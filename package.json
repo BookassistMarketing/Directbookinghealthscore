@@ -34,10 +34,3 @@
     "vite": "^7.3.1"
   }
 }
-{
-  "homepage": "https://bookassistmarketing.github.io/DirectbookinghealthScore",
-  "scripts": {
-    "predeploy": "npm run build",
-    "deploy": "gh-pages -d dist"
-  }
-}
