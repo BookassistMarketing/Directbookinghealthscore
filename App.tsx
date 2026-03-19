@@ -168,3 +168,5 @@ const App: React.FC = () => {
 };
 
 export default App;
+
+// Small change for testing purposes
