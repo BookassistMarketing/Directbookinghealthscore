@@ -71,7 +71,7 @@ export const generateStrategicAnalysis = async (answers: Answer[], lang: Languag
     throw new Error('MISSING_API_KEY');
   }
 
-  const ai = new GoogleGenAI({ apiKey });
+  const ai = new GoogleGenAI({ apiKey, httpOptions: { apiVersion: 'v1alpha' } });
   
   const gapsList = answers
     .filter(a => a.value === AnswerValue.NO)
