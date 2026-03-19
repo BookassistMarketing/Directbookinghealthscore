@@ -1,5 +1,6 @@
 
 // Testing GitHub Desktop sync
+// Version 1.0.1 - Strategic Assessment Update
 import React, { useState } from 'react';
 import { Home } from './components/Home';
 import { AuditTool } from './components/AuditTool';
