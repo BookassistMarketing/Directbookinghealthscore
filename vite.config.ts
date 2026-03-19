@@ -9,7 +9,7 @@ export default defineConfig(({ mode }) => {
     const env = loadEnv(mode, '.', '');
     
     // Resolve the API key from multiple possible sources
-    const apiKey = env.GEMINI_API_KEY || env.VITE_API_KEY || env.API_KEY || '';
+    const apiKey = env.VITE_GEMINI_API_KEY || env.GEMINI_API_KEY || env.VITE_API_KEY || env.API_KEY || '';
     
     return {
       base: '/',
