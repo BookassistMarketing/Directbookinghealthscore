@@ -1,4 +1,3 @@
-
 import { GoogleGenAI } from "@google/genai";
 import { Answer, AnswerValue, Language } from '../types';
 import { QUESTIONS, CATEGORY_TRANSLATIONS } from '../constants';
@@ -100,7 +99,6 @@ export const generateStrategicAnalysis = async (answers: Answer[], lang: Languag
         - NEVER use emojis or icons.
         - Identify the 2 most dangerous gaps and explain their direct impact on net profit.
         - Do not include links or greetings. Start directly with the assessment.`,
-        temperature: 0.6,
       },
     });
     
