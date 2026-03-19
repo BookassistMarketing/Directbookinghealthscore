@@ -48,7 +48,7 @@ const App: React.FC = () => {
             </div>
             <div className="flex flex-col justify-center">
               <h1 className="text-lg sm:text-xl font-bold text-brand-blue tracking-tight leading-none">
-                 <EditableText id="app.header.title" defaultText="Hotel Health Clinic" as="span" />
+                 <EditableText id="app.header.title" defaultText="Direct Booking Health Score" as="span" />
               </h1>
               <p className="hidden sm:block text-xs text-gray-500 uppercase tracking-widest font-semibold mt-1 print:block">
                  <EditableText id="app.header.subtitle" defaultText="Hotel Tech & Marketing Audit Tool" as="span" />
@@ -158,7 +158,7 @@ const App: React.FC = () => {
 
       <footer className="bg-white border-t border-gray-200 py-8 sm:py-12 mt-auto print:border-t-0 print:py-4 print:mt-4 break-inside-avoid">
         <div className="max-w-7xl mx-auto px-4 text-center text-gray-400 text-sm">
-          <p>&copy; {new Date().getFullYear()} Hotel Health Clinic. All rights reserved.</p>
+          <p>&copy; {new Date().getFullYear()} Direct Booking Health Score. All rights reserved.</p>
           <p className="mt-2 text-xs uppercase tracking-widest text-gray-300 print:text-gray-500">Technology Provided by Bookassist</p>
         </div>
       </footer>

@@ -1,8 +1,8 @@
 {
-  "name": "hotel-health-clinic-v3",
+  "name": "direct-booking-health-score",
   "private": true,
   "version": "1.0.0",
-  "homepage": "https://bookassistmarketing.github.io/Directbookinghealthscore",
+  "homepage": "https://directbookinghealthscore.com",
   "description": "Professional hotel technology and marketing audit tool with AI-powered strategic assessments.",
   "author": "Bookassist",
   "license": "MIT",
@@ -12,7 +12,7 @@
     "build": "vite build",
     "lint": "tsc --noEmit",
     "predeploy": "npm run build",
-   "deploy": "gh-pages -r https://github.com/BookassistMarketing/Directbookinghealthscore.git -d dist",
+    "deploy": "gh-pages -r https://github.com/danielbarniville/direct-booking-health-score.git -d dist",
     "preview": "vite preview"
   },
   "dependencies": {
