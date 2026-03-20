@@ -12,7 +12,7 @@
     "build": "vite build",
     "lint": "tsc --noEmit",
     "predeploy": "npm run build",
-    "deploy": "gh-pages -r https://github.com/danielbarniville/direct-booking-health-score.git -d dist",
+    "deploy": "gh-pages -r https://github.com/BookassistMarketing/Directbookinghealthscore.git -d dist",
     "preview": "vite preview"
   },
   "dependencies": {
