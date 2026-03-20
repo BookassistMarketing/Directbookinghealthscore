@@ -86,7 +86,7 @@ export const generateStrategicAnalysis = async (answers: Answer[], lang: Languag
 
   try {
     const response = await ai.models.generateContent({
-      model: 'gemini-3-flash-preview',
+      model: 'gemini-2.5-flash-preview',
       contents: `Perform a digital health diagnosis for a hotel that scored ${scorePercent}% in their technical audit. Technical gaps identified:\n${gapsList}`,
       config: {
         systemInstruction: `You are the "Bookassist Digital Health Strategist." 
