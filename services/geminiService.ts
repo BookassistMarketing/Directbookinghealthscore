@@ -71,7 +71,7 @@ export const generateStrategicAnalysis = async (answers: Answer[], lang: Languag
     throw new Error('MISSING_API_KEY');
   }
 
-  const ai = new GoogleGenAI({ apiKey, httpOptions: { apiVersion: 'v1alpha' } });
+  const ai = new GoogleGenAI({ apiKey });
   
   const gapsList = answers
     .filter(a => a.value === AnswerValue.NO)
@@ -86,7 +86,7 @@ export const generateStrategicAnalysis = async (answers: Answer[], lang: Languag
 
   try {
     const response = await ai.models.generateContent({
-      model: 'gemini-2.5-flash-preview',
+      model: 'gemini-2.0-flash',
       contents: `Perform a digital health diagnosis for a hotel that scored ${scorePercent}% in their technical audit. Technical gaps identified:\n${gapsList}`,
       config: {
         systemInstruction: `You are the "Bookassist Digital Health Strategist." 
