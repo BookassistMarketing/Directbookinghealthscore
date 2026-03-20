@@ -16,8 +16,8 @@ export const LeadCapture: React.FC<LeadCaptureProps> = ({ onUnlock }) => {
 
   const labelsMap: Record<Language, any> = {
     en: {
-      title: "Your Strategic Report is Ready",
-      subtitle: "Your technical infrastructure has been analyzed. Complete the form to unlock your full assessment.",
+      title: "Your Score is Ready. Now, Get the Strategy.",
+      subtitle: "To unlock your custom AI Strategic Assessment and download your full report, please confirm your details below.",
       benefit1: "Full breakdown of revenue leaks",
       benefit2: "Prioritized technical repairs",
       benefit3: "AI strategic roadmap",

@@ -32,6 +32,6 @@ export interface AnalysisResult {
 export enum AppState {
   WELCOME = 'WELCOME',
   QUIZ = 'QUIZ',
-  ANALYZING = 'ANALYZING',
-  RESULTS = 'RESULTS'
+  SCORE = 'SCORE',
+  FULL_RESULTS = 'FULL_RESULTS'
 }
