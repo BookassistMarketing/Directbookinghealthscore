@@ -4,15 +4,18 @@
 import React, { useState } from 'react';
 import { Home } from './components/Home';
 import { AuditTool } from './components/AuditTool';
+import { Blog } from './components/Blog';
+import { BlogPost } from './components/BlogPost';
 import { Activity, Menu, X, Globe } from 'lucide-react';
 import { EditableText } from './components/Editable';
 import { useContent } from './contexts/ContentContext';
 import { Language } from './types';
 
-type Page = 'HOME' | 'AUDIT';
+type Page = 'HOME' | 'AUDIT' | 'BLOG' | 'BLOG_POST';
 
 const App: React.FC = () => {
   const [currentPage, setCurrentPage] = useState<Page>('HOME');
+  const [selectedSlug, setSelectedSlug] = useState<string>('');
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const { language, setLanguage } = useContent();
 
@@ -82,13 +85,19 @@ const App: React.FC = () => {
               >
                 Home
               </button>
-              <button 
+              <button
                 onClick={() => navigateTo('AUDIT')}
                 className={`text-sm font-medium transition-colors ${currentPage === 'AUDIT' ? 'text-brand-blue font-bold' : 'text-gray-500 hover:text-brand-blue'}`}
               >
                 Digital Audit
               </button>
-              <a 
+              <button
+                onClick={() => navigateTo('BLOG')}
+                className={`text-sm font-medium transition-colors ${currentPage === 'BLOG' || currentPage === 'BLOG_POST' ? 'text-brand-blue font-bold' : 'text-gray-500 hover:text-brand-blue'}`}
+              >
+                Blog
+              </button>
+              <a
                 href="https://bookassist.org/book-a-demo"
                 target="_blank"
                 rel="noopener noreferrer"
@@ -125,13 +134,19 @@ const App: React.FC = () => {
               >
                 Home
               </button>
-              <button 
+              <button
                 onClick={() => navigateTo('AUDIT')}
                 className={`text-left px-4 py-4 rounded-lg text-lg ${currentPage === 'AUDIT' ? 'bg-blue-50 text-brand-blue font-semibold' : 'text-gray-700 hover:bg-gray-50'}`}
               >
                 Digital Audit Tool
               </button>
-              <a 
+              <button
+                onClick={() => navigateTo('BLOG')}
+                className={`text-left px-4 py-4 rounded-lg text-lg ${currentPage === 'BLOG' || currentPage === 'BLOG_POST' ? 'bg-blue-50 text-brand-blue font-semibold' : 'text-gray-700 hover:bg-gray-50'}`}
+              >
+                Blog
+              </button>
+              <a
                 href="https://bookassist.org/book-a-demo"
                 target="_blank"
                 rel="noopener noreferrer"
@@ -155,6 +170,8 @@ const App: React.FC = () => {
       <main className="flex-grow flex flex-col items-center justify-start w-full pt-4 sm:pt-6 pb-12 print:pt-4 print:pb-0">
         {currentPage === 'HOME' && <Home onStart={() => navigateTo('AUDIT')} />}
         {currentPage === 'AUDIT' && <AuditTool />}
+        {currentPage === 'BLOG' && <Blog onSelectPost={(slug) => { setSelectedSlug(slug); navigateTo('BLOG_POST'); }} onStartAudit={() => navigateTo('AUDIT')} />}
+        {currentPage === 'BLOG_POST' && <BlogPost slug={selectedSlug} onBack={() => navigateTo('BLOG')} onStartAudit={() => navigateTo('AUDIT')} />}
       </main>
 
       <footer className="bg-white border-t border-gray-200 py-8 sm:py-12 mt-auto print:border-t-0 print:py-4 print:mt-4 break-inside-avoid">
