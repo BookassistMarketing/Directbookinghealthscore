@@ -1,6 +1,6 @@
-import React, { useRef, useState } from 'react';
+import React, { useState } from 'react';
 import { PieChart, Pie, Cell, ResponsiveContainer } from 'recharts';
-import { Download, Loader2, RefreshCcw, ArrowRight } from 'lucide-react';
+import { RefreshCcw, ArrowRight, ExternalLink } from 'lucide-react';
 import { Answer, AnswerValue, Language } from '../types';
 import { QUESTIONS, MAX_SCORE } from '../constants';
 import { useContent } from '../contexts/ContentContext';
@@ -14,10 +14,8 @@ interface ResultsProps {
 }
 
 export const Results: React.FC<ResultsProps> = ({ answers, onReset, onGetFullReport }) => {
-  const [isGeneratingPdf, setIsGeneratingPdf] = useState(false);
   const [showGate, setShowGate] = useState(false);
   const { language } = useContent();
-  const scoreBoxRef = useRef<HTMLDivElement>(null);
 
   const score = answers.reduce((acc, ans) => {
     if (ans.value === AnswerValue.YES) {
@@ -38,9 +36,9 @@ export const Results: React.FC<ResultsProps> = ({ answers, onReset, onGetFullRep
   };
 
   const labelsMap: Record<Language, any> = {
-    en: { auditComplete: "AUDIT COMPLETE", passing: "Passing Checks", gaps: "Critical Gaps", downloadScore: "Download Tech Score", getFullReport: "Download Full Strategic Assessment", retake: "Retake Audit", generating: "Generating..." },
-    it: { auditComplete: "AUDIT COMPLETATO", passing: "Controlli Superati", gaps: "Lacune Critiche", downloadScore: "Scarica Tech Score", getFullReport: "Scarica Valutazione Strategica Completa", retake: "Rifai l'Audit", generating: "Generazione..." },
-    es: { auditComplete: "AUDIT COMPLETADO", passing: "Pruebas Superadas", gaps: "Brechas Críticas", downloadScore: "Descargar Tech Score", getFullReport: "Descargar Evaluación Estratégica Completa", retake: "Repetir Audit", generating: "Generando..." }
+    en: { auditComplete: "AUDIT COMPLETE", passing: "Passing Checks", gaps: "Critical Gaps", bookDemo: "Book a Demo", getFullReport: "Download Full Strategic Assessment", retake: "Retake Audit", generating: "Generating..." },
+    it: { auditComplete: "AUDIT COMPLETATO", passing: "Controlli Superati", gaps: "Lacune Critiche", bookDemo: "Prenota una Demo", getFullReport: "Scarica Valutazione Strategica Completa", retake: "Rifai l'Audit", generating: "Generazione..." },
+    es: { auditComplete: "AUDIT COMPLETADO", passing: "Pruebas Superadas", gaps: "Brechas Críticas", bookDemo: "Reservar una Demo", getFullReport: "Descargar Evaluación Estratégica Completa", retake: "Repetir Audit", generating: "Generando..." }
   };
 
   const s = statusMap[language];
@@ -62,41 +60,13 @@ export const Results: React.FC<ResultsProps> = ({ answers, onReset, onGetFullRep
 
   const data = [{ name: 'Score', value: score }, { name: 'Gap', value: MAX_SCORE - score }];
 
-  const handleDownloadTechScore = async () => {
-    if (isGeneratingPdf || !scoreBoxRef.current) return;
-    const html2canvas = (window as any).html2canvas;
-    const jsPDFConstructor = (window as any).jspdf?.jsPDF || (window as any).jsPDF;
-    if (!html2canvas || !jsPDFConstructor) { window.print(); return; }
-
-    setIsGeneratingPdf(true);
-    try {
-      const canvas = await html2canvas(scoreBoxRef.current, { scale: 2, useCORS: true, logging: false, backgroundColor: '#F4F6F8' });
-      const pdf = new jsPDFConstructor({ orientation: 'p', unit: 'mm', format: 'a4' });
-      const pageWidth = pdf.internal.pageSize.getWidth();
-      const pageHeight = pdf.internal.pageSize.getHeight();
-      const targetWidth = 175;
-      const centerX = (pageWidth - targetWidth) / 2;
-      const imgData = canvas.toDataURL('image/jpeg', 0.95);
-      const props = pdf.getImageProperties(imgData);
-      const imgHeight = (props.height * targetWidth) / props.width;
-      pdf.setFillColor(244, 246, 248);
-      pdf.rect(0, 0, pageWidth, pageHeight, 'F');
-      pdf.addImage(imgData, 'JPEG', centerX, 15, targetWidth, imgHeight);
-      pdf.save(`Hotel-Tech-Score-${percentage}pct.pdf`);
-    } catch (err) {
-      window.print();
-    } finally {
-      setIsGeneratingPdf(false);
-    }
-  };
-
   return (
     <div className="w-full max-w-4xl px-4 sm:px-6 py-12 flex flex-col items-center mx-auto">
       {showGate && (
         <LeadCapture onUnlock={() => { setShowGate(false); onGetFullReport(); }} />
       )}
 
-      <div ref={scoreBoxRef} className="w-full flex justify-center">
+      <div className="w-full flex justify-center">
         <div className="bg-white rounded-[32px] shadow-xl border border-gray-100 overflow-hidden w-full max-w-3xl">
           <div className="p-8 sm:p-14 flex flex-col md:flex-row items-center gap-12">
             <div className="flex-shrink-0 relative w-48 h-48 sm:w-56 sm:h-56">
@@ -138,9 +108,9 @@ export const Results: React.FC<ResultsProps> = ({ answers, onReset, onGetFullRep
           {l.retake}
         </button>
         <div className="flex flex-col sm:flex-row gap-4 w-full sm:w-auto">
-          <Button onClick={handleDownloadTechScore} variant="outline" className="w-full sm:w-auto px-8 py-4 rounded-xl font-black text-sm uppercase tracking-widest shadow-xl" disabled={isGeneratingPdf}>
-            {isGeneratingPdf ? <Loader2 size={18} className="animate-spin" /> : <Download size={18} />}
-            {isGeneratingPdf ? l.generating : l.downloadScore}
+          <Button onClick={() => window.open('https://bookassist.com/contact?utm_term=&utm_campaign=%5BPM%5D+EN&utm_source=adwords&utm_medium=ppc&hsa_acc=2087462776&hsa_cam=23195660378&hsa_grp=&hsa_ad=&hsa_src=x&hsa_tgt=&hsa_kw=&hsa_mt=&hsa_net=adwords&hsa_ver=3&gad_source=1&gad_campaignid=23624383116&gbraid=0AAAAAD4LeD6A0DWD-hRn4iPJc7bIgJPtH&gclid=CjwKCAjwyYPOBhBxEiwAgpT8P9j3lssY74_YKOvUuO_PJkq6_bZmoyvxIUM9i5LNQ0X43zgg22h9xBoCjvQQAvD_BwE', '_blank')} variant="outline" className="w-full sm:w-auto px-8 py-4 rounded-xl font-black text-sm uppercase tracking-widest shadow-xl">
+            <ExternalLink size={18} />
+            {l.bookDemo}
           </Button>
           <Button onClick={() => setShowGate(true)} className="w-full sm:w-auto px-8 py-4 rounded-xl font-black text-sm uppercase tracking-widest shadow-xl">
             {l.getFullReport} <ArrowRight size={18} />
