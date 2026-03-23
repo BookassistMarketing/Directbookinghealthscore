@@ -28,19 +28,39 @@ function parseFrontmatter(content: string): Record<string, string> {
 
 const rawFiles = import.meta.glob('/blog/*.md', { query: '?raw', import: 'default', eager: true }) as Record<string, string>;
 
-function loadPosts(): Post[] {
-  return Object.entries(rawFiles)
-    .map(([path, raw]) => {
-      const data = parseFrontmatter(raw);
+function loadPosts(language: Language): Post[] {
+  // Group files by base slug (without language suffix)
+  const postMap: Record<string, Record<string, { path: string; raw: string }>> = {};
+
+  Object.entries(rawFiles).forEach(([path, raw]) => {
+    const filename = path.replace(/.*\//, '').replace('.md', '');
+    // Check for language suffix like .it or .es
+    const langMatch = filename.match(/^(.+)\.(it|es)$/);
+    const baseSlug = langMatch ? langMatch[1] : filename;
+    const fileLang = langMatch ? langMatch[2] : 'en';
+
+    if (!postMap[baseSlug]) postMap[baseSlug] = {};
+    postMap[baseSlug][fileLang] = { path, raw };
+  });
+
+  // Select appropriate language version for each post
+  return Object.entries(postMap)
+    .map(([baseSlug, versions]) => {
+      // Prefer current language, fallback to English
+      const selected = versions[language] || versions['en'];
+      if (!selected) return null;
+
+      const data = parseFrontmatter(selected.raw);
       return {
-        slug: data.slug || path.replace(/.*\//, '').replace('.md', ''),
+        slug: data.slug || baseSlug,
         title: data.title || 'Untitled',
         date: data.date || '',
         excerpt: data.excerpt || '',
         image: data.image || '',
-        raw,
+        raw: selected.raw,
       };
     })
+    .filter((p): p is Post => p !== null)
     .sort((a, b) => (a.date < b.date ? 1 : -1));
 }
 
@@ -51,7 +71,7 @@ interface BlogProps {
 
 export const Blog: React.FC<BlogProps> = ({ onSelectPost, onStartAudit }) => {
   const { language } = useContent();
-  const posts = useMemo(() => loadPosts(), []);
+  const posts = useMemo(() => loadPosts(language), [language]);
 
   const labels: Record<Language, any> = {
     en: { heading: 'Direct Booking Insights', sub: 'Weekly strategy and technology advice for hotels reducing OTA dependency.', readMore: 'Read Article', cta: 'Audit Your Hotel\'s Direct Booking Health', ctaSub: 'Free 5-minute assessment — get your Tech Score instantly.' },
@@ -62,7 +82,8 @@ export const Blog: React.FC<BlogProps> = ({ onSelectPost, onStartAudit }) => {
 
   const formatDate = (dateStr: string) => {
     if (!dateStr) return '';
-    return new Date(dateStr).toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' });
+    const localeMap: Record<Language, string> = { en: 'en-GB', it: 'it-IT', es: 'es-ES' };
+    return new Date(dateStr).toLocaleDateString(localeMap[language], { day: 'numeric', month: 'long', year: 'numeric' });
   };
 
   return (

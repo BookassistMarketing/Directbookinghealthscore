@@ -37,14 +37,32 @@ export const BlogPost: React.FC<BlogPostProps> = ({ slug, onBack, onStartAudit }
   const l = labels[language];
 
   const { data, body } = useMemo(() => {
-    const entry = Object.entries(rawFiles).find(([path]) => path.includes(slug));
-    if (!entry) return { data: {}, body: 'Post not found.' };
-    return parseFrontmatter(entry[1]);
-  }, [slug]);
+    // Find all versions of this post
+    const versions: Record<string, string> = {};
+    Object.entries(rawFiles).forEach(([path, raw]) => {
+      const filename = path.replace(/.*\//, '').replace('.md', '');
+      const langMatch = filename.match(/^(.+)\.(it|es)$/);
+      const baseSlug = langMatch ? langMatch[1] : filename;
+      const fileLang = langMatch ? langMatch[2] : 'en';
+
+      // Check if this file matches the requested slug
+      const parsed = parseFrontmatter(raw);
+      const fileSlug = parsed.data.slug || baseSlug;
+      if (fileSlug === slug || baseSlug.includes(slug)) {
+        versions[fileLang] = raw;
+      }
+    });
+
+    // Prefer current language, fallback to English
+    const selectedRaw = versions[language] || versions['en'];
+    if (!selectedRaw) return { data: {}, body: 'Post not found.' };
+    return parseFrontmatter(selectedRaw);
+  }, [slug, language]);
 
   const formatDate = (dateStr: string) => {
     if (!dateStr) return '';
-    return new Date(dateStr).toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' });
+    const localeMap: Record<Language, string> = { en: 'en-GB', it: 'it-IT', es: 'es-ES' };
+    return new Date(dateStr).toLocaleDateString(localeMap[language], { day: 'numeric', month: 'long', year: 'numeric' });
   };
 
   return (
