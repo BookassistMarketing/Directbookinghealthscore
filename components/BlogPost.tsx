@@ -1,8 +1,9 @@
-import React, { useMemo } from 'react';
-import { ArrowLeft, Calendar, ArrowRight } from 'lucide-react';
+import React, { useMemo, useState, useEffect } from 'react';
+import { ArrowLeft, Calendar, ArrowRight, Loader2 } from 'lucide-react';
 import ReactMarkdown from 'react-markdown';
 import { useContent } from '../contexts/ContentContext';
 import { Language } from '../types';
+import { translateBlogContent } from '../services/geminiService';
 
 function parseFrontmatter(content: string): { data: Record<string, string>; body: string } {
   const match = content.match(/^---\n([\s\S]*?)\n---\n?([\s\S]*)$/);
@@ -28,36 +29,61 @@ interface BlogPostProps {
 
 export const BlogPost: React.FC<BlogPostProps> = ({ slug, onBack, onStartAudit }) => {
   const { language } = useContent();
+  const [isTranslating, setIsTranslating] = useState(false);
+  const [translatedContent, setTranslatedContent] = useState<{ title: string; excerpt: string; body: string } | null>(null);
 
   const labels: Record<Language, any> = {
-    en: { back: 'Back to Blog', cta: 'Find out how your hotel scores', ctaBtn: 'Take the Free Audit' },
-    it: { back: 'Torna al Blog', cta: 'Scopri il punteggio del tuo hotel', ctaBtn: 'Fai l\'Audit Gratuito' },
-    es: { back: 'Volver al Blog', cta: 'Descubre cómo puntúa tu hotel', ctaBtn: 'Haz el Audit Gratuito' },
+    en: { back: 'Back to Blog', cta: 'Find out how your hotel scores', ctaBtn: 'Take the Free Audit', translating: 'Translating...' },
+    it: { back: 'Torna al Blog', cta: 'Scopri il punteggio del tuo hotel', ctaBtn: 'Fai l\'Audit Gratuito', translating: 'Traduzione in corso...' },
+    es: { back: 'Volver al Blog', cta: 'Descubre cómo puntúa tu hotel', ctaBtn: 'Haz el Audit Gratuito', translating: 'Traduciendo...' },
   };
   const l = labels[language];
 
+  // Load the English source content
   const { data, body } = useMemo(() => {
-    // Find all versions of this post
-    const versions: Record<string, string> = {};
-    Object.entries(rawFiles).forEach(([path, raw]) => {
+    const entry = Object.entries(rawFiles).find(([path]) => {
       const filename = path.replace(/.*\//, '').replace('.md', '');
-      const langMatch = filename.match(/^(.+)\.(it|es)$/);
-      const baseSlug = langMatch ? langMatch[1] : filename;
-      const fileLang = langMatch ? langMatch[2] : 'en';
-
-      // Check if this file matches the requested slug
-      const parsed = parseFrontmatter(raw);
-      const fileSlug = parsed.data.slug || baseSlug;
-      if (fileSlug === slug || baseSlug.includes(slug)) {
-        versions[fileLang] = raw;
-      }
+      // Skip language-specific files, only load base English file
+      if (filename.match(/\.(it|es)$/)) return false;
+      const parsed = parseFrontmatter(rawFiles[path]);
+      const fileSlug = parsed.data.slug || filename;
+      return fileSlug === slug || filename.includes(slug);
     });
+    if (!entry) return { data: {}, body: 'Post not found.' };
+    return parseFrontmatter(entry[1]);
+  }, [slug]);
 
-    // Prefer current language, fallback to English
-    const selectedRaw = versions[language] || versions['en'];
-    if (!selectedRaw) return { data: {}, body: 'Post not found.' };
-    return parseFrontmatter(selectedRaw);
-  }, [slug, language]);
+  // Auto-translate when language changes
+  useEffect(() => {
+    if (language === 'en') {
+      setTranslatedContent(null);
+      return;
+    }
+
+    const doTranslate = async () => {
+      setIsTranslating(true);
+      try {
+        const translated = await translateBlogContent(
+          slug,
+          data.title || '',
+          data.excerpt || '',
+          body,
+          language
+        );
+        setTranslatedContent(translated);
+      } catch {
+        setTranslatedContent(null);
+      } finally {
+        setIsTranslating(false);
+      }
+    };
+
+    doTranslate();
+  }, [language, slug, data.title, data.excerpt, body]);
+
+  // Use translated content if available, otherwise use English
+  const displayTitle = translatedContent?.title || data.title;
+  const displayBody = translatedContent?.body || body;
 
   const formatDate = (dateStr: string) => {
     if (!dateStr) return '';
@@ -88,17 +114,26 @@ export const BlogPost: React.FC<BlogPostProps> = ({ slug, onBack, onStartAudit }
       </div>
 
       {/* Title */}
-      <h1 className="text-3xl sm:text-4xl font-black text-gray-900 mb-8 leading-tight">{data.title}</h1>
+      <h1 className="text-3xl sm:text-4xl font-black text-gray-900 mb-8 leading-tight">{displayTitle}</h1>
+
+      {/* Translating indicator */}
+      {isTranslating && (
+        <div className="flex items-center gap-3 text-brand-blue mb-6 p-4 bg-blue-50 rounded-xl">
+          <Loader2 size={18} className="animate-spin" />
+          <span className="font-medium text-sm">{l.translating}</span>
+        </div>
+      )}
 
       {/* Content */}
-      <div className="prose prose-lg max-w-none
+      <div className={`prose prose-lg max-w-none
         prose-headings:font-black prose-headings:text-gray-900
         prose-h2:text-2xl prose-h2:mt-10 prose-h2:mb-4
         prose-p:text-gray-600 prose-p:leading-relaxed
         prose-strong:text-gray-900 prose-strong:font-black
         prose-li:text-gray-600
-        prose-a:text-brand-blue prose-a:no-underline hover:prose-a:underline">
-        <ReactMarkdown>{body}</ReactMarkdown>
+        prose-a:text-brand-blue prose-a:no-underline hover:prose-a:underline
+        ${isTranslating ? 'opacity-50' : ''}`}>
+        <ReactMarkdown>{displayBody}</ReactMarkdown>
       </div>
 
       {/* CTA */}

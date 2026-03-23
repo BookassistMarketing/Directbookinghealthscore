@@ -1,7 +1,8 @@
-import React, { useMemo } from 'react';
-import { ArrowRight, Calendar, BookOpen } from 'lucide-react';
+import React, { useMemo, useState, useEffect } from 'react';
+import { ArrowRight, Calendar, BookOpen, Loader2 } from 'lucide-react';
 import { useContent } from '../contexts/ContentContext';
 import { Language } from '../types';
+import { translateBlogContent } from '../services/geminiService';
 
 interface Post {
   slug: string;
@@ -28,39 +29,26 @@ function parseFrontmatter(content: string): Record<string, string> {
 
 const rawFiles = import.meta.glob('/blog/*.md', { query: '?raw', import: 'default', eager: true }) as Record<string, string>;
 
-function loadPosts(language: Language): Post[] {
-  // Group files by base slug (without language suffix)
-  const postMap: Record<string, Record<string, { path: string; raw: string }>> = {};
-
-  Object.entries(rawFiles).forEach(([path, raw]) => {
-    const filename = path.replace(/.*\//, '').replace('.md', '');
-    // Check for language suffix like .it or .es
-    const langMatch = filename.match(/^(.+)\.(it|es)$/);
-    const baseSlug = langMatch ? langMatch[1] : filename;
-    const fileLang = langMatch ? langMatch[2] : 'en';
-
-    if (!postMap[baseSlug]) postMap[baseSlug] = {};
-    postMap[baseSlug][fileLang] = { path, raw };
-  });
-
-  // Select appropriate language version for each post
-  return Object.entries(postMap)
-    .map(([baseSlug, versions]) => {
-      // Prefer current language, fallback to English
-      const selected = versions[language] || versions['en'];
-      if (!selected) return null;
-
-      const data = parseFrontmatter(selected.raw);
+function loadPosts(): Post[] {
+  // Load only English (base) blog posts - translations are handled dynamically
+  return Object.entries(rawFiles)
+    .filter(([path]) => {
+      const filename = path.replace(/.*\//, '').replace('.md', '');
+      // Skip language-specific files (ending in .it or .es)
+      return !filename.match(/\.(it|es)$/);
+    })
+    .map(([path, raw]) => {
+      const filename = path.replace(/.*\//, '').replace('.md', '');
+      const data = parseFrontmatter(raw);
       return {
-        slug: data.slug || baseSlug,
+        slug: data.slug || filename,
         title: data.title || 'Untitled',
         date: data.date || '',
         excerpt: data.excerpt || '',
         image: data.image || '',
-        raw: selected.raw,
+        raw,
       };
     })
-    .filter((p): p is Post => p !== null)
     .sort((a, b) => (a.date < b.date ? 1 : -1));
 }
 
@@ -71,7 +59,49 @@ interface BlogProps {
 
 export const Blog: React.FC<BlogProps> = ({ onSelectPost, onStartAudit }) => {
   const { language } = useContent();
-  const posts = useMemo(() => loadPosts(language), [language]);
+  const basePosts = useMemo(() => loadPosts(), []);
+  const [translatedPosts, setTranslatedPosts] = useState<Record<string, { title: string; excerpt: string }>>({});
+  const [isTranslating, setIsTranslating] = useState(false);
+
+  // Auto-translate post titles and excerpts when language changes
+  useEffect(() => {
+    if (language === 'en') {
+      setTranslatedPosts({});
+      return;
+    }
+
+    const translateAll = async () => {
+      setIsTranslating(true);
+      const translations: Record<string, { title: string; excerpt: string }> = {};
+
+      for (const post of basePosts) {
+        try {
+          const translated = await translateBlogContent(
+            post.slug,
+            post.title,
+            post.excerpt,
+            '', // Don't translate body for listing
+            language
+          );
+          translations[post.slug] = { title: translated.title, excerpt: translated.excerpt };
+        } catch {
+          translations[post.slug] = { title: post.title, excerpt: post.excerpt };
+        }
+      }
+
+      setTranslatedPosts(translations);
+      setIsTranslating(false);
+    };
+
+    translateAll();
+  }, [language, basePosts]);
+
+  // Get display content (translated if available)
+  const getPostDisplay = (post: Post) => ({
+    ...post,
+    title: translatedPosts[post.slug]?.title || post.title,
+    excerpt: translatedPosts[post.slug]?.excerpt || post.excerpt,
+  });
 
   const labels: Record<Language, any> = {
     en: { heading: 'Direct Booking Insights', sub: 'Weekly strategy and technology advice for hotels reducing OTA dependency.', readMore: 'Read Article', cta: 'Audit Your Hotel\'s Direct Booking Health', ctaSub: 'Free 5-minute assessment — get your Tech Score instantly.' },
@@ -97,35 +127,48 @@ export const Blog: React.FC<BlogProps> = ({ onSelectPost, onStartAudit }) => {
         <p className="text-lg text-gray-500 max-w-xl mx-auto">{l.sub}</p>
       </div>
 
+      {/* Translating indicator */}
+      {isTranslating && language !== 'en' && (
+        <div className="flex items-center justify-center gap-3 text-brand-blue mb-8 p-4 bg-blue-50 rounded-xl">
+          <Loader2 size={18} className="animate-spin" />
+          <span className="font-medium text-sm">
+            {language === 'it' ? 'Traduzione in corso...' : 'Traduciendo...'}
+          </span>
+        </div>
+      )}
+
       {/* Post Grid */}
-      {posts.length === 0 ? (
+      {basePosts.length === 0 ? (
         <p className="text-center text-gray-400 py-20">No posts yet — check back next week.</p>
       ) : (
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-16">
-          {posts.map((post, i) => (
-            <button
-              key={post.slug}
-              onClick={() => onSelectPost(post.slug)}
-              className={`text-left bg-white rounded-[24px] shadow-md border border-gray-100 overflow-hidden hover:shadow-xl hover:-translate-y-1 transition-all duration-200 flex flex-col ${i === 0 ? 'md:col-span-2' : ''}`}
-            >
-              {post.image && (
-                <div className={`w-full overflow-hidden ${i === 0 ? 'h-64 sm:h-80' : 'h-48'}`}>
-                  <img src={post.image} alt={post.title} className="w-full h-full object-cover" />
+        <div className={`grid grid-cols-1 md:grid-cols-2 gap-8 mb-16 ${isTranslating ? 'opacity-50' : ''}`}>
+          {basePosts.map((basePost, i) => {
+            const post = getPostDisplay(basePost);
+            return (
+              <button
+                key={post.slug}
+                onClick={() => onSelectPost(post.slug)}
+                className={`text-left bg-white rounded-[24px] shadow-md border border-gray-100 overflow-hidden hover:shadow-xl hover:-translate-y-1 transition-all duration-200 flex flex-col ${i === 0 ? 'md:col-span-2' : ''}`}
+              >
+                {post.image && (
+                  <div className={`w-full overflow-hidden ${i === 0 ? 'h-64 sm:h-80' : 'h-48'}`}>
+                    <img src={post.image} alt={post.title} className="w-full h-full object-cover" />
+                  </div>
+                )}
+                <div className="p-7 flex flex-col flex-1">
+                  <div className="flex items-center gap-2 text-gray-400 text-xs font-bold uppercase tracking-widest mb-3">
+                    <Calendar size={12} />
+                    {formatDate(post.date)}
+                  </div>
+                  <h2 className={`font-black text-gray-900 mb-3 leading-tight ${i === 0 ? 'text-2xl sm:text-3xl' : 'text-xl'}`}>{post.title}</h2>
+                  <p className="text-gray-500 text-sm leading-relaxed flex-1 mb-5">{post.excerpt}</p>
+                  <span className="inline-flex items-center gap-2 text-brand-blue font-black text-xs uppercase tracking-widest">
+                    {l.readMore} <ArrowRight size={14} />
+                  </span>
                 </div>
-              )}
-              <div className="p-7 flex flex-col flex-1">
-                <div className="flex items-center gap-2 text-gray-400 text-xs font-bold uppercase tracking-widest mb-3">
-                  <Calendar size={12} />
-                  {formatDate(post.date)}
-                </div>
-                <h2 className={`font-black text-gray-900 mb-3 leading-tight ${i === 0 ? 'text-2xl sm:text-3xl' : 'text-xl'}`}>{post.title}</h2>
-                <p className="text-gray-500 text-sm leading-relaxed flex-1 mb-5">{post.excerpt}</p>
-                <span className="inline-flex items-center gap-2 text-brand-blue font-black text-xs uppercase tracking-widest">
-                  {l.readMore} <ArrowRight size={14} />
-                </span>
-              </div>
-            </button>
-          ))}
+              </button>
+            );
+          })}
         </div>
       )}
 
