@@ -30,9 +30,9 @@ export const BlogPost: React.FC<BlogPostProps> = ({ slug, onBack, onStartAudit }
   const { language } = useContent();
 
   const labels: Record<Language, any> = {
-    en: { back: 'Back to Blog', cta: 'Find out how your hotel scores', ctaBtn: 'Take the Free Audit' },
-    it: { back: 'Torna al Blog', cta: 'Scopri il punteggio del tuo hotel', ctaBtn: 'Fai l\'Audit Gratuito' },
-    es: { back: 'Volver al Blog', cta: 'Descubre cómo puntúa tu hotel', ctaBtn: 'Haz el Audit Gratuito' },
+    en: { back: 'Back to Blog', cta: 'Book a Demo to Improve Your Hotel Score', ctaBtn: 'Book a Demo' },
+    it: { back: 'Torna al Blog', cta: 'Prenota una Demo per Migliorare il Punteggio del Tuo Hotel', ctaBtn: 'Prenota una Demo' },
+    es: { back: 'Volver al Blog', cta: 'Reserva una Demo para Mejorar la Puntuación de tu Hotel', ctaBtn: 'Reservar una Demo' },
   };
   const l = labels[language];
 
