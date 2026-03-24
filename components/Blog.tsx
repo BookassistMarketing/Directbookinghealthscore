@@ -131,12 +131,14 @@ export const Blog: React.FC<BlogProps> = ({ onSelectPost, onStartAudit }) => {
       <div className="bg-brand-blue rounded-[28px] p-10 text-center text-white">
         <h3 className="text-2xl sm:text-3xl font-black mb-3">{l.cta}</h3>
         <p className="text-blue-200 mb-7">{l.ctaSub}</p>
-        <button
-          onClick={onStartAudit}
-          className="bg-white text-brand-blue px-10 py-4 rounded-xl font-black text-sm uppercase tracking-widest hover:scale-105 transition-transform shadow-xl"
+        <a
+          href="https://bookassist.org/book-a-demo"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="inline-flex items-center bg-white text-brand-blue px-10 py-4 rounded-xl font-black text-sm uppercase tracking-widest hover:scale-105 transition-transform shadow-xl"
         >
-          Start Free Audit <ArrowRight size={16} className="inline ml-2" />
-        </button>
+          Book a Demo <ArrowRight size={16} className="inline ml-2" />
+        </a>
       </div>
     </div>
   );
