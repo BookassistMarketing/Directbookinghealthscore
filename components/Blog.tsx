@@ -72,9 +72,9 @@ export const Blog: React.FC<BlogProps> = ({ onSelectPost, onStartAudit }) => {
   const posts = useMemo(() => loadPosts(language), [language]);
 
   const labels: Record<Language, any> = {
-    en: { heading: 'Direct Booking Insights', sub: 'Weekly strategy and technology advice for hotels reducing OTA dependency.', readMore: 'Read Article', cta: 'Audit Your Hotel\'s Direct Booking Health', ctaSub: 'Free 5-minute assessment — get your Tech Score instantly.' },
-    it: { heading: 'Approfondimenti sul Direct Booking', sub: 'Consigli settimanali su strategia e tecnologia per hotel che riducono la dipendenza dalle OTA.', readMore: 'Leggi Articolo', cta: 'Verifica la Salute del Tuo Direct Booking', ctaSub: 'Valutazione gratuita in 5 minuti — ottieni subito il tuo Tech Score.' },
-    es: { heading: 'Perspectivas de Reserva Directa', sub: 'Consejos semanales de estrategia y tecnología para hoteles que reducen su dependencia de las OTA.', readMore: 'Leer Artículo', cta: 'Audita la Salud de tu Reserva Directa', ctaSub: 'Evaluación gratuita en 5 minutos — obtén tu Tech Score al instante.' },
+    en: { heading: 'Direct Booking Insights', sub: 'Weekly strategy and technology advice for hotels reducing OTA dependency.', readMore: 'Read Article', cta: 'Book a Demo to Improve Your Hotel Score', ctaSub: 'Speak with an expert and find out how to grow your direct bookings.' },
+    it: { heading: 'Approfondimenti sul Direct Booking', sub: 'Consigli settimanali su strategia e tecnologia per hotel che riducono la dipendenza dalle OTA.', readMore: 'Leggi Articolo', cta: 'Prenota una Demo per Migliorare il Punteggio del Tuo Hotel', ctaSub: 'Parla con un esperto e scopri come aumentare le prenotazioni dirette.' },
+    es: { heading: 'Perspectivas de Reserva Directa', sub: 'Consejos semanales de estrategia y tecnología para hoteles que reducen su dependencia de las OTA.', readMore: 'Leer Artículo', cta: 'Reserva una Demo para Mejorar la Puntuación de tu Hotel', ctaSub: 'Habla con un experto y descubre cómo aumentar tus reservas directas.' },
   };
   const l = labels[language];
 
