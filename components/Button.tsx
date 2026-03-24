@@ -26,7 +26,7 @@ export const Button: React.FC<ButtonProps> = ({
   const variants = {
     primary: "bg-brand-blue text-white hover:bg-blue-900 shadow-md hover:shadow-lg",
     secondary: "bg-brand-success text-white hover:bg-teal-700 shadow-sm",
-    outline: "border-2 border-brand-success text-brand-success hover:bg-brand-success hover:text-white"
+    outline: "bg-brand-success text-white border-2 border-brand-success hover:bg-teal-700"
   };
 
   const combinedClasses = `${baseStyles} ${variants[variant]} ${fullWidth ? 'w-full' : ''} ${className}`;
