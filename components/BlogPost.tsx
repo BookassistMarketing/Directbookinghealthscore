@@ -106,12 +106,14 @@ export const BlogPost: React.FC<BlogPostProps> = ({ slug, onBack, onStartAudit }
       {/* CTA */}
       <div className="mt-16 bg-brand-blue rounded-[24px] p-10 text-center text-white">
         <h3 className="text-2xl font-black mb-6">{l.cta}</h3>
-        <button
-          onClick={onStartAudit}
-          className="bg-white text-brand-blue px-10 py-4 rounded-xl font-black text-sm uppercase tracking-widest hover:scale-105 transition-transform shadow-xl"
+        <a
+          href="https://bookassist.org/book-a-demo"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="inline-flex items-center bg-white text-brand-blue px-10 py-4 rounded-xl font-black text-sm uppercase tracking-widest hover:scale-105 transition-transform shadow-xl"
         >
-          {l.ctaBtn} <ArrowRight size={16} className="inline ml-2" />
-        </button>
+          Book a Demo <ArrowRight size={16} className="inline ml-2" />
+        </a>
       </div>
     </div>
   );
