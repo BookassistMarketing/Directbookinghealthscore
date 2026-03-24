@@ -89,7 +89,7 @@ const App: React.FC = () => {
                 onClick={() => navigateTo('AUDIT')}
                 className={`text-sm font-medium transition-colors ${currentPage === 'AUDIT' ? 'text-brand-blue font-bold' : 'text-gray-500 hover:text-brand-blue'}`}
               >
-                Digital Audit
+                Hotel Audit
               </button>
               <button
                 onClick={() => navigateTo('BLOG')}
@@ -138,7 +138,7 @@ const App: React.FC = () => {
                 onClick={() => navigateTo('AUDIT')}
                 className={`text-left px-4 py-4 rounded-lg text-lg ${currentPage === 'AUDIT' ? 'bg-blue-50 text-brand-blue font-semibold' : 'text-gray-700 hover:bg-gray-50'}`}
               >
-                Digital Audit Tool
+                Hotel Audit Tool
               </button>
               <button
                 onClick={() => navigateTo('BLOG')}
