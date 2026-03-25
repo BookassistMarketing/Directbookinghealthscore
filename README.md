@@ -59,6 +59,10 @@ npm run build
 ```
 The output will be in the `dist/` directory.
 
+## 🔒 Security
+
+For information on API key protection, access control, and how to report a vulnerability, see [SECURITY.md](SECURITY.md).
+
 ## 📄 License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
