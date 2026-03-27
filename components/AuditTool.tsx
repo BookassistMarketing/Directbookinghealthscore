@@ -4,7 +4,7 @@ import { WelcomeScreen } from './WelcomeScreen';
 import { Quiz } from './Quiz';
 import { Results } from './Results';
 import { FullResults } from './FullResults';
-import { generateStrategicAnalysis } from '../services/geminiService';
+import { submitAssessment } from '../services/apiService';
 import { useContent } from '../contexts/ContentContext';
 
 export const AuditTool: React.FC = () => {
@@ -22,9 +22,9 @@ export const AuditTool: React.FC = () => {
     setAnalysisLoading(true);
     setAnalysisError(null);
     setAnalysis('');
-    generateStrategicAnalysis(completedAnswers, language)
+    submitAssessment(completedAnswers, language)
       .then(result => setAnalysis(result))
-      .catch(err => setAnalysisError(err.message === 'MISSING_API_KEY' ? 'MISSING_API_KEY' : 'FAILED'))
+      .catch(() => setAnalysisError('FAILED'))
       .finally(() => setAnalysisLoading(false));
   };
 
