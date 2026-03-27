@@ -80,7 +80,7 @@ If you discover a security vulnerability in this project, please report it respo
 
 Instead, send a private email to:
 
-**security@bookassist.com**
+**dpo@bookassist.com**
 
 Please include:
 - A description of the vulnerability
