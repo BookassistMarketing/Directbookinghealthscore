@@ -31,94 +31,94 @@ export interface AssessmentPayload {
 // ─── Mock Responses by Score Bracket ─────────────────────────────────────────
 const MOCK_ANALYSIS_CRITICAL = `## Strategic Assessment: Critical Infrastructure Failure
 
-Your Digital Health Score places your property in the **bottom quartile** of direct booking readiness. This is not a marginal underperformance — it is a structural revenue crisis that is actively transferring margin to OTAs on every booking your hotel generates.
+Your Digital Health Score places your property in the bottom tier of direct booking readiness. This is not a marginal underperformance — it is a structural problem that is actively transferring revenue to OTAs on every booking your hotel generates.
 
 ### What This Score Means in Practice
 
-At this level, the majority of your bookings are being captured by third-party channels. You are paying commissions of **18–25% per reservation** on revenue that should be flowing directly to your property. Across a full trading year, this represents a significant and entirely recoverable loss of net profit.
+At this level, the majority of your bookings are being captured by third-party channels. Revenue that should flow directly to your property is instead being intermediated by OTAs, with commission costs attached to each transaction. The core issue is an absence of the infrastructure required to compete for direct bookings effectively.
 
 ### Primary Failure Points
 
-- **No high-intent direct capture mechanism:** Your property lacks the technical infrastructure to intercept guests at the moment of booking intent. Without a conversion-optimised booking engine and rate parity enforcement, OTAs will always win that transaction.
+- **No high-intent direct capture mechanism:** Your property lacks the technical infrastructure to intercept guests at the moment of booking intent. Without a conversion-optimised booking engine and rate parity enforcement, OTAs will consistently win that transaction — they are better resourced, better optimised, and more visible at the point of decision.
 
-- **Metasearch invisibility:** Google Hotel Ads, Trivago, and Kayak aggregate millions of price-comparison searches daily. Properties not actively bidding in these channels are handing high-converting traffic directly to OTA listings. This traffic does not return — once a guest books via an OTA, they are registered in that OTA's loyalty ecosystem, not yours.
+- **Metasearch invisibility:** Google Hotel Ads, Trivago, and Kayak aggregate price-comparison searches from guests who are actively ready to book. Properties not present in these channels are absent from one of the most commercially valuable moments in the guest journey. That traffic defaults to OTA listings by default.
 
-- **No CRM or guest data ownership:** Without a direct relationship infrastructure, you have no ability to market to past guests, drive repeat bookings, or reduce acquisition cost over time. Every new guest is effectively acquired from scratch, at full OTA commission.
+- **No CRM or guest data ownership:** Without a direct relationship infrastructure, there is no mechanism to market to past guests, build repeat booking behaviour, or reduce acquisition cost over time. Each new guest is acquired from scratch, through a channel that takes a commission and retains the guest relationship.
 
-- **Analytics blind spots:** Without visibility into channel performance, booking window data, and conversion funnels, commercial decisions are being made without evidence. This compounds every other vulnerability.
+- **Analytics blind spots:** Without visibility into channel performance, booking window behaviour, and conversion data, commercial decisions are made without evidence. This makes it impossible to identify where revenue is being lost or to prioritise corrective action.
 
-### Revenue Impact Estimate
+### Next Steps
 
-Properties in this bracket typically recover **12–20% of annual revenue** when full direct booking infrastructure is deployed. The intervention is not cosmetic — it is a structural correction with a measurable return within the first trading year.
+The gaps identified in your audit represent the foundational layer of a direct booking strategy. Without addressing these areas, OTA dependency will remain the default commercial position for your property.
 
 ---
 *Bookassist Digital Health Strategist — Algorithmic Assessment*`;
 
 const MOCK_ANALYSIS_HIGH_RISK = `## Strategic Assessment: High Revenue Leakage Detected
 
-Your Digital Health Score indicates that your property has partial infrastructure in place, but critical gaps remain across multiple revenue categories. You are capturing some direct business — but you are losing a substantial share to OTAs that could and should be retained.
+Your Digital Health Score indicates that your property has partial infrastructure in place, but critical gaps remain across multiple revenue categories. You are capturing some direct business — but a significant share is being lost to OTAs that could and should be retained.
 
 ### What This Score Means in Practice
 
-Properties in this bracket are in a transitional state. Some of the building blocks exist, but they are either not fully deployed, not optimised, or not working together as an integrated system. The result is that OTAs continue to absorb a disproportionate share of your bookings — and the commissions that come with them.
+Properties in this bracket are in a transitional state. Some of the foundational systems exist, but they are either not fully deployed, not optimised, or not operating as an integrated strategy. The result is that OTAs continue to absorb a disproportionate share of bookings — along with the commission costs that come with them.
 
 ### Key Gaps Identified
 
-- **Booking engine underperformance:** A booking engine exists, but conversion rates suggest it is not optimised for mobile, not presenting compelling rate differentiation, or not integrated with a rate intelligence tool that ensures you are always competitive against your own OTA listings.
+- **Booking engine underperformance:** A booking engine exists, but the audit suggests it is not fully optimised — whether for mobile conversion, rate presentation, or integration with a rate intelligence tool that ensures your direct price is always competitive against your own OTA listings. A booking engine that exists but underconverts is not providing the commercial return it should.
 
-- **Incomplete metasearch presence:** Partial metasearch activity leaves significant gaps in your price-comparison visibility. Guests who search on Google Hotel Ads and find no direct option — or a slower, less compelling one — will default to the OTA result. Each of those bookings carries a commission that erodes your RevPAR.
+- **Incomplete metasearch presence:** Partial metasearch activity leaves gaps in your price-comparison visibility. Guests who search on Google Hotel Ads and encounter no direct option — or a weaker one — will default to the OTA result. Every booking lost at that moment carries a commission cost that could have been avoided.
 
-- **CRM gaps:** Guest data is likely being collected inconsistently, or not being activated for remarketing. Repeat guests are one of the highest-margin booking segments available to any hotel — without a CRM strategy, this segment is underserved.
+- **CRM gaps:** Guest data is likely being collected inconsistently, or is not being activated for remarketing and retention. Without a functioning CRM strategy, repeat booking behaviour is left to chance rather than managed as a commercial asset.
 
-### The Commercial Opportunity
+### Next Steps
 
-Closing the gaps identified in your audit would move your property from reactive OTA dependency to a proactive direct booking strategy. The revenue uplift at this stage is typically **8–15% of annual turnover** — recoverable through targeted technology deployment and channel optimisation.
+The infrastructure exists in outline — the issue is completeness and integration. Addressing the gaps identified here would shift your property from partial direct capability to a cohesive direct booking strategy.
 
 ---
 *Bookassist Digital Health Strategist — Algorithmic Assessment*`;
 
 const MOCK_ANALYSIS_MODERATE = `## Strategic Assessment: Moderate Performance — Optimisation Required
 
-Your Digital Health Score reflects a property with solid direct booking foundations but identifiable gaps that are suppressing performance. You are ahead of many competitors in your infrastructure maturity — but you are leaving measurable revenue on the table through incomplete deployment and optimisation.
+Your Digital Health Score reflects a property with solid direct booking foundations but identifiable gaps that are suppressing performance. Your infrastructure maturity is ahead of many competitors — but specific weaknesses are limiting the commercial return on the investments already made.
 
 ### What This Score Means in Practice
 
-At this level, you have made meaningful investments in direct booking technology. The core systems are in place. However, the audit has identified specific areas where those systems are either not fully integrated, not actively managed, or not performing at the level required to maximise direct revenue share.
+At this level, meaningful investment has been made in direct booking technology. The core systems are in place. However, the audit has identified areas where those systems are either not fully integrated, not actively managed, or not performing at the level required to maximise direct revenue share against OTA competition.
 
 ### Areas Requiring Attention
 
-- **Rate intelligence and parity management:** Having a booking engine is only part of the equation. If your direct rates are not consistently competitive — or if rate parity is being eroded by OTA promotions — guests will still choose the OTA path even when they find you directly. Automated rate intelligence closes this gap.
+- **Rate intelligence and parity management:** Having a booking engine is only part of the equation. If direct rates are not consistently competitive — or if rate parity is being eroded by OTA promotional pricing — guests will choose the OTA path even when they find you directly. Automated rate intelligence is what closes this gap systematically rather than reactively.
 
-- **Metasearch optimisation:** Your metasearch presence may exist, but bid strategy, campaign structure, and return on ad spend require active management. An underperforming metasearch campaign can cost more than it returns if not properly optimised.
+- **Metasearch optimisation:** A metasearch presence may exist, but the quality of that presence matters as much as its existence. Bid strategy, campaign structure, and budget allocation require active management. A metasearch campaign that is live but not optimised will underdeliver relative to its cost.
 
-- **Guest data activation:** CRM infrastructure may be in place, but the question is whether guest data is being actively used to drive pre-arrival upselling, post-stay remarketing, and loyalty incentives. These touchpoints represent low-cost, high-margin revenue opportunities that are frequently underdeveloped.
+- **Guest data activation:** CRM infrastructure may be in place, but the question is whether guest data is being used actively — for pre-arrival communication, post-stay remarketing, and retention incentives. These are high-margin touchpoints that are frequently underdeveloped even in otherwise well-structured operations.
 
-### The Path Forward
+### Next Steps
 
-The gap between your current performance and full optimisation is narrower than it is for lower-scoring properties — but the revenue available is still significant. Properties that close these specific gaps typically see a **5–10% improvement in direct revenue share** within two to three trading quarters.
+The foundation is there. The opportunity lies in ensuring that the systems already in place are performing at full capacity — and that the remaining gaps are closed before they compound into a structural disadvantage.
 
 ---
 *Bookassist Digital Health Strategist — Algorithmic Assessment*`;
 
 const MOCK_ANALYSIS_STRONG = `## Strategic Assessment: Strong Foundation — Competitive Refinement Advised
 
-Your Digital Health Score places your property in the top tier of direct booking readiness. Your technical infrastructure is well-developed and your approach to direct revenue management is more sophisticated than the majority of independent hotels. This is a strong commercial position — but it is not a static one.
+Your Digital Health Score places your property in the top tier of direct booking readiness. Your technical infrastructure is well-developed and your approach to direct revenue management is more sophisticated than the majority of independent hotels. This is a strong commercial position — but it requires active maintenance to remain so.
 
 ### What This Score Means in Practice
 
-High-scoring properties have typically made deliberate investments in booking technology, metasearch presence, and guest data strategy. The risks at this level are different in nature: not structural failure, but competitive erosion over time if systems are not actively maintained, updated, and benchmarked against a market that is continuously evolving.
+High-scoring properties have made deliberate investments in booking technology, metasearch presence, and guest data strategy. The risks at this level are different in nature: not structural failure, but competitive erosion if systems are not continuously maintained, benchmarked, and adapted to a market that does not stand still.
 
-### Fine-Tuning Opportunities
+### Areas to Monitor and Refine
 
-- **Booking engine conversion rate:** Even well-configured booking engines have conversion rate optimisation headroom. A/B testing of rate presentation, room type ordering, upsell sequencing, and mobile UX can yield incremental gains that compound meaningfully at scale.
+- **Booking engine conversion quality:** Even well-configured booking engines have optimisation headroom. Rate presentation, room type ordering, upsell sequencing, and mobile experience all influence conversion — and the cumulative effect of marginal improvements across these areas is commercially meaningful at scale.
 
-- **Metasearch bid strategy:** At high performance levels, the focus shifts from presence to efficiency. Ensuring that your cost-per-acquisition across metasearch channels is optimised — and that budget allocation responds dynamically to demand signals — is the difference between good and best-in-class.
+- **Metasearch bid strategy efficiency:** At high performance levels, the focus shifts from presence to precision. Ensuring that cost-per-acquisition across metasearch channels is optimised — and that budget allocation responds to demand signals rather than running on fixed parameters — is what separates strong performance from best-in-class.
 
-- **CRM and loyalty depth:** Strong performers often have CRM in place but have not fully activated segmented communication strategies, pre-arrival personalisation, or structured loyalty incentives. These are the tools that convert one-time direct bookers into repeat guests — the highest-margin segment in any hotel's revenue mix.
+- **CRM depth and segmentation:** Strong performers often have CRM in place but have not fully activated segmented communication, pre-arrival personalisation, or structured retention incentives. These are the tools that convert one-time direct bookers into repeat guests — a booking segment that carries significantly lower acquisition cost than new business.
 
 ### Maintaining Your Position
 
-The direct booking landscape is not static. OTAs continue to invest heavily in guest acquisition and loyalty programmes. Sustaining a high Health Score requires ongoing investment in technology, strategy, and channel management. The properties that maintain this level of performance treat direct booking as a commercial discipline, not a one-time project.
+The direct booking landscape is not static. OTAs continue to invest in guest acquisition and loyalty infrastructure. Sustaining a high Health Score requires treating direct booking as an ongoing commercial discipline rather than a completed project.
 
 ---
 *Bookassist Digital Health Strategist — Algorithmic Assessment*`;
