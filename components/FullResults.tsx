@@ -1,3 +1,5 @@
+'use client';
+
 import React, { useRef, useState } from 'react';
 import { PieChart, Pie, Cell, ResponsiveContainer } from 'recharts';
 import { BrainCircuit, Download, Loader2, RefreshCcw, ArrowRight, ExternalLink } from 'lucide-react';

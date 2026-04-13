@@ -1,3 +1,5 @@
+'use client';
+
 import React, { useRef } from 'react';
 import { useContent } from '../contexts/ContentContext';
 import { Edit3, Image as ImageIcon, Upload } from 'lucide-react';

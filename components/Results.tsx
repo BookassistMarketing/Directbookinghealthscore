@@ -1,3 +1,5 @@
+'use client';
+
 import React, { useState } from 'react';
 import { PieChart, Pie, Cell, ResponsiveContainer } from 'recharts';
 import { RefreshCcw, ArrowRight, ExternalLink } from 'lucide-react';

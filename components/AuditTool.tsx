@@ -1,3 +1,5 @@
+'use client';
+
 import React, { useState } from 'react';
 import { AppState, Answer } from '../types';
 import { WelcomeScreen } from './WelcomeScreen';

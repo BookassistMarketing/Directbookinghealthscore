@@ -1,3 +1,4 @@
+'use client';
 
 import React, { useEffect, useState, useRef } from 'react';
 import { Lock, FileText, CheckCircle, ShieldCheck, Loader2, ShieldAlert } from 'lucide-react';

@@ -1,65 +1,39 @@
-import React, { useMemo } from 'react';
-import { ArrowLeft, Calendar, ArrowRight } from 'lucide-react';
+'use client';
+
+import React from 'react';
+import { ArrowLeft, ArrowRight, Calendar } from 'lucide-react';
 import ReactMarkdown from 'react-markdown';
 import { useContent } from '../contexts/ContentContext';
 import { Language } from '../types';
-
-function parseFrontmatter(content: string): { data: Record<string, string>; body: string } {
-  const match = content.match(/^---\n([\s\S]*?)\n---\n?([\s\S]*)$/);
-  if (!match) return { data: {}, body: content };
-  const data: Record<string, string> = {};
-  match[1].split('\n').forEach(line => {
-    const colonIdx = line.indexOf(':');
-    if (colonIdx === -1) return;
-    const key = line.slice(0, colonIdx).trim();
-    const value = line.slice(colonIdx + 1).trim().replace(/^"|"$/g, '');
-    data[key] = value;
-  });
-  return { data, body: match[2] };
-}
-
-const rawFiles = import.meta.glob('/blog/*.md', { query: '?raw', import: 'default', eager: true }) as Record<string, string>;
+import type { BlogPostContent } from '../lib/blog';
 
 interface BlogPostProps {
   slug: string;
+  content: BlogPostContent | null;
   onBack: () => void;
   onStartAudit: () => void;
 }
 
-export const BlogPost: React.FC<BlogPostProps> = ({ slug, onBack, onStartAudit }) => {
+export const BlogPost: React.FC<BlogPostProps> = ({ slug, content, onBack, onStartAudit }) => {
   const { language } = useContent();
 
-  const labels: Record<Language, any> = {
+  const labels: Record<Language, { back: string; cta: string; ctaBtn: string }> = {
     en: { back: 'Back to Blog', cta: 'Book a Demo to Improve Your Hotel Score', ctaBtn: 'Book a Demo' },
     it: { back: 'Torna al Blog', cta: 'Prenota una Demo per Migliorare il Punteggio del Tuo Hotel', ctaBtn: 'Prenota una Demo' },
     es: { back: 'Volver al Blog', cta: 'Reserva una Demo para Mejorar la Puntuación de tu Hotel', ctaBtn: 'Reservar una Demo' },
   };
   const l = labels[language];
 
-  const { data, body } = useMemo(() => {
-    // Group files by base slug and find matching post
-    const postVersions: Record<string, string> = {};
+  if (!content) {
+    return (
+      <div className="w-full max-w-3xl px-4 py-12 mx-auto text-center">
+        <p className="text-gray-400">Post not found.</p>
+        <button onClick={onBack} className="mt-4 text-brand-blue font-bold">{l.back}</button>
+      </div>
+    );
+  }
 
-    Object.entries(rawFiles).forEach(([path, raw]) => {
-      const filename = path.replace(/.*\//, '').replace('.md', '');
-      const langMatch = filename.match(/^(.+)\.(it|es)$/);
-      const baseSlug = langMatch ? langMatch[1] : filename;
-      const fileLang = langMatch ? langMatch[2] : 'en';
-
-      // Check if this file matches the requested slug
-      const parsed = parseFrontmatter(raw);
-      const fileSlug = parsed.data.slug || baseSlug;
-
-      if (fileSlug === slug || baseSlug.includes(slug)) {
-        postVersions[fileLang] = raw;
-      }
-    });
-
-    // Prefer current language, fallback to English
-    const selectedRaw = postVersions[language] || postVersions['en'];
-    if (!selectedRaw) return { data: {}, body: 'Post not found.' };
-    return parseFrontmatter(selectedRaw);
-  }, [slug, language]);
+  const { data, body } = content;
 
   const formatDate = (dateStr: string) => {
     if (!dateStr) return '';

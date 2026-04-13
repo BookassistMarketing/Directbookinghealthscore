@@ -1,3 +1,5 @@
+'use client';
+
 import React from 'react';
 import { Button } from './Button';
 import { ShieldCheck, BarChart2, Globe, Zap } from 'lucide-react';

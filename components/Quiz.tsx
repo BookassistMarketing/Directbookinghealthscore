@@ -1,3 +1,5 @@
+'use client';
+
 import React, { useState } from 'react';
 import { Answer, AnswerValue, Language } from '../types';
 import { QUESTIONS, CATEGORY_TRANSLATIONS } from '../constants';

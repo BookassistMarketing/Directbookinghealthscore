@@ -21,7 +21,7 @@ jobs:
       - name: Build
         run: npm run build
         env:
-          VITE_GEMINI_API_KEY: ${{ secrets.VITE_GEMINI_API_KEY }}
+          NEXT_PUBLIC_GEMINI_API_KEY: ${{ secrets.VITE_GEMINI_API_KEY }}
       - name: Deploy
         uses: JamesIves/github-pages-deploy-action@v4
         with:
