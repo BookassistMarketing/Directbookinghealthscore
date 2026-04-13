@@ -5,8 +5,25 @@ import { AppShell } from '../components/AppShell';
 import './globals.css';
 
 export const metadata: Metadata = {
-  title: 'Direct Booking Health Score | Digital Audit',
-  description: 'Professional hotel technology and marketing audit tool with AI-powered strategic assessments.',
+  title: {
+    default: 'Direct Booking Health Score | Free Hotel Tech Audit',
+    template: '%s | Direct Booking Health Score',
+  },
+  description:
+    'The industry standard hotel technology and marketing audit tool. Assess your direct booking strategy, metasearch connectivity, and marketing ROI in under 3 minutes.',
+  metadataBase: new URL('https://directbookinghealthscore.com'),
+  openGraph: {
+    siteName: 'Direct Booking Health Score',
+    type: 'website',
+    locale: 'en_GB',
+  },
+  twitter: {
+    card: 'summary_large_image',
+  },
+  robots: {
+    index: true,
+    follow: true,
+  },
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {

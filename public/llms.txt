@@ -1,0 +1,41 @@
+# Direct Booking Health Score
+
+> A free hotel technology and direct booking strategy audit tool built by Bookassist. Hotels answer 20 questions about their tech stack and receive an AI-powered health score identifying revenue leakage from OTA dependency.
+
+## About
+
+The Direct Booking Health Score helps independent hotels and hotel groups assess the maturity of their direct booking infrastructure. It scores hotels across five categories: booking engine, metasearch, CRM, analytics, and marketing. The output is a scored report with AI-generated recommendations for reducing OTA commission costs.
+
+This tool is built and maintained by Bookassist, a hotel direct booking technology company.
+
+## Key Pages
+
+- [Home](https://directbookinghealthscore.com/): Overview and tool launch
+- [Hotel Audit Tool](https://directbookinghealthscore.com/hotel-audit): The 20-question direct booking health audit
+- [Blog](https://directbookinghealthscore.com/blog): Weekly articles on hotel direct booking strategy and technology
+- [Contact](https://directbookinghealthscore.com/contact): Contact Bookassist for a demo or consultation
+
+## Blog
+
+- [Why Most Hotels Are Losing 20% of Revenue to OTAs Without Realising It](https://directbookinghealthscore.com/blog/why-hotels-lose-money-to-otas): OTA commissions are the silent profit killer for independent hotels. Understanding exactly where your revenue leaks helps you take it back.
+
+## Key Concepts
+
+- **Direct Booking Health Score**: A 0-100% score measuring a hotel's direct booking infrastructure maturity
+- **OTA Dependency**: Over-reliance on Online Travel Agencies (Booking.com, Expedia) at the expense of direct revenue
+- **Metasearch**: Price comparison channels (Google Hotel Ads, Trivago, Kayak) where hotels can bid for direct bookings
+- **Booking Engine**: The software on a hotel website that takes direct reservations
+- **CRM**: Customer Relationship Management - tools for managing guest data and driving repeat bookings
+- **Rate Parity**: Ensuring direct prices are competitive against OTA prices
+
+## Languages
+
+This tool is available in English, Italian (Italiano), and Spanish (Espanol).
+
+## Technology
+
+Built with Next.js 15, React 19, TypeScript, Tailwind CSS 4, and Google Gemini AI.
+
+## Contact
+
+For more information about direct booking technology, visit https://bookassist.org
