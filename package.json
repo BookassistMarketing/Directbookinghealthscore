@@ -8,29 +8,26 @@
   "license": "MIT",
   "type": "module",
   "scripts": {
-    "dev": "vite",
-    "build": "vite build",
-    "lint": "tsc --noEmit",
-    "preview": "vite preview",
-    "deploy": "gh-pages -d dist"
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "tsc --noEmit"
   },
   "dependencies": {
     "@google/genai": "^1.30.0",
-    "@tailwindcss/vite": "^4.2.1",
+    "@tailwindcss/postcss": "^4.2.1",
     "lucide-react": "^0.554.0",
-    "path": "^0.12.7",
+    "next": "^15.3.0",
     "react": "^19.2.0",
     "react-dom": "^19.2.0",
     "react-markdown": "^10.1.0",
-    "react-router-dom": "^7.13.2",
     "recharts": "^3.4.1",
     "tailwindcss": "^4.2.1"
   },
   "devDependencies": {
     "@types/node": "^22.14.0",
-    "@vitejs/plugin-react": "^5.1.4",
-    "gh-pages": "^6.3.0",
-    "typescript": "~5.8.2",
-    "vite": "^7.3.1"
+    "@types/react": "^19.0.0",
+    "@types/react-dom": "^19.0.0",
+    "typescript": "~5.8.2"
   }
 }

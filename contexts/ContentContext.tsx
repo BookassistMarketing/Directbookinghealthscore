@@ -1,3 +1,5 @@
+'use client';
+
 import React, { createContext, useContext, useState, useEffect } from 'react';
 import { Language } from '../types';
 
@@ -25,6 +27,7 @@ export const useContent = () => useContext(ContentContext);
 
 export const ContentProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [language, setLanguageState] = useState<Language>(() => {
+    if (typeof window === 'undefined') return 'en';
     const saved = localStorage.getItem('hhc_lang');
     return (saved as Language) || 'en';
   });
@@ -48,18 +51,22 @@ export const ContentProvider: React.FC<{ children: React.ReactNode }> = ({ child
   const updateContent = (key: string, value: string) => {
     const newContent = { ...content, [key]: value };
     setContent(newContent);
-    localStorage.setItem(`hhc_content_${language}`, JSON.stringify(newContent));
+    if (typeof window !== 'undefined') {
+      localStorage.setItem(`hhc_content_${language}`, JSON.stringify(newContent));
+    }
   };
 
   const setLanguage = (lang: Language) => {
     setLanguageState(lang);
-    localStorage.setItem('hhc_lang', lang);
+    if (typeof window !== 'undefined') {
+      localStorage.setItem('hhc_lang', lang);
+    }
   };
 
   const toggleEditing = () => setIsEditing(prev => !prev);
 
   const resetContent = () => {
-    if (window.confirm("Are you sure you want to reset all content for this language to defaults?")) {
+    if (typeof window !== 'undefined' && window.confirm("Are you sure you want to reset all content for this language to defaults?")) {
       setContent({});
       localStorage.removeItem(`hhc_content_${language}`);
     }

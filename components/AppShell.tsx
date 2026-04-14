@@ -1,55 +1,39 @@
+'use client';
+
 import React, { useState } from 'react';
-import { Routes, Route, Navigate, useNavigate, useLocation, useParams } from 'react-router-dom';
-import { Home } from './components/Home';
-import { AuditTool } from './components/AuditTool';
-import { Blog } from './components/Blog';
-import { BlogPost } from './components/BlogPost';
-import { Contact } from './components/Contact';
-import { Security } from './components/Security';
+import { useRouter, usePathname } from 'next/navigation';
 import { Activity, Menu, X, Globe } from 'lucide-react';
-import { EditableText } from './components/Editable';
-import { useContent } from './contexts/ContentContext';
-import { Language } from './types';
+import { EditableText } from './Editable';
+import { useContent } from '../contexts/ContentContext';
+import { Language } from '../types';
 
-function BlogPostRoute() {
-  const { slug } = useParams<{ slug: string }>();
-  const navigate = useNavigate();
-  return (
-    <BlogPost
-      slug={slug!}
-      onBack={() => navigate('/blog')}
-      onStartAudit={() => navigate('/hotel-audit')}
-    />
-  );
-}
-
-const App: React.FC = () => {
+export const AppShell: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const { language, setLanguage } = useContent();
-  const navigate = useNavigate();
-  const location = useLocation();
+  const router = useRouter();
+  const pathname = usePathname();
 
   const navigateTo = (path: string) => {
-    navigate(path);
+    router.push(path);
     setIsMenuOpen(false);
     window.scrollTo(0, 0);
   };
 
   const isActive = (path: string) => {
-    if (path === '/blog') return location.pathname.startsWith('/blog');
-    return location.pathname === path;
+    if (path === '/blog') return pathname.startsWith('/blog');
+    return pathname === path;
   };
 
   const languages: { code: Language; label: string }[] = [
     { code: 'en', label: 'English' },
     { code: 'it', label: 'Italiano' },
-    { code: 'es', label: 'Español' }
+    { code: 'es', label: 'Español' },
   ];
 
   const headerLabels: Record<Language, { contact: string; start: string }> = {
     en: { contact: 'Contact Us', start: 'Start Audit' },
     it: { contact: 'Contattaci', start: "Inizia l'Audit" },
-    es: { contact: 'Contáctanos', start: 'Empieza el Audit' }
+    es: { contact: 'Contáctanos', start: 'Empieza el Audit' },
   };
 
   const labels = headerLabels[language];
@@ -84,8 +68,8 @@ const App: React.FC = () => {
                   onClick={() => setLanguage(lang.code)}
                   className={`px-2 py-1 text-[10px] sm:text-xs font-bold rounded uppercase transition-colors ${
                     language === lang.code
-                    ? 'bg-brand-blue text-white shadow-sm'
-                    : 'text-gray-400 hover:text-brand-blue hover:bg-white'
+                      ? 'bg-brand-blue text-white shadow-sm'
+                      : 'text-gray-400 hover:text-brand-blue hover:bg-white'
                   }`}
                 >
                   {lang.code}
@@ -139,7 +123,7 @@ const App: React.FC = () => {
         </div>
 
         {isMenuOpen && (
-          <div className="md:hidden bg-white border-t border-gray-100 shadow-xl absolute w-full left-0 top-16 sm:top-20 z-40 animate-in slide-in-from-top-5 duration-200 h-[calc(100vh-4rem)] overflow-y-auto print:hidden">
+          <div className="md:hidden bg-white border-t border-gray-100 shadow-xl absolute w-full left-0 top-16 sm:top-20 z-40 h-[calc(100vh-4rem)] overflow-y-auto print:hidden">
             <div className="px-4 py-6 space-y-3 flex flex-col pb-20">
               <button
                 onClick={() => navigateTo('/')}
@@ -185,26 +169,26 @@ const App: React.FC = () => {
       </header>
 
       <main className="flex-grow flex flex-col items-center justify-start w-full pt-4 sm:pt-6 pb-12 print:pt-4 print:pb-0">
-        <Routes>
-          <Route path="/" element={<Home onStart={() => navigateTo('/hotel-audit')} />} />
-          <Route path="/hotel-audit" element={<AuditTool />} />
-          <Route path="/blog" element={<Blog onSelectPost={(slug) => navigateTo(`/blog/${slug}`)} onStartAudit={() => navigateTo('/hotel-audit')} />} />
-          <Route path="/blog/:slug" element={<BlogPostRoute />} />
-          <Route path="/contact" element={<Contact />} />
-          <Route path="/security" element={<Security />} />
-          <Route path="*" element={<Navigate to="/" replace />} />
-        </Routes>
+        {children}
       </main>
 
       <footer className="bg-white border-t border-gray-200 py-8 sm:py-12 mt-auto print:border-t-0 print:py-4 print:mt-4 break-inside-avoid">
         <div className="max-w-7xl mx-auto px-4 text-center text-gray-400 text-sm">
           <p>&copy; {new Date().getFullYear()} Direct Booking Health Score. All rights reserved.</p>
-          <p className="mt-2 text-xs uppercase tracking-widest text-gray-300 print:text-gray-500">Technology Provided by Bookassist</p>
+          <p className="mt-2 text-xs uppercase tracking-widest text-gray-300 print:text-gray-500">
+            Technology Provided by Bookassist
+          </p>
           <div className="mt-4 flex justify-center gap-6 text-xs">
-            <button onClick={() => navigateTo('/security')} className="text-gray-400 hover:text-brand-blue transition-colors">
+            <button
+              onClick={() => navigateTo('/security')}
+              className="text-gray-400 hover:text-brand-blue transition-colors"
+            >
               Security & Privacy
             </button>
-            <button onClick={() => navigateTo('/contact')} className="text-gray-400 hover:text-brand-blue transition-colors">
+            <button
+              onClick={() => navigateTo('/contact')}
+              className="text-gray-400 hover:text-brand-blue transition-colors"
+            >
               Contact Us
             </button>
           </div>
@@ -213,5 +197,3 @@ const App: React.FC = () => {
     </div>
   );
 };
-
-export default App;

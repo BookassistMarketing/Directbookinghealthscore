@@ -1,92 +1,57 @@
-import React, { useMemo } from 'react';
+'use client';
+
+import React from 'react';
 import { ArrowRight, Calendar, BookOpen } from 'lucide-react';
 import { useContent } from '../contexts/ContentContext';
 import { Language } from '../types';
-
-interface Post {
-  slug: string;
-  title: string;
-  date: string;
-  excerpt: string;
-  image: string;
-}
-
-function parseFrontmatter(content: string): Record<string, string> {
-  const match = content.match(/^---\n([\s\S]*?)\n---/);
-  if (!match) return {};
-  const data: Record<string, string> = {};
-  match[1].split('\n').forEach(line => {
-    const colonIdx = line.indexOf(':');
-    if (colonIdx === -1) return;
-    const key = line.slice(0, colonIdx).trim();
-    const value = line.slice(colonIdx + 1).trim().replace(/^"|"$/g, '');
-    data[key] = value;
-  });
-  return data;
-}
-
-const rawFiles = import.meta.glob('/blog/*.md', { query: '?raw', import: 'default', eager: true }) as Record<string, string>;
-
-function loadPosts(language: Language): Post[] {
-  // Group files by base slug (without language suffix)
-  const postMap: Record<string, Record<string, string>> = {};
-
-  Object.entries(rawFiles).forEach(([path, raw]) => {
-    const filename = path.replace(/.*\//, '').replace('.md', '');
-    // Check for language suffix like .it or .es
-    const langMatch = filename.match(/^(.+)\.(it|es)$/);
-    const baseSlug = langMatch ? langMatch[1] : filename;
-    const fileLang = langMatch ? langMatch[2] : 'en';
-
-    if (!postMap[baseSlug]) postMap[baseSlug] = {};
-    postMap[baseSlug][fileLang] = raw;
-  });
-
-  // Select appropriate language version for each post
-  return Object.entries(postMap)
-    .map(([baseSlug, versions]) => {
-      // Prefer current language, fallback to English
-      const selectedRaw = versions[language] || versions['en'];
-      if (!selectedRaw) return null;
-
-      const data = parseFrontmatter(selectedRaw);
-      return {
-        slug: data.slug || baseSlug,
-        title: data.title || 'Untitled',
-        date: data.date || '',
-        excerpt: data.excerpt || '',
-        image: data.image || '',
-      };
-    })
-    .filter((p): p is Post => p !== null)
-    .sort((a, b) => (a.date < b.date ? 1 : -1));
-}
+import type { BlogPostMeta } from '../lib/blog';
 
 interface BlogProps {
+  posts: BlogPostMeta[];
   onSelectPost: (slug: string) => void;
   onStartAudit: () => void;
 }
 
-export const Blog: React.FC<BlogProps> = ({ onSelectPost, onStartAudit }) => {
+export const Blog: React.FC<BlogProps> = ({ posts, onSelectPost, onStartAudit }) => {
   const { language } = useContent();
-  const posts = useMemo(() => loadPosts(language), [language]);
 
-  const labels: Record<Language, any> = {
-    en: { heading: 'Direct Booking Insights', sub: 'Weekly strategy and technology advice for hotels reducing OTA dependency.', readMore: 'Read Article', cta: 'Book a Demo to Improve Your Hotel Score', ctaSub: 'Speak with an expert and find out how to grow your direct bookings.' },
-    it: { heading: 'Approfondimenti sul Direct Booking', sub: 'Consigli settimanali su strategia e tecnologia per hotel che riducono la dipendenza dalle OTA.', readMore: 'Leggi Articolo', cta: 'Prenota una Demo per Migliorare il Punteggio del Tuo Hotel', ctaSub: 'Parla con un esperto e scopri come aumentare le prenotazioni dirette.' },
-    es: { heading: 'Perspectivas de Reserva Directa', sub: 'Consejos semanales de estrategia y tecnología para hoteles que reducen su dependencia de las OTA.', readMore: 'Leer Artículo', cta: 'Reserva una Demo para Mejorar la Puntuación de tu Hotel', ctaSub: 'Habla con un experto y descubre cómo aumentar tus reservas directas.' },
+  const labels: Record<Language, { heading: string; sub: string; readMore: string; cta: string; ctaSub: string }> = {
+    en: {
+      heading: 'Direct Booking Insights',
+      sub: 'Weekly strategy and technology advice for hotels reducing OTA dependency.',
+      readMore: 'Read Article',
+      cta: 'Book a Demo to Improve Your Hotel Score',
+      ctaSub: 'Speak with an expert and find out how to grow your direct bookings.',
+    },
+    it: {
+      heading: 'Approfondimenti sul Direct Booking',
+      sub: 'Consigli settimanali su strategia e tecnologia per hotel che riducono la dipendenza dalle OTA.',
+      readMore: 'Leggi Articolo',
+      cta: 'Prenota una Demo per Migliorare il Punteggio del Tuo Hotel',
+      ctaSub: 'Parla con un esperto e scopri come aumentare le prenotazioni dirette.',
+    },
+    es: {
+      heading: 'Perspectivas de Reserva Directa',
+      sub: 'Consejos semanales de estrategia y tecnología para hoteles que reducen su dependencia de las OTA.',
+      readMore: 'Leer Artículo',
+      cta: 'Reserva una Demo para Mejorar la Puntuación de tu Hotel',
+      ctaSub: 'Habla con un experto y descubre cómo aumentar tus reservas directas.',
+    },
   };
   const l = labels[language];
 
   const formatDate = (dateStr: string) => {
     if (!dateStr) return '';
     const localeMap: Record<Language, string> = { en: 'en-GB', it: 'it-IT', es: 'es-ES' };
-    return new Date(dateStr).toLocaleDateString(localeMap[language], { day: 'numeric', month: 'long', year: 'numeric' });
+    return new Date(dateStr).toLocaleDateString(localeMap[language], {
+      day: 'numeric',
+      month: 'long',
+      year: 'numeric',
+    });
   };
 
   return (
     <div className="w-full max-w-5xl px-4 sm:px-6 py-12 mx-auto">
-      {/* Header */}
       <div className="text-center mb-14">
         <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-brand-blue/10 text-brand-blue text-[10px] font-black tracking-widest uppercase mb-5">
           <BookOpen size={12} /> Weekly Insights
@@ -95,7 +60,6 @@ export const Blog: React.FC<BlogProps> = ({ onSelectPost, onStartAudit }) => {
         <p className="text-lg text-gray-500 max-w-xl mx-auto">{l.sub}</p>
       </div>
 
-      {/* Post Grid */}
       {posts.length === 0 ? (
         <p className="text-center text-gray-400 py-20">No posts yet — check back next week.</p>
       ) : (
@@ -104,7 +68,9 @@ export const Blog: React.FC<BlogProps> = ({ onSelectPost, onStartAudit }) => {
             <button
               key={post.slug}
               onClick={() => onSelectPost(post.slug)}
-              className={`text-left bg-white rounded-[24px] shadow-md border border-gray-100 overflow-hidden hover:shadow-xl hover:-translate-y-1 transition-all duration-200 flex flex-col ${i === 0 ? 'md:col-span-2' : ''}`}
+              className={`text-left bg-white rounded-[24px] shadow-md border border-gray-100 overflow-hidden hover:shadow-xl hover:-translate-y-1 transition-all duration-200 flex flex-col ${
+                i === 0 ? 'md:col-span-2' : ''
+              }`}
             >
               {post.image && (
                 <div className={`w-full overflow-hidden ${i === 0 ? 'h-64 sm:h-80' : 'h-48'}`}>
@@ -116,7 +82,13 @@ export const Blog: React.FC<BlogProps> = ({ onSelectPost, onStartAudit }) => {
                   <Calendar size={12} />
                   {formatDate(post.date)}
                 </div>
-                <h2 className={`font-black text-gray-900 mb-3 leading-tight ${i === 0 ? 'text-2xl sm:text-3xl' : 'text-xl'}`}>{post.title}</h2>
+                <h2
+                  className={`font-black text-gray-900 mb-3 leading-tight ${
+                    i === 0 ? 'text-2xl sm:text-3xl' : 'text-xl'
+                  }`}
+                >
+                  {post.title}
+                </h2>
                 <p className="text-gray-500 text-sm leading-relaxed flex-1 mb-5">{post.excerpt}</p>
                 <span className="inline-flex items-center gap-2 text-brand-blue font-black text-xs uppercase tracking-widest">
                   {l.readMore} <ArrowRight size={14} />
@@ -127,7 +99,6 @@ export const Blog: React.FC<BlogProps> = ({ onSelectPost, onStartAudit }) => {
         </div>
       )}
 
-      {/* CTA Banner */}
       <div className="bg-brand-blue rounded-[28px] p-10 text-center text-white">
         <h3 className="text-2xl sm:text-3xl font-black mb-3">{l.cta}</h3>
         <p className="text-blue-200 mb-7">{l.ctaSub}</p>

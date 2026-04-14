@@ -63,7 +63,7 @@ const generateLocalAnalysis = (answers: Answer[], scorePercent: number, lang: La
 const delay = (ms: number) => new Promise(resolve => setTimeout(resolve, ms));
 
 export const generateStrategicAnalysis = async (answers: Answer[], lang: Language, attempt: number = 1): Promise<string> => {
-  const apiKey = import.meta.env.VITE_GEMINI_API_KEY;
+  const apiKey = process.env.NEXT_PUBLIC_GEMINI_API_KEY;
   const passedItems = answers.filter(a => a.value === AnswerValue.YES).length;
   const scorePercent = Math.round((passedItems / QUESTIONS.length) * 100);
 

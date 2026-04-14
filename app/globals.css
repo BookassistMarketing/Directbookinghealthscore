@@ -1,0 +1,35 @@
+@import "tailwindcss";
+
+@theme {
+  --color-brand-blue: #003366;
+  --color-brand-light: #F4F6F8;
+  --color-brand-accent: #E63946;
+  --color-brand-success: #2A9D8F;
+}
+
+@layer base {
+  body {
+    @apply bg-brand-light text-gray-900 font-sans;
+  }
+}
+
+@media print {
+  @page {
+    margin: 1cm;
+    size: auto;
+  }
+  body {
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+    background-color: white !important;
+  }
+  ::-webkit-scrollbar {
+    display: none;
+  }
+  .break-inside-avoid {
+    page-break-inside: avoid;
+  }
+  .no-print {
+    display: none !important;
+  }
+}

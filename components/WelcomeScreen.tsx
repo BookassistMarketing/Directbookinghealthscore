@@ -1,3 +1,5 @@
+'use client';
+
 import React from 'react';
 import { Activity, BarChart3, Stethoscope } from 'lucide-react';
 import { Button } from './Button';
