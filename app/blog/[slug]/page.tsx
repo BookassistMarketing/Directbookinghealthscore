@@ -48,6 +48,7 @@ export default async function BlogPostPage({ params }: Props) {
   const contentEn = getPostContent(slug, 'en');
   const contentIt = getPostContent(slug, 'it');
   const contentEs = getPostContent(slug, 'es');
+  const contentPl = getPostContent(slug, 'pl');
 
   const post = {
     title: contentEn?.data?.title || '',
@@ -74,6 +75,7 @@ export default async function BlogPostPage({ params }: Props) {
         contentEn={contentEn}
         contentIt={contentIt}
         contentEs={contentEs}
+        contentPl={contentPl}
       />
     </>
   );

@@ -11,9 +11,10 @@ interface Props {
   contentEn: BlogPostContent | null;
   contentIt: BlogPostContent | null;
   contentEs: BlogPostContent | null;
+  contentPl: BlogPostContent | null;
 }
 
-export const BlogPostClientPage: React.FC<Props> = ({ slug, contentEn, contentIt, contentEs }) => {
+export const BlogPostClientPage: React.FC<Props> = ({ slug, contentEn, contentIt, contentEs, contentPl }) => {
   const { language } = useContent();
   const router = useRouter();
 
@@ -21,6 +22,7 @@ export const BlogPostClientPage: React.FC<Props> = ({ slug, contentEn, contentIt
     en: contentEn,
     it: contentIt,
     es: contentEs,
+    pl: contentPl,
   };
   const content = contentByLang[language] ?? contentEn;
 

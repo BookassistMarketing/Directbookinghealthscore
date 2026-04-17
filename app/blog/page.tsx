@@ -28,11 +28,12 @@ export default function BlogPage() {
   const postsEn = getAllPosts('en');
   const postsIt = getAllPosts('it');
   const postsEs = getAllPosts('es');
+  const postsPl = getAllPosts('pl');
 
   return (
     <>
       <JsonLd schema={blogListingSchema} />
-      <BlogClientPage postsEn={postsEn} postsIt={postsIt} postsEs={postsEs} />
+      <BlogClientPage postsEn={postsEn} postsIt={postsIt} postsEs={postsEs} postsPl={postsPl} />
     </>
   );
 }
