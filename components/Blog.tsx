@@ -37,12 +37,19 @@ export const Blog: React.FC<BlogProps> = ({ posts, onSelectPost, onStartAudit })
       cta: 'Reserva una Demo para Mejorar la Puntuación de tu Hotel',
       ctaSub: 'Habla con un experto y descubre cómo aumentar tus reservas directas.',
     },
+    pl: {
+      heading: 'Spostrzeżenia o Rezerwacjach Bezpośrednich',
+      sub: 'Cotygodniowe porady strategiczne i technologiczne dla hoteli zmniejszających zależność od OTA.',
+      readMore: 'Czytaj Artykuł',
+      cta: 'Zamów Prezentację, aby Poprawić Wynik Swojego Hotelu',
+      ctaSub: 'Porozmawiaj z ekspertem i odkryj, jak zwiększyć swoje rezerwacje bezpośrednie.',
+    },
   };
   const l = labels[language];
 
   const formatDate = (dateStr: string) => {
     if (!dateStr) return '';
-    const localeMap: Record<Language, string> = { en: 'en-GB', it: 'it-IT', es: 'es-ES' };
+    const localeMap: Record<Language, string> = { en: 'en-GB', it: 'it-IT', es: 'es-ES', pl: 'pl-PL' };
     return new Date(dateStr).toLocaleDateString(localeMap[language], {
       day: 'numeric',
       month: 'long',

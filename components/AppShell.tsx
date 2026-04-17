@@ -28,12 +28,14 @@ export const AppShell: React.FC<{ children: React.ReactNode }> = ({ children }) 
     { code: 'en', label: 'English' },
     { code: 'it', label: 'Italiano' },
     { code: 'es', label: 'Español' },
+    { code: 'pl', label: 'Polski' },
   ];
 
   const headerLabels: Record<Language, { contact: string; start: string }> = {
     en: { contact: 'Contact Us', start: 'Start Audit' },
     it: { contact: 'Contattaci', start: "Inizia l'Audit" },
     es: { contact: 'Contáctanos', start: 'Empieza el Audit' },
+    pl: { contact: 'Kontakt', start: 'Rozpocznij Audyt' },
   };
 
   const labels = headerLabels[language];

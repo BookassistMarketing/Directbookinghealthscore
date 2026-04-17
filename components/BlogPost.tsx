@@ -21,6 +21,7 @@ export const BlogPost: React.FC<BlogPostProps> = ({ slug, content, onBack, onSta
     en: { back: 'Back to Blog', cta: 'Book a Demo to Improve Your Hotel Score', ctaBtn: 'Book a Demo' },
     it: { back: 'Torna al Blog', cta: 'Prenota una Demo per Migliorare il Punteggio del Tuo Hotel', ctaBtn: 'Prenota una Demo' },
     es: { back: 'Volver al Blog', cta: 'Reserva una Demo para Mejorar la Puntuación de tu Hotel', ctaBtn: 'Reservar una Demo' },
+    pl: { back: 'Powrót do Bloga', cta: 'Zamów Prezentację, aby Poprawić Wynik Swojego Hotelu', ctaBtn: 'Zamów Prezentację' },
   };
   const l = labels[language];
 
@@ -37,7 +38,7 @@ export const BlogPost: React.FC<BlogPostProps> = ({ slug, content, onBack, onSta
 
   const formatDate = (dateStr: string) => {
     if (!dateStr) return '';
-    const localeMap: Record<Language, string> = { en: 'en-GB', it: 'it-IT', es: 'es-ES' };
+    const localeMap: Record<Language, string> = { en: 'en-GB', it: 'it-IT', es: 'es-ES', pl: 'pl-PL' };
     return new Date(dateStr).toLocaleDateString(localeMap[language], { day: 'numeric', month: 'long', year: 'numeric' });
   };
 

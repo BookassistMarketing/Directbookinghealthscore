@@ -42,6 +42,15 @@ export const LeadCapture: React.FC<LeadCaptureProps> = ({ onUnlock }) => {
       benefit3: "Hoja de ruta estratégica IA",
       loading: "Conectando al portal...",
       bypass: "Bypass (Modo Diagnóstico)"
+    },
+    pl: {
+      title: "Twój Raport Strategiczny jest Gotowy",
+      subtitle: "Twoja infrastruktura techniczna została przeanalizowana. Wypełnij formularz, aby odblokować ocenę.",
+      benefit1: "Pełna analiza utraty przychodów",
+      benefit2: "Priorytetyzowane naprawy techniczne",
+      benefit3: "Strategiczna mapa drogowa AI",
+      loading: "Łączenie z portalem...",
+      bypass: "Bypass (Tryb Diagnostyczny)"
     }
   };
 

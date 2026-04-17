@@ -1,4 +1,4 @@
-export type Language = 'en' | 'it' | 'es';
+export type Language = 'en' | 'it' | 'es' | 'pl';
 
 export interface QuestionContent {
   text: string;

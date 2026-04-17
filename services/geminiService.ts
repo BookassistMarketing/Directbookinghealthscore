@@ -27,6 +27,14 @@ const generateLocalAnalysis = (answers: Answer[], scorePercent: number, lang: La
       gapsHeader: 'Principales Vulnerabilidades Identificadas:',
       noGaps: 'Tu base técnica es excepcionalmente sólida.',
       footer: 'Nota: Esta es una evaluación estándar. Para un análisis algorítmico más profundo, contacta con un estratega.'
+    },
+    pl: {
+      title: 'Strategiczna Ocena Technologiczna',
+      intro: `Twój hotel osiągnął Digital Health Score na poziomie **${scorePercent}%**.`,
+      risk: 'Ten wynik wskazuje na znaczną utratę przychodów. Twoja obecna infrastruktura techniczna prawdopodobnie oddaje wysokomarżowy ruch bezpośredni zewnętrznym OTA.',
+      gapsHeader: 'Zidentyfikowane Kluczowe Luki:',
+      noGaps: 'Twoja baza techniczna jest wyjątkowo solidna.',
+      footer: 'Uwaga: To jest standardowa ocena. Aby uzyskać głębszą analizę algorytmiczną, skontaktuj się ze strategiem.'
     }
   };
 
@@ -82,7 +90,7 @@ export const generateStrategicAnalysis = async (answers: Answer[], lang: Languag
     .filter(Boolean)
     .join('\n');
 
-  const langNames = { en: 'English', it: 'Italian', es: 'Spanish' };
+  const langNames = { en: 'English', it: 'Italian', es: 'Spanish', pl: 'Polish' };
 
   try {
     const response = await ai.models.generateContent({
