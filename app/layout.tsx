@@ -4,6 +4,8 @@ import { ContentProvider } from '../contexts/ContentContext';
 import { AppShell } from '../components/AppShell';
 import './globals.css';
 
+export const revalidate = 60;
+
 export const metadata: Metadata = {
   title: {
     default: 'Direct Booking Health Score | Free Hotel Tech Audit',
