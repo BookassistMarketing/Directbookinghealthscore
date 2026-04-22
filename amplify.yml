@@ -1,5 +1,5 @@
 version: 1
-# Trigger rebuild to invalidate CloudFront cache
+# Trigger rebuild to invalidate CloudFront cache (retry)
 frontend:
   phases:
     preBuild:
