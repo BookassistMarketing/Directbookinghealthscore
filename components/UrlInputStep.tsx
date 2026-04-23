@@ -105,7 +105,7 @@ export const UrlInputStep: React.FC<UrlInputStepProps> = ({
         <label htmlFor="audit-url-input" className="sr-only">{l.heading}</label>
         <input
           id="audit-url-input"
-          type="url"
+          type="text"
           inputMode="url"
           autoComplete="url"
           value={value}
