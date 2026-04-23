@@ -4,14 +4,20 @@ import React from 'react';
 import { Button } from './Button';
 import { ShieldCheck, BarChart2, Globe, Zap } from 'lucide-react';
 import { EditableText, EditableImage } from './Editable';
+import { RecentBlogs } from './RecentBlogs';
 import { useContent } from '../contexts/ContentContext';
 import { Language } from '../types';
+import type { BlogPostMeta } from '../lib/blog';
 
 interface HomeProps {
   onStart: () => void;
+  recentEn: BlogPostMeta[];
+  recentIt: BlogPostMeta[];
+  recentEs: BlogPostMeta[];
+  recentPl: BlogPostMeta[];
 }
 
-export const Home: React.FC<HomeProps> = ({ onStart }) => {
+export const Home: React.FC<HomeProps> = ({ onStart, recentEn, recentIt, recentEs, recentPl }) => {
   const { language } = useContent();
 
   const labelsMap: Record<Language, any> = {
@@ -62,6 +68,13 @@ export const Home: React.FC<HomeProps> = ({ onStart }) => {
           <EditableText id="home.feat4.desc" as="p" multiline defaultText={l.f4d} className="text-sm sm:text-base text-gray-600 leading-relaxed" />
         </div>
       </div>
+
+      <RecentBlogs
+        recentEn={recentEn}
+        recentIt={recentIt}
+        recentEs={recentEs}
+        recentPl={recentPl}
+      />
 
       <div className="bg-brand-blue rounded-2xl sm:rounded-3xl p-6 sm:p-12 text-center text-white relative overflow-hidden print:hidden">
         <div className="relative z-10">
