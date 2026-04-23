@@ -46,10 +46,10 @@ export const FullResults: React.FC<FullResultsProps> = ({ questions, answers, an
   };
 
   const labelsMap: Record<Language, any> = {
-    en: { auditComplete: "AUDIT COMPLETE", passing: "Passing Checks", gaps: "Critical Gaps", aiTitle: "AI Strategic Assessment", ctaTitle: "Visit bookassist.org to improve your Tech Score Today", downloadFull: "Download Full AI Strategic Assessment", retake: "Retake Audit", book: "Book Consultation", generating: "Exporting..." },
-    it: { auditComplete: "AUDIT COMPLETATO", passing: "Controlli Superati", gaps: "Lacune Critiche", aiTitle: "Valutazione Strategica AI", ctaTitle: "Visita bookassist.org per migliorare il tuo Tech Score oggi stesso", downloadFull: "Scarica Valutazione Strategica AI Completa", retake: "Rifai l'Audit", book: "Prenota Consulenza", generating: "Esportazione..." },
-    es: { auditComplete: "AUDIT COMPLETADO", passing: "Pruebas Superadas", gaps: "Brechas Críticas", aiTitle: "Evaluación Estratégica IA", ctaTitle: "Visita bookassist.org para mejorar tu Tech Score hoy mismo", downloadFull: "Descargar Evaluación Estratégica IA Completa", retake: "Repetir Audit", book: "Reservar Consultoría", generating: "Exportando..." },
-    pl: { auditComplete: "AUDYT ZAKOŃCZONY", passing: "Zaliczone Sprawdzenia", gaps: "Krytyczne Luki", aiTitle: "Strategiczna Ocena AI", ctaTitle: "Odwiedź bookassist.org, aby już dziś poprawić swój Tech Score", downloadFull: "Pobierz Pełną Strategiczną Ocenę AI", retake: "Powtórz Audyt", book: "Zamów Konsultację", generating: "Eksportowanie..." }
+    en: { auditComplete: "AUDIT COMPLETE", passing: "Passing Checks", gaps: "Critical Gaps", aiTitle: "AI Strategic Assessment", ctaTitle: "Visit bookassist.org to improve your Tech Score Today", downloadFull: "Download Full AI Strategic Assessment", retake: "Retake Audit", book: "Book Consultation", generating: "Exporting...", reportFor: "Report for" },
+    it: { auditComplete: "AUDIT COMPLETATO", passing: "Controlli Superati", gaps: "Lacune Critiche", aiTitle: "Valutazione Strategica AI", ctaTitle: "Visita bookassist.org per migliorare il tuo Tech Score oggi stesso", downloadFull: "Scarica Valutazione Strategica AI Completa", retake: "Rifai l'Audit", book: "Prenota Consulenza", generating: "Esportazione...", reportFor: "Rapporto per" },
+    es: { auditComplete: "AUDIT COMPLETADO", passing: "Pruebas Superadas", gaps: "Brechas Críticas", aiTitle: "Evaluación Estratégica IA", ctaTitle: "Visita bookassist.org para mejorar tu Tech Score hoy mismo", downloadFull: "Descargar Evaluación Estratégica IA Completa", retake: "Repetir Audit", book: "Reservar Consultoría", generating: "Exportando...", reportFor: "Informe para" },
+    pl: { auditComplete: "AUDYT ZAKOŃCZONY", passing: "Zaliczone Sprawdzenia", gaps: "Krytyczne Luki", aiTitle: "Strategiczna Ocena AI", ctaTitle: "Odwiedź bookassist.org, aby już dziś poprawić swój Tech Score", downloadFull: "Pobierz Pełną Strategiczną Ocenę AI", retake: "Powtórz Audyt", book: "Zamów Konsultację", generating: "Eksportowanie...", reportFor: "Raport dla" }
   };
 
   const s = statusMap[language];
@@ -144,6 +144,11 @@ export const FullResults: React.FC<FullResultsProps> = ({ questions, answers, an
             <div className="flex-1 text-center md:text-left">
               <div className="inline-flex px-4 py-1.5 rounded-full bg-gray-100 text-gray-500 text-[10px] font-black tracking-widest mb-6 uppercase">{l.auditComplete}</div>
               <h2 className="text-3xl sm:text-4xl font-black text-gray-900 mb-3 leading-tight">Status: <span style={{ color }}>{status}</span></h2>
+              {siteUrl && (
+                <p className="text-sm text-gray-400 mt-2">
+                  {l.reportFor} <span className="font-semibold text-brand-blue">{new URL(siteUrl).hostname.replace(/^www\./, '')}</span>
+                </p>
+              )}
               <p className="text-lg sm:text-xl text-gray-500 font-medium mb-8">{subtext}</p>
               <div className="flex gap-4 w-full max-w-sm mx-auto md:mx-0">
                 <div className="flex-1 bg-gray-50 p-5 rounded-2xl border border-gray-100 text-center">

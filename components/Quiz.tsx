@@ -18,6 +18,10 @@ export const Quiz: React.FC<QuizProps> = ({ questions, onComplete }) => {
   const [answers, setAnswers] = useState<Answer[]>([]);
   const { language } = useContent();
 
+  if (questions.length === 0) {
+    return null;
+  }
+
   const currentQuestion = questions[currentIndex];
   const progress = ((currentIndex) / questions.length) * 100;
 
