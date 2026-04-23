@@ -15,9 +15,10 @@ interface FullResultsProps {
   analysisLoading: boolean;
   analysisError: string | null;
   onReset: () => void;
+  siteUrl: string | null;
 }
 
-export const FullResults: React.FC<FullResultsProps> = ({ answers, analysis, analysisLoading, analysisError, onReset }) => {
+export const FullResults: React.FC<FullResultsProps> = ({ answers, analysis, analysisLoading, analysisError, onReset, siteUrl }) => {
   const [isGeneratingPdf, setIsGeneratingPdf] = useState(false);
   const { language } = useContent();
   const scoreBoxRef = useRef<HTMLDivElement>(null);
