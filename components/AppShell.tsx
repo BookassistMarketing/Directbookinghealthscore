@@ -2,7 +2,7 @@
 
 import React, { useState } from 'react';
 import { useRouter, usePathname } from 'next/navigation';
-import { Activity, Menu, X, Globe } from 'lucide-react';
+import { Activity, Menu, X, Globe, ArrowUpRight } from 'lucide-react';
 import { EditableText } from './Editable';
 import { useContent } from '../contexts/ContentContext';
 import { Language } from '../types';
@@ -178,7 +178,22 @@ export const AppShell: React.FC<{ children: React.ReactNode }> = ({ children }) 
         <div className="max-w-7xl mx-auto px-4 text-center text-gray-400 text-sm">
           <p>&copy; {new Date().getFullYear()} Direct Booking Health Score. All rights reserved.</p>
           <p className="mt-2 text-xs uppercase tracking-widest text-gray-300 print:text-gray-500">
-            Technology Provided by Bookassist
+            Powered by{' '}
+            <a
+              href="https://bookassist.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="group relative inline-flex items-center gap-1 text-gray-300 hover:text-brand-blue transition-colors print:text-gray-500"
+            >
+              <span className="relative">
+                Bookassist
+                <span className="absolute left-0 -bottom-0.5 h-px w-0 bg-brand-blue transition-all duration-300 ease-out group-hover:w-full print:hidden" />
+              </span>
+              <ArrowUpRight
+                size={12}
+                className="opacity-0 -translate-x-1 transition-all duration-300 ease-out group-hover:opacity-100 group-hover:translate-x-0 print:hidden"
+              />
+            </a>
           </p>
           <div className="mt-4 flex justify-center gap-6 text-xs">
             <button
