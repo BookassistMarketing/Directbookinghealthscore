@@ -476,21 +476,21 @@ function buildPayload(answers: Answer[], lang: Language, geolocation: GeoLocatio
 }
 
 // ─── Main Export ──────────────────────────────────────────────────────────────
-export async function submitAssessment(answers: Answer[], lang: Language): Promise<string> {
+export async function submitAssessment(answers: Answer[], lang: Language, siteUrl: string | null = null): Promise<string> {
   const geolocation = await detectGeolocation();
   const payload = buildPayload(answers, lang, geolocation);
 
   if (USE_MOCK) {
     // Simulate realistic API latency
     await new Promise(r => setTimeout(r, 1200));
-    console.log('[apiService] Mock mode — payload that would be sent to backend:', payload);
+    console.log('[apiService] Mock mode — payload that would be sent to backend:', { ...payload, siteUrl });
     return getMockAnalysis(payload.scorePercent, lang);
   }
 
   const res = await fetch(BACKEND_URL, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify(payload),
+    body: JSON.stringify({ ...payload, siteUrl }),
   });
 
   if (!res.ok) {
