@@ -1,5 +1,12 @@
 export type Language = 'en' | 'it' | 'es' | 'pl';
 
+export type QuestionCategory =
+  | 'Direct Booking'
+  | 'Metasearch'
+  | 'Analytics'
+  | 'CRM'
+  | 'SEO & AI Search';
+
 export interface QuestionContent {
   text: string;
   subtext: string;
@@ -8,8 +15,12 @@ export interface QuestionContent {
 export interface Question {
   id: number;
   translations: Record<Language, QuestionContent>;
-  category: 'Direct Booking' | 'Metasearch' | 'Analytics' | 'CRM';
+  category: QuestionCategory;
   weight: number;
+}
+
+export interface DynamicQuestion extends Question {
+  source: 'static' | 'ai';
 }
 
 export enum AnswerValue {
@@ -31,6 +42,8 @@ export interface AnalysisResult {
 
 export enum AppState {
   WELCOME = 'WELCOME',
+  URL_INPUT = 'URL_INPUT',
+  ANALYSING_SITE = 'ANALYSING_SITE',
   QUIZ = 'QUIZ',
   SCORE = 'SCORE',
   FULL_RESULTS = 'FULL_RESULTS'
