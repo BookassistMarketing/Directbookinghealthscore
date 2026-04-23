@@ -29,6 +29,7 @@ export const UrlInputStep: React.FC<UrlInputStepProps> = ({
     submit: string;
     fallbackLink: string;
     invalid: string;
+    stepLabel: string;
   }> = {
     en: {
       heading: 'What is your hotel website?',
@@ -37,6 +38,7 @@ export const UrlInputStep: React.FC<UrlInputStepProps> = ({
       submit: 'Analyse my site',
       fallbackLink: 'Continue without site analysis',
       invalid: 'Please enter a valid website URL.',
+      stepLabel: 'Step 1',
     },
     it: {
       heading: 'Qual è il sito del tuo hotel?',
@@ -45,6 +47,7 @@ export const UrlInputStep: React.FC<UrlInputStepProps> = ({
       submit: 'Analizza il mio sito',
       fallbackLink: 'Continua senza analisi del sito',
       invalid: 'Inserisci un URL valido.',
+      stepLabel: 'Passo 1',
     },
     es: {
       heading: '¿Cuál es el sitio web de tu hotel?',
@@ -53,6 +56,7 @@ export const UrlInputStep: React.FC<UrlInputStepProps> = ({
       submit: 'Analizar mi sitio',
       fallbackLink: 'Continuar sin análisis del sitio',
       invalid: 'Introduce una URL válida.',
+      stepLabel: 'Paso 1',
     },
     pl: {
       heading: 'Jaka jest strona Twojego hotelu?',
@@ -61,6 +65,7 @@ export const UrlInputStep: React.FC<UrlInputStepProps> = ({
       submit: 'Analizuj moją stronę',
       fallbackLink: 'Kontynuuj bez analizy strony',
       invalid: 'Wprowadź prawidłowy adres URL.',
+      stepLabel: 'Krok 1',
     },
   };
   const l = labels[language];
@@ -90,24 +95,34 @@ export const UrlInputStep: React.FC<UrlInputStepProps> = ({
     <div className="w-full max-w-2xl mx-auto px-4 py-12 sm:py-20">
       <div className="text-center mb-8">
         <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-brand-blue/10 text-brand-blue text-[10px] font-black tracking-widest uppercase mb-5">
-          <Globe size={12} /> Step 1
+          <Globe size={12} /> {l.stepLabel}
         </div>
         <h1 className="text-3xl sm:text-4xl font-black text-gray-900 mb-4 leading-tight">{l.heading}</h1>
         <p className="text-base sm:text-lg text-gray-500 max-w-xl mx-auto">{l.helper}</p>
       </div>
 
       <form onSubmit={handleSubmit} className="space-y-4">
+        <label htmlFor="audit-url-input" className="sr-only">{l.heading}</label>
         <input
-          type="text"
+          id="audit-url-input"
+          type="url"
+          inputMode="url"
+          autoComplete="url"
           value={value}
           onChange={e => setValue(e.target.value)}
           placeholder={l.placeholder}
+          aria-invalid={!!errorMessage}
+          aria-describedby={errorMessage ? 'audit-url-error' : undefined}
           className="w-full px-5 py-4 text-lg rounded-xl border border-gray-200 focus:border-brand-blue focus:ring-2 focus:ring-brand-blue/20 outline-none transition"
           autoFocus
         />
 
         {errorMessage && (
-          <div className="flex items-center gap-2 text-sm text-brand-accent bg-rose-50 border border-rose-100 rounded-xl px-4 py-3">
+          <div
+            id="audit-url-error"
+            role="alert"
+            className="flex items-center gap-2 text-sm text-brand-accent bg-rose-50 border border-rose-100 rounded-xl px-4 py-3"
+          >
             <AlertCircle size={16} />
             <span>{errorMessage}</span>
           </div>
