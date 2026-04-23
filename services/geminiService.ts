@@ -180,12 +180,21 @@ export async function generateSiteQuestions(
       throw new Error('AI returned invalid question list');
     }
 
-    return parsed.slice(0, 3).map((q: AIQuestion) => ({
-      text: String(q.text ?? ''),
-      subtext: String(q.subtext ?? ''),
-      category: 'SEO & AI Search' as const,
-      weight: 10,
-    }));
+    const valid = parsed
+      .filter((q: AIQuestion) => typeof q?.text === 'string' && q.text.trim().length > 0)
+      .slice(0, 3)
+      .map((q: AIQuestion) => ({
+        text: String(q.text).trim(),
+        subtext: String(q.subtext ?? '').trim(),
+        category: 'SEO & AI Search' as const,
+        weight: 10,
+      }));
+
+    if (valid.length === 0) {
+      throw new Error('AI returned no usable questions');
+    }
+
+    return valid;
   } catch (error: any) {
     if ((error?.status === 429 || error?.message?.includes('429')) && attempt < 3) {
       await new Promise(r => setTimeout(r, Math.pow(2, attempt) * 1000));
