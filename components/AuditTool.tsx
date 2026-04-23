@@ -15,6 +15,18 @@ import { generateSiteQuestions, type AIQuestion } from '../services/aiService';
 
 const MAX_URL_FAILURES = 3;
 
+const SITE_ANALYSIS_TIMEOUT_MS = 30_000;
+
+function withTimeout<T>(promise: Promise<T>, ms: number): Promise<T> {
+  return new Promise((resolve, reject) => {
+    const timer = setTimeout(() => reject(new Error('SITE_ANALYSIS_TIMEOUT')), ms);
+    promise.then(
+      v => { clearTimeout(timer); resolve(v); },
+      e => { clearTimeout(timer); reject(e); }
+    );
+  });
+}
+
 function aiToDynamic(q: AIQuestion, index: number): DynamicQuestion {
   return {
     id: 1000 + index, // high ID space to avoid collision with static 1..15
@@ -65,11 +77,12 @@ export const AuditTool: React.FC = () => {
     setAppState(AppState.ANALYSING_SITE);
 
     try {
-      const aiQs = await generateSiteQuestions(url, language);
+      const aiQs = await withTimeout(generateSiteQuestions(url, language), SITE_ANALYSIS_TIMEOUT_MS);
       const dyn = aiQs.map((q, i) => aiToDynamic(q, i));
       setAiQuestions(dyn);
       setAppState(AppState.QUIZ);
-    } catch {
+    } catch (err) {
+      console.error('[AuditTool] Site analysis failed:', err);
       const nextCount = failureCount + 1;
       setFailureCount(nextCount);
 
