@@ -2,10 +2,14 @@ import type { Language, Answer } from '../types';
 import {
   generateSiteQuestions as geminiGenerateSiteQuestions,
   generateStrategicAnalysis as geminiGenerateStrategicAnalysis,
-  type AIQuestion,
 } from './geminiService';
 
-export type { AIQuestion };
+export interface AIQuestion {
+  text: string;
+  subtext: string;
+  category: 'SEO & AI Search';
+  weight: number;
+}
 
 export function generateSiteQuestions(url: string, lang: Language): Promise<AIQuestion[]> {
   return geminiGenerateSiteQuestions(url, lang);

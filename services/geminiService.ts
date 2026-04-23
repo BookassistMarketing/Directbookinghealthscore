@@ -1,13 +1,7 @@
 import { GoogleGenAI } from "@google/genai";
 import { Answer, AnswerValue, Language } from '../types';
 import { QUESTIONS, CATEGORY_TRANSLATIONS } from '../constants';
-
-export interface AIQuestion {
-  text: string;
-  subtext: string;
-  category: 'SEO & AI Search';
-  weight: number;
-}
+import type { AIQuestion } from './aiService';
 
 const generateLocalAnalysis = (answers: Answer[], scorePercent: number, lang: Language): string => {
   const localText: Record<Language, any> = {
