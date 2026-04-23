@@ -177,6 +177,7 @@ export const AuditTool: React.FC = () => {
       )}
       {appState === AppState.FULL_RESULTS && (
         <FullResults
+          questions={quizQuestions}
           answers={answers}
           analysis={analysis}
           analysisLoading={analysisLoading}
