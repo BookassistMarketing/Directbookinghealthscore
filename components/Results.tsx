@@ -4,7 +4,7 @@ import React, { useState } from 'react';
 import { PieChart, Pie, Cell, ResponsiveContainer } from 'recharts';
 import { RefreshCcw, ArrowRight, ExternalLink } from 'lucide-react';
 import { Answer, AnswerValue, Language } from '../types';
-import { QUESTIONS, MAX_SCORE } from '../constants';
+import { QUESTIONS, STATIC_MAX_SCORE } from '../constants';
 import { useContent } from '../contexts/ContentContext';
 import { Button } from './Button';
 import { LeadCapture } from './LeadCapture';
@@ -27,7 +27,7 @@ export const Results: React.FC<ResultsProps> = ({ answers, onReset, onGetFullRep
     return acc;
   }, 0);
 
-  const percentage = Math.round((score / MAX_SCORE) * 100);
+  const percentage = Math.round((score / STATIC_MAX_SCORE) * 100);
   const missingCount = answers.filter(a => a.value === AnswerValue.NO).length;
   const passingCount = answers.length - missingCount;
 
@@ -62,7 +62,7 @@ export const Results: React.FC<ResultsProps> = ({ answers, onReset, onGetFullRep
     subtext = s.subOpt;
   }
 
-  const data = [{ name: 'Score', value: score }, { name: 'Gap', value: MAX_SCORE - score }];
+  const data = [{ name: 'Score', value: score }, { name: 'Gap', value: STATIC_MAX_SCORE - score }];
 
   return (
     <div className="w-full max-w-4xl px-4 sm:px-6 py-12 flex flex-col items-center mx-auto">

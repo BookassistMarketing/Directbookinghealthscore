@@ -4,7 +4,13 @@ export const CATEGORY_TRANSLATIONS: Record<string, Record<Language, string>> = {
   'Direct Booking': { en: 'Direct Booking', it: 'Prenotazione Diretta', es: 'Reserva Directa', pl: 'Rezerwacje Bezpośrednie' },
   'Metasearch': { en: 'Metasearch', it: 'Metamotori', es: 'Metabuscadores', pl: 'Metawyszukiwarki' },
   'Analytics': { en: 'Analytics', it: 'Analisi', es: 'Analítica', pl: 'Analityka' },
-  'CRM': { en: 'CRM', it: 'CRM', es: 'CRM', pl: 'CRM' }
+  'CRM': { en: 'CRM', it: 'CRM', es: 'CRM', pl: 'CRM' },
+  'SEO & AI Search': {
+    en: 'SEO & AI Search',
+    it: 'SEO e Ricerca AI',
+    es: 'SEO y Búsqueda con IA',
+    pl: 'SEO i Wyszukiwanie AI',
+  },
 };
 
 export const QUESTIONS: Question[] = [
@@ -175,4 +181,4 @@ export const QUESTIONS: Question[] = [
   }
 ];
 
-export const MAX_SCORE = QUESTIONS.reduce((acc, q) => acc + q.weight, 0);
+export const STATIC_MAX_SCORE = QUESTIONS.reduce((acc, q) => acc + q.weight, 0);

@@ -5,7 +5,7 @@ import { PieChart, Pie, Cell, ResponsiveContainer } from 'recharts';
 import { BrainCircuit, Download, Loader2, RefreshCcw, ArrowRight, ExternalLink } from 'lucide-react';
 import ReactMarkdown from 'react-markdown';
 import { Answer, AnswerValue, Language } from '../types';
-import { QUESTIONS, MAX_SCORE } from '../constants';
+import { QUESTIONS, STATIC_MAX_SCORE } from '../constants';
 import { useContent } from '../contexts/ContentContext';
 import { Button } from './Button';
 
@@ -31,7 +31,7 @@ export const FullResults: React.FC<FullResultsProps> = ({ answers, analysis, ana
     return acc;
   }, 0);
 
-  const percentage = Math.round((score / MAX_SCORE) * 100);
+  const percentage = Math.round((score / STATIC_MAX_SCORE) * 100);
   const missingCount = answers.filter(a => a.value === AnswerValue.NO).length;
   const passingCount = answers.length - missingCount;
 
@@ -66,7 +66,7 @@ export const FullResults: React.FC<FullResultsProps> = ({ answers, analysis, ana
     subtext = s.subOpt;
   }
 
-  const data = [{ name: 'Score', value: score }, { name: 'Gap', value: MAX_SCORE - score }];
+  const data = [{ name: 'Score', value: score }, { name: 'Gap', value: STATIC_MAX_SCORE - score }];
 
   const handleDownloadFullPdf = async () => {
     if (isGeneratingPdf || analysisLoading || !scoreBoxRef.current || !aiBoxRef.current) return;

@@ -1,5 +1,5 @@
 import { Answer, AnswerValue, Language } from '../types';
-import { QUESTIONS, MAX_SCORE } from '../constants';
+import { QUESTIONS, STATIC_MAX_SCORE } from '../constants';
 
 // ─── Configuration ────────────────────────────────────────────────────────────
 // Set USE_MOCK to false once your backend endpoint is ready
@@ -455,7 +455,7 @@ function buildPayload(answers: Answer[], lang: Language, geolocation: GeoLocatio
     return sum + (q?.weight ?? 0);
   }, 0);
 
-  const scorePercent = Math.round((scoreRaw / MAX_SCORE) * 100);
+  const scorePercent = Math.round((scoreRaw / STATIC_MAX_SCORE) * 100);
 
   return {
     answers: answers.map(a => {
