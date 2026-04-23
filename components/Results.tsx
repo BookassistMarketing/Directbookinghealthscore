@@ -112,7 +112,7 @@ export const Results: React.FC<ResultsProps> = ({ answers, onReset, onGetFullRep
           {l.retake}
         </button>
         <div className="flex flex-col sm:flex-row gap-4 w-full sm:w-auto">
-          <Button onClick={() => window.open('https://bookassist.com/contact?utm_term=&utm_campaign=%5BPM%5D+EN&utm_source=adwords&utm_medium=ppc&hsa_acc=2087462776&hsa_cam=23195660378&hsa_grp=&hsa_ad=&hsa_src=x&hsa_tgt=&hsa_kw=&hsa_mt=&hsa_net=adwords&hsa_ver=3&gad_source=1&gad_campaignid=23624383116&gbraid=0AAAAAD4LeD6A0DWD-hRn4iPJc7bIgJPtH&gclid=CjwKCAjwyYPOBhBxEiwAgpT8P9j3lssY74_YKOvUuO_PJkq6_bZmoyvxIUM9i5LNQ0X43zgg22h9xBoCjvQQAvD_BwE', '_blank')} variant="outline" className="w-full sm:w-auto px-8 py-4 rounded-xl font-black text-sm uppercase tracking-widest shadow-xl">
+          <Button onClick={() => window.open('https://bookassist.com/book-a-demo', '_blank')} variant="outline" className="w-full sm:w-auto px-8 py-4 rounded-xl font-black text-sm uppercase tracking-widest shadow-xl">
             <ExternalLink size={18} />
             {l.bookDemo}
           </Button>
