@@ -4,30 +4,33 @@ import React, { useState } from 'react';
 import { PieChart, Pie, Cell, ResponsiveContainer } from 'recharts';
 import { RefreshCcw, ArrowRight, ExternalLink } from 'lucide-react';
 import { Answer, AnswerValue, Language } from '../types';
-import { QUESTIONS, STATIC_MAX_SCORE } from '../constants';
+import type { DynamicQuestion } from '../types';
 import { useContent } from '../contexts/ContentContext';
 import { Button } from './Button';
 import { LeadCapture } from './LeadCapture';
 
 interface ResultsProps {
+  questions: DynamicQuestion[];
   answers: Answer[];
   onReset: () => void;
   onGetFullReport: () => void;
 }
 
-export const Results: React.FC<ResultsProps> = ({ answers, onReset, onGetFullReport }) => {
+export const Results: React.FC<ResultsProps> = ({ questions, answers, onReset, onGetFullReport }) => {
   const [showGate, setShowGate] = useState(false);
   const { language } = useContent();
 
+  const maxScore = questions.reduce((acc, q) => acc + q.weight, 0);
+
   const score = answers.reduce((acc, ans) => {
     if (ans.value === AnswerValue.YES) {
-      const q = QUESTIONS.find(q => q.id === ans.questionId);
+      const q = questions.find(q => q.id === ans.questionId);
       return acc + (q ? q.weight : 0);
     }
     return acc;
   }, 0);
 
-  const percentage = Math.round((score / STATIC_MAX_SCORE) * 100);
+  const percentage = maxScore === 0 ? 0 : Math.round((score / maxScore) * 100);
   const missingCount = answers.filter(a => a.value === AnswerValue.NO).length;
   const passingCount = answers.length - missingCount;
 
@@ -62,7 +65,7 @@ export const Results: React.FC<ResultsProps> = ({ answers, onReset, onGetFullRep
     subtext = s.subOpt;
   }
 
-  const data = [{ name: 'Score', value: score }, { name: 'Gap', value: STATIC_MAX_SCORE - score }];
+  const data = [{ name: 'Score', value: score }, { name: 'Gap', value: maxScore - score }];
 
   return (
     <div className="w-full max-w-4xl px-4 sm:px-6 py-12 flex flex-col items-center mx-auto">
