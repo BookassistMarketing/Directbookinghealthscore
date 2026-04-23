@@ -2,22 +2,24 @@
 
 import React, { useState } from 'react';
 import { Answer, AnswerValue, Language } from '../types';
-import { QUESTIONS, CATEGORY_TRANSLATIONS } from '../constants';
+import type { DynamicQuestion } from '../types';
+import { CATEGORY_TRANSLATIONS } from '../constants';
 import { useContent } from '../contexts/ContentContext';
 import { CheckCircle2, XCircle } from 'lucide-react';
 import { EditableText } from './Editable';
 
 interface QuizProps {
+  questions: DynamicQuestion[];
   onComplete: (answers: Answer[]) => void;
 }
 
-export const Quiz: React.FC<QuizProps> = ({ onComplete }) => {
+export const Quiz: React.FC<QuizProps> = ({ questions, onComplete }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [answers, setAnswers] = useState<Answer[]>([]);
   const { language } = useContent();
 
-  const currentQuestion = QUESTIONS[currentIndex];
-  const progress = ((currentIndex) / QUESTIONS.length) * 100;
+  const currentQuestion = questions[currentIndex];
+  const progress = ((currentIndex) / questions.length) * 100;
 
   const handleAnswer = (value: AnswerValue) => {
     const newAnswer: Answer = {
@@ -28,7 +30,7 @@ export const Quiz: React.FC<QuizProps> = ({ onComplete }) => {
     const updatedAnswers = [...answers, newAnswer];
     setAnswers(updatedAnswers);
 
-    if (currentIndex < QUESTIONS.length - 1) {
+    if (currentIndex < questions.length - 1) {
       setCurrentIndex(prev => prev + 1);
     } else {
       onComplete(updatedAnswers);
@@ -54,7 +56,7 @@ export const Quiz: React.FC<QuizProps> = ({ onComplete }) => {
           <span>
              <EditableText id="quiz.progress.label" defaultText={labels.progress} as="span" />
           </span>
-          <span>{currentIndex + 1} / {QUESTIONS.length}</span>
+          <span>{currentIndex + 1} / {questions.length}</span>
         </div>
         <div className="h-2 bg-gray-200 rounded-full overflow-hidden">
           <div 
