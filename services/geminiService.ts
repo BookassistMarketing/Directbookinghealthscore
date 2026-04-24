@@ -1,3 +1,4 @@
+import 'server-only';
 import { GoogleGenAI } from "@google/genai";
 import { Answer, AnswerValue, Language } from '../types';
 import { QUESTIONS, CATEGORY_TRANSLATIONS } from '../constants';
