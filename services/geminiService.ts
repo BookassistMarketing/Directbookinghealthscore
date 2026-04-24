@@ -72,7 +72,7 @@ const generateLocalAnalysis = (answers: Answer[], scorePercent: number, lang: La
 const delay = (ms: number) => new Promise(resolve => setTimeout(resolve, ms));
 
 export const generateStrategicAnalysis = async (answers: Answer[], lang: Language, siteUrl: string | null = null, attempt: number = 1): Promise<string> => {
-  const apiKey = process.env.NEXT_PUBLIC_GEMINI_API_KEY;
+  const apiKey = process.env.GEMINI_API_KEY;
   const passedItems = answers.filter(a => a.value === AnswerValue.YES).length;
   const scorePercent = Math.round((passedItems / QUESTIONS.length) * 100);
 
@@ -148,7 +148,7 @@ export async function generateSiteQuestions(
   lang: Language,
   attempt = 1
 ): Promise<AIQuestion[]> {
-  const apiKey = process.env.NEXT_PUBLIC_GEMINI_API_KEY;
+  const apiKey = process.env.GEMINI_API_KEY;
 
   if (!apiKey) {
     throw new Error('MISSING_API_KEY');
