@@ -10,8 +10,7 @@ import { AnalysingSite } from './AnalysingSite';
 import { Quiz } from './Quiz';
 import { Results } from './Results';
 import { FullResults } from './FullResults';
-import { submitAssessment } from '../services/apiService';
-import { generateSiteQuestions, type AIQuestion } from '../services/aiService';
+import { generateSiteQuestions, generateStrategicAnalysis, type AIQuestion } from '../services/aiService';
 
 const MAX_URL_FAILURES = 3;
 
@@ -115,9 +114,12 @@ export const AuditTool: React.FC = () => {
     setAnalysisLoading(true);
     setAnalysisError(null);
     setAnalysis('');
-    submitAssessment(completedAnswers, language, siteUrl)
+    generateStrategicAnalysis(completedAnswers, language, siteUrl)
       .then(result => setAnalysis(result))
-      .catch(() => setAnalysisError('FAILED'))
+      .catch(err => {
+        console.error('[AuditTool] Strategic analysis failed:', err);
+        setAnalysisError('FAILED');
+      })
       .finally(() => setAnalysisLoading(false));
   };
 
