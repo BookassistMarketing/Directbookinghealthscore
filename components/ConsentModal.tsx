@@ -58,7 +58,7 @@ export const ConsentModal: React.FC<ConsentModalProps> = ({ onAccept, onDecline 
       role="dialog"
       aria-modal="true"
       aria-labelledby="consent-modal-heading"
-      className="fixed inset-0 z-50 flex items-center justify-center bg-gray-900/60 backdrop-blur-sm p-4"
+      className="fixed inset-0 z-40 flex items-center justify-center bg-gray-900/60 backdrop-blur-sm p-4"
     >
       <div className="bg-white rounded-2xl shadow-2xl max-w-lg w-full p-6 sm:p-8">
         <div className="flex items-center gap-3 mb-4">
