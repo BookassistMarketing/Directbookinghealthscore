@@ -7,6 +7,7 @@ import { useContent } from '../contexts/ContentContext';
 import { WelcomeScreen } from './WelcomeScreen';
 import { UrlInputStep } from './UrlInputStep';
 import { AnalysingSite } from './AnalysingSite';
+import { ConsentModal, ConsentDeclinedScreen } from './ConsentModal';
 import { Quiz } from './Quiz';
 import { Results } from './Results';
 import { FullResults } from './FullResults';
@@ -55,6 +56,8 @@ export const AuditTool: React.FC = () => {
   const [analysisLoading, setAnalysisLoading] = useState(false);
   const [analysisError, setAnalysisError] = useState<string | null>(null);
 
+  const [consentState, setConsentState] = useState<'pending' | 'accepted' | 'declined'>('pending');
+
   const staticQuestions: DynamicQuestion[] = QUESTIONS.map(q => ({ ...q, source: 'static' as const }));
   const quizQuestions: DynamicQuestion[] = [...aiQuestions, ...staticQuestions];
 
@@ -67,7 +70,16 @@ export const AuditTool: React.FC = () => {
     setSiteUrl(null);
     setAnalysis('');
     setAnalysisError(null);
+    setConsentState('pending');
     setAppState(AppState.URL_INPUT);
+  };
+
+  const handleConsentAccept = () => setConsentState('accepted');
+  const handleConsentDecline = () => setConsentState('declined');
+  const handleConsentReconsider = () => setConsentState('pending');
+  const handleConsentGoHome = () => {
+    setConsentState('pending');
+    setAppState(AppState.WELCOME);
   };
 
   const handleUrlSubmit = async (url: string) => {
@@ -134,6 +146,7 @@ export const AuditTool: React.FC = () => {
     setAnalysis('');
     setAnalysisLoading(false);
     setAnalysisError(null);
+    setConsentState('pending');
   };
 
   useEffect(() => {
@@ -159,7 +172,10 @@ export const AuditTool: React.FC = () => {
       )}
 
       {appState === AppState.WELCOME && <WelcomeScreen onStart={handleStart} />}
-      {appState === AppState.URL_INPUT && (
+      {appState === AppState.URL_INPUT && consentState === 'declined' && (
+        <ConsentDeclinedScreen onReconsider={handleConsentReconsider} onGoHome={handleConsentGoHome} />
+      )}
+      {appState === AppState.URL_INPUT && consentState !== 'declined' && (
         <UrlInputStep
           onSubmit={handleUrlSubmit}
           onSkipToStatic={handleSkipToStatic}
@@ -187,6 +203,10 @@ export const AuditTool: React.FC = () => {
           siteUrl={siteUrl}
           onReset={handleReset}
         />
+      )}
+
+      {appState === AppState.URL_INPUT && consentState === 'pending' && (
+        <ConsentModal onAccept={handleConsentAccept} onDecline={handleConsentDecline} />
       )}
     </div>
   );
