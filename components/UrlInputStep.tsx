@@ -9,14 +9,12 @@ import { Button } from './Button';
 interface UrlInputStepProps {
   onSubmit: (url: string) => void;
   onSkipToStatic: () => void;
-  failureCount: number;
   errorMessage: string | null;
 }
 
 export const UrlInputStep: React.FC<UrlInputStepProps> = ({
   onSubmit,
   onSkipToStatic,
-  failureCount,
   errorMessage,
 }) => {
   const { language } = useContent();
@@ -137,16 +135,14 @@ export const UrlInputStep: React.FC<UrlInputStepProps> = ({
         </Button>
       </form>
 
-      {failureCount >= 2 && (
-        <div className="text-center mt-6">
-          <button
-            onClick={onSkipToStatic}
-            className="text-sm text-gray-400 hover:text-brand-blue underline transition-colors"
-          >
-            {l.fallbackLink}
-          </button>
-        </div>
-      )}
+      <div className="text-center mt-6">
+        <button
+          onClick={onSkipToStatic}
+          className="text-sm text-gray-400 hover:text-brand-blue underline transition-colors"
+        >
+          {l.fallbackLink}
+        </button>
+      </div>
     </div>
   );
 };

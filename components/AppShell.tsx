@@ -87,12 +87,6 @@ export const AppShell: React.FC<{ children: React.ReactNode }> = ({ children }) 
                 Home
               </button>
               <button
-                onClick={() => navigateTo('/hotel-audit')}
-                className={`text-sm font-medium transition-colors ${isActive('/hotel-audit') ? 'text-brand-blue font-bold' : 'text-gray-500 hover:text-brand-blue'}`}
-              >
-                Hotel Audit
-              </button>
-              <button
                 onClick={() => navigateTo('/blog')}
                 className={`text-sm font-medium transition-colors ${isActive('/blog') ? 'text-brand-blue font-bold' : 'text-gray-500 hover:text-brand-blue'}`}
               >
@@ -132,12 +126,6 @@ export const AppShell: React.FC<{ children: React.ReactNode }> = ({ children }) 
                 className={`text-left px-4 py-4 rounded-lg text-lg ${isActive('/') ? 'bg-blue-50 text-brand-blue font-semibold' : 'text-gray-700 hover:bg-gray-50'}`}
               >
                 Home
-              </button>
-              <button
-                onClick={() => navigateTo('/hotel-audit')}
-                className={`text-left px-4 py-4 rounded-lg text-lg ${isActive('/hotel-audit') ? 'bg-blue-50 text-brand-blue font-semibold' : 'text-gray-700 hover:bg-gray-50'}`}
-              >
-                Hotel Audit Tool
               </button>
               <button
                 onClick={() => navigateTo('/blog')}

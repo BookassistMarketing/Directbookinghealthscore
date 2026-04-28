@@ -179,7 +179,6 @@ export const AuditTool: React.FC = () => {
         <UrlInputStep
           onSubmit={handleUrlSubmit}
           onSkipToStatic={handleSkipToStatic}
-          failureCount={failureCount}
           errorMessage={urlError}
         />
       )}
