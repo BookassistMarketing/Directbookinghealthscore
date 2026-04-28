@@ -55,11 +55,11 @@ export const AppShell: React.FC<{ children: React.ReactNode }> = ({ children }) 
     { code: 'pl', label: 'Polski' },
   ];
 
-  const headerLabels: Record<Language, { contact: string; start: string }> = {
-    en: { contact: 'Contact Us', start: 'Start Audit' },
-    it: { contact: 'Contattaci', start: "Inizia l'Audit" },
-    es: { contact: 'Contáctanos', start: 'Empieza el Audit' },
-    pl: { contact: 'Kontakt', start: 'Rozpocznij Audyt' },
+  const headerLabels: Record<Language, { contact: string; hotelAudit: string; aiAudit: string }> = {
+    en: { contact: 'Contact Us', hotelAudit: 'Hotel Tech Audit', aiAudit: 'AI Visibility Audit' },
+    it: { contact: 'Contattaci', hotelAudit: 'Audit Tecnologico', aiAudit: 'Audit Visibilità AI' },
+    es: { contact: 'Contáctanos', hotelAudit: 'Auditoría Técnica', aiAudit: 'Auditoría Visibilidad IA' },
+    pl: { contact: 'Kontakt', hotelAudit: 'Audyt Techniczny', aiAudit: 'Audyt Widoczności AI' },
   };
 
   const labels = headerLabels[language];
@@ -151,10 +151,10 @@ export const AppShell: React.FC<{ children: React.ReactNode }> = ({ children }) 
               )}
             </div>
 
-            <div className="hidden md:flex items-center gap-6 lg:gap-8 print:hidden">
+            <div className="hidden md:flex items-center gap-4 lg:gap-6 print:hidden">
               <button
                 onClick={() => navigateTo('/')}
-                className={`text-sm font-medium transition-colors ${isActive('/') ? 'text-brand-blue font-bold' : 'text-gray-500 hover:text-brand-blue'}`}
+                className={`hidden lg:block text-sm font-medium transition-colors ${isActive('/') ? 'text-brand-blue font-bold' : 'text-gray-500 hover:text-brand-blue'}`}
               >
                 Home
               </button>
@@ -168,16 +168,24 @@ export const AppShell: React.FC<{ children: React.ReactNode }> = ({ children }) 
                 href="https://bookassist.com/book-a-demo"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-sm font-medium transition-colors text-gray-500 hover:text-brand-blue"
+                className="hidden lg:inline text-sm font-medium transition-colors text-gray-500 hover:text-brand-blue"
               >
                 {labels.contact}
               </a>
-              <button
-                onClick={() => navigateTo('/hotel-audit')}
-                className="bg-brand-blue text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-blue-900 transition-colors shadow-sm"
-              >
-                {labels.start}
-              </button>
+              <div className="flex items-center gap-2">
+                <button
+                  onClick={() => navigateTo('/hotel-audit')}
+                  className={`bg-brand-blue text-white px-3 lg:px-4 py-2 rounded-lg text-xs lg:text-sm font-medium hover:bg-blue-900 transition-colors shadow-sm whitespace-nowrap ${isActive('/hotel-audit') ? 'ring-2 ring-blue-300' : ''}`}
+                >
+                  {labels.hotelAudit}
+                </button>
+                <button
+                  onClick={() => navigateTo('/ai-visibility-audit')}
+                  className={`bg-brand-blue text-white px-3 lg:px-4 py-2 rounded-lg text-xs lg:text-sm font-medium hover:bg-blue-900 transition-colors shadow-sm whitespace-nowrap ${isActive('/ai-visibility-audit') ? 'ring-2 ring-blue-300' : ''}`}
+                >
+                  {labels.aiAudit}
+                </button>
+              </div>
             </div>
 
             <div className="md:hidden flex items-center print:hidden">
@@ -246,12 +254,18 @@ export const AppShell: React.FC<{ children: React.ReactNode }> = ({ children }) 
                 </div>
               </div>
 
-              <div className="pt-4 border-t border-gray-100 mt-2">
+              <div className="pt-4 border-t border-gray-100 mt-2 space-y-3">
                 <button
                   onClick={() => navigateTo('/hotel-audit')}
                   className="w-full bg-brand-blue text-white px-4 py-4 rounded-xl text-lg font-medium shadow-md active:scale-[0.98] transition-transform"
                 >
-                  {labels.start}
+                  {labels.hotelAudit}
+                </button>
+                <button
+                  onClick={() => navigateTo('/ai-visibility-audit')}
+                  className="w-full bg-brand-blue text-white px-4 py-4 rounded-xl text-lg font-medium shadow-md active:scale-[0.98] transition-transform"
+                >
+                  {labels.aiAudit}
                 </button>
               </div>
             </div>

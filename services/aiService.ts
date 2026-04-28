@@ -4,13 +4,6 @@
 
 import type { Language, Answer } from '../types';
 
-export interface AIQuestion {
-  text: string;
-  subtext: string;
-  category: 'SEO & AI Search';
-  weight: number;
-}
-
 async function parseError(res: Response): Promise<Error> {
   const fallback = `HTTP_${res.status}`;
   try {
@@ -19,17 +12,6 @@ async function parseError(res: Response): Promise<Error> {
   } catch {
     return new Error(fallback);
   }
-}
-
-export async function generateSiteQuestions(url: string, lang: Language): Promise<AIQuestion[]> {
-  const res = await fetch('/api/analyse-site', {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ url, language: lang }),
-  });
-  if (!res.ok) throw await parseError(res);
-  const data = (await res.json()) as { questions: AIQuestion[] };
-  return data.questions;
 }
 
 export async function generateStrategicAnalysis(
