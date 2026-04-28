@@ -21,12 +21,16 @@ export const Home: React.FC<HomeProps> = ({ onStart, recentEn, recentIt, recentE
   const { language } = useContent();
 
   // Scroll-snap: enable section-by-section snapping on the home page only.
-  // Toggle on the <html> element so the document's native scroll container
-  // applies snap. Cleaned up on unmount so other pages scroll normally.
+  // Set the CSS property directly on <html> rather than via a class, because
+  // Tailwind only compiles utilities it sees in source files at build time —
+  // classes added at runtime would have no matching CSS rule.
   useEffect(() => {
     const html = document.documentElement;
-    html.classList.add('snap-y', 'snap-mandatory');
-    return () => html.classList.remove('snap-y', 'snap-mandatory');
+    const previous = html.style.scrollSnapType;
+    html.style.scrollSnapType = 'y mandatory';
+    return () => {
+      html.style.scrollSnapType = previous;
+    };
   }, []);
 
   const labelsMap: Record<Language, any> = {
@@ -39,11 +43,13 @@ export const Home: React.FC<HomeProps> = ({ onStart, recentEn, recentIt, recentE
   const l = labelsMap[language];
 
   return (
-    <div className="relative w-full">
-      {/* Page-wide dot grid — sits behind every section on the home page */}
+    <div className="relative isolate w-full">
+      {/* Page-wide dot grid — sits behind every section on the home page.
+          isolate on the parent confines this -z-10 layer to the home root's
+          stacking context so it doesn't get pushed below the AppShell bg. */}
       <div
         aria-hidden="true"
-        className="absolute inset-0 -z-20 pointer-events-none print:hidden [background-image:radial-gradient(circle,rgba(15,23,42,0.10)_1px,transparent_1px)] [background-size:22px_22px]"
+        className="absolute inset-0 -z-10 pointer-events-none print:hidden [background-image:radial-gradient(circle,rgba(15,23,42,0.10)_1px,transparent_1px)] [background-size:22px_22px]"
       />
 
       {/* Hero — full viewport width; only the radial blue glow lives here */}
