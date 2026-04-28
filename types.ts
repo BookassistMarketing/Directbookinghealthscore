@@ -1,4 +1,4 @@
-export type Language = 'en' | 'it' | 'es' | 'pl';
+export type Language = 'en' | 'it' | 'es' | 'pl' | 'fr' | 'de' | 'cs';
 
 export type QuestionCategory =
   | 'Direct Booking'

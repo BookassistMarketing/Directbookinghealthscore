@@ -37,7 +37,7 @@ function loadAllVersions(): Record<string, Record<string, { data: Record<string,
   files.forEach(filename => {
     if (!filename.endsWith('.md')) return;
     const withoutExt = filename.replace('.md', '');
-    const langMatch = withoutExt.match(/^(.+)\.(it|es|pl)$/);
+    const langMatch = withoutExt.match(/^(.+)\.(it|es|pl|fr|de|cs)$/);
     const baseSlug = langMatch ? langMatch[1] : withoutExt;
     const fileLang = langMatch ? langMatch[2] : 'en';
 

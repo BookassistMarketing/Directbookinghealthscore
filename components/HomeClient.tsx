@@ -9,9 +9,12 @@ interface HomeClientProps {
   recentIt: BlogPostMeta[];
   recentEs: BlogPostMeta[];
   recentPl: BlogPostMeta[];
+  recentFr: BlogPostMeta[];
+  recentDe: BlogPostMeta[];
+  recentCs: BlogPostMeta[];
 }
 
-export function HomeClient({ recentEn, recentIt, recentEs, recentPl }: HomeClientProps) {
+export function HomeClient({ recentEn, recentIt, recentEs, recentPl, recentFr, recentDe, recentCs }: HomeClientProps) {
   const router = useRouter();
   return (
     <Home
@@ -20,6 +23,9 @@ export function HomeClient({ recentEn, recentIt, recentEs, recentPl }: HomeClien
       recentIt={recentIt}
       recentEs={recentEs}
       recentPl={recentPl}
+      recentFr={recentFr}
+      recentDe={recentDe}
+      recentCs={recentCs}
     />
   );
 }

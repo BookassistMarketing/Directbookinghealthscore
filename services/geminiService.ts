@@ -36,6 +36,30 @@ const generateLocalAnalysis = (answers: Answer[], scorePercent: number, lang: La
       gapsHeader: 'Zidentyfikowane Kluczowe Luki:',
       noGaps: 'Twoja baza techniczna jest wyjątkowo solidna.',
       footer: 'Uwaga: To jest standardowa ocena. Aby uzyskać głębszą analizę algorytmiczną, skontaktuj się ze strategiem.'
+    },
+    fr: {
+      title: 'Évaluation Stratégique Technologique',
+      intro: `Votre hôtel a obtenu un Digital Health Score de **${scorePercent}%**.`,
+      risk: "Ce score indique une perte de revenus significative. Votre infrastructure technique actuelle cède probablement du trafic direct à forte marge aux OTA tierces.",
+      gapsHeader: 'Principales Vulnérabilités Identifiées :',
+      noGaps: 'Vos fondations techniques sont exceptionnellement solides.',
+      footer: "Note : Il s'agit d'une évaluation standard. Pour une analyse algorithmique plus approfondie, contactez un stratège."
+    },
+    de: {
+      title: 'Strategische Tech-Bewertung',
+      intro: `Ihr Hotel erzielte einen Digital Health Score von **${scorePercent}%**.`,
+      risk: 'Dieser Wert weist auf erhebliche Umsatzverluste hin. Ihre aktuelle technische Infrastruktur überlässt wahrscheinlich margenstarken Direktverkehr Drittanbieter-OTAs.',
+      gapsHeader: 'Wichtigste identifizierte Schwachstellen:',
+      noGaps: 'Ihr technisches Fundament ist außergewöhnlich stark.',
+      footer: 'Hinweis: Dies ist eine Standardbewertung. Für eine tiefergehende algorithmische Analyse wenden Sie sich an einen Strategen.'
+    },
+    cs: {
+      title: 'Strategické technologické hodnocení',
+      intro: `Váš hotel dosáhl Digital Health Score **${scorePercent}%**.`,
+      risk: 'Toto skóre naznačuje významný únik příjmů. Vaše současná technická infrastruktura pravděpodobně předává vysokomaržový přímý provoz třetím OTA.',
+      gapsHeader: 'Hlavní identifikované zranitelnosti:',
+      noGaps: 'Vaše technické základy jsou výjimečně silné.',
+      footer: 'Poznámka: Toto je standardní hodnocení. Pro hlubší algoritmickou analýzu kontaktujte stratéga.'
     }
   };
 

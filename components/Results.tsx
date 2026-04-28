@@ -38,14 +38,20 @@ export const Results: React.FC<ResultsProps> = ({ questions, answers, onReset, o
     en: { critical: "Critical Condition", risk: "Digital Risk", optimized: "Optimised", subCritical: "Highly vulnerable to OTA dominance.", subRisk: "Missing profit-driving automation.", subOpt: "Performing well against industry benchmarks." },
     it: { critical: "Condizione Critica", risk: "Rischio Digitale", optimized: "Ottimizzato", subCritical: "Altamente vulnerabile al dominio delle OTA.", subRisk: "Manca l'automazione che genera profitto.", subOpt: "Ottime prestazioni rispetto ai benchmark di settore." },
     es: { critical: "Estado Crítico", risk: "Riesgo Digital", optimized: "Optimizado", subCritical: "Altamente vulnerable al dominio de las OTA.", subRisk: "Falta automatización que genere beneficios.", subOpt: "Buen desempeño frente a los estándares de la industria." },
-    pl: { critical: "Stan Krytyczny", risk: "Ryzyko Cyfrowe", optimized: "Zoptymalizowany", subCritical: "Wysoce narażony na dominację OTA.", subRisk: "Brak automatyzacji generującej zyski.", subOpt: "Dobre wyniki w zestawieniu ze standardami branżowymi." }
+    pl: { critical: "Stan Krytyczny", risk: "Ryzyko Cyfrowe", optimized: "Zoptymalizowany", subCritical: "Wysoce narażony na dominację OTA.", subRisk: "Brak automatyzacji generującej zyski.", subOpt: "Dobre wyniki w zestawieniu ze standardami branżowymi." },
+    fr: { critical: "État Critique", risk: "Risque Numérique", optimized: "Optimisé", subCritical: "Hautement vulnérable à la domination des OTA.", subRisk: "Manque d'automatisation génératrice de profits.", subOpt: "Bonnes performances par rapport aux références du secteur." },
+    de: { critical: "Kritischer Zustand", risk: "Digitales Risiko", optimized: "Optimiert", subCritical: "Hochgradig anfällig für die OTA-Dominanz.", subRisk: "Profitfördernde Automatisierung fehlt.", subOpt: "Gute Leistung im Vergleich zu Branchen-Benchmarks." },
+    cs: { critical: "Kritický stav", risk: "Digitální riziko", optimized: "Optimalizováno", subCritical: "Vysoce zranitelný vůči dominanci OTA.", subRisk: "Chybí automatizace generující zisk.", subOpt: "Dobrý výkon ve srovnání s oborovými benchmarky." }
   };
 
   const labelsMap: Record<Language, any> = {
     en: { auditComplete: "AUDIT COMPLETE", passing: "Passing Checks", gaps: "Critical Gaps", bookDemo: "Book a Demo", getFullReport: "Download Full Strategic Assessment", retake: "Retake Audit", generating: "Generating..." },
     it: { auditComplete: "AUDIT COMPLETATO", passing: "Controlli Superati", gaps: "Lacune Critiche", bookDemo: "Prenota una Demo", getFullReport: "Scarica Valutazione Strategica Completa", retake: "Rifai l'Audit", generating: "Generazione..." },
     es: { auditComplete: "AUDIT COMPLETADO", passing: "Pruebas Superadas", gaps: "Brechas Críticas", bookDemo: "Reservar una Demo", getFullReport: "Descargar Evaluación Estratégica Completa", retake: "Repetir Audit", generating: "Generando..." },
-    pl: { auditComplete: "AUDYT ZAKOŃCZONY", passing: "Zaliczone Sprawdzenia", gaps: "Krytyczne Luki", bookDemo: "Zamów Prezentację", getFullReport: "Pobierz Pełną Ocenę Strategiczną", retake: "Powtórz Audyt", generating: "Generowanie..." }
+    pl: { auditComplete: "AUDYT ZAKOŃCZONY", passing: "Zaliczone Sprawdzenia", gaps: "Krytyczne Luki", bookDemo: "Zamów Prezentację", getFullReport: "Pobierz Pełną Ocenę Strategiczną", retake: "Powtórz Audyt", generating: "Generowanie..." },
+    fr: { auditComplete: "AUDIT TERMINÉ", passing: "Contrôles Réussis", gaps: "Lacunes Critiques", bookDemo: "Réserver une Démo", getFullReport: "Télécharger l'Évaluation Stratégique Complète", retake: "Refaire l'Audit", generating: "Génération..." },
+    de: { auditComplete: "AUDIT ABGESCHLOSSEN", passing: "Bestandene Prüfungen", gaps: "Kritische Lücken", bookDemo: "Demo buchen", getFullReport: "Vollständige strategische Bewertung herunterladen", retake: "Audit wiederholen", generating: "Wird erstellt..." },
+    cs: { auditComplete: "AUDIT DOKONČEN", passing: "Úspěšné kontroly", gaps: "Kritické mezery", bookDemo: "Rezervovat ukázku", getFullReport: "Stáhnout úplné strategické hodnocení", retake: "Opakovat audit", generating: "Generování..." }
   };
 
   const s = statusMap[language];

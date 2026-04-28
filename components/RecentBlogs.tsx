@@ -12,6 +12,9 @@ interface RecentBlogsProps {
   recentIt: BlogPostMeta[];
   recentEs: BlogPostMeta[];
   recentPl: BlogPostMeta[];
+  recentFr: BlogPostMeta[];
+  recentDe: BlogPostMeta[];
+  recentCs: BlogPostMeta[];
 }
 
 export const RecentBlogs: React.FC<RecentBlogsProps> = ({
@@ -19,6 +22,9 @@ export const RecentBlogs: React.FC<RecentBlogsProps> = ({
   recentIt,
   recentEs,
   recentPl,
+  recentFr,
+  recentDe,
+  recentCs,
 }) => {
   const { language } = useContent();
 
@@ -27,6 +33,9 @@ export const RecentBlogs: React.FC<RecentBlogsProps> = ({
     it: recentIt,
     es: recentEs,
     pl: recentPl,
+    fr: recentFr,
+    de: recentDe,
+    cs: recentCs,
   };
   const posts = postsByLanguage[language] ?? recentEn;
 
@@ -61,12 +70,33 @@ export const RecentBlogs: React.FC<RecentBlogsProps> = ({
       readMore: 'Czytaj Artykuł',
       viewAll: 'Zobacz Wszystkie Artykuły',
     },
+    fr: {
+      eyebrow: 'Derniers Articles',
+      heading: 'Insights sur la Réservation Directe',
+      sub: "Conseils d'experts sur la stratégie de réservation directe et la technologie hôtelière.",
+      readMore: "Lire l'Article",
+      viewAll: 'Voir Tous les Articles',
+    },
+    de: {
+      eyebrow: 'Neueste Insights',
+      heading: 'Insights zur Direktbuchung',
+      sub: 'Expertenrat zu Direktbuchungsstrategien und Hoteltechnologie.',
+      readMore: 'Artikel lesen',
+      viewAll: 'Alle Artikel ansehen',
+    },
+    cs: {
+      eyebrow: 'Nejnovější Postřehy',
+      heading: 'Postřehy o přímých rezervacích',
+      sub: 'Odborné rady k strategii přímých rezervací a hotelové technologii.',
+      readMore: 'Přečíst článek',
+      viewAll: 'Zobrazit všechny články',
+    },
   };
   const l = labels[language];
 
   const formatDate = (dateStr: string) => {
     if (!dateStr) return '';
-    const localeMap: Record<Language, string> = { en: 'en-GB', it: 'it-IT', es: 'es-ES', pl: 'pl-PL' };
+    const localeMap: Record<Language, string> = { en: 'en-GB', it: 'it-IT', es: 'es-ES', pl: 'pl-PL', fr: 'fr-FR', de: 'de-DE', cs: 'cs-CZ' };
     return new Date(dateStr).toLocaleDateString(localeMap[language], {
       day: 'numeric',
       month: 'long',

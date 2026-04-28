@@ -44,12 +44,33 @@ export const Blog: React.FC<BlogProps> = ({ posts, onSelectPost, onStartAudit })
       cta: 'Zamów Prezentację, aby Poprawić Wynik Swojego Hotelu',
       ctaSub: 'Porozmawiaj z ekspertem i odkryj, jak zwiększyć swoje rezerwacje bezpośrednie.',
     },
+    fr: {
+      heading: 'Insights sur la Réservation Directe',
+      sub: "Conseils hebdomadaires en stratégie et technologie pour les hôtels réduisant leur dépendance aux OTA.",
+      readMore: "Lire l'Article",
+      cta: 'Réservez une Démo pour Améliorer le Score de votre Hôtel',
+      ctaSub: "Échangez avec un expert et découvrez comment développer vos réservations directes.",
+    },
+    de: {
+      heading: 'Insights zur Direktbuchung',
+      sub: 'Wöchentliche Strategie- und Technologie-Tipps für Hotels, die ihre OTA-Abhängigkeit reduzieren.',
+      readMore: 'Artikel lesen',
+      cta: 'Buchen Sie eine Demo, um den Score Ihres Hotels zu verbessern',
+      ctaSub: 'Sprechen Sie mit einem Experten und erfahren Sie, wie Sie Ihre Direktbuchungen steigern.',
+    },
+    cs: {
+      heading: 'Postřehy o přímých rezervacích',
+      sub: 'Týdenní strategické a technologické rady pro hotely snižující závislost na OTA.',
+      readMore: 'Přečíst článek',
+      cta: 'Rezervujte si ukázku a vylepšete skóre svého hotelu',
+      ctaSub: 'Promluvte si s odborníkem a zjistěte, jak zvýšit přímé rezervace.',
+    },
   };
   const l = labels[language];
 
   const formatDate = (dateStr: string) => {
     if (!dateStr) return '';
-    const localeMap: Record<Language, string> = { en: 'en-GB', it: 'it-IT', es: 'es-ES', pl: 'pl-PL' };
+    const localeMap: Record<Language, string> = { en: 'en-GB', it: 'it-IT', es: 'es-ES', pl: 'pl-PL', fr: 'fr-FR', de: 'de-DE', cs: 'cs-CZ' };
     return new Date(dateStr).toLocaleDateString(localeMap[language], {
       day: 'numeric',
       month: 'long',

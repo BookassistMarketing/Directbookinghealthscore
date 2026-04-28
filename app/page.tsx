@@ -30,6 +30,9 @@ export default function HomePage() {
   const recentIt = getAllPosts('it').slice(0, 3);
   const recentEs = getAllPosts('es').slice(0, 3);
   const recentPl = getAllPosts('pl').slice(0, 3);
+  const recentFr = getAllPosts('fr').slice(0, 3);
+  const recentDe = getAllPosts('de').slice(0, 3);
+  const recentCs = getAllPosts('cs').slice(0, 3);
 
   return (
     <>
@@ -39,6 +42,9 @@ export default function HomePage() {
         recentIt={recentIt}
         recentEs={recentEs}
         recentPl={recentPl}
+        recentFr={recentFr}
+        recentDe={recentDe}
+        recentCs={recentCs}
       />
     </>
   );

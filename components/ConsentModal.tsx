@@ -50,6 +50,27 @@ export const ConsentModal: React.FC<ConsentModalProps> = ({ onAccept, onDecline 
       accept: 'Akceptuję i kontynuuję',
       decline: 'Anuluj',
     },
+    fr: {
+      heading: 'Avant de commencer',
+      body: "L'URL de votre site web et les réponses de l'audit seront traitées par Google Gemini (notre partenaire IA) pour générer votre analyse personnalisée. Nous ne les conservons pas. Acceptez-vous et souhaitez-vous continuer ?",
+      learnMore: 'En savoir plus sur la gestion de vos données',
+      accept: 'Accepter et continuer',
+      decline: 'Annuler',
+    },
+    de: {
+      heading: 'Bevor wir beginnen',
+      body: 'Die URL Ihrer Website und Ihre Audit-Antworten werden von Google Gemini (unserem KI-Partner) verarbeitet, um Ihre individuelle Analyse zu erstellen. Wir speichern sie nicht. Akzeptieren Sie und möchten Sie fortfahren?',
+      learnMore: 'Mehr darüber erfahren, wie wir Ihre Daten behandeln',
+      accept: 'Akzeptieren und fortfahren',
+      decline: 'Abbrechen',
+    },
+    cs: {
+      heading: 'Než začneme',
+      body: 'URL vašeho webu a odpovědi z auditu budou zpracovány společností Google Gemini (naším AI partnerem) za účelem vytvoření vaší přizpůsobené analýzy. Neukládáme je. Souhlasíte a chcete pokračovat?',
+      learnMore: 'Zjistit více o tom, jak nakládáme s vašimi daty',
+      accept: 'Souhlasit a pokračovat',
+      decline: 'Zrušit',
+    },
   };
   const l = labels[language];
 
@@ -135,6 +156,24 @@ export const ConsentDeclinedScreen: React.FC<ConsentDeclinedScreenProps> = ({ on
       body: 'Aby dostosować wynik zdrowia Twojego hotelu, musimy wysłać adres URL Twojej strony i odpowiedzi do Google Gemini. Bez Twojej zgody nie możemy dostarczyć analizy.',
       reconsider: 'Przejrzyj ponownie',
       goHome: 'Powrót do strony głównej',
+    },
+    fr: {
+      heading: "Nous ne pouvons pas effectuer l'audit sans cela",
+      body: "Pour personnaliser le score de santé de votre hôtel, nous devons envoyer l'URL de votre site et vos réponses à Google Gemini. Sans votre accord, nous ne pouvons pas fournir l'analyse.",
+      reconsider: 'Revoir',
+      goHome: "Retour à l'accueil",
+    },
+    de: {
+      heading: 'Ohne diese Zustimmung können wir den Audit nicht durchführen',
+      body: 'Um den Health Score Ihres Hotels zu personalisieren, müssen wir die URL Ihrer Website und Ihre Antworten an Google Gemini senden. Ohne Ihre Zustimmung können wir die Analyse nicht bereitstellen.',
+      reconsider: 'Erneut prüfen',
+      goHome: 'Zurück zur Startseite',
+    },
+    cs: {
+      heading: 'Bez tohoto souhlasu nemůžeme audit provést',
+      body: 'Abychom mohli přizpůsobit health score vašeho hotelu, musíme odeslat URL vašeho webu a odpovědi do Google Gemini. Bez vašeho souhlasu nemůžeme analýzu poskytnout.',
+      reconsider: 'Znovu zkontrolovat',
+      goHome: 'Zpět na úvod',
     },
   };
   const l = labels[language];

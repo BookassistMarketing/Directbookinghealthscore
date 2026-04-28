@@ -53,6 +53,9 @@ export const AppShell: React.FC<{ children: React.ReactNode }> = ({ children }) 
     { code: 'it', label: 'Italiano' },
     { code: 'es', label: 'Español' },
     { code: 'pl', label: 'Polski' },
+    { code: 'fr', label: 'Français' },
+    { code: 'de', label: 'Deutsch' },
+    { code: 'cs', label: 'Čeština' },
   ];
 
   const headerLabels: Record<Language, { contact: string; hotelAudit: string; aiAudit: string }> = {
@@ -60,6 +63,9 @@ export const AppShell: React.FC<{ children: React.ReactNode }> = ({ children }) 
     it: { contact: 'Contattaci', hotelAudit: 'Audit Tecnologico', aiAudit: 'Audit Visibilità AI' },
     es: { contact: 'Contáctanos', hotelAudit: 'Auditoría Técnica', aiAudit: 'Auditoría Visibilidad IA' },
     pl: { contact: 'Kontakt', hotelAudit: 'Audyt Techniczny', aiAudit: 'Audyt Widoczności AI' },
+    fr: { contact: 'Contactez-nous', hotelAudit: 'Audit Technique', aiAudit: 'Audit Visibilité IA' },
+    de: { contact: 'Kontakt', hotelAudit: 'Technologie-Audit', aiAudit: 'KI-Sichtbarkeitsaudit' },
+    cs: { contact: 'Kontakt', hotelAudit: 'Technický audit', aiAudit: 'Audit AI viditelnosti' },
   };
 
   const labels = headerLabels[language];

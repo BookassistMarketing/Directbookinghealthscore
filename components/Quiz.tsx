@@ -48,7 +48,10 @@ export const Quiz: React.FC<QuizProps> = ({ questions, onComplete }) => {
     en: { progress: 'Diagnostic Progress', yes: 'Yes, fully implemented', no: 'No, not yet', live: 'Live Analysis Active' },
     it: { progress: 'Avanzamento Diagnosi', yes: 'Sì, completamente implementato', no: 'No, non ancora', live: 'Analisi in Tempo Reale Attiva' },
     es: { progress: 'Progreso del Diagnóstico', yes: 'Sí, totalmente implementado', no: 'No, todavía no', live: 'Análisis en Vivo Activo' },
-    pl: { progress: 'Postęp Diagnostyki', yes: 'Tak, w pełni wdrożone', no: 'Nie, jeszcze nie', live: 'Analiza na Żywo Aktywna' }
+    pl: { progress: 'Postęp Diagnostyki', yes: 'Tak, w pełni wdrożone', no: 'Nie, jeszcze nie', live: 'Analiza na Żywo Aktywna' },
+    fr: { progress: 'Progression du Diagnostic', yes: 'Oui, entièrement mis en place', no: 'Non, pas encore', live: 'Analyse en Direct Active' },
+    de: { progress: 'Diagnose-Fortschritt', yes: 'Ja, vollständig umgesetzt', no: 'Noch nicht', live: 'Live-Analyse aktiv' },
+    cs: { progress: 'Průběh diagnostiky', yes: 'Ano, plně implementováno', no: 'Zatím ne', live: 'Živá analýza aktivní' }
   };
 
   const labels = labelMap[language];
