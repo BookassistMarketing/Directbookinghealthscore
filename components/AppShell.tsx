@@ -86,7 +86,23 @@ export const AppShell: React.FC<{ children: React.ReactNode }> = ({ children }) 
                 <EditableText id="app.header.title" defaultText="Hotel Health Clinic" as="span" />
               </h1>
               <p className="hidden sm:block text-xs text-gray-500 uppercase tracking-widest font-semibold mt-1 print:block">
-                <EditableText id="app.header.subtitle" defaultText="Powered by Bookassist" as="span" />
+                Powered by{' '}
+                <a
+                  href="https://bookassist.com"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  onClick={e => e.stopPropagation()}
+                  className="group relative inline-flex items-center gap-1 text-gray-500 hover:text-brand-blue transition-colors print:text-gray-500"
+                >
+                  <span className="relative">
+                    Bookassist
+                    <span className="absolute left-0 -bottom-0.5 h-px w-0 bg-brand-blue transition-all duration-300 ease-out group-hover:w-full print:hidden" />
+                  </span>
+                  <ArrowUpRight
+                    size={12}
+                    className="opacity-0 -translate-x-1 transition-all duration-300 ease-out group-hover:opacity-100 group-hover:translate-x-0 print:hidden"
+                  />
+                </a>
               </p>
             </div>
           </div>

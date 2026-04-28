@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useEffect } from 'react';
+import React from 'react';
 import { Button } from './Button';
 import { ShieldCheck, BarChart2, Globe, Zap, ArrowRight } from 'lucide-react';
 import { EditableText } from './Editable';
@@ -20,89 +20,6 @@ interface HomeProps {
 export const Home: React.FC<HomeProps> = ({ onStart, recentEn, recentIt, recentEs, recentPl }) => {
   const { language } = useContent();
 
-  // Scroll-hijack: one wheel tick / one swipe = jump to the next or previous
-  // section. No in-between scrolling on the home page. Cleaned up on unmount
-  // so other pages scroll normally. Touch and keyboard supported.
-  useEffect(() => {
-    const sections = Array.from(
-      document.querySelectorAll<HTMLElement>('[data-snap-section]')
-    );
-    if (sections.length === 0) return;
-
-    let locked = false;
-    let touchStartY = 0;
-
-    const headerOffset = () => (window.innerWidth >= 640 ? 80 : 64);
-
-    const currentIndex = () => {
-      const probe = window.scrollY + headerOffset() + 8;
-      let idx = 0;
-      for (let i = 0; i < sections.length; i++) {
-        if (sections[i].offsetTop - 4 <= probe) idx = i;
-      }
-      return idx;
-    };
-
-    const goTo = (idx: number) => {
-      if (idx < 0 || idx >= sections.length) return;
-      locked = true;
-      const target = sections[idx].offsetTop - headerOffset();
-      window.scrollTo({ top: target, behavior: 'smooth' });
-      // Unlock once the smooth scroll has likely settled.
-      window.setTimeout(() => { locked = false; }, 700);
-    };
-
-    const handleWheel = (e: WheelEvent) => {
-      if (locked) {
-        e.preventDefault();
-        return;
-      }
-      if (Math.abs(e.deltaY) < 8) return;
-      e.preventDefault();
-      goTo(currentIndex() + (e.deltaY > 0 ? 1 : -1));
-    };
-
-    const handleTouchStart = (e: TouchEvent) => {
-      touchStartY = e.touches[0].clientY;
-    };
-
-    const handleTouchEnd = (e: TouchEvent) => {
-      if (locked) return;
-      const dy = touchStartY - e.changedTouches[0].clientY;
-      if (Math.abs(dy) < 40) return;
-      goTo(currentIndex() + (dy > 0 ? 1 : -1));
-    };
-
-    const handleKey = (e: KeyboardEvent) => {
-      if (locked) return;
-      if (e.key === 'ArrowDown' || e.key === 'PageDown' || e.key === ' ') {
-        e.preventDefault();
-        goTo(currentIndex() + 1);
-      } else if (e.key === 'ArrowUp' || e.key === 'PageUp') {
-        e.preventDefault();
-        goTo(currentIndex() - 1);
-      } else if (e.key === 'Home') {
-        e.preventDefault();
-        goTo(0);
-      } else if (e.key === 'End') {
-        e.preventDefault();
-        goTo(sections.length - 1);
-      }
-    };
-
-    window.addEventListener('wheel', handleWheel, { passive: false });
-    window.addEventListener('touchstart', handleTouchStart, { passive: true });
-    window.addEventListener('touchend', handleTouchEnd, { passive: true });
-    window.addEventListener('keydown', handleKey);
-
-    return () => {
-      window.removeEventListener('wheel', handleWheel);
-      window.removeEventListener('touchstart', handleTouchStart);
-      window.removeEventListener('touchend', handleTouchEnd);
-      window.removeEventListener('keydown', handleKey);
-    };
-  }, []);
-
   const labelsMap: Record<Language, any> = {
     en: { eyebrow: 'Hotel Tech Diagnostics', trustMicro: 'Free • 3 minutes • No signup required', title: 'Maximise Your <span class="text-brand-blue">Digital Revenue</span> Potential', subtitle: "The Direct Booking Health Score is the industry standard for assessing hospitality technology infrastructure. We analyse your <strong>Direct Booking Strategy</strong>, <strong>Metasearch Connectivity</strong>, and <strong>Marketing ROI</strong> to identify critical performance gaps.", cta: "Launch Free Tech Audit", f1t: "Secure Your Data", f1d: "In an era of privacy-first browsing, legacy tracking destroys attribution. Our audit checks for <strong>GA4 implementation</strong> and <strong>First-Party Data compliance</strong>.", f2t: "Dominate Metasearch", f2d: "Are you bidding on parity-loss dates? <strong>Metasearch Optimisation</strong> requires granular inventory management and real-time rate parity checks.", f3t: "High-Conversion Engines", f3d: "Friction kills conversion. From <strong>Digital Wallets</strong> to dynamic multi-currency, modern travellers demand a seamless experience.", f4t: "AI-Driven Personalisation", f4d: "Leverage <strong>Predictive Analytics</strong> and <strong>Dynamic Content Personalisation</strong> to serve the right offer to the right guest.", bt: "Ready to diagnose your digital health?", bd: "Join thousands of hoteliers optimising their revenue strategy. The audit takes less than 3 minutes.", bcta: "Start Assessment Now" },
     it: { eyebrow: 'Diagnostica Tech Alberghiera', trustMicro: 'Gratis • 3 minuti • Nessuna registrazione', title: 'Massimizza il tuo <span class="text-brand-blue">Potenziale di Ricavo</span> Digitale', subtitle: "Il Direct Booking Health Score è lo standard del settore per valutare l'infrastruttura tecnologica alberghiera. Analizziamo la tua <strong>Strategia di Prenotazione Diretta</strong> e il <strong>ROI del Marketing</strong>.", cta: "Lancia l'Audit Gratuito", f1t: "Proteggi i Tuoi Dati", f1d: "In un'era incentrata sulla privacy, il tracciamento legacy distrugge l'attribuzione. Verifichiamo la <strong>conformità ai dati di prima parte</strong>.", f2t: "Domina i Metamotori", f2d: "Stai puntando su date in perdita di parità? L'<strong>Ottimizzazione dei Metamotori</strong> richiede una gestione granulare dell'inventario.", f3t: "Motori ad Alta Conversione", f3d: "La frizione uccide la conversione. Dai <strong>Portafogli Digitali</strong> alle multi-valute dinamiche, i viaggiatori esigono fluidità.", f4t: "Personalizzazione AI", f4d: "Sfrutta l'<strong>Analisi Predittiva</strong> e la <strong>Personalizzazione dei Contenuti</strong> per servire l'offerta giusta all'ospite giusto.", bt: "Pronto a diagnosticare la tua salute digitale?", bd: "Unisciti a migliaia di albergatori che ottimizzano la loro strategia. L'audit richiede meno di 3 minuti.", bcta: "Inizia la Valutazione" },
@@ -116,7 +33,7 @@ export const Home: React.FC<HomeProps> = ({ onStart, recentEn, recentIt, recentE
     <div className="relative w-full">
       {/* Hero — full viewport width; only the radial blue glow lives here.
           The dotted background is now provided site-wide by AppShell. */}
-      <section data-snap-section className="relative w-full isolate overflow-hidden mb-12 sm:mb-20 snap-start scroll-mt-16 sm:scroll-mt-20 print:overflow-visible">
+      <section className="relative w-full isolate overflow-hidden mb-12 sm:mb-20 print:overflow-visible">
         {/* Ambient atmosphere — hero-specific radial glow only */}
         <div aria-hidden="true" className="absolute inset-0 -z-10 print:hidden">
           <div className="absolute -top-40 left-1/2 -translate-x-1/2 w-[140vw] h-[800px] bg-[radial-gradient(ellipse_at_center,rgba(37,99,235,0.12),rgba(37,99,235,0.03)_45%,transparent_70%)] blur-2xl" />
@@ -174,7 +91,7 @@ export const Home: React.FC<HomeProps> = ({ onStart, recentEn, recentIt, recentE
       </section>
 
       <div className="w-full max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 pb-6 sm:pb-12">
-      <section data-snap-section className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6 lg:gap-12 mb-12 sm:mb-20 snap-start scroll-mt-16 sm:scroll-mt-20">
+      <section className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6 lg:gap-12 mb-12 sm:mb-20">
         <div className="bg-white p-5 sm:p-8 rounded-2xl shadow-sm border border-gray-100 break-inside-avoid">
           <div className="w-12 h-12 bg-blue-50 rounded-lg flex items-center justify-center mb-4"><ShieldCheck className="w-6 h-6 text-brand-blue" /></div>
           <EditableText id="home.feat1.title" as="h3" defaultText={l.f1t} className="text-xl sm:text-2xl font-bold text-gray-900 mb-2" />
@@ -197,7 +114,7 @@ export const Home: React.FC<HomeProps> = ({ onStart, recentEn, recentIt, recentE
         </div>
       </section>
 
-      <section data-snap-section className="snap-start scroll-mt-16 sm:scroll-mt-20">
+      <section>
         <RecentBlogs
           recentEn={recentEn}
           recentIt={recentIt}
@@ -206,7 +123,7 @@ export const Home: React.FC<HomeProps> = ({ onStart, recentEn, recentIt, recentE
         />
       </section>
 
-      <section data-snap-section className="bg-brand-blue rounded-2xl sm:rounded-3xl p-6 sm:p-12 text-center text-white relative overflow-hidden snap-start scroll-mt-16 sm:scroll-mt-20 print:hidden">
+      <section className="bg-brand-blue rounded-2xl sm:rounded-3xl p-6 sm:p-12 text-center text-white relative overflow-hidden print:hidden">
         <div className="relative z-10">
           <EditableText id="home.bottom.title" as="h2" defaultText={l.bt} className="text-2xl sm:text-3xl font-bold mb-4" />
           <EditableText id="home.bottom.desc" as="p" defaultText={l.bd} className="text-blue-100 mb-8 max-w-2xl mx-auto text-sm sm:text-base" />
