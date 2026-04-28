@@ -46,3 +46,14 @@ export async function generateStrategicAnalysis(
   const data = (await res.json()) as { analysis: string };
   return data.analysis;
 }
+
+export async function generateAiReadinessReport(url: string, lang: Language): Promise<string> {
+  const res = await fetch('/api/ai-audit', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ url, language: lang }),
+  });
+  if (!res.ok) throw await parseError(res);
+  const data = (await res.json()) as { report: string };
+  return data.report;
+}

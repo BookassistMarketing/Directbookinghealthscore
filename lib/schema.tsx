@@ -49,6 +49,27 @@ export const softwareApplicationSchema = {
   },
 };
 
+export const aiAuditSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'SoftwareApplication',
+  name: 'AI Visibility Audit',
+  applicationCategory: 'BusinessApplication',
+  operatingSystem: 'Web',
+  url: `${BASE_URL}/ai-visibility-audit`,
+  description:
+    'Free AI Readiness Report for hotel websites. Paste a URL and receive a structured analysis of how visible the site is to AI search engines like ChatGPT, Perplexity and Gemini, scored across structured data, crawlability, semantic coverage, booking pathway clarity and more.',
+  offers: {
+    '@type': 'Offer',
+    price: '0',
+    priceCurrency: 'EUR',
+  },
+  provider: {
+    '@type': 'Organization',
+    name: 'Bookassist',
+    url: 'https://bookassist.org',
+  },
+};
+
 export const serviceSchema = {
   '@context': 'https://schema.org',
   '@type': 'Service',

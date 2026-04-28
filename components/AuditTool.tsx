@@ -1,6 +1,7 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import { useRouter } from 'next/navigation';
 import { AppState, type Answer, type DynamicQuestion } from '../types';
 import { QUESTIONS } from '../constants';
 import { useContent } from '../contexts/ContentContext';
@@ -8,16 +9,37 @@ import { WelcomeScreen } from './WelcomeScreen';
 import { Quiz } from './Quiz';
 import { Results } from './Results';
 import { FullResults } from './FullResults';
+import { ConsentModal, ConsentDeclinedScreen } from './ConsentModal';
 import { generateStrategicAnalysis } from '../services/aiService';
+
+const CONSENT_KEY = 'hhc_gemini_consent';
 
 export const AuditTool: React.FC = () => {
   const { language } = useContent();
+  const router = useRouter();
   const [appState, setAppState] = useState<AppState>(AppState.WELCOME);
   const [answers, setAnswers] = useState<Answer[]>([]);
+  const [consentChecked, setConsentChecked] = useState(false);
+  const [consentAccepted, setConsentAccepted] = useState(false);
+  const [consentDeclined, setConsentDeclined] = useState(false);
 
   const [analysis, setAnalysis] = useState<string>('');
   const [analysisLoading, setAnalysisLoading] = useState(false);
   const [analysisError, setAnalysisError] = useState<string | null>(null);
+
+  useEffect(() => {
+    if (typeof window === 'undefined') return;
+    setConsentAccepted(sessionStorage.getItem(CONSENT_KEY) === 'accepted');
+    setConsentChecked(true);
+  }, []);
+
+  const handleConsentAccept = () => {
+    if (typeof window !== 'undefined') sessionStorage.setItem(CONSENT_KEY, 'accepted');
+    setConsentAccepted(true);
+  };
+  const handleConsentDecline = () => setConsentDeclined(true);
+  const handleConsentReconsider = () => setConsentDeclined(false);
+  const handleConsentGoHome = () => router.push('/');
 
   const quizQuestions: DynamicQuestion[] = QUESTIONS.map(q => ({ ...q, source: 'static' as const }));
 
@@ -51,8 +73,20 @@ export const AuditTool: React.FC = () => {
     setAnalysisError(null);
   };
 
+  if (consentDeclined) {
+    return (
+      <ConsentDeclinedScreen
+        onReconsider={handleConsentReconsider}
+        onGoHome={handleConsentGoHome}
+      />
+    );
+  }
+
   return (
     <div className="w-full flex flex-col items-center">
+      {consentChecked && !consentAccepted && (
+        <ConsentModal onAccept={handleConsentAccept} onDecline={handleConsentDecline} />
+      )}
       {appState === AppState.WELCOME && <WelcomeScreen onStart={handleStart} />}
       {appState === AppState.QUIZ && <Quiz questions={quizQuestions} onComplete={handleQuizComplete} />}
       {appState === AppState.SCORE && (
