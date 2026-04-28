@@ -238,7 +238,7 @@ export const AppShell: React.FC<{ children: React.ReactNode }> = ({ children }) 
         )}
       </header>
 
-      <main className="flex-grow flex flex-col items-center justify-start w-full pt-4 sm:pt-6 pb-12 print:pt-4 print:pb-0">
+      <main className="flex-grow flex flex-col items-center justify-start w-full pb-12 print:pt-4 print:pb-0">
         {children}
       </main>
 
