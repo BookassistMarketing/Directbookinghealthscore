@@ -149,18 +149,25 @@ export const Home: React.FC<HomeProps> = ({ onStart, recentEn, recentIt, recentE
 const Heartbeat: React.FC = () => {
   // Path length is roughly the sum of segment lengths — used for stroke-dasharray.
   // We don't need exact precision; a number >= true length works for the dash trick.
+  // Path uses small Q (quadratic Bezier) curves at each junction so the
+  // corners feel soft like the logo's heartbeat icon, instead of sharp.
   const PATH_D =
-    'M -20 240 ' +
-    'L 600 240 ' +     // long flat baseline (underlines the heading)
-    'L 620 240 ' +
-    'L 640 256 ' +     // Q wave (small dip)
-    'L 660 60 ' +      // R wave (big spike up)
-    'L 680 320 ' +     // S wave (overshoot down)
-    'L 700 240 ' +     // back to baseline
-    'L 800 240 ' +
-    'L 820 215 ' +     // T wave (small bump)
-    'L 850 240 ' +
-    'L 1220 240';     // continue trail off-right
+    'M 30 300 ' +
+    'L 740 300 ' +                                    // flat baseline (underlines "Potential" line)
+    'Q 752 300 758 308 ' +                            // soft turn down into Q wave
+    'L 770 320 ' +
+    'Q 778 322 784 312 ' +                            // soft turn up
+    'L 800 90 ' +                                     // R wave — big spike up
+    'Q 808 84 816 90 ' +                              // rounded apex
+    'L 832 350 ' +                                    // S wave — overshoot down
+    'Q 840 358 850 350 ' +                            // rounded bottom
+    'L 868 300 ' +                                    // return to baseline
+    'L 980 300 ' +                                    // flat after main complex
+    'Q 994 300 1000 288 ' +                           // T wave up
+    'L 1014 278 ' +
+    'Q 1024 278 1030 290 ' +                          // T wave down
+    'L 1044 300 ' +
+    'L 1220 300';                                     // trail off right
 
   return (
     <div
@@ -223,6 +230,7 @@ const Heartbeat: React.FC = () => {
           strokeWidth="2"
           strokeLinecap="round"
           strokeLinejoin="round"
+          vectorEffect="non-scaling-stroke"
           className="hb-trail"
         />
 
@@ -234,6 +242,7 @@ const Heartbeat: React.FC = () => {
           strokeWidth="2.75"
           strokeLinecap="round"
           strokeLinejoin="round"
+          vectorEffect="non-scaling-stroke"
           filter="url(#hb-glow)"
           className="hb-line"
         />
