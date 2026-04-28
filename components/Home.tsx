@@ -172,12 +172,12 @@ const Heartbeat: React.FC = () => {
     'L 1120 168 ' +
     'Q 1130 168 1136 180 ' +                          // T wave down
     'L 1150 190 ' +
-    'L 1220 190';                                     // trail off right
+    'L 1200 190';                                     // trail to right edge of container
 
   return (
     <div
       aria-hidden="true"
-      className="hidden lg:block absolute inset-0 -z-[1] pointer-events-none print:hidden"
+      className="hidden lg:block absolute inset-y-0 left-8 right-[calc(36rem-50vw)] -z-[1] pointer-events-none print:hidden"
     >
       <style>{`
         @keyframes hb-trace {
