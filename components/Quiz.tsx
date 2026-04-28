@@ -70,8 +70,8 @@ export const Quiz: React.FC<QuizProps> = ({ questions, onComplete }) => {
         </div>
       </div>
 
-      <div className="bg-white rounded-2xl shadow-xl border border-gray-100 overflow-hidden min-h-[50vh] sm:min-h-[400px] flex flex-col flex-grow">
-        <div className="p-5 sm:p-12 flex-grow flex flex-col justify-center">
+      <div className="bg-white rounded-2xl shadow-xl border border-gray-100 overflow-hidden h-[60vh] sm:h-[520px] flex flex-col">
+        <div className="p-5 sm:p-12 flex-1 min-h-0 overflow-y-auto flex flex-col justify-center">
           <span className="inline-block px-3 py-1 bg-blue-50 text-brand-blue text-xs font-bold tracking-wider rounded-full mb-4 sm:mb-6 w-fit">
             {translatedCategory.toUpperCase()}
           </span>
