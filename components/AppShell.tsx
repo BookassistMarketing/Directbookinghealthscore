@@ -77,10 +77,10 @@ export const AppShell: React.FC<{ children: React.ReactNode }> = ({ children }) 
             </div>
             <div className="flex flex-col justify-center">
               <h1 className="text-lg sm:text-xl font-bold text-brand-blue tracking-tight leading-none">
-                <EditableText id="app.header.title" defaultText="Direct Booking Health Score" as="span" />
+                <EditableText id="app.header.title" defaultText="Hotel Health Clinic" as="span" />
               </h1>
               <p className="hidden sm:block text-xs text-gray-500 uppercase tracking-widest font-semibold mt-1 print:block">
-                <EditableText id="app.header.subtitle" defaultText="Hotel Tech & Marketing Audit Tool" as="span" />
+                <EditableText id="app.header.subtitle" defaultText="Powered by Bookassist" as="span" />
               </p>
             </div>
           </div>
