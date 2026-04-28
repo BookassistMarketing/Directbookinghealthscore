@@ -116,9 +116,9 @@ export const Home: React.FC<HomeProps> = ({ onStart, recentEn, recentIt, recentE
 
         <div className="flip-card relative min-h-[240px] sm:min-h-[260px] break-inside-avoid">
           <div className="flip-card-inner">
-            <div className="flip-card-face flip-card-front bg-white p-5 sm:p-8 shadow-sm border border-gray-100 flex flex-col items-start justify-center">
-              <div className="w-12 h-12 bg-blue-50 rounded-lg flex items-center justify-center mb-4"><ShieldCheck className="w-6 h-6 text-brand-blue" /></div>
-              <EditableText id="home.feat1.title" as="h3" defaultText={l.f1t} className="text-xl sm:text-2xl font-bold text-gray-900" />
+            <div className="flip-card-face flip-card-front bg-white p-6 sm:p-10 shadow-sm border border-gray-100 flex flex-col items-center justify-center text-center">
+              <div className="w-16 h-16 sm:w-20 sm:h-20 bg-blue-50 rounded-2xl flex items-center justify-center mb-5"><ShieldCheck className="w-8 h-8 sm:w-10 sm:h-10 text-brand-blue" /></div>
+              <EditableText id="home.feat1.title" as="h3" defaultText={l.f1t} className="text-xl sm:text-2xl lg:text-3xl font-bold text-gray-900 leading-tight" />
             </div>
             <div className="flip-card-face flip-card-back bg-brand-blue text-white p-5 sm:p-8 shadow-md flex items-center">
               <EditableText id="home.feat1.desc" as="p" multiline defaultText={l.f1d} className="text-sm sm:text-base text-blue-50 leading-relaxed" />
@@ -128,9 +128,9 @@ export const Home: React.FC<HomeProps> = ({ onStart, recentEn, recentIt, recentE
 
         <div className="flip-card relative min-h-[240px] sm:min-h-[260px] break-inside-avoid">
           <div className="flip-card-inner">
-            <div className="flip-card-face flip-card-front bg-white p-5 sm:p-8 shadow-sm border border-gray-100 flex flex-col items-start justify-center">
-              <div className="w-12 h-12 bg-teal-50 rounded-lg flex items-center justify-center mb-4"><Globe className="w-6 h-6 text-brand-success" /></div>
-              <EditableText id="home.feat2.title" as="h3" defaultText={l.f2t} className="text-xl sm:text-2xl font-bold text-gray-900" />
+            <div className="flip-card-face flip-card-front bg-white p-6 sm:p-10 shadow-sm border border-gray-100 flex flex-col items-center justify-center text-center">
+              <div className="w-16 h-16 sm:w-20 sm:h-20 bg-teal-50 rounded-2xl flex items-center justify-center mb-5"><Globe className="w-8 h-8 sm:w-10 sm:h-10 text-brand-success" /></div>
+              <EditableText id="home.feat2.title" as="h3" defaultText={l.f2t} className="text-xl sm:text-2xl lg:text-3xl font-bold text-gray-900 leading-tight" />
             </div>
             <div className="flip-card-face flip-card-back bg-brand-blue text-white p-5 sm:p-8 shadow-md flex items-center">
               <EditableText id="home.feat2.desc" as="p" multiline defaultText={l.f2d} className="text-sm sm:text-base text-blue-50 leading-relaxed" />
@@ -140,9 +140,9 @@ export const Home: React.FC<HomeProps> = ({ onStart, recentEn, recentIt, recentE
 
         <div className="flip-card relative min-h-[240px] sm:min-h-[260px] break-inside-avoid">
           <div className="flip-card-inner">
-            <div className="flip-card-face flip-card-front bg-white p-5 sm:p-8 shadow-sm border border-gray-100 flex flex-col items-start justify-center">
-              <div className="w-12 h-12 bg-indigo-50 rounded-lg flex items-center justify-center mb-4"><Zap className="w-6 h-6 text-indigo-600" /></div>
-              <EditableText id="home.feat3.title" as="h3" defaultText={l.f3t} className="text-xl sm:text-2xl font-bold text-gray-900" />
+            <div className="flip-card-face flip-card-front bg-white p-6 sm:p-10 shadow-sm border border-gray-100 flex flex-col items-center justify-center text-center">
+              <div className="w-16 h-16 sm:w-20 sm:h-20 bg-indigo-50 rounded-2xl flex items-center justify-center mb-5"><Zap className="w-8 h-8 sm:w-10 sm:h-10 text-indigo-600" /></div>
+              <EditableText id="home.feat3.title" as="h3" defaultText={l.f3t} className="text-xl sm:text-2xl lg:text-3xl font-bold text-gray-900 leading-tight" />
             </div>
             <div className="flip-card-face flip-card-back bg-brand-blue text-white p-5 sm:p-8 shadow-md flex items-center">
               <EditableText id="home.feat3.desc" as="p" multiline defaultText={l.f3d} className="text-sm sm:text-base text-blue-50 leading-relaxed" />
@@ -152,9 +152,9 @@ export const Home: React.FC<HomeProps> = ({ onStart, recentEn, recentIt, recentE
 
         <div className="flip-card relative min-h-[240px] sm:min-h-[260px] break-inside-avoid">
           <div className="flip-card-inner">
-            <div className="flip-card-face flip-card-front bg-white p-5 sm:p-8 shadow-sm border border-gray-100 flex flex-col items-start justify-center">
-              <div className="w-12 h-12 bg-rose-50 rounded-lg flex items-center justify-center mb-4"><BarChart2 className="w-6 h-6 text-brand-accent" /></div>
-              <EditableText id="home.feat4.title" as="h3" defaultText={l.f4t} className="text-xl sm:text-2xl font-bold text-gray-900" />
+            <div className="flip-card-face flip-card-front bg-white p-6 sm:p-10 shadow-sm border border-gray-100 flex flex-col items-center justify-center text-center">
+              <div className="w-16 h-16 sm:w-20 sm:h-20 bg-rose-50 rounded-2xl flex items-center justify-center mb-5"><BarChart2 className="w-8 h-8 sm:w-10 sm:h-10 text-brand-accent" /></div>
+              <EditableText id="home.feat4.title" as="h3" defaultText={l.f4t} className="text-xl sm:text-2xl lg:text-3xl font-bold text-gray-900 leading-tight" />
             </div>
             <div className="flip-card-face flip-card-back bg-brand-blue text-white p-5 sm:p-8 shadow-md flex items-center">
               <EditableText id="home.feat4.desc" as="p" multiline defaultText={l.f4d} className="text-sm sm:text-base text-blue-50 leading-relaxed" />
