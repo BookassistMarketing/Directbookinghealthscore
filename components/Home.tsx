@@ -89,11 +89,6 @@ export const Home: React.FC<HomeProps> = ({ onStart, recentEn, recentIt, recentE
           </div>
         </div>
 
-        {/* Decorative pagination indicator */}
-        <div className="hidden lg:flex absolute bottom-6 right-2 items-baseline gap-1.5 font-mono tabular-nums print:hidden">
-          <span className="text-3xl font-black text-gray-900">01</span>
-          <span className="text-sm text-gray-300">/04</span>
-        </div>
       </section>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6 lg:gap-12 mb-12 sm:mb-20">
