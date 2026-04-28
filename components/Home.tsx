@@ -30,18 +30,19 @@ export const Home: React.FC<HomeProps> = ({ onStart, recentEn, recentIt, recentE
   const l = labelsMap[language];
 
   return (
-    <div className="w-full max-w-6xl mx-auto px-4 py-6 sm:py-12 sm:px-6 lg:px-8">
-      {/* Hero — Ternio-inspired: bold typography, geometric graphics, dot grid backdrop */}
-      <section className="relative isolate overflow-hidden mb-12 sm:mb-20 -mx-4 sm:-mx-6 lg:-mx-8 px-4 sm:px-6 lg:px-8 print:overflow-visible">
+    <>
+      {/* Hero — full viewport width so the dotted background and heartbeat span edge-to-edge */}
+      <section className="relative isolate overflow-hidden mb-12 sm:mb-20 print:overflow-visible">
         {/* Ambient atmosphere */}
         <div aria-hidden="true" className="absolute inset-0 -z-10 print:hidden">
-          {/* Soft radial glow behind heading */}
-          <div className="absolute -top-40 left-1/4 w-[1100px] h-[700px] bg-[radial-gradient(ellipse_at_center,rgba(37,99,235,0.18),rgba(37,99,235,0.04)_45%,transparent_70%)] blur-2xl" />
+          {/* Soft radial glow — wider, full-bleed */}
+          <div className="absolute -top-40 left-1/2 -translate-x-1/2 w-[140vw] h-[800px] bg-[radial-gradient(ellipse_at_center,rgba(37,99,235,0.14),rgba(37,99,235,0.03)_45%,transparent_70%)] blur-2xl" />
           {/* Subtle dot grid */}
-          <div className="absolute inset-0 [background-image:radial-gradient(circle,rgba(15,23,42,0.10)_1px,transparent_1px)] [background-size:22px_22px] [mask-image:radial-gradient(ellipse_at_center,black_30%,transparent_75%)]" />
+          <div className="absolute inset-0 [background-image:radial-gradient(circle,rgba(15,23,42,0.10)_1px,transparent_1px)] [background-size:22px_22px] [mask-image:radial-gradient(ellipse_at_center,black_40%,transparent_85%)]" />
         </div>
 
-        <div className="relative grid grid-cols-1 lg:grid-cols-12 gap-8 sm:gap-10 lg:gap-12 items-center min-h-[600px] py-10 sm:py-16 lg:py-20">
+        <div className="w-full max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="relative grid grid-cols-1 lg:grid-cols-12 gap-8 sm:gap-10 lg:gap-12 items-center min-h-[560px] py-6 sm:py-10 lg:py-14">
           {/* Left: copy column */}
           <div className="lg:col-span-7 space-y-7 sm:space-y-8 z-10">
             <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white border border-blue-100 shadow-sm">
@@ -84,13 +85,15 @@ export const Home: React.FC<HomeProps> = ({ onStart, recentEn, recentIt, recentE
           </div>
 
           {/* Right: kept for grid balance; heartbeat overlays the section */}
-          <div className="hidden lg:block lg:col-span-5" aria-hidden="true" />
+            <div className="hidden lg:block lg:col-span-5" aria-hidden="true" />
+          </div>
         </div>
 
         {/* Heartbeat — ECG line that underlines the heading and spikes into the dead space */}
         <Heartbeat />
       </section>
 
+      <div className="w-full max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 pb-6 sm:pb-12">
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6 lg:gap-12 mb-12 sm:mb-20">
         <div className="bg-white p-5 sm:p-8 rounded-2xl shadow-sm border border-gray-100 break-inside-avoid">
           <div className="w-12 h-12 bg-blue-50 rounded-lg flex items-center justify-center mb-4"><ShieldCheck className="w-6 h-6 text-brand-blue" /></div>
@@ -132,7 +135,8 @@ export const Home: React.FC<HomeProps> = ({ onStart, recentEn, recentIt, recentE
         <div className="absolute top-0 left-0 w-48 h-48 bg-white opacity-5 rounded-full -translate-x-1/2 -translate-y-1/2"></div>
         <div className="absolute bottom-0 right-0 w-64 h-64 bg-white opacity-5 rounded-full translate-x-1/3 translate-y-1/3"></div>
       </div>
-    </div>
+      </div>
+    </>
   );
 };
 
@@ -159,8 +163,8 @@ const Heartbeat: React.FC = () => {
     'Q 892 190 898 198 ' +                            // soft turn into Q wave
     'L 910 210 ' +
     'Q 918 212 924 202 ' +                            // soft turn up
-    'L 940 -20 ' +                                    // R wave — big spike up (further right)
-    'Q 948 -26 956 -20 ' +                            // rounded apex
+    'L 940 50 ' +                                     // R wave — big spike up (further right)
+    'Q 948 44 956 50 ' +                              // rounded apex
     'L 972 240 ' +                                    // S wave — overshoot down
     'Q 980 248 990 240 ' +                            // rounded bottom
     'L 1008 190 ' +                                   // return to baseline
