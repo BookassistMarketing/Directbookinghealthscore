@@ -83,12 +83,12 @@ export const Home: React.FC<HomeProps> = ({ onStart, recentEn, recentIt, recentE
             </div>
           </div>
 
-          {/* Right: geometric graphic */}
-          <div className="lg:col-span-5 relative aspect-square max-w-[460px] mx-auto w-full print:hidden" aria-hidden="true">
-            <HeroCrystal />
-          </div>
+          {/* Right: kept for grid balance; heartbeat overlays the section */}
+          <div className="hidden lg:block lg:col-span-5" aria-hidden="true" />
         </div>
 
+        {/* Heartbeat — ECG line that underlines the heading and spikes into the dead space */}
+        <Heartbeat />
       </section>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6 lg:gap-12 mb-12 sm:mb-20">
@@ -137,105 +137,115 @@ export const Home: React.FC<HomeProps> = ({ onStart, recentEn, recentIt, recentE
 };
 
 /**
- * HeroCrystal — abstract crystalline geometry inspired by Ternio's hero,
- * adapted for a light theme. Suggests data-precision/diagnostics rather
- * than blockchain. Pure SVG with CSS-animated floating motion.
+ * Heartbeat — ECG-style continuous line that underlines the heading on
+ * the left and launches into a dramatic R-spike in the right "dead
+ * space". Animates like a live heart-rate monitor: the trace
+ * continuously redraws left-to-right with a glowing leading-edge dot.
+ *
+ * The stroke path uses a 1200x400 viewBox. A horizontal baseline at y=240
+ * runs the full width; the QRS-T complex fires between x=620 and x=900
+ * (visually the right column on lg+). A small T-wave bump follows.
  */
-const HeroCrystal: React.FC = () => (
-  <div className="relative w-full h-full">
-    <style>{`
-      @keyframes hc-float-a { 0%, 100% { transform: translateY(0) rotate(0deg); } 50% { transform: translateY(-14px) rotate(1.2deg); } }
-      @keyframes hc-float-b { 0%, 100% { transform: translateY(0) rotate(0deg); } 50% { transform: translateY(10px) rotate(-1.5deg); } }
-      @keyframes hc-float-c { 0%, 100% { transform: translateY(0) rotate(0deg); } 50% { transform: translateY(-8px) rotate(2deg); } }
-      @keyframes hc-spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
-      .hc-float-a { animation: hc-float-a 7s ease-in-out infinite; transform-origin: center; }
-      .hc-float-b { animation: hc-float-b 9s ease-in-out infinite; transform-origin: center; }
-      .hc-float-c { animation: hc-float-c 6s ease-in-out infinite; transform-origin: center; }
-      .hc-spin-slow { animation: hc-spin 40s linear infinite; transform-origin: center; }
-      @media (prefers-reduced-motion: reduce) { .hc-float-a, .hc-float-b, .hc-float-c, .hc-spin-slow { animation: none; } }
-    `}</style>
+const Heartbeat: React.FC = () => {
+  // Path length is roughly the sum of segment lengths — used for stroke-dasharray.
+  // We don't need exact precision; a number >= true length works for the dash trick.
+  const PATH_D =
+    'M -20 240 ' +
+    'L 600 240 ' +     // long flat baseline (underlines the heading)
+    'L 620 240 ' +
+    'L 640 256 ' +     // Q wave (small dip)
+    'L 660 60 ' +      // R wave (big spike up)
+    'L 680 320 ' +     // S wave (overshoot down)
+    'L 700 240 ' +     // back to baseline
+    'L 800 240 ' +
+    'L 820 215 ' +     // T wave (small bump)
+    'L 850 240 ' +
+    'L 1220 240';     // continue trail off-right
 
-    {/* Soft halo glow */}
-    <div className="absolute inset-[12%] rounded-full bg-[radial-gradient(circle_at_center,rgba(37,99,235,0.18),transparent_70%)] blur-2xl" />
+  return (
+    <div
+      aria-hidden="true"
+      className="hidden lg:block absolute inset-0 -z-[1] pointer-events-none print:hidden"
+    >
+      <style>{`
+        @keyframes hb-trace {
+          0% { stroke-dashoffset: 2400; }
+          100% { stroke-dashoffset: 0; }
+        }
+        @keyframes hb-fade-trail {
+          0%, 100% { opacity: 0.18; }
+          50% { opacity: 0.35; }
+        }
+        .hb-line {
+          stroke-dasharray: 1200 1200;
+          stroke-dashoffset: 2400;
+          animation: hb-trace 2.6s linear infinite;
+        }
+        .hb-trail {
+          animation: hb-fade-trail 2.6s ease-in-out infinite;
+        }
+        .hb-dot {
+          /* The dot rides along the path via offset-path */
+          offset-path: path('${PATH_D}');
+          offset-rotate: 0deg;
+          animation: hb-trace 2.6s linear infinite;
+        }
+        @media (prefers-reduced-motion: reduce) {
+          .hb-line, .hb-trail, .hb-dot { animation-duration: 8s; }
+        }
+      `}</style>
 
-    {/* Slowly rotating concentric ring */}
-    <svg viewBox="0 0 500 500" className="absolute inset-0 w-full h-full hc-spin-slow">
-      <circle cx="250" cy="250" r="218" fill="none" stroke="rgba(37,99,235,0.12)" strokeWidth="1" strokeDasharray="2 7" />
-      <circle cx="250" cy="250" r="180" fill="none" stroke="rgba(37,99,235,0.18)" strokeWidth="1" strokeDasharray="1 5" />
-    </svg>
+      <svg
+        viewBox="0 0 1200 400"
+        preserveAspectRatio="none"
+        className="w-full h-full"
+      >
+        <defs>
+          <filter id="hb-glow" x="-20%" y="-20%" width="140%" height="140%">
+            <feGaussianBlur stdDeviation="4" result="blur" />
+            <feMerge>
+              <feMergeNode in="blur" />
+              <feMergeNode in="SourceGraphic" />
+            </feMerge>
+          </filter>
+          <linearGradient id="hb-grad" x1="0" y1="0" x2="1" y2="0">
+            <stop offset="0%" stopColor="#1E3A8A" />
+            <stop offset="50%" stopColor="#2563EB" />
+            <stop offset="100%" stopColor="#60A5FA" />
+          </linearGradient>
+        </defs>
 
-    {/* Main crystal */}
-    <svg viewBox="0 0 500 500" className="relative w-full h-full">
-      <defs>
-        <linearGradient id="hc-grad-main" x1="0" y1="0" x2="1" y2="1">
-          <stop offset="0%" stopColor="#60A5FA" />
-          <stop offset="55%" stopColor="#2563EB" />
-          <stop offset="100%" stopColor="#1E3A8A" />
-        </linearGradient>
-        <linearGradient id="hc-grad-facet" x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0%" stopColor="#DBEAFE" />
-          <stop offset="100%" stopColor="#93C5FD" />
-        </linearGradient>
-        <linearGradient id="hc-grad-sat" x1="0" y1="0" x2="1" y2="1">
-          <stop offset="0%" stopColor="#93C5FD" />
-          <stop offset="100%" stopColor="#1D4ED8" />
-        </linearGradient>
-        <filter id="hc-shadow" x="-30%" y="-30%" width="160%" height="160%">
-          <feDropShadow dx="0" dy="14" stdDeviation="16" floodColor="#1E3A8A" floodOpacity="0.18" />
-        </filter>
-      </defs>
+        {/* Faint persistent trail (so the line doesn't fully disappear between cycles) */}
+        <path
+          d={PATH_D}
+          fill="none"
+          stroke="#2563EB"
+          strokeWidth="2"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          className="hb-trail"
+        />
 
-      {/* Connecting dotted lines (drawn before crystals so they sit behind) */}
-      <line x1="285" y1="180" x2="385" y2="115" stroke="#3B82F6" strokeWidth="1" strokeDasharray="2 4" opacity="0.45" />
-      <line x1="205" y1="320" x2="120" y2="365" stroke="#3B82F6" strokeWidth="1" strokeDasharray="2 4" opacity="0.45" />
+        {/* Bright leading edge — the actively drawing line */}
+        <path
+          d={PATH_D}
+          fill="none"
+          stroke="url(#hb-grad)"
+          strokeWidth="2.75"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          filter="url(#hb-glow)"
+          className="hb-line"
+        />
+      </svg>
 
-      {/* Main hexagonal crystal */}
-      <g className="hc-float-a" filter="url(#hc-shadow)">
-        <g transform="translate(250 250)">
-          {/* base hexagon */}
-          <polygon points="0,-140 121,-70 121,70 0,140 -121,70 -121,-70" fill="url(#hc-grad-main)" />
-          {/* upper-left facet (lighter) */}
-          <polygon points="0,-140 121,-70 0,0 -121,-70" fill="url(#hc-grad-facet)" opacity="0.92" />
-          {/* lower-right facet (darker accent for depth) */}
-          <polygon points="0,0 121,-70 121,70 0,140" fill="#1E3A8A" opacity="0.20" />
-          {/* central spine */}
-          <line x1="0" y1="-140" x2="0" y2="140" stroke="rgba(255,255,255,0.45)" strokeWidth="1" />
-          <line x1="-121" y1="-70" x2="121" y2="-70" stroke="rgba(255,255,255,0.25)" strokeWidth="1" />
-          {/* outline */}
-          <polygon points="0,-140 121,-70 121,70 0,140 -121,70 -121,-70" fill="none" stroke="white" strokeWidth="1.5" opacity="0.85" />
-          {/* pulsing core dot */}
-          <circle cx="0" cy="-30" r="5" fill="white">
-            <animate attributeName="opacity" values="0.5;1;0.5" dur="2.4s" repeatCount="indefinite" />
-            <animate attributeName="r" values="4;6;4" dur="2.4s" repeatCount="indefinite" />
-          </circle>
-        </g>
-      </g>
+      {/* The "pen" of the monitor — bright dot riding along the path. */}
+      <div className="absolute inset-0">
+        <svg viewBox="0 0 1200 400" preserveAspectRatio="none" className="w-full h-full">
+          <circle r="6" fill="#2563EB" filter="url(#hb-glow)" className="hb-dot" />
+        </svg>
+      </div>
+    </div>
+  );
+};
 
-      {/* Top-right satellite — diamond */}
-      <g className="hc-float-b" filter="url(#hc-shadow)">
-        <g transform="translate(395 105)">
-          <polygon points="0,-32 32,0 0,32 -32,0" fill="url(#hc-grad-sat)" />
-          <polygon points="0,-32 32,0 0,0" fill="#DBEAFE" opacity="0.85" />
-          <polygon points="0,-32 32,0 0,32 -32,0" fill="none" stroke="white" strokeWidth="1.5" opacity="0.9" />
-        </g>
-      </g>
-
-      {/* Bottom-left satellite — small triangle/diamond */}
-      <g className="hc-float-c" filter="url(#hc-shadow)">
-        <g transform="translate(105 380)">
-          <polygon points="0,-22 22,0 0,22 -22,0" fill="url(#hc-grad-sat)" opacity="0.95" />
-          <polygon points="0,-22 22,0 0,22 -22,0" fill="none" stroke="white" strokeWidth="1.5" opacity="0.9" />
-        </g>
-      </g>
-
-      {/* Scattered particle dots */}
-      <g opacity="0.55">
-        <circle cx="60" cy="180" r="2" fill="#3B82F6" />
-        <circle cx="440" cy="260" r="2.5" fill="#60A5FA" />
-        <circle cx="180" cy="60" r="1.5" fill="#3B82F6" />
-        <circle cx="430" cy="380" r="1.5" fill="#3B82F6" />
-        <circle cx="80" cy="450" r="2" fill="#60A5FA" />
-      </g>
-    </svg>
-  </div>
-);
