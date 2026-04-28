@@ -32,13 +32,13 @@ export const Home: React.FC<HomeProps> = ({ onStart, recentEn, recentIt, recentE
   return (
     <>
       {/* Hero — full viewport width so the dotted background and heartbeat span edge-to-edge */}
-      <section className="relative isolate overflow-hidden mb-12 sm:mb-20 print:overflow-visible">
-        {/* Ambient atmosphere */}
+      <section className="relative w-full isolate overflow-hidden mb-12 sm:mb-20 print:overflow-visible">
+        {/* Ambient atmosphere — spans the full hero, no mask falloff */}
         <div aria-hidden="true" className="absolute inset-0 -z-10 print:hidden">
           {/* Soft radial glow — wider, full-bleed */}
-          <div className="absolute -top-40 left-1/2 -translate-x-1/2 w-[140vw] h-[800px] bg-[radial-gradient(ellipse_at_center,rgba(37,99,235,0.14),rgba(37,99,235,0.03)_45%,transparent_70%)] blur-2xl" />
-          {/* Subtle dot grid */}
-          <div className="absolute inset-0 [background-image:radial-gradient(circle,rgba(15,23,42,0.10)_1px,transparent_1px)] [background-size:22px_22px] [mask-image:radial-gradient(ellipse_at_center,black_40%,transparent_85%)]" />
+          <div className="absolute -top-40 left-1/2 -translate-x-1/2 w-[140vw] h-[800px] bg-[radial-gradient(ellipse_at_center,rgba(37,99,235,0.12),rgba(37,99,235,0.03)_45%,transparent_70%)] blur-2xl" />
+          {/* Subtle dot grid — covers the entire hero edge-to-edge */}
+          <div className="absolute inset-0 [background-image:radial-gradient(circle,rgba(15,23,42,0.10)_1px,transparent_1px)] [background-size:22px_22px]" />
         </div>
 
         <div className="w-full max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -197,14 +197,8 @@ const Heartbeat: React.FC = () => {
         .hb-trail {
           animation: hb-fade-trail 2.6s ease-in-out infinite;
         }
-        .hb-dot {
-          /* The dot rides along the path via offset-path */
-          offset-path: path('${PATH_D}');
-          offset-rotate: 0deg;
-          animation: hb-trace 2.6s linear infinite;
-        }
         @media (prefers-reduced-motion: reduce) {
-          .hb-line, .hb-trail, .hb-dot { animation-duration: 8s; }
+          .hb-line, .hb-trail { animation-duration: 8s; }
         }
       `}</style>
 
@@ -252,13 +246,6 @@ const Heartbeat: React.FC = () => {
           className="hb-line"
         />
       </svg>
-
-      {/* The "pen" of the monitor — bright dot riding along the path. */}
-      <div className="absolute inset-0">
-        <svg viewBox="0 0 1200 400" preserveAspectRatio="none" className="w-full h-full">
-          <circle r="6" fill="#0B1E47" filter="url(#hb-glow)" className="hb-dot" />
-        </svg>
-      </div>
     </div>
   );
 };
