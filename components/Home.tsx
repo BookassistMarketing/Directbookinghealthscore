@@ -213,42 +213,27 @@ export const Home: React.FC<HomeProps> = ({ onStart, recentEn, recentIt, recentE
  * (visually the right column on lg+). A small T-wave bump follows.
  */
 const Heartbeat: React.FC = () => {
-  const { language } = useContent();
-
-  // Per-language X position (in viewBox units, 0–1200) where the flat baseline
-  // ends and the QRS spike fires — tuned so the spike fires just after the
-  // brand-blue highlighted word in each language's hero title.
-  const spikeStartByLanguage: Record<Language, number> = {
-    en: 760,
-    it: 900,
-    es: 860,
-    pl: 920,
-    fr: 900,
-    de: 1000,
-    cs: 1020,
-  };
-  const s = spikeStartByLanguage[language] ?? 760;
-
-  // Path uses small Q (quadratic Bezier) curves at each junction so the
-  // corners feel soft like the logo's heartbeat icon, instead of sharp.
-  // Baseline y=190; R-peak at y=30; S-bottom at y=350.
+  // Spike fires at a fixed X position in the right-column dead space so it
+  // looks the same in every language. Baseline y=230 sits below the heading
+  // even when the title wraps to 2 lines (e.g. German "digitales
+  // Umsatzpotenzial"), avoiding the line cutting through the words.
   const PATH_D =
-    `M 0 190 ` +
-    `L ${s} 190 ` +                                   // flat baseline (underlines the highlighted word)
-    `Q ${s + 12} 190 ${s + 18} 198 ` +                // soft turn into Q wave
-    `L ${s + 30} 210 ` +
-    `Q ${s + 38} 212 ${s + 44} 202 ` +                // soft turn up
-    `L ${s + 60} 30 ` +                               // R wave
-    `Q ${s + 68} 22 ${s + 76} 30 ` +                  // rounded apex
-    `L ${s + 92} 350 ` +                              // S wave deep overshoot
-    `Q ${s + 100} 360 ${s + 110} 350 ` +              // rounded bottom
-    `L ${s + 128} 190 ` +                             // return to baseline
-    `L ${s + 210} 190 ` +                             // flat after main complex
-    `Q ${s + 222} 190 ${s + 228} 178 ` +              // T wave up
-    `L ${s + 240} 168 ` +
-    `Q ${s + 250} 168 ${s + 256} 180 ` +              // T wave down
-    `L ${s + 270} 190 ` +
-    `L 1200 190`;                                     // trail to right edge of container
+    'M 0 230 ' +
+    'L 760 230 ' +                                    // flat baseline (sits under the heading area)
+    'Q 772 230 778 238 ' +                            // soft turn into Q wave
+    'L 790 250 ' +
+    'Q 798 252 804 242 ' +                            // soft turn up
+    'L 820 70 ' +                                     // R wave (R-peak fires in dead space centre)
+    'Q 828 62 836 70 ' +                              // rounded apex
+    'L 852 390 ' +                                    // S wave deep overshoot
+    'Q 860 400 870 390 ' +                            // rounded bottom
+    'L 888 230 ' +                                    // return to baseline
+    'L 970 230 ' +                                    // flat after main complex
+    'Q 982 230 988 218 ' +                            // T wave up
+    'L 1000 208 ' +
+    'Q 1010 208 1016 220 ' +                          // T wave down
+    'L 1030 230 ' +
+    'L 1200 230';                                     // trail to right edge of container
 
   return (
     <div
