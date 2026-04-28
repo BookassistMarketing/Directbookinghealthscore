@@ -1,17 +1,41 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { useRouter, usePathname } from 'next/navigation';
-import { Activity, Menu, X, Globe, ArrowUpRight } from 'lucide-react';
+import { Activity, Menu, X, Globe, ArrowUpRight, ChevronDown } from 'lucide-react';
 import { EditableText } from './Editable';
 import { useContent } from '../contexts/ContentContext';
 import { Language } from '../types';
 
 export const AppShell: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [langOpen, setLangOpen] = useState(false);
+  const langCloseTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const langWrapperRef = useRef<HTMLDivElement | null>(null);
   const { language, setLanguage } = useContent();
   const router = useRouter();
   const pathname = usePathname();
+
+  const openLang = () => {
+    if (langCloseTimer.current) clearTimeout(langCloseTimer.current);
+    setLangOpen(true);
+  };
+  const closeLangSoon = () => {
+    if (langCloseTimer.current) clearTimeout(langCloseTimer.current);
+    langCloseTimer.current = setTimeout(() => setLangOpen(false), 150);
+  };
+
+  // Close the dropdown when clicking outside.
+  useEffect(() => {
+    if (!langOpen) return;
+    const handler = (e: MouseEvent) => {
+      if (langWrapperRef.current && !langWrapperRef.current.contains(e.target as Node)) {
+        setLangOpen(false);
+      }
+    };
+    document.addEventListener('mousedown', handler);
+    return () => document.removeEventListener('mousedown', handler);
+  }, [langOpen]);
 
   const navigateTo = (path: string) => {
     router.push(path);
@@ -62,21 +86,47 @@ export const AppShell: React.FC<{ children: React.ReactNode }> = ({ children }) 
           </div>
 
           <div className="flex items-center gap-4 sm:gap-8">
-            <div className="flex items-center gap-1 sm:gap-2 bg-gray-50 p-1 rounded-lg border border-gray-200 print:hidden">
-              <Globe size={16} className="text-gray-400 ml-1" />
-              {languages.map((lang) => (
-                <button
-                  key={lang.code}
-                  onClick={() => setLanguage(lang.code)}
-                  className={`px-2 py-1 text-[10px] sm:text-xs font-bold rounded uppercase transition-colors ${
-                    language === lang.code
-                      ? 'bg-brand-blue text-white shadow-sm'
-                      : 'text-gray-400 hover:text-brand-blue hover:bg-white'
-                  }`}
+            <div
+              ref={langWrapperRef}
+              onMouseEnter={openLang}
+              onMouseLeave={closeLangSoon}
+              className="relative print:hidden"
+            >
+              <button
+                type="button"
+                onClick={() => setLangOpen(o => !o)}
+                aria-haspopup="listbox"
+                aria-expanded={langOpen}
+                className="flex items-center gap-2 px-3 py-2 bg-gray-50 border border-gray-200 rounded-lg text-sm font-semibold text-gray-700 hover:text-brand-blue hover:border-brand-blue transition-colors"
+              >
+                <Globe size={14} className="text-gray-400" />
+                <span>{(languages.find(l => l.code === language) ?? languages[0]).label}</span>
+                <ChevronDown size={14} className={`transition-transform ${langOpen ? 'rotate-180' : ''}`} />
+              </button>
+
+              {langOpen && (
+                <ul
+                  role="listbox"
+                  className="absolute top-full right-0 mt-1 min-w-[10rem] bg-white border border-gray-200 rounded-lg shadow-lg overflow-hidden z-50"
                 >
-                  {lang.code}
-                </button>
-              ))}
+                  {languages
+                    .filter(l => l.code !== language)
+                    .map(lang => (
+                      <li key={lang.code}>
+                        <button
+                          type="button"
+                          onClick={() => {
+                            setLanguage(lang.code);
+                            setLangOpen(false);
+                          }}
+                          className="block w-full text-left px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50 hover:text-brand-blue"
+                        >
+                          {lang.label}
+                        </button>
+                      </li>
+                    ))}
+                </ul>
+              )}
             </div>
 
             <div className="hidden md:flex items-center gap-6 lg:gap-8 print:hidden">
