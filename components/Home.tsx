@@ -48,9 +48,10 @@ export const Home: React.FC<HomeProps> = ({ onStart, recentEn, recentIt, recentE
 
       {/* Hero — full viewport width; only the radial blue glow lives here */}
       <section className="relative w-full isolate overflow-hidden mb-12 sm:mb-20 snap-start scroll-mt-16 sm:scroll-mt-20 print:overflow-visible">
-        {/* Ambient atmosphere — radial glow only; the dot grid is page-wide above */}
+        {/* Ambient atmosphere — hero-specific glow + dot grid, identical to before */}
         <div aria-hidden="true" className="absolute inset-0 -z-10 print:hidden">
           <div className="absolute -top-40 left-1/2 -translate-x-1/2 w-[140vw] h-[800px] bg-[radial-gradient(ellipse_at_center,rgba(37,99,235,0.12),rgba(37,99,235,0.03)_45%,transparent_70%)] blur-2xl" />
+          <div className="absolute inset-0 [background-image:radial-gradient(circle,rgba(15,23,42,0.10)_1px,transparent_1px)] [background-size:22px_22px]" />
         </div>
 
         <div className="relative w-full max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
