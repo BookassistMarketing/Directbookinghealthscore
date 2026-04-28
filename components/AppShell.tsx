@@ -118,18 +118,19 @@ export const AppShell: React.FC<{ children: React.ReactNode }> = ({ children }) 
               ref={langWrapperRef}
               onMouseEnter={openLang}
               onMouseLeave={closeLangSoon}
-              className="relative hidden md:block print:hidden"
+              className="relative print:hidden"
             >
               <button
                 type="button"
                 onClick={() => setLangOpen(o => !o)}
                 aria-haspopup="listbox"
                 aria-expanded={langOpen}
-                className="flex items-center gap-2 px-3 py-2 bg-gray-50 border border-gray-200 rounded-lg text-sm font-semibold text-gray-700 hover:text-brand-blue hover:border-brand-blue transition-colors"
+                aria-label="Choose language"
+                className="flex items-center gap-2 px-2 md:px-3 py-2 bg-gray-50 border border-gray-200 rounded-lg text-sm font-semibold text-gray-700 hover:text-brand-blue hover:border-brand-blue transition-colors"
               >
-                <Globe size={14} className="text-gray-400" />
-                <span>{(languages.find(l => l.code === language) ?? languages[0]).label}</span>
-                <ChevronDown size={14} className={`transition-transform ${langOpen ? 'rotate-180' : ''}`} />
+                <Globe size={16} className="text-gray-500 md:size-[14px] md:text-gray-400" />
+                <span className="hidden md:inline">{(languages.find(l => l.code === language) ?? languages[0]).label}</span>
+                <ChevronDown size={14} className={`hidden md:inline-block transition-transform ${langOpen ? 'rotate-180' : ''}`} />
               </button>
 
               {langOpen && (
@@ -187,7 +188,7 @@ export const AppShell: React.FC<{ children: React.ReactNode }> = ({ children }) 
                 </button>
                 <button
                   onClick={() => navigateTo('/ai-visibility-audit')}
-                  className={`bg-brand-blue text-white px-3 lg:px-4 py-2 rounded-lg text-xs lg:text-sm font-medium hover:bg-blue-900 transition-colors shadow-sm whitespace-nowrap ${isActive('/ai-visibility-audit') ? 'ring-2 ring-blue-300' : ''}`}
+                  className={`bg-brand-success text-white px-3 lg:px-4 py-2 rounded-lg text-xs lg:text-sm font-medium hover:bg-teal-700 transition-colors shadow-sm whitespace-nowrap ${isActive('/ai-visibility-audit') ? 'ring-2 ring-teal-300' : ''}`}
                 >
                   {labels.aiAudit}
                 </button>
@@ -269,7 +270,7 @@ export const AppShell: React.FC<{ children: React.ReactNode }> = ({ children }) 
                 </button>
                 <button
                   onClick={() => navigateTo('/ai-visibility-audit')}
-                  className="w-full bg-brand-blue text-white px-4 py-4 rounded-xl text-lg font-medium shadow-md active:scale-[0.98] transition-transform"
+                  className="w-full bg-brand-success text-white px-4 py-4 rounded-xl text-lg font-medium shadow-md active:scale-[0.98] transition-transform"
                 >
                   {labels.aiAudit}
                 </button>
