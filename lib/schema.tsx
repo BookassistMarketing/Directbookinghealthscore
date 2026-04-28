@@ -10,7 +10,7 @@ export const organizationSchema = {
   contactPoint: {
     '@type': 'ContactPoint',
     contactType: 'customer support',
-    url: `${BASE_URL}/contact`,
+    url: 'https://bookassist.com/book-a-demo',
   },
 };
 
@@ -77,19 +77,6 @@ export const blogListingSchema = {
   description:
     'Weekly strategy and technology advice for hotels reducing OTA dependency and growing direct bookings.',
   publisher: {
-    '@type': 'Organization',
-    name: 'Bookassist',
-    url: 'https://bookassist.org',
-  },
-};
-
-export const contactPageSchema = {
-  '@context': 'https://schema.org',
-  '@type': 'ContactPage',
-  name: 'Contact Direct Booking Health Score',
-  url: `${BASE_URL}/contact`,
-  description: 'Contact the Bookassist team to learn how to grow your direct bookings.',
-  mainEntity: {
     '@type': 'Organization',
     name: 'Bookassist',
     url: 'https://bookassist.org',

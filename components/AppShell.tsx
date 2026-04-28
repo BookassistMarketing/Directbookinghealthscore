@@ -164,12 +164,14 @@ export const AppShell: React.FC<{ children: React.ReactNode }> = ({ children }) 
               >
                 Blog
               </button>
-              <button
-                onClick={() => navigateTo('/contact')}
-                className={`text-sm font-medium transition-colors ${isActive('/contact') ? 'text-brand-blue font-bold' : 'text-gray-500 hover:text-brand-blue'}`}
+              <a
+                href="https://bookassist.com/book-a-demo"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-sm font-medium transition-colors text-gray-500 hover:text-brand-blue"
               >
                 {labels.contact}
-              </button>
+              </a>
               <button
                 onClick={() => navigateTo('/hotel-audit')}
                 className="bg-brand-blue text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-blue-900 transition-colors shadow-sm"
@@ -205,12 +207,15 @@ export const AppShell: React.FC<{ children: React.ReactNode }> = ({ children }) 
               >
                 Blog
               </button>
-              <button
-                onClick={() => navigateTo('/contact')}
-                className={`text-left px-4 py-4 rounded-lg text-lg ${isActive('/contact') ? 'bg-blue-50 text-brand-blue font-semibold' : 'text-gray-700 hover:bg-gray-50'}`}
+              <a
+                href="https://bookassist.com/book-a-demo"
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={() => setIsMenuOpen(false)}
+                className="text-left px-4 py-4 rounded-lg text-lg text-gray-700 hover:bg-gray-50 block"
               >
                 {labels.contact}
-              </button>
+              </a>
               <button
                 onClick={() => navigateTo('/security')}
                 className={`text-left px-4 py-4 rounded-lg text-lg ${isActive('/security') ? 'bg-blue-50 text-brand-blue font-semibold' : 'text-gray-700 hover:bg-gray-50'}`}
@@ -286,12 +291,14 @@ export const AppShell: React.FC<{ children: React.ReactNode }> = ({ children }) 
             >
               Security & Privacy
             </button>
-            <button
-              onClick={() => navigateTo('/contact')}
+            <a
+              href="https://bookassist.com/book-a-demo"
+              target="_blank"
+              rel="noopener noreferrer"
               className="text-gray-400 hover:text-brand-blue transition-colors"
             >
               Contact Us
-            </button>
+            </a>
           </div>
         </div>
       </footer>
