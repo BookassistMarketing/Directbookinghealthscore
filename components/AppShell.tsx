@@ -90,7 +90,7 @@ export const AppShell: React.FC<{ children: React.ReactNode }> = ({ children }) 
               ref={langWrapperRef}
               onMouseEnter={openLang}
               onMouseLeave={closeLangSoon}
-              className="relative print:hidden"
+              className="relative hidden md:block print:hidden"
             >
               <button
                 type="button"
@@ -169,7 +169,7 @@ export const AppShell: React.FC<{ children: React.ReactNode }> = ({ children }) 
         </div>
 
         {isMenuOpen && (
-          <div className="md:hidden bg-white border-t border-gray-100 shadow-xl absolute w-full left-0 top-16 sm:top-20 z-40 h-[calc(100vh-4rem)] overflow-y-auto print:hidden">
+          <div className="md:hidden fixed inset-x-0 top-16 sm:top-20 bottom-0 z-40 bg-white border-t border-gray-100 shadow-xl overflow-y-auto print:hidden">
             <div className="px-4 py-6 space-y-3 flex flex-col pb-20">
               <button
                 onClick={() => navigateTo('/')}
@@ -195,6 +195,30 @@ export const AppShell: React.FC<{ children: React.ReactNode }> = ({ children }) 
               >
                 Security & Privacy
               </button>
+              <div className="pt-4 border-t border-gray-100 mt-2 space-y-3">
+                <p className="text-[10px] font-black text-gray-400 uppercase tracking-[0.2em] px-4 flex items-center gap-2">
+                  <Globe size={12} /> Language
+                </p>
+                <div className="grid grid-cols-2 gap-2">
+                  {languages.map(lang => (
+                    <button
+                      key={lang.code}
+                      onClick={() => {
+                        setLanguage(lang.code);
+                        setIsMenuOpen(false);
+                      }}
+                      className={`px-4 py-3 rounded-lg text-sm font-semibold transition-colors ${
+                        language === lang.code
+                          ? 'bg-brand-blue text-white shadow-sm'
+                          : 'bg-gray-50 text-gray-700 hover:bg-gray-100 border border-gray-200'
+                      }`}
+                    >
+                      {lang.label}
+                    </button>
+                  ))}
+                </div>
+              </div>
+
               <div className="pt-4 border-t border-gray-100 mt-2">
                 <button
                   onClick={() => navigateTo('/hotel-audit')}

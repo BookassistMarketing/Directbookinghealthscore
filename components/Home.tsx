@@ -164,8 +164,8 @@ const Heartbeat: React.FC = () => {
     'Q 918 212 924 202 ' +                            // soft turn up
     'L 940 50 ' +                                     // R wave — big spike up (further right)
     'Q 948 44 956 50 ' +                              // rounded apex
-    'L 972 240 ' +                                    // S wave — overshoot down
-    'Q 980 248 990 240 ' +                            // rounded bottom
+    'L 972 300 ' +                                    // S wave — overshoot down (deeper)
+    'Q 980 308 990 300 ' +                            // rounded bottom
     'L 1008 190 ' +                                   // return to baseline
     'L 1090 190 ' +                                   // flat after main complex
     'Q 1102 190 1108 178 ' +                          // T wave up
