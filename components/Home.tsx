@@ -241,20 +241,20 @@ const Heartbeat: React.FC = () => {
   // not in the subhead area. R-spike pushed deep into the right column dead space.
   const PATH_D =
     'M 0 190 ' +
-    'L 830 190 ' +                                    // flat baseline (underlines the heading)
-    'Q 842 190 848 198 ' +                            // soft turn into Q wave
-    'L 860 210 ' +
-    'Q 868 212 874 202 ' +                            // soft turn up
-    'L 890 30 ' +                                     // R wave — bigger + shifted left to centre dead space
-    'Q 898 22 906 30 ' +                              // rounded apex
-    'L 922 350 ' +                                    // S wave — deeper overshoot
-    'Q 930 360 940 350 ' +                            // rounded bottom
-    'L 958 190 ' +                                    // return to baseline
-    'L 1040 190 ' +                                   // flat after main complex
-    'Q 1052 190 1058 178 ' +                          // T wave up
-    'L 1070 168 ' +
-    'Q 1080 168 1086 180 ' +                          // T wave down
-    'L 1100 190 ' +
+    'L 760 190 ' +                                    // flat baseline (underlines the heading)
+    'Q 772 190 778 198 ' +                            // soft turn into Q wave
+    'L 790 210 ' +
+    'Q 798 212 804 202 ' +                            // soft turn up
+    'L 820 30 ' +                                     // R wave — spike happens sooner
+    'Q 828 22 836 30 ' +                              // rounded apex
+    'L 852 350 ' +                                    // S wave — deeper overshoot
+    'Q 860 360 870 350 ' +                            // rounded bottom
+    'L 888 190 ' +                                    // return to baseline
+    'L 970 190 ' +                                    // flat after main complex
+    'Q 982 190 988 178 ' +                            // T wave up
+    'L 1000 168 ' +
+    'Q 1010 168 1016 180 ' +                          // T wave down
+    'L 1030 190 ' +
     'L 1200 190';                                     // trail to right edge of container
 
   return (
