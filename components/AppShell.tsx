@@ -65,7 +65,13 @@ export const AppShell: React.FC<{ children: React.ReactNode }> = ({ children }) 
   const labels = headerLabels[language];
 
   return (
-    <div className="min-h-screen supports-[height:100dvh]:min-h-[100dvh] bg-[#F4F6F8] font-sans text-gray-900 flex flex-col print:bg-white print:h-auto print:min-h-0">
+    <div className="relative isolate min-h-screen supports-[height:100dvh]:min-h-[100dvh] bg-[#F4F6F8] font-sans text-gray-900 flex flex-col print:bg-white print:h-auto print:min-h-0">
+      {/* Site-wide dotted background — sits behind every page */}
+      <div
+        aria-hidden="true"
+        className="absolute inset-0 -z-10 pointer-events-none print:hidden [background-image:radial-gradient(circle,rgba(15,23,42,0.10)_1px,transparent_1px)] [background-size:22px_22px]"
+      />
+
       <header className="bg-white shadow-sm sticky top-0 z-50 border-b border-gray-200 print:static print:shadow-none print:border-b-2 print:border-brand-blue">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 sm:h-20 flex items-center justify-between">
           <div

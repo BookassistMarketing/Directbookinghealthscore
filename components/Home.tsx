@@ -113,21 +113,13 @@ export const Home: React.FC<HomeProps> = ({ onStart, recentEn, recentIt, recentE
   const l = labelsMap[language];
 
   return (
-    <div className="relative isolate w-full">
-      {/* Page-wide dot grid — sits behind every section on the home page.
-          isolate on the parent confines this -z-10 layer to the home root's
-          stacking context so it doesn't get pushed below the AppShell bg. */}
-      <div
-        aria-hidden="true"
-        className="absolute inset-0 -z-10 pointer-events-none print:hidden [background-image:radial-gradient(circle,rgba(15,23,42,0.10)_1px,transparent_1px)] [background-size:22px_22px]"
-      />
-
-      {/* Hero — full viewport width; only the radial blue glow lives here */}
+    <div className="relative w-full">
+      {/* Hero — full viewport width; only the radial blue glow lives here.
+          The dotted background is now provided site-wide by AppShell. */}
       <section data-snap-section className="relative w-full isolate overflow-hidden mb-12 sm:mb-20 snap-start scroll-mt-16 sm:scroll-mt-20 print:overflow-visible">
-        {/* Ambient atmosphere — hero-specific glow + dot grid, identical to before */}
+        {/* Ambient atmosphere — hero-specific radial glow only */}
         <div aria-hidden="true" className="absolute inset-0 -z-10 print:hidden">
           <div className="absolute -top-40 left-1/2 -translate-x-1/2 w-[140vw] h-[800px] bg-[radial-gradient(ellipse_at_center,rgba(37,99,235,0.12),rgba(37,99,235,0.03)_45%,transparent_70%)] blur-2xl" />
-          <div className="absolute inset-0 [background-image:radial-gradient(circle,rgba(15,23,42,0.10)_1px,transparent_1px)] [background-size:22px_22px]" />
         </div>
 
         <div className="relative w-full max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
