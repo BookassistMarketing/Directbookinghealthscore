@@ -41,7 +41,9 @@ export const Home: React.FC<HomeProps> = ({ onStart, recentEn, recentIt, recentE
           <div className="absolute inset-0 [background-image:radial-gradient(circle,rgba(15,23,42,0.10)_1px,transparent_1px)] [background-size:22px_22px]" />
         </div>
 
-        <div className="w-full max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="relative w-full max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+          {/* Heartbeat — anchored to the content wrapper so it starts at the heading's left edge */}
+          <Heartbeat />
           <div className="relative grid grid-cols-1 lg:grid-cols-12 gap-8 sm:gap-10 lg:gap-12 items-center min-h-[560px] py-6 sm:py-10 lg:py-14">
           {/* Left: copy column */}
           <div className="lg:col-span-7 space-y-7 sm:space-y-8 z-10">
@@ -88,9 +90,6 @@ export const Home: React.FC<HomeProps> = ({ onStart, recentEn, recentIt, recentE
             <div className="hidden lg:block lg:col-span-5" aria-hidden="true" />
           </div>
         </div>
-
-        {/* Heartbeat — ECG line that underlines the heading and spikes into the dead space */}
-        <Heartbeat />
       </section>
 
       <div className="w-full max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 pb-6 sm:pb-12">
