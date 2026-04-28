@@ -157,7 +157,7 @@ const Heartbeat: React.FC = () => {
   // Baseline y=190 sits at the bottom of the heading line (under "Potential"),
   // not in the subhead area. R-spike pushed deep into the right column dead space.
   const PATH_D =
-    'M 30 190 ' +
+    'M 0 190 ' +
     'L 880 190 ' +                                    // long flat baseline (underlines "Potential")
     'Q 892 190 898 198 ' +                            // soft turn into Q wave
     'L 910 210 ' +
