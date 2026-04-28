@@ -151,23 +151,25 @@ const Heartbeat: React.FC = () => {
   // We don't need exact precision; a number >= true length works for the dash trick.
   // Path uses small Q (quadratic Bezier) curves at each junction so the
   // corners feel soft like the logo's heartbeat icon, instead of sharp.
+  // Baseline y=190 sits at the bottom of the heading line (under "Potential"),
+  // not in the subhead area. R-spike pushed deep into the right column dead space.
   const PATH_D =
-    'M 30 300 ' +
-    'L 740 300 ' +                                    // flat baseline (underlines "Potential" line)
-    'Q 752 300 758 308 ' +                            // soft turn down into Q wave
-    'L 770 320 ' +
-    'Q 778 322 784 312 ' +                            // soft turn up
-    'L 800 90 ' +                                     // R wave — big spike up
-    'Q 808 84 816 90 ' +                              // rounded apex
-    'L 832 350 ' +                                    // S wave — overshoot down
-    'Q 840 358 850 350 ' +                            // rounded bottom
-    'L 868 300 ' +                                    // return to baseline
-    'L 980 300 ' +                                    // flat after main complex
-    'Q 994 300 1000 288 ' +                           // T wave up
-    'L 1014 278 ' +
-    'Q 1024 278 1030 290 ' +                          // T wave down
-    'L 1044 300 ' +
-    'L 1220 300';                                     // trail off right
+    'M 30 190 ' +
+    'L 880 190 ' +                                    // long flat baseline (underlines "Potential")
+    'Q 892 190 898 198 ' +                            // soft turn into Q wave
+    'L 910 210 ' +
+    'Q 918 212 924 202 ' +                            // soft turn up
+    'L 940 -20 ' +                                    // R wave — big spike up (further right)
+    'Q 948 -26 956 -20 ' +                            // rounded apex
+    'L 972 240 ' +                                    // S wave — overshoot down
+    'Q 980 248 990 240 ' +                            // rounded bottom
+    'L 1008 190 ' +                                   // return to baseline
+    'L 1090 190 ' +                                   // flat after main complex
+    'Q 1102 190 1108 178 ' +                          // T wave up
+    'L 1120 168 ' +
+    'Q 1130 168 1136 180 ' +                          // T wave down
+    'L 1150 190 ' +
+    'L 1220 190';                                     // trail off right
 
   return (
     <div
@@ -216,9 +218,8 @@ const Heartbeat: React.FC = () => {
             </feMerge>
           </filter>
           <linearGradient id="hb-grad" x1="0" y1="0" x2="1" y2="0">
-            <stop offset="0%" stopColor="#1E3A8A" />
-            <stop offset="50%" stopColor="#2563EB" />
-            <stop offset="100%" stopColor="#60A5FA" />
+            <stop offset="0%" stopColor="#0B1E47" />
+            <stop offset="100%" stopColor="#1E3A8A" />
           </linearGradient>
         </defs>
 
@@ -226,7 +227,7 @@ const Heartbeat: React.FC = () => {
         <path
           d={PATH_D}
           fill="none"
-          stroke="#2563EB"
+          stroke="#1E3A8A"
           strokeWidth="2"
           strokeLinecap="round"
           strokeLinejoin="round"
@@ -251,7 +252,7 @@ const Heartbeat: React.FC = () => {
       {/* The "pen" of the monitor — bright dot riding along the path. */}
       <div className="absolute inset-0">
         <svg viewBox="0 0 1200 400" preserveAspectRatio="none" className="w-full h-full">
-          <circle r="6" fill="#2563EB" filter="url(#hb-glow)" className="hb-dot" />
+          <circle r="6" fill="#0B1E47" filter="url(#hb-glow)" className="hb-dot" />
         </svg>
       </div>
     </div>
