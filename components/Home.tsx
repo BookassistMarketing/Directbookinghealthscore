@@ -21,15 +21,17 @@ export const Home: React.FC<HomeProps> = ({ onStart, recentEn, recentIt, recentE
   const { language } = useContent();
 
   // Scroll-snap: enable section-by-section snapping on the home page only.
-  // Set the CSS property directly on <html> rather than via a class, because
-  // Tailwind only compiles utilities it sees in source files at build time —
-  // classes added at runtime would have no matching CSS rule.
+  // Inject a real stylesheet rule (rather than a runtime style attribute)
+  // so it wins the cascade against any user-agent / framework defaults
+  // and applies to whichever element is the actual scroll container.
   useEffect(() => {
-    const html = document.documentElement;
-    const previous = html.style.scrollSnapType;
-    html.style.scrollSnapType = 'y mandatory';
+    const style = document.createElement('style');
+    style.setAttribute('data-home-snap', '');
+    style.textContent =
+      'html, body { scroll-snap-type: y mandatory; scroll-behavior: smooth; }';
+    document.head.appendChild(style);
     return () => {
-      html.style.scrollSnapType = previous;
+      style.remove();
     };
   }, []);
 
