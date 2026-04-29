@@ -3,7 +3,7 @@
 import React, { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { Button } from './Button';
-import { ShieldCheck, BarChart2, Globe, Zap } from 'lucide-react';
+import { ShieldCheck, BarChart2, Globe, Zap, RotateCw } from 'lucide-react';
 import { EditableText } from './Editable';
 import { RecentBlogs } from './RecentBlogs';
 import { useContent } from '../contexts/ContentContext';
@@ -27,6 +27,10 @@ export const Home: React.FC<HomeProps> = ({ onStart, recentEn, recentIt, recentE
   const router = useRouter();
   const [hbActive, setHbActive] = useState(false);
   const [hbKey, setHbKey] = useState(0);
+  const [flipped, setFlipped] = useState([false, false, false, false]);
+
+  const toggleCard = (i: number) =>
+    setFlipped(f => f.map((v, j) => (j === i ? !v : v)));
 
   const labelsMap: Record<Language, any> = {
     en: { eyebrow: 'Hotel Tech Diagnostics', trustMicro: 'Free • 3 minutes', title: 'Maximise Your <span class="text-brand-blue">Digital Revenue</span> Potential', subtitle: "The Direct Booking Health Score is the industry standard for assessing hospitality technology infrastructure. We analyse your <strong>Direct Booking Strategy</strong>, <strong>Metasearch Connectivity</strong>, and <strong>Marketing ROI</strong> to identify critical performance gaps.", cta: "Launch Free Tech Audit", cta1: "Launch Hotel Tech Audit", cta2: "Launch AI Visibility Audit", f1t: "Secure Your Data", f1d: "In an era of privacy-first browsing, legacy tracking destroys attribution. Our audit checks for <strong>GA4 implementation</strong> and <strong>First-Party Data compliance</strong>.", f2t: "Dominate Metasearch", f2d: "Are you bidding on parity-loss dates? <strong>Metasearch Optimisation</strong> requires granular inventory management and real-time rate parity checks.", f3t: "High-Conversion Engines", f3d: "Friction kills conversion. From <strong>Digital Wallets</strong> to dynamic multi-currency, modern travellers demand a seamless experience.", f4t: "AI-Driven Personalisation", f4d: "Leverage <strong>Predictive Analytics</strong> and <strong>Dynamic Content Personalisation</strong> to serve the right offer to the right guest.", bt: "Ready to diagnose your digital health?", bd: "Join thousands of hoteliers optimising their revenue strategy. The audit takes less than 3 minutes.", bcta: "Start Assessment Now" },
@@ -119,8 +123,7 @@ export const Home: React.FC<HomeProps> = ({ onStart, recentEn, recentIt, recentE
             transition: transform 0.6s cubic-bezier(0.22, 0.61, 0.36, 1);
             transform-style: preserve-3d;
           }
-          .flip-card:hover .flip-card-inner,
-          .flip-card:focus-within .flip-card-inner { transform: rotateY(180deg); }
+          .flip-card.is-flipped .flip-card-inner { transform: rotateY(180deg); }
           .flip-card-face {
             position: absolute;
             inset: 0;
@@ -129,56 +132,40 @@ export const Home: React.FC<HomeProps> = ({ onStart, recentEn, recentIt, recentE
             border-radius: 1rem;
           }
           .flip-card-back { transform: rotateY(180deg); }
-          @media (prefers-reduced-motion: reduce) { .flip-card-inner { transition: none; } }
+          @keyframes flip-hint { 0%,100% { transform: rotate(0deg); } 60% { transform: rotate(180deg); } }
+          .flip-hint { animation: flip-hint 2.8s ease-in-out infinite; }
+          @media (prefers-reduced-motion: reduce) { .flip-card-inner { transition: none; } .flip-hint { animation: none; } }
         `}</style>
 
-        <div className="flip-card relative min-h-[240px] sm:min-h-[260px] break-inside-avoid">
-          <div className="flip-card-inner">
-            <div className="flip-card-face flip-card-front bg-white p-6 sm:p-10 shadow-sm border border-gray-100 flex flex-col items-center justify-center text-center">
-              <div className="w-16 h-16 sm:w-20 sm:h-20 bg-blue-50 rounded-2xl flex items-center justify-center mb-5"><ShieldCheck className="w-8 h-8 sm:w-10 sm:h-10 text-brand-blue" /></div>
-              <EditableText id="home.feat1.title" as="h3" defaultText={l.f1t} className="text-xl sm:text-2xl lg:text-3xl font-bold text-gray-900 leading-tight" />
-            </div>
-            <div className="flip-card-face flip-card-back bg-brand-blue text-white p-5 sm:p-8 shadow-md flex items-center">
-              <EditableText id="home.feat1.desc" as="p" multiline defaultText={l.f1d} className="text-base sm:text-lg text-blue-50 leading-relaxed" />
-            </div>
-          </div>
-        </div>
-
-        <div className="flip-card relative min-h-[240px] sm:min-h-[260px] break-inside-avoid">
-          <div className="flip-card-inner">
-            <div className="flip-card-face flip-card-front bg-white p-6 sm:p-10 shadow-sm border border-gray-100 flex flex-col items-center justify-center text-center">
-              <div className="w-16 h-16 sm:w-20 sm:h-20 bg-teal-50 rounded-2xl flex items-center justify-center mb-5"><Globe className="w-8 h-8 sm:w-10 sm:h-10 text-brand-success" /></div>
-              <EditableText id="home.feat2.title" as="h3" defaultText={l.f2t} className="text-xl sm:text-2xl lg:text-3xl font-bold text-gray-900 leading-tight" />
-            </div>
-            <div className="flip-card-face flip-card-back bg-brand-blue text-white p-5 sm:p-8 shadow-md flex items-center">
-              <EditableText id="home.feat2.desc" as="p" multiline defaultText={l.f2d} className="text-base sm:text-lg text-blue-50 leading-relaxed" />
-            </div>
-          </div>
-        </div>
-
-        <div className="flip-card relative min-h-[240px] sm:min-h-[260px] break-inside-avoid">
-          <div className="flip-card-inner">
-            <div className="flip-card-face flip-card-front bg-white p-6 sm:p-10 shadow-sm border border-gray-100 flex flex-col items-center justify-center text-center">
-              <div className="w-16 h-16 sm:w-20 sm:h-20 bg-indigo-50 rounded-2xl flex items-center justify-center mb-5"><Zap className="w-8 h-8 sm:w-10 sm:h-10 text-indigo-600" /></div>
-              <EditableText id="home.feat3.title" as="h3" defaultText={l.f3t} className="text-xl sm:text-2xl lg:text-3xl font-bold text-gray-900 leading-tight" />
-            </div>
-            <div className="flip-card-face flip-card-back bg-brand-blue text-white p-5 sm:p-8 shadow-md flex items-center">
-              <EditableText id="home.feat3.desc" as="p" multiline defaultText={l.f3d} className="text-base sm:text-lg text-blue-50 leading-relaxed" />
+        {[
+          { id: 'feat1', icon: <ShieldCheck className="w-8 h-8 sm:w-10 sm:h-10 text-brand-blue" />, iconBg: 'bg-blue-50', titleKey: 'home.feat1.title', titleText: l.f1t, descKey: 'home.feat1.desc', descText: l.f1d },
+          { id: 'feat2', icon: <Globe className="w-8 h-8 sm:w-10 sm:h-10 text-brand-success" />, iconBg: 'bg-teal-50', titleKey: 'home.feat2.title', titleText: l.f2t, descKey: 'home.feat2.desc', descText: l.f2d },
+          { id: 'feat3', icon: <Zap className="w-8 h-8 sm:w-10 sm:h-10 text-indigo-600" />, iconBg: 'bg-indigo-50', titleKey: 'home.feat3.title', titleText: l.f3t, descKey: 'home.feat3.desc', descText: l.f3d },
+          { id: 'feat4', icon: <BarChart2 className="w-8 h-8 sm:w-10 sm:h-10 text-brand-accent" />, iconBg: 'bg-rose-50', titleKey: 'home.feat4.title', titleText: l.f4t, descKey: 'home.feat4.desc', descText: l.f4d },
+        ].map((card, i) => (
+          <div
+            key={card.id}
+            className={`flip-card relative min-h-[240px] sm:min-h-[260px] break-inside-avoid cursor-pointer${flipped[i] ? ' is-flipped' : ''}`}
+            onClick={() => toggleCard(i)}
+            role="button"
+            tabIndex={0}
+            onKeyDown={e => (e.key === 'Enter' || e.key === ' ') && toggleCard(i)}
+            aria-pressed={flipped[i]}
+          >
+            <div className="flip-card-inner">
+              <div className="flip-card-face flip-card-front bg-white p-6 sm:p-10 shadow-sm border border-gray-100 flex flex-col items-center justify-center text-center">
+                <div className={`w-16 h-16 sm:w-20 sm:h-20 ${card.iconBg} rounded-2xl flex items-center justify-center mb-5`}>{card.icon}</div>
+                <EditableText id={`home.${card.id}.title`} as="h3" defaultText={card.titleText} className="text-xl sm:text-2xl lg:text-3xl font-bold text-gray-900 leading-tight" />
+                <div className="absolute bottom-4 right-4 text-gray-300">
+                  <RotateCw size={16} className="flip-hint" />
+                </div>
+              </div>
+              <div className="flip-card-face flip-card-back bg-brand-blue text-white p-5 sm:p-8 shadow-md flex items-center">
+                <EditableText id={`home.${card.id}.desc`} as="p" multiline defaultText={card.descText} className="text-base sm:text-lg text-blue-50 leading-relaxed" />
+              </div>
             </div>
           </div>
-        </div>
-
-        <div className="flip-card relative min-h-[240px] sm:min-h-[260px] break-inside-avoid">
-          <div className="flip-card-inner">
-            <div className="flip-card-face flip-card-front bg-white p-6 sm:p-10 shadow-sm border border-gray-100 flex flex-col items-center justify-center text-center">
-              <div className="w-16 h-16 sm:w-20 sm:h-20 bg-rose-50 rounded-2xl flex items-center justify-center mb-5"><BarChart2 className="w-8 h-8 sm:w-10 sm:h-10 text-brand-accent" /></div>
-              <EditableText id="home.feat4.title" as="h3" defaultText={l.f4t} className="text-xl sm:text-2xl lg:text-3xl font-bold text-gray-900 leading-tight" />
-            </div>
-            <div className="flip-card-face flip-card-back bg-brand-blue text-white p-5 sm:p-8 shadow-md flex items-center">
-              <EditableText id="home.feat4.desc" as="p" multiline defaultText={l.f4d} className="text-base sm:text-lg text-blue-50 leading-relaxed" />
-            </div>
-          </div>
-        </div>
+        ))}
       </section>
 
       <section>
