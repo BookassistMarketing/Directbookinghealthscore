@@ -132,8 +132,8 @@ export const Home: React.FC<HomeProps> = ({ onStart, recentEn, recentIt, recentE
             border-radius: 1rem;
           }
           .flip-card-back { transform: rotateY(180deg); }
-          @keyframes flip-hint { 0%,100% { transform: rotate(0deg); } 60% { transform: rotate(180deg); } }
-          .flip-hint { animation: flip-hint 2.8s ease-in-out infinite; }
+          @keyframes flip-hint { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+          .flip-hint { animation: flip-hint 0.65s ease-in-out 2; }
           @media (prefers-reduced-motion: reduce) { .flip-card-inner { transition: none; } .flip-hint { animation: none; } }
         `}</style>
 
@@ -156,9 +156,11 @@ export const Home: React.FC<HomeProps> = ({ onStart, recentEn, recentIt, recentE
               <div className="flip-card-face flip-card-front bg-white p-6 sm:p-10 shadow-sm border border-gray-100 flex flex-col items-center justify-center text-center">
                 <div className={`w-16 h-16 sm:w-20 sm:h-20 ${card.iconBg} rounded-2xl flex items-center justify-center mb-5`}>{card.icon}</div>
                 <EditableText id={`home.${card.id}.title`} as="h3" defaultText={card.titleText} className="text-xl sm:text-2xl lg:text-3xl font-bold text-gray-900 leading-tight" />
-                <div className="absolute bottom-4 right-4 text-gray-300">
-                  <RotateCw size={16} className="flip-hint" />
-                </div>
+                {!flipped[i] && (
+                  <div className="absolute bottom-4 right-4 text-gray-300">
+                    <RotateCw size={16} className="flip-hint" style={{ animationDelay: `${0.6 + i * 0.35}s` }} />
+                  </div>
+                )}
               </div>
               <div className="flip-card-face flip-card-back bg-brand-blue text-white p-5 sm:p-8 shadow-md flex items-center">
                 <EditableText id={`home.${card.id}.desc`} as="p" multiline defaultText={card.descText} className="text-base sm:text-lg text-blue-50 leading-relaxed" />
