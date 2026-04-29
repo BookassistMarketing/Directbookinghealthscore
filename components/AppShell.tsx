@@ -2,7 +2,7 @@
 
 import React, { useEffect, useRef, useState } from 'react';
 import { useRouter, usePathname } from 'next/navigation';
-import { Activity, Menu, X, Globe, ArrowUpRight, ChevronDown } from 'lucide-react';
+import { Activity, Menu, X, Globe, ArrowUpRight, ChevronDown, Home } from 'lucide-react';
 import { EditableText } from './Editable';
 import { CookieBanner } from './CookieBanner';
 import { useContent } from '../contexts/ContentContext';
@@ -175,9 +175,10 @@ export const AppShell: React.FC<{ children: React.ReactNode }> = ({ children }) 
             <div className="hidden md:flex items-center gap-4 lg:gap-6 print:hidden">
               <button
                 onClick={() => navigateTo('/')}
-                className={`hidden lg:block text-sm font-medium transition-colors ${isActive('/') ? 'text-brand-blue font-bold' : 'text-gray-500 hover:text-brand-blue'}`}
+                aria-label="Home"
+                className={`hidden lg:flex items-center justify-center p-1.5 rounded-md transition-colors ${isActive('/') ? 'text-brand-blue' : 'text-gray-500 hover:text-brand-blue'}`}
               >
-                Home
+                <Home size={18} />
               </button>
               <button
                 onClick={() => navigateTo('/blog')}
@@ -226,9 +227,10 @@ export const AppShell: React.FC<{ children: React.ReactNode }> = ({ children }) 
             <div className="px-4 py-6 space-y-3 flex flex-col pb-20">
               <button
                 onClick={() => navigateTo('/')}
-                className={`text-left px-4 py-4 rounded-lg text-lg ${isActive('/') ? 'bg-blue-50 text-brand-blue font-semibold' : 'text-gray-700 hover:bg-gray-50'}`}
+                aria-label="Home"
+                className={`flex items-center justify-center px-4 py-4 rounded-lg ${isActive('/') ? 'bg-blue-50 text-brand-blue' : 'text-gray-700 hover:bg-gray-50'}`}
               >
-                Home
+                <Home size={22} />
               </button>
               <button
                 onClick={() => navigateTo('/blog')}

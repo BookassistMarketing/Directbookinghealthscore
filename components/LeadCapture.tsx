@@ -20,7 +20,7 @@ export const LeadCapture: React.FC<LeadCaptureProps> = ({ onUnlock }) => {
       title: "Your Score is Ready. Now, Get the Strategy.",
       subtitle: "To unlock your custom AI Strategic Assessment and download your full report, please confirm your details below.",
       benefit1: "Full breakdown of revenue leaks",
-      benefit2: "Prioritized technical repairs",
+      benefit2: "Prioritised technical repairs",
       benefit3: "AI strategic roadmap",
       loading: "Connecting to Audit Portal...",
       bypass: "Bypass Lock (Diagnostic Mode)"
