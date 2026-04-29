@@ -222,8 +222,8 @@ const Heartbeat: React.FC = () => {
   // the line under the words instead of cutting through them.
   const baselineByLanguage: Record<Language, number> = {
     en: 230,
-    it: 240,
-    es: 240,
+    it: 190,
+    es: 190,
     pl: 230,
     fr: 230,
     de: 230,
