@@ -1,3 +1,24 @@
+# Handoff — Session 2026-04-29
+
+**Status:** All shipped and live on main.
+
+## Changes Made This Session
+
+### 1. AI Visibility Audit — HubSpot lead gate (`components/AiAudit.tsx`)
+Flow changed from `URL → report` to `URL → HubSpot form → report`.
+After the user enters a valid URL, the `LeadCapture` modal (same as hotel audit) appears. On HubSpot form submission, the Gemini analysis runs and the report renders. The `generateAiReadinessReport` API call was split into a separate `runAnalysis()` function that `LeadCapture.onUnlock` triggers.
+
+### 2. AI logo on home CTA button (`components/Home.tsx`, `public/ai-logo.svg`)
+Replaced the `<Sparkles>` Lucide icon next to "Launch AI Visibility Audit" with the Bookassist AI logo SVG (`/Users/danielbarniville/Downloads/AI - Logo.svg` → copied to `public/ai-logo.svg`). Rendered as `<img src="/ai-logo.svg" width={22} height={22}>`.
+
+### 3. Heartbeat animation — hover-only (`components/Home.tsx`)
+The ECG heartbeat trace now only animates when the mouse is over the hero section. Uses React state (`hbActive`, `hbKey`) with `onMouseEnter/onMouseLeave` on the hero `<section>`. The `hbKey` counter increments on each hover entry, causing the path elements to remount (via `key` prop) so the trace always restarts from the beginning rather than continuing from a paused mid-state.
+
+### 4. Feature cards — click to flip with hint (`components/Home.tsx`)
+Cards changed from hover-triggered flip to click-triggered. Each card has its own `flipped[i]` state (array of 4 booleans). A `RotateCw` icon in the bottom-right corner of each front face spins twice on mount (staggered 0.6s + 0.35s × index delay) to hint that the card is interactive. The icon is hidden once the card is flipped.
+
+---
+
 # Handoff — CloudFront Stale Cache Bug
 
 **Date:** 2026-04-22
