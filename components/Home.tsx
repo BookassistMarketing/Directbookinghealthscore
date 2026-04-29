@@ -3,7 +3,7 @@
 import React from 'react';
 import { useRouter } from 'next/navigation';
 import { Button } from './Button';
-import { ShieldCheck, BarChart2, Globe, Zap, Sparkles } from 'lucide-react';
+import { ShieldCheck, BarChart2, Globe, Zap } from 'lucide-react';
 import { EditableText } from './Editable';
 import { RecentBlogs } from './RecentBlogs';
 import { useContent } from '../contexts/ContentContext';
@@ -90,7 +90,7 @@ export const Home: React.FC<HomeProps> = ({ onStart, recentEn, recentIt, recentE
                 onClick={() => router.push(`${localePrefix(language)}/ai-visibility-audit`)}
                 className="group inline-flex items-center justify-center gap-2 bg-brand-success text-white px-7 py-4 rounded-full text-sm font-black uppercase tracking-widest shadow-xl hover:shadow-2xl hover:-translate-y-0.5 transition-all w-full sm:w-auto"
               >
-                <Sparkles size={16} className="transition-transform group-hover:scale-110" />
+                <img src="/ai-logo.svg" alt="" width={18} height={18} className="flex-shrink-0 transition-transform group-hover:scale-110" />
                 <EditableText id="home.hero.cta2" defaultText={l.cta2} as="span" />
               </button>
             </div>

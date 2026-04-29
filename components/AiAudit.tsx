@@ -7,13 +7,14 @@ import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 import { Button } from './Button';
 import { ConsentModal, ConsentDeclinedScreen } from './ConsentModal';
+import { LeadCapture } from './LeadCapture';
 import { useContent } from '../contexts/ContentContext';
 import { Language } from '../types';
 import { generateAiReadinessReport } from '../services/aiService';
 
 const CONSENT_KEY = 'hhc_gemini_consent';
 
-type ViewState = 'idle' | 'loading' | 'done';
+type ViewState = 'idle' | 'form_gate' | 'loading' | 'done';
 
 const labelsMap: Record<Language, {
   eyebrow: string;
@@ -203,7 +204,7 @@ export const AiAudit: React.FC = () => {
   const handleConsentReconsider = () => setConsentDeclined(false);
   const handleConsentGoHome = () => router.push('/');
 
-  const submit = async (e: React.FormEvent) => {
+  const submit = (e: React.FormEvent) => {
     e.preventDefault();
     setUrlError(null);
     setRequestError(null);
@@ -215,12 +216,14 @@ export const AiAudit: React.FC = () => {
     }
 
     setAuditedUrl(normalised);
+    setView('form_gate');
+  };
+
+  const runAnalysis = async () => {
     setView('loading');
-
     const formAgeMs = Date.now() - formRenderedAt.current;
-
     try {
-      const result = await generateAiReadinessReport(normalised, language, {
+      const result = await generateAiReadinessReport(auditedUrl, language, {
         honeypot,
         formAgeMs,
       });
@@ -255,6 +258,10 @@ export const AiAudit: React.FC = () => {
     <div className="w-full max-w-4xl mx-auto px-4 py-6 sm:py-12 lg:px-8">
       {consentChecked && !consentAccepted && (
         <ConsentModal onAccept={handleConsentAccept} onDecline={handleConsentDecline} />
+      )}
+
+      {view === 'form_gate' && (
+        <LeadCapture onUnlock={runAnalysis} />
       )}
 
       {view === 'idle' && (
