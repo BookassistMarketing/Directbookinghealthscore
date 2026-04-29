@@ -214,27 +214,41 @@ export const Home: React.FC<HomeProps> = ({ onStart, recentEn, recentIt, recentE
  * (visually the right column on lg+). A small T-wave bump follows.
  */
 const Heartbeat: React.FC = () => {
-  // Spike fires at a fixed X position in the right-column dead space so it
-  // looks the same in every language. Baseline y=230 sits below the heading
-  // even when the title wraps to 2 lines (e.g. German "digitales
-  // Umsatzpotenzial"), avoiding the line cutting through the words.
+  const { language } = useContent();
+  // Spike X position is fixed (right-column dead space) so it looks the same
+  // in every language. Baseline Y is per-language because Italian and Spanish
+  // titles wrap with a trailing word (Digitale / Digitales) at the row where
+  // the default baseline sits — pushing baseline down for those locales keeps
+  // the line under the words instead of cutting through them.
+  const baselineByLanguage: Record<Language, number> = {
+    en: 230,
+    it: 290,
+    es: 290,
+    pl: 230,
+    fr: 230,
+    de: 230,
+    cs: 230,
+  };
+  const b = baselineByLanguage[language] ?? 230;
+  const s = b - 230; // shift applied to all spike y-coordinates
+
   const PATH_D =
-    'M 0 230 ' +
-    'L 760 230 ' +                                    // flat baseline (sits under the heading area)
-    'Q 772 230 778 238 ' +                            // soft turn into Q wave
-    'L 790 250 ' +
-    'Q 798 252 804 242 ' +                            // soft turn up
-    'L 820 70 ' +                                     // R wave (R-peak fires in dead space centre)
-    'Q 828 62 836 70 ' +                              // rounded apex
-    'L 852 390 ' +                                    // S wave deep overshoot
-    'Q 860 400 870 390 ' +                            // rounded bottom
-    'L 888 230 ' +                                    // return to baseline
-    'L 970 230 ' +                                    // flat after main complex
-    'Q 982 230 988 218 ' +                            // T wave up
-    'L 1000 208 ' +
-    'Q 1010 208 1016 220 ' +                          // T wave down
-    'L 1030 230 ' +
-    'L 1200 230';                                     // trail to right edge of container
+    `M 0 ${b} ` +
+    `L 760 ${b} ` +                                  // flat baseline
+    `Q 772 ${b} 778 ${238 + s} ` +                   // soft turn into Q wave
+    `L 790 ${250 + s} ` +
+    `Q 798 ${252 + s} 804 ${242 + s} ` +             // soft turn up
+    `L 820 ${70 + s} ` +                             // R wave (peak in dead space centre)
+    `Q 828 ${62 + s} 836 ${70 + s} ` +               // rounded apex
+    `L 852 ${390 + s} ` +                            // S wave deep overshoot
+    `Q 860 ${400 + s} 870 ${390 + s} ` +             // rounded bottom
+    `L 888 ${b} ` +                                  // return to baseline
+    `L 970 ${b} ` +                                  // flat after main complex
+    `Q 982 ${b} 988 ${218 + s} ` +                   // T wave up
+    `L 1000 ${208 + s} ` +
+    `Q 1010 ${208 + s} 1016 ${220 + s} ` +           // T wave down
+    `L 1030 ${b} ` +
+    `L 1200 ${b}`;                                   // trail to right edge
 
   return (
     <div
