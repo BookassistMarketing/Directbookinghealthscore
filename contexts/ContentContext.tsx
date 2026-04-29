@@ -63,6 +63,10 @@ export const ContentProvider: React.FC<{ children: React.ReactNode }> = ({ child
     if (lang === language) return;
     if (typeof window !== 'undefined') {
       localStorage.setItem('hhc_lang', lang);
+      // Set a cookie so the Accept-Language middleware respects this explicit
+      // choice on future visits and doesn't auto-redirect back. 1-year expiry.
+      const oneYear = 60 * 60 * 24 * 365;
+      document.cookie = `hhc_locale=${lang}; path=/; max-age=${oneYear}; samesite=lax`;
     }
     // Navigate to the locale-equivalent URL — this triggers a re-render with
     // server-side rendered content for the new locale, which is what crawlers
