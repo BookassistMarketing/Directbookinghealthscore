@@ -11,7 +11,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "tsc --noEmit"
+    "lint": "tsc --noEmit && node scripts/check-no-secret-leaks.mjs",
+    "lint:secrets": "node scripts/check-no-secret-leaks.mjs"
   },
   "dependencies": {
     "@google/genai": "^1.30.0",
@@ -30,5 +31,8 @@
     "@types/react": "^19.0.0",
     "@types/react-dom": "^19.0.0",
     "typescript": "~5.8.2"
+  },
+  "overrides": {
+    "postcss": "^8.5.10"
   }
 }
