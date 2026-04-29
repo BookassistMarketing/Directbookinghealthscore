@@ -4,6 +4,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import { useRouter, usePathname } from 'next/navigation';
 import { Activity, Menu, X, Globe, ArrowUpRight, ChevronDown } from 'lucide-react';
 import { EditableText } from './Editable';
+import { CookieBanner } from './CookieBanner';
 import { useContent } from '../contexts/ContentContext';
 import { Language } from '../types';
 
@@ -336,6 +337,8 @@ export const AppShell: React.FC<{ children: React.ReactNode }> = ({ children }) 
           </div>
         </div>
       </footer>
+
+      <CookieBanner />
     </div>
   );
 };
