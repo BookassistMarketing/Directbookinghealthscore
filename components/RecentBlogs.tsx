@@ -5,6 +5,7 @@ import Link from 'next/link';
 import { ArrowRight, Calendar, BookOpen } from 'lucide-react';
 import { useContent } from '../contexts/ContentContext';
 import { Language } from '../types';
+import { localePrefix } from '../lib/i18n';
 import type { BlogPostMeta } from '../lib/blog';
 
 interface RecentBlogsProps {
@@ -125,7 +126,7 @@ export const RecentBlogs: React.FC<RecentBlogsProps> = ({
         {posts.map(post => (
           <Link
             key={post.slug}
-            href={`/blog/${post.slug}`}
+            href={`${localePrefix(language)}/blog/${post.slug}`}
             className="group text-left bg-white rounded-[24px] shadow-md border border-gray-100 overflow-hidden hover:shadow-xl hover:-translate-y-1 transition-all duration-200 flex flex-col"
           >
             {post.image && (
@@ -156,7 +157,7 @@ export const RecentBlogs: React.FC<RecentBlogsProps> = ({
 
       <div className="text-center">
         <Link
-          href="/blog"
+          href={`${localePrefix(language)}/blog`}
           className="inline-flex items-center gap-2 text-brand-blue font-black text-sm uppercase tracking-widest hover:gap-3 transition-all"
         >
           {l.viewAll} <ArrowRight size={16} />

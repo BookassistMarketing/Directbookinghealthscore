@@ -2,6 +2,8 @@
 
 import { useRouter } from 'next/navigation';
 import { Home } from './Home';
+import { useContent } from '../contexts/ContentContext';
+import { localePrefix } from '../lib/i18n';
 import type { BlogPostMeta } from '../lib/blog';
 
 interface HomeClientProps {
@@ -16,9 +18,10 @@ interface HomeClientProps {
 
 export function HomeClient({ recentEn, recentIt, recentEs, recentPl, recentFr, recentDe, recentCs }: HomeClientProps) {
   const router = useRouter();
+  const { language } = useContent();
   return (
     <Home
-      onStart={() => router.push('/hotel-audit')}
+      onStart={() => router.push(`${localePrefix(language)}/hotel-audit`)}
       recentEn={recentEn}
       recentIt={recentIt}
       recentEs={recentEs}

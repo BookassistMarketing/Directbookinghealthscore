@@ -2,12 +2,13 @@ import type { Metadata } from 'next';
 import { HomeClient } from '../components/HomeClient';
 import { JsonLd, organizationSchema, webSiteSchema } from '../lib/schema';
 import { getAllPosts } from '../lib/blog';
+import { buildHreflang, canonicalFor } from '../lib/i18n';
 
 export const metadata: Metadata = {
   title: 'Direct Booking Health Score | Free Hotel Tech Audit',
   description:
     'The industry standard hotel technology audit. Assess your direct booking strategy, metasearch connectivity, and marketing ROI in under 3 minutes.',
-  alternates: { canonical: 'https://directbookinghealthscore.com' },
+  alternates: { canonical: canonicalFor('en', '/'), languages: buildHreflang('/') },
   openGraph: {
     title: 'Direct Booking Health Score | Free Hotel Tech Audit',
     description:

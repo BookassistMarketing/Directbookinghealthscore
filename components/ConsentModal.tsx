@@ -5,6 +5,7 @@ import Link from 'next/link';
 import { ShieldCheck, AlertCircle } from 'lucide-react';
 import { useContent } from '../contexts/ContentContext';
 import { Language } from '../types';
+import { localePrefix } from '../lib/i18n';
 import { Button } from './Button';
 
 interface ConsentModalProps {
@@ -94,7 +95,7 @@ export const ConsentModal: React.FC<ConsentModalProps> = ({ onAccept, onDecline 
         <p className="text-sm sm:text-base text-gray-600 leading-relaxed mb-4">{l.body}</p>
 
         <Link
-          href="/security"
+          href={`${localePrefix(language)}/security`}
           className="inline-block text-xs text-brand-blue underline hover:no-underline mb-6"
         >
           {l.learnMore}

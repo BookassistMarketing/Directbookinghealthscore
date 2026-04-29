@@ -1,12 +1,13 @@
 import type { Metadata } from 'next';
 import { AuditTool } from '../../components/AuditTool';
 import { JsonLd, softwareApplicationSchema, serviceSchema } from '../../lib/schema';
+import { buildHreflang, canonicalFor } from '../../lib/i18n';
 
 export const metadata: Metadata = {
   title: 'Hotel Direct Booking Audit Tool | Direct Booking Health Score',
   description:
     'Free AI-powered hotel technology audit. Answer 20 questions about your booking engine, metasearch, CRM, and analytics to get an instant scored report.',
-  alternates: { canonical: 'https://directbookinghealthscore.com/hotel-audit' },
+  alternates: { canonical: canonicalFor('en', '/hotel-audit'), languages: buildHreflang('/hotel-audit') },
   openGraph: {
     title: 'Hotel Direct Booking Audit Tool',
     description:

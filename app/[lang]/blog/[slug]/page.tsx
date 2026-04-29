@@ -1,33 +1,35 @@
 import type { Metadata } from 'next';
-import { getAllPostSlugs, getPostContent } from '../../../lib/blog';
-import { BlogPostClientPage } from '../../../components/BlogPostClientPage';
-import { JsonLd, articleSchema, breadcrumbSchema } from '../../../lib/schema';
-import { buildHreflang, canonicalFor } from '../../../lib/i18n';
+import { getAllPostSlugs, getPostContent } from '../../../../lib/blog';
+import { BlogPostClientPage } from '../../../../components/BlogPostClientPage';
+import { JsonLd, articleSchema, breadcrumbSchema } from '../../../../lib/schema';
+import { buildHreflang, canonicalFor, LOCALIZED_LOCALES } from '../../../../lib/i18n';
+import type { Language } from '../../../../types';
 
 export function generateStaticParams() {
-  return getAllPostSlugs();
+  const slugs = getAllPostSlugs();
+  return LOCALIZED_LOCALES.flatMap(lang => slugs.map(({ slug }) => ({ lang, slug })));
 }
 
 interface Props {
-  params: Promise<{ slug: string }>;
+  params: Promise<{ lang: string; slug: string }>;
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const { slug } = await params;
-  const content = getPostContent(slug, 'en');
+  const { lang, slug } = await params;
+  const content = getPostContent(slug, lang) ?? getPostContent(slug, 'en');
   const title = content?.data?.title || 'Blog Post';
   const description = content?.data?.metaDescription || content?.data?.excerpt || '';
   const image = content?.data?.image || '';
-  const url = canonicalFor('en', `/blog/${slug}`);
+  const canonical = canonicalFor(lang as Language, `/blog/${slug}`);
 
   return {
     title: `${title} | Direct Booking Health Score`,
     description,
-    alternates: { canonical: url, languages: buildHreflang(`/blog/${slug}`) },
+    alternates: { canonical, languages: buildHreflang(`/blog/${slug}`) },
     openGraph: {
       title,
       description,
-      url,
+      url: canonical,
       siteName: 'Direct Booking Health Score',
       type: 'article',
       publishedTime: content?.data?.date,
@@ -43,7 +45,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   };
 }
 
-export default async function BlogPostPage({ params }: Props) {
+export default async function LocalizedBlogPostPage({ params }: Props) {
   const { slug } = await params;
 
   const contentEn = getPostContent(slug, 'en');

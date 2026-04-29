@@ -37,15 +37,28 @@ export const AppShell: React.FC<{ children: React.ReactNode }> = ({ children }) 
     return () => document.removeEventListener('mousedown', handler);
   }, [langOpen]);
 
+  // Strip the leading locale segment from pathname (if present) so isActive
+  // works the same on /hotel-audit and /it/hotel-audit.
+  const localePrefix = language === 'en' ? '' : `/${language}`;
+  const pathWithoutLocale = (() => {
+    if (!pathname) return '/';
+    const segs = pathname.split('/').filter(Boolean);
+    if (segs[0] && ['it','es','pl','fr','de','cs'].includes(segs[0])) {
+      return '/' + segs.slice(1).join('/');
+    }
+    return pathname;
+  })();
+
   const navigateTo = (path: string) => {
-    router.push(path);
+    const target = path === '/' ? (localePrefix || '/') : `${localePrefix}${path}`;
+    router.push(target);
     setIsMenuOpen(false);
     window.scrollTo(0, 0);
   };
 
   const isActive = (path: string) => {
-    if (path === '/blog') return pathname.startsWith('/blog');
-    return pathname === path;
+    if (path === '/blog') return pathWithoutLocale.startsWith('/blog');
+    return pathWithoutLocale === path;
   };
 
   const languages: { code: Language; label: string }[] = [

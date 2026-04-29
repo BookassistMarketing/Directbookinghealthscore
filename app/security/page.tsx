@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import { Security } from '../../components/Security';
 import { JsonLd } from '../../lib/schema';
+import { buildHreflang, canonicalFor } from '../../lib/i18n';
 
 const securityPageSchema = {
   '@context': 'https://schema.org',
@@ -20,7 +21,7 @@ export const metadata: Metadata = {
   title: 'Security & Privacy | Direct Booking Health Score',
   description:
     'Security and privacy information for the Direct Booking Health Score hotel audit tool by Bookassist.',
-  alternates: { canonical: 'https://directbookinghealthscore.com/security' },
+  alternates: { canonical: canonicalFor('en', '/security'), languages: buildHreflang('/security') },
   openGraph: {
     title: 'Security & Privacy | Direct Booking Health Score',
     description: 'Security and privacy information for the Direct Booking Health Score audit tool.',

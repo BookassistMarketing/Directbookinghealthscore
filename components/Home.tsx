@@ -8,6 +8,7 @@ import { EditableText } from './Editable';
 import { RecentBlogs } from './RecentBlogs';
 import { useContent } from '../contexts/ContentContext';
 import { Language } from '../types';
+import { localePrefix } from '../lib/i18n';
 import type { BlogPostMeta } from '../lib/blog';
 
 interface HomeProps {
@@ -86,7 +87,7 @@ export const Home: React.FC<HomeProps> = ({ onStart, recentEn, recentIt, recentE
                 <EditableText id="home.hero.cta1" defaultText={l.cta1} as="span" />
               </button>
               <button
-                onClick={() => router.push('/ai-visibility-audit')}
+                onClick={() => router.push(`${localePrefix(language)}/ai-visibility-audit`)}
                 className="group inline-flex items-center justify-center gap-2 bg-brand-success text-white px-7 py-4 rounded-full text-sm font-black uppercase tracking-widest shadow-xl hover:shadow-2xl hover:-translate-y-0.5 transition-all w-full sm:w-auto"
               >
                 <Sparkles size={16} className="transition-transform group-hover:scale-110" />
