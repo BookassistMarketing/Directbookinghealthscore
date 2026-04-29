@@ -223,7 +223,7 @@ const Heartbeat: React.FC = () => {
   const baselineByLanguage: Record<Language, number> = {
     en: 230,
     it: 190,
-    es: 190,
+    es: 194,
     pl: 230,
     fr: 230,
     de: 230,
