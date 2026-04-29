@@ -1,6 +1,6 @@
 'use client';
 
-import React from 'react';
+import React, { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { Button } from './Button';
 import { ShieldCheck, BarChart2, Globe, Zap } from 'lucide-react';
@@ -25,6 +25,8 @@ interface HomeProps {
 export const Home: React.FC<HomeProps> = ({ onStart, recentEn, recentIt, recentEs, recentPl, recentFr, recentDe, recentCs }) => {
   const { language } = useContent();
   const router = useRouter();
+  const [hbActive, setHbActive] = useState(false);
+  const [hbKey, setHbKey] = useState(0);
 
   const labelsMap: Record<Language, any> = {
     en: { eyebrow: 'Hotel Tech Diagnostics', trustMicro: 'Free • 3 minutes', title: 'Maximise Your <span class="text-brand-blue">Digital Revenue</span> Potential', subtitle: "The Direct Booking Health Score is the industry standard for assessing hospitality technology infrastructure. We analyse your <strong>Direct Booking Strategy</strong>, <strong>Metasearch Connectivity</strong>, and <strong>Marketing ROI</strong> to identify critical performance gaps.", cta: "Launch Free Tech Audit", cta1: "Launch Hotel Tech Audit", cta2: "Launch AI Visibility Audit", f1t: "Secure Your Data", f1d: "In an era of privacy-first browsing, legacy tracking destroys attribution. Our audit checks for <strong>GA4 implementation</strong> and <strong>First-Party Data compliance</strong>.", f2t: "Dominate Metasearch", f2d: "Are you bidding on parity-loss dates? <strong>Metasearch Optimisation</strong> requires granular inventory management and real-time rate parity checks.", f3t: "High-Conversion Engines", f3d: "Friction kills conversion. From <strong>Digital Wallets</strong> to dynamic multi-currency, modern travellers demand a seamless experience.", f4t: "AI-Driven Personalisation", f4d: "Leverage <strong>Predictive Analytics</strong> and <strong>Dynamic Content Personalisation</strong> to serve the right offer to the right guest.", bt: "Ready to diagnose your digital health?", bd: "Join thousands of hoteliers optimising their revenue strategy. The audit takes less than 3 minutes.", bcta: "Start Assessment Now" },
@@ -42,7 +44,11 @@ export const Home: React.FC<HomeProps> = ({ onStart, recentEn, recentIt, recentE
     <div className="relative w-full">
       {/* Hero — full viewport width; only the radial blue glow lives here.
           The dotted background is now provided site-wide by AppShell. */}
-      <section className="relative w-full isolate overflow-hidden mb-12 sm:mb-20 print:overflow-visible">
+      <section
+        className="relative w-full isolate overflow-hidden mb-12 sm:mb-20 print:overflow-visible"
+        onMouseEnter={() => { setHbActive(true); setHbKey(k => k + 1); }}
+        onMouseLeave={() => setHbActive(false)}
+      >
         {/* Ambient atmosphere — hero-specific radial glow only */}
         <div aria-hidden="true" className="absolute inset-0 -z-10 print:hidden">
           <div className="absolute -top-40 left-1/2 -translate-x-1/2 w-[140vw] h-[800px] bg-[radial-gradient(ellipse_at_center,rgba(37,99,235,0.12),rgba(37,99,235,0.03)_45%,transparent_70%)] blur-2xl" />
@@ -50,7 +56,7 @@ export const Home: React.FC<HomeProps> = ({ onStart, recentEn, recentIt, recentE
 
         <div className="relative w-full max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           {/* Heartbeat — anchored to the content wrapper so it starts at the heading's left edge */}
-          <Heartbeat />
+          <Heartbeat isActive={hbActive} animKey={hbKey} />
           <div className="relative grid grid-cols-1 lg:grid-cols-12 gap-8 sm:gap-10 lg:gap-12 items-center min-h-[560px] py-6 sm:py-10 lg:py-14">
           {/* Left: copy column */}
           <div className="lg:col-span-7 space-y-7 sm:space-y-8 z-10">
@@ -213,7 +219,7 @@ export const Home: React.FC<HomeProps> = ({ onStart, recentEn, recentIt, recentE
  * runs the full width; the QRS-T complex fires between x=620 and x=900
  * (visually the right column on lg+). A small T-wave bump follows.
  */
-const Heartbeat: React.FC = () => {
+const Heartbeat: React.FC<{ isActive: boolean; animKey: number }> = ({ isActive, animKey }) => {
   const { language } = useContent();
   // Spike X position is fixed (right-column dead space) so it looks the same
   // in every language. Baseline Y is per-language because Italian and Spanish
@@ -268,9 +274,11 @@ const Heartbeat: React.FC = () => {
           stroke-dasharray: 1200 1200;
           stroke-dashoffset: 2400;
           animation: hb-trace 2.6s linear infinite;
+          animation-play-state: ${isActive ? 'running' : 'paused'};
         }
         .hb-trail {
           animation: hb-fade-trail 2.6s ease-in-out infinite;
+          animation-play-state: ${isActive ? 'running' : 'paused'};
         }
         @media (prefers-reduced-motion: reduce) {
           .hb-line, .hb-trail { animation-duration: 8s; }
@@ -298,6 +306,7 @@ const Heartbeat: React.FC = () => {
 
         {/* Faint persistent trail (so the line doesn't fully disappear between cycles) */}
         <path
+          key={`trail-${animKey}`}
           d={PATH_D}
           fill="none"
           stroke="#1E3A8A"
@@ -310,6 +319,7 @@ const Heartbeat: React.FC = () => {
 
         {/* Bright leading edge — the actively drawing line */}
         <path
+          key={`line-${animKey}`}
           d={PATH_D}
           fill="none"
           stroke="url(#hb-grad)"
