@@ -29,11 +29,22 @@ export async function POST(req: NextRequest) {
     );
   }
 
-  let body: { url?: unknown; language?: unknown };
+  let body: { url?: unknown; language?: unknown; honeypot?: unknown; formAgeMs?: unknown };
   try {
     body = await req.json();
   } catch {
     return NextResponse.json({ error: 'INVALID_JSON' }, { status: 400 });
+  }
+
+  // Bot defence: honeypot must be empty, form must have been visible for ≥1.5s.
+  // Real users never see the honeypot field; bots fill all fields. Real users
+  // need at least a moment to type/paste a URL; bots submit instantly.
+  // Return a generic 400 to avoid telling attackers which signal tripped.
+  const honeypot = typeof body.honeypot === 'string' ? body.honeypot : '';
+  const formAgeMs = typeof body.formAgeMs === 'number' ? body.formAgeMs : 0;
+  if (honeypot.length > 0 || formAgeMs < 1500) {
+    console.warn('[api/ai-audit] Bot defence triggered', { honeypotFilled: honeypot.length > 0, formAgeMs });
+    return NextResponse.json({ error: 'INVALID_REQUEST' }, { status: 400 });
   }
 
   const urlCheck = validatePublicUrl(body.url);

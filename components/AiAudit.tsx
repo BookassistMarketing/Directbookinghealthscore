@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { Sparkles, Globe, Loader2, AlertCircle, ArrowRight, RotateCcw } from 'lucide-react';
 import ReactMarkdown from 'react-markdown';
@@ -182,10 +182,17 @@ export const AiAudit: React.FC = () => {
   const [auditedUrl, setAuditedUrl] = useState('');
   const [requestError, setRequestError] = useState<string | null>(null);
 
+  // Bot defence: honeypot field (real users never see it) + timestamp of when
+  // the form was rendered. Bots fill all fields including hidden ones, and
+  // submit instantly. Both signals are checked server-side in /api/ai-audit.
+  const [honeypot, setHoneypot] = useState('');
+  const formRenderedAt = useRef<number>(Date.now());
+
   useEffect(() => {
     if (typeof window === 'undefined') return;
     setConsentAccepted(sessionStorage.getItem(CONSENT_KEY) === 'accepted');
     setConsentChecked(true);
+    formRenderedAt.current = Date.now();
   }, []);
 
   const handleConsentAccept = () => {
@@ -210,8 +217,13 @@ export const AiAudit: React.FC = () => {
     setAuditedUrl(normalised);
     setView('loading');
 
+    const formAgeMs = Date.now() - formRenderedAt.current;
+
     try {
-      const result = await generateAiReadinessReport(normalised, language);
+      const result = await generateAiReadinessReport(normalised, language, {
+        honeypot,
+        formAgeMs,
+      });
       setReport(result);
       setView('done');
     } catch (err) {
@@ -259,6 +271,19 @@ export const AiAudit: React.FC = () => {
 
           <form onSubmit={submit} className="max-w-xl mx-auto">
             <label htmlFor="ai-audit-url" className="sr-only">{l.inputLabel}</label>
+            {/* Honeypot — hidden from real users, attractive to bots */}
+            <div aria-hidden="true" style={{ position: 'absolute', left: '-9999px', top: 'auto', width: '1px', height: '1px', overflow: 'hidden' }}>
+              <label htmlFor="website_url_extra">Website URL (leave blank)</label>
+              <input
+                id="website_url_extra"
+                type="text"
+                name="website_url_extra"
+                tabIndex={-1}
+                autoComplete="off"
+                value={honeypot}
+                onChange={e => setHoneypot(e.target.value)}
+              />
+            </div>
             <div className="relative">
               <Globe
                 size={18}

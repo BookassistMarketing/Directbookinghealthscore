@@ -29,11 +29,25 @@ export async function generateStrategicAnalysis(
   return data.analysis;
 }
 
-export async function generateAiReadinessReport(url: string, lang: Language): Promise<string> {
+export interface BotCheckSignals {
+  honeypot: string;
+  formAgeMs: number;
+}
+
+export async function generateAiReadinessReport(
+  url: string,
+  lang: Language,
+  bot: BotCheckSignals,
+): Promise<string> {
   const res = await fetch('/api/ai-audit', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ url, language: lang }),
+    body: JSON.stringify({
+      url,
+      language: lang,
+      honeypot: bot.honeypot,
+      formAgeMs: bot.formAgeMs,
+    }),
   });
   if (!res.ok) throw await parseError(res);
   const data = (await res.json()) as { report: string };
