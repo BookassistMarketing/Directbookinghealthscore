@@ -14,6 +14,7 @@ export const LeadCapture: React.FC<LeadCaptureProps> = ({ onUnlock }) => {
   const [isLoaded, setIsLoaded] = useState(false);
   const [showBypass, setShowBypass] = useState(false);
   const formInitialized = useRef(false);
+  const unlockCalled = useRef(false);
 
   const labelsMap: Record<Language, any> = {
     en: {
@@ -90,6 +91,12 @@ export const LeadCapture: React.FC<LeadCaptureProps> = ({ onUnlock }) => {
     
     const bypassTimer = setTimeout(() => setShowBypass(true), 8000);
 
+    const triggerUnlock = () => {
+      if (unlockCalled.current) return;
+      unlockCalled.current = true;
+      onUnlock();
+    };
+
     const createForm = () => {
       const hbspt = (window as any).hbspt;
       if (hbspt && !formInitialized.current) {
@@ -106,7 +113,7 @@ export const LeadCapture: React.FC<LeadCaptureProps> = ({ onUnlock }) => {
             },
             onFormSubmitted: () => {
               console.log("HubSpot Form Submitted");
-              onUnlock();
+              triggerUnlock();
             }
           });
           formInitialized.current = true;
@@ -138,10 +145,10 @@ export const LeadCapture: React.FC<LeadCaptureProps> = ({ onUnlock }) => {
 
     // Message listener for cross-origin form events
     const handleHSMessages = (event: MessageEvent) => {
-      if (event.data.type === 'hsFormCallback' && 
+      if (event.data.type === 'hsFormCallback' &&
          (event.data.eventName === 'onFormSubmitted' || event.data.eventName === 'onFormCompleted')) {
         console.log("HubSpot completion event detected via message");
-        onUnlock();
+        triggerUnlock();
       }
     };
     window.addEventListener('message', handleHSMessages);
