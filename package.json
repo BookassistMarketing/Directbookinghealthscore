@@ -12,7 +12,8 @@
     "build": "next build",
     "start": "next start",
     "lint": "tsc --noEmit && node scripts/check-no-secret-leaks.mjs",
-    "lint:secrets": "node scripts/check-no-secret-leaks.mjs"
+    "lint:secrets": "node scripts/check-no-secret-leaks.mjs",
+    "prepare": "husky"
   },
   "dependencies": {
     "@google/genai": "^1.30.0",
@@ -30,6 +31,7 @@
     "@types/node": "^22.14.0",
     "@types/react": "^19.0.0",
     "@types/react-dom": "^19.0.0",
+    "husky": "^9.1.7",
     "typescript": "~5.8.2"
   },
   "overrides": {
