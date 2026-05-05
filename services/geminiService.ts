@@ -269,7 +269,7 @@ export async function generateAiReadinessReport(
 
   try {
     const response = await ai.models.generateContent({
-      model: 'gemini-2.0-flash',
+      model: 'gemini-2.5-flash-preview-04-17',
       contents: `Analyse this hotel website and produce the AI Readiness Report following the exact structure in your instructions: ${url}`,
       config: {
         systemInstruction: AI_READINESS_SYSTEM_PROMPT(lang),
