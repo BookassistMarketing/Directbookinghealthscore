@@ -25,6 +25,8 @@ interface HomeProps {
 export const Home: React.FC<HomeProps> = ({ onStart, recentEn, recentIt, recentEs, recentPl, recentFr, recentDe, recentCs }) => {
   const { language } = useContent();
   const router = useRouter();
+  const [hbActive, setHbActive] = useState(false);
+  const [hbKey, setHbKey] = useState(0);
   const [flipped, setFlipped] = useState([false, false, false, false]);
 
   const toggleCard = (i: number) =>
@@ -56,7 +58,7 @@ export const Home: React.FC<HomeProps> = ({ onStart, recentEn, recentIt, recentE
 
         <div className="relative w-full max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           {/* Heartbeat — anchored to the content wrapper so it starts at the heading's left edge */}
-          <Heartbeat isActive={true} animKey={0} />
+          <Heartbeat isActive={hbActive} animKey={hbKey} />
           <div className="relative grid grid-cols-1 lg:grid-cols-12 gap-8 sm:gap-10 lg:gap-12 items-center min-h-[560px] py-6 sm:py-10 lg:py-14">
           {/* Left: copy column */}
           <div className="lg:col-span-7 space-y-7 sm:space-y-8 z-10">
@@ -88,15 +90,18 @@ export const Home: React.FC<HomeProps> = ({ onStart, recentEn, recentIt, recentE
             <div className="flex flex-col sm:flex-row gap-3 pt-2 print:hidden">
               <button
                 onClick={onStart}
+                onMouseEnter={() => { setHbActive(true); setHbKey(k => k + 1); }}
+                onMouseLeave={() => setHbActive(false)}
                 className="inline-flex items-center justify-center gap-2 bg-brand-blue text-white px-7 py-4 rounded-full text-sm font-black uppercase tracking-widest shadow-xl hover:shadow-2xl hover:-translate-y-0.5 transition-all w-full sm:w-auto"
               >
                 <EditableText id="home.hero.cta1" defaultText={l.cta1} as="span" />
               </button>
               <button
                 onClick={() => router.push(`${localePrefix(language)}/ai-visibility-audit`)}
-                className="group inline-flex items-center justify-center gap-2 bg-brand-success text-white px-7 py-4 rounded-full text-sm font-black uppercase tracking-widest shadow-xl hover:shadow-2xl hover:-translate-y-0.5 transition-all w-full sm:w-auto"
+                onMouseEnter={() => { setHbActive(true); setHbKey(k => k + 1); }}
+                onMouseLeave={() => setHbActive(false)}
+                className="inline-flex items-center justify-center gap-2 bg-brand-success text-white px-7 py-4 rounded-full text-sm font-black uppercase tracking-widest shadow-xl hover:shadow-2xl hover:-translate-y-0.5 transition-all w-full sm:w-auto"
               >
-                <img src="/ai-logo.svg" alt="" width={22} height={22} className="flex-shrink-0 transition-transform group-hover:scale-110" />
                 <EditableText id="home.hero.cta2" defaultText={l.cta2} as="span" />
               </button>
             </div>
