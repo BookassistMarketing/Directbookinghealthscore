@@ -95,6 +95,11 @@ const generateLocalAnalysis = (answers: Answer[], scorePercent: number, lang: La
 
 const delay = (ms: number) => new Promise(resolve => setTimeout(resolve, ms));
 
+const retryDelay = (attempt: number) => {
+  const base = Math.min(1000 * Math.pow(2, attempt), 32000);
+  return base + Math.random() * base * 0.3;
+};
+
 export const generateStrategicAnalysis = async (answers: Answer[], lang: Language, siteUrl: string | null = null, attempt: number = 1): Promise<string> => {
   const apiKey = process.env.GEMINI_API_KEY;
   const passedItems = answers.filter(a => a.value === AnswerValue.YES).length;
@@ -115,11 +120,11 @@ export const generateStrategicAnalysis = async (answers: Answer[], lang: Languag
     .filter(Boolean)
     .join('\n');
 
-  const langNames = { en: 'English', it: 'Italian', es: 'Spanish', pl: 'Polish' };
+  const langNames = { en: 'English', it: 'Italian', es: 'Spanish', pl: 'Polish', fr: 'French', de: 'German', cs: 'Czech' };
 
   try {
     const response = await ai.models.generateContent({
-      model: 'gemini-2.0-flash',
+      model: 'gemini-2.5-flash',
       contents: `Perform a digital health diagnosis for a hotel that scored ${scorePercent}% in their technical audit. Technical gaps identified:\n${gapsList}${siteUrl ? `\n\nThe hotel's website is: ${siteUrl}. Reference it by name where relevant.` : ''}`,
       config: {
         systemInstruction: `You are the "Bookassist Digital Health Strategist."
@@ -143,9 +148,13 @@ export const generateStrategicAnalysis = async (answers: Answer[], lang: Languag
     const isRetryable = error?.status === 429 || error?.status === 503 ||
       error?.message?.includes('429') || error?.message?.includes('503') ||
       /RESOURCE_EXHAUSTED|UNAVAILABLE/i.test(error?.message ?? '');
-    if (isRetryable && attempt < 3) {
-      await delay(Math.pow(2, attempt) * 1000);
+    if (isRetryable && attempt < 6) {
+      await delay(retryDelay(attempt));
       return generateStrategicAnalysis(answers, lang, siteUrl, attempt + 1);
+    }
+    if (isRetryable) {
+      console.warn('[gemini] generateStrategicAnalysis: all retries exhausted, falling back to local analysis');
+      return generateLocalAnalysis(answers, scorePercent, lang);
     }
     throw error;
   }
@@ -289,8 +298,8 @@ export async function generateAiReadinessReport(
     const isRetryable = error?.status === 429 || error?.status === 503 ||
       error?.message?.includes('429') || error?.message?.includes('503') ||
       /RESOURCE_EXHAUSTED|UNAVAILABLE/i.test(error?.message ?? '');
-    if (isRetryable && attempt < 3) {
-      await new Promise(r => setTimeout(r, Math.pow(2, attempt) * 1000));
+    if (isRetryable && attempt < 6) {
+      await delay(retryDelay(attempt));
       return generateAiReadinessReport(url, lang, attempt + 1);
     }
     throw error;
