@@ -25,8 +25,6 @@ interface HomeProps {
 export const Home: React.FC<HomeProps> = ({ onStart, recentEn, recentIt, recentEs, recentPl, recentFr, recentDe, recentCs }) => {
   const { language } = useContent();
   const router = useRouter();
-  const [hbActive, setHbActive] = useState(false);
-  const [hbKey, setHbKey] = useState(0);
   const [flipped, setFlipped] = useState([false, false, false, false]);
 
   const toggleCard = (i: number) =>
@@ -50,8 +48,6 @@ export const Home: React.FC<HomeProps> = ({ onStart, recentEn, recentIt, recentE
           The dotted background is now provided site-wide by AppShell. */}
       <section
         className="relative w-full isolate overflow-hidden mb-12 sm:mb-20 print:overflow-visible"
-        onMouseEnter={() => { setHbActive(true); setHbKey(k => k + 1); }}
-        onMouseLeave={() => setHbActive(false)}
       >
         {/* Ambient atmosphere — hero-specific radial glow only */}
         <div aria-hidden="true" className="absolute inset-0 -z-10 print:hidden">
@@ -60,7 +56,7 @@ export const Home: React.FC<HomeProps> = ({ onStart, recentEn, recentIt, recentE
 
         <div className="relative w-full max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           {/* Heartbeat — anchored to the content wrapper so it starts at the heading's left edge */}
-          <Heartbeat isActive={hbActive} animKey={hbKey} />
+          <Heartbeat isActive={true} animKey={0} />
           <div className="relative grid grid-cols-1 lg:grid-cols-12 gap-8 sm:gap-10 lg:gap-12 items-center min-h-[560px] py-6 sm:py-10 lg:py-14">
           {/* Left: copy column */}
           <div className="lg:col-span-7 space-y-7 sm:space-y-8 z-10">

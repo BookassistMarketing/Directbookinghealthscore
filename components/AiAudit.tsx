@@ -14,7 +14,7 @@ import { generateAiReadinessReport } from '../services/aiService';
 
 const CONSENT_KEY = 'hhc_gemini_consent';
 
-type ViewState = 'idle' | 'form_gate' | 'loading' | 'done';
+type ViewState = 'idle' | 'loading' | 'preview' | 'form_gate' | 'done';
 
 const labelsMap: Record<Language, {
   eyebrow: string;
@@ -32,6 +32,7 @@ const labelsMap: Record<Language, {
   reportHeading: string;
   another: string;
   disclosure: string;
+  seeMore: string;
 }> = {
   en: {
     eyebrow: 'AI Visibility Audit',
@@ -49,6 +50,7 @@ const labelsMap: Record<Language, {
     reportHeading: 'Your AI Readiness Report',
     another: 'Audit another site',
     disclosure: 'Your URL is sent to Google Gemini for analysis. We do not store it.',
+    seeMore: 'See full report',
   },
   it: {
     eyebrow: 'Audit di Visibilità AI',
@@ -66,6 +68,7 @@ const labelsMap: Record<Language, {
     reportHeading: 'Il tuo Report di AI Readiness',
     another: 'Audit di un altro sito',
     disclosure: "Il tuo URL viene inviato a Google Gemini per l'analisi. Non lo conserviamo.",
+    seeMore: 'Visualizza il report completo',
   },
   es: {
     eyebrow: 'Auditoría de Visibilidad IA',
@@ -83,6 +86,7 @@ const labelsMap: Record<Language, {
     reportHeading: 'Tu Informe de AI Readiness',
     another: 'Auditar otro sitio',
     disclosure: 'Tu URL se envía a Google Gemini para el análisis. No la almacenamos.',
+    seeMore: 'Ver informe completo',
   },
   pl: {
     eyebrow: 'Audyt Widoczności AI',
@@ -100,6 +104,7 @@ const labelsMap: Record<Language, {
     reportHeading: 'Twój Raport AI Readiness',
     another: 'Audyt innej strony',
     disclosure: 'Twój URL jest wysyłany do Google Gemini w celu analizy. Nie przechowujemy go.',
+    seeMore: 'Zobacz pełny raport',
   },
   fr: {
     eyebrow: 'Audit Visibilité IA',
@@ -117,6 +122,7 @@ const labelsMap: Record<Language, {
     reportHeading: 'Votre rapport AI Readiness',
     another: 'Auditer un autre site',
     disclosure: "Votre URL est envoyée à Google Gemini pour analyse. Nous ne la conservons pas.",
+    seeMore: 'Voir le rapport complet',
   },
   de: {
     eyebrow: 'KI-Sichtbarkeitsaudit',
@@ -134,6 +140,7 @@ const labelsMap: Record<Language, {
     reportHeading: 'Ihr AI-Readiness-Bericht',
     another: 'Eine andere Website auditieren',
     disclosure: 'Ihre URL wird zur Analyse an Google Gemini gesendet. Wir speichern sie nicht.',
+    seeMore: 'Vollständigen Bericht anzeigen',
   },
   cs: {
     eyebrow: 'Audit AI viditelnosti',
@@ -151,6 +158,7 @@ const labelsMap: Record<Language, {
     reportHeading: 'Vaše zpráva AI Readiness',
     another: 'Auditovat jiný web',
     disclosure: 'Vaše URL se odesílá k analýze do Google Gemini. Neukládáme ji.',
+    seeMore: 'Zobrazit celý přehled',
   },
 };
 
@@ -216,19 +224,19 @@ export const AiAudit: React.FC = () => {
     }
 
     setAuditedUrl(normalised);
-    setView('form_gate');
+    runAnalysis(normalised);
   };
 
-  const runAnalysis = async () => {
+  const runAnalysis = async (url: string) => {
     setView('loading');
     const formAgeMs = Date.now() - formRenderedAt.current;
     try {
-      const result = await generateAiReadinessReport(auditedUrl, language, {
+      const result = await generateAiReadinessReport(url, language, {
         honeypot,
         formAgeMs,
       });
       setReport(result);
-      setView('done');
+      setView('preview');
     } catch (err) {
       console.error('[AiAudit] Audit failed:', err);
       setRequestError(l.errorBody);
@@ -261,7 +269,7 @@ export const AiAudit: React.FC = () => {
       )}
 
       {view === 'form_gate' && (
-        <LeadCapture onUnlock={runAnalysis} />
+        <LeadCapture onUnlock={() => setView('done')} />
       )}
 
       {view === 'idle' && (
@@ -333,6 +341,65 @@ export const AiAudit: React.FC = () => {
           <Loader2 className="w-12 h-12 text-brand-blue mx-auto mb-6 animate-spin" />
           <h2 className="text-2xl sm:text-3xl font-black text-gray-900 mb-3">{l.loading}</h2>
           <p className="text-base text-gray-500 max-w-md mx-auto">{l.loadingSub}</p>
+        </div>
+      )}
+
+      {view === 'preview' && (
+        <div>
+          <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4 mb-6">
+            <div>
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-50 text-brand-blue text-xs font-bold uppercase tracking-widest mb-3">
+                <Sparkles className="w-3.5 h-3.5" /> {l.eyebrow}
+              </div>
+              <h1 className="text-2xl sm:text-3xl font-bold text-gray-900 tracking-tight">
+                {l.reportHeading}
+              </h1>
+              <p className="text-sm text-gray-500 mt-1 break-all">{auditedUrl}</p>
+            </div>
+          </div>
+
+          <div className="relative">
+            <article className="prose prose-slate max-w-none bg-white rounded-2xl shadow-sm border border-gray-100 p-6 sm:p-10 max-h-72 overflow-hidden">
+              <ReactMarkdown
+                remarkPlugins={[remarkGfm]}
+                components={{
+                  table: ({ children }) => (
+                    <div className="overflow-x-auto my-6">
+                      <table className="w-full border-collapse text-sm">{children}</table>
+                    </div>
+                  ),
+                  thead: ({ children }) => <thead className="bg-blue-50">{children}</thead>,
+                  th: ({ children }) => (
+                    <th className="text-left p-3 border border-gray-200 font-semibold text-gray-900">{children}</th>
+                  ),
+                  td: ({ children }) => (
+                    <td className="p-3 border border-gray-200 align-top">{children}</td>
+                  ),
+                  h1: ({ children }) => (
+                    <h2 className="text-2xl font-bold text-gray-900 mt-8 mb-4">{children}</h2>
+                  ),
+                  h2: ({ children }) => (
+                    <h3 className="text-xl font-bold text-brand-blue mt-8 mb-3">{children}</h3>
+                  ),
+                  h3: ({ children }) => (
+                    <h4 className="text-lg font-semibold text-gray-900 mt-6 mb-2">{children}</h4>
+                  ),
+                }}
+              >
+                {report}
+              </ReactMarkdown>
+            </article>
+            <div className="absolute bottom-0 left-0 right-0 h-40 bg-gradient-to-t from-white to-transparent rounded-b-2xl pointer-events-none" />
+          </div>
+
+          <div className="text-center mt-8">
+            <Button
+              onClick={() => setView('form_gate')}
+              className="px-10 py-4 text-base shadow-lg"
+            >
+              {l.seeMore} <ArrowRight size={18} className="ml-2 inline-block" />
+            </Button>
+          </div>
         </div>
       )}
 
