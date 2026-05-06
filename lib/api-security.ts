@@ -95,7 +95,7 @@ export function validatePublicUrl(raw: unknown): string | UrlCheckFailure {
 // ---------------------------------------------------------------------------
 
 const RATE_LIMIT_COOKIE = 'hhc_audit_throttle';
-const RATE_LIMIT_WINDOW_SECONDS = 5 * 60; // 5 minutes between successful audits
+const RATE_LIMIT_WINDOW_SECONDS = 20; // 3 per minute (1 every 20 seconds) between successful audits
 
 function getRateLimitSecret(): string {
   // Falls back to a build-time string in dev so local testing works without
