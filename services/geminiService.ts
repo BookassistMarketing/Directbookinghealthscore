@@ -140,7 +140,10 @@ export const generateStrategicAnalysis = async (answers: Answer[], lang: Languag
     }
     return response.text;
   } catch (error: any) {
-    if ((error?.status === 429 || error?.message?.includes('429')) && attempt < 3) {
+    const isRetryable = error?.status === 429 || error?.status === 503 ||
+      error?.message?.includes('429') || error?.message?.includes('503') ||
+      /RESOURCE_EXHAUSTED|UNAVAILABLE/i.test(error?.message ?? '');
+    if (isRetryable && attempt < 3) {
       await delay(Math.pow(2, attempt) * 1000);
       return generateStrategicAnalysis(answers, lang, siteUrl, attempt + 1);
     }
@@ -283,7 +286,10 @@ export async function generateAiReadinessReport(
     }
     return text;
   } catch (error: any) {
-    if ((error?.status === 429 || error?.message?.includes('429')) && attempt < 3) {
+    const isRetryable = error?.status === 429 || error?.status === 503 ||
+      error?.message?.includes('429') || error?.message?.includes('503') ||
+      /RESOURCE_EXHAUSTED|UNAVAILABLE/i.test(error?.message ?? '');
+    if (isRetryable && attempt < 3) {
       await new Promise(r => setTimeout(r, Math.pow(2, attempt) * 1000));
       return generateAiReadinessReport(url, lang, attempt + 1);
     }
