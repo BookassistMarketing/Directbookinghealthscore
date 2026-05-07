@@ -193,8 +193,12 @@ export const FullResults: React.FC<FullResultsProps> = ({ questions, answers, an
                 <div className="prose prose-invert prose-blue max-w-none
                   prose-p:text-blue-50 prose-p:text-lg sm:prose-p:text-xl prose-p:leading-relaxed
                   prose-strong:text-white prose-strong:font-black
-                  prose-h2:text-white prose-h2:text-2xl sm:prose-h2:text-3xl prose-h2:font-black
-                  prose-li:text-blue-50 prose-li:text-lg">
+                  prose-h2:text-white prose-h2:text-2xl sm:prose-h2:text-3xl prose-h2:font-black prose-h2:mb-6
+                  prose-h3:text-blue-200 prose-h3:text-xs prose-h3:font-black prose-h3:uppercase prose-h3:tracking-[0.15em] prose-h3:mt-8 prose-h3:mb-3
+                  prose-li:text-blue-50 prose-li:text-lg prose-li:my-1
+                  prose-ul:space-y-1 prose-ul:mt-2
+                  prose-hr:border-white/10 prose-hr:my-6
+                  prose-em:text-blue-300 prose-em:text-sm prose-em:not-italic">
                   <ReactMarkdown>{analysis}</ReactMarkdown>
                 </div>
                 <div className="pt-10 border-t border-white/10">

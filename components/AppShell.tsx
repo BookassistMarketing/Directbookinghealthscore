@@ -127,51 +127,7 @@ export const AppShell: React.FC<{ children: React.ReactNode }> = ({ children }) 
             </div>
           </div>
 
-          <div className="flex items-center gap-4 sm:gap-8">
-            <div
-              ref={langWrapperRef}
-              onMouseEnter={openLang}
-              onMouseLeave={closeLangSoon}
-              className="relative print:hidden"
-            >
-              <button
-                type="button"
-                onClick={() => setLangOpen(o => !o)}
-                aria-haspopup="listbox"
-                aria-expanded={langOpen}
-                aria-label="Choose language"
-                className="flex items-center gap-2 px-2 md:px-3 py-2 bg-gray-50 border border-gray-200 rounded-lg text-sm font-semibold text-gray-700 hover:text-brand-blue hover:border-brand-blue transition-colors"
-              >
-                <Globe size={16} className="text-gray-500 md:size-[14px] md:text-gray-400" />
-                <span className="hidden md:inline">{(languages.find(l => l.code === language) ?? languages[0]).label}</span>
-                <ChevronDown size={14} className={`hidden md:inline-block transition-transform ${langOpen ? 'rotate-180' : ''}`} />
-              </button>
-
-              {langOpen && (
-                <ul
-                  role="listbox"
-                  className="absolute top-full right-0 mt-1 min-w-[10rem] bg-white border border-gray-200 rounded-lg shadow-lg overflow-hidden z-50"
-                >
-                  {languages
-                    .filter(l => l.code !== language)
-                    .map(lang => (
-                      <li key={lang.code}>
-                        <button
-                          type="button"
-                          onClick={() => {
-                            setLanguage(lang.code);
-                            setLangOpen(false);
-                          }}
-                          className="block w-full text-left px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50 hover:text-brand-blue"
-                        >
-                          {lang.label}
-                        </button>
-                      </li>
-                    ))}
-                </ul>
-              )}
-            </div>
-
+          <div className="flex items-center gap-3 sm:gap-4">
             <div className="hidden md:flex items-center gap-4 lg:gap-6 print:hidden">
               <button
                 onClick={() => navigateTo('/')}
@@ -207,6 +163,50 @@ export const AppShell: React.FC<{ children: React.ReactNode }> = ({ children }) 
                 >
                   {labels.aiAudit}
                 </button>
+              </div>
+
+              <div
+                ref={langWrapperRef}
+                onMouseEnter={openLang}
+                onMouseLeave={closeLangSoon}
+                className="relative"
+              >
+                <button
+                  type="button"
+                  onClick={() => setLangOpen(o => !o)}
+                  aria-haspopup="listbox"
+                  aria-expanded={langOpen}
+                  aria-label="Choose language"
+                  className="flex items-center gap-2 px-3 py-2 bg-gray-50 border border-gray-200 rounded-lg text-sm font-semibold text-gray-700 hover:text-brand-blue hover:border-brand-blue transition-colors"
+                >
+                  <Globe size={14} className="text-gray-400" />
+                  <span>{(languages.find(l => l.code === language) ?? languages[0]).label}</span>
+                  <ChevronDown size={14} className={`transition-transform ${langOpen ? 'rotate-180' : ''}`} />
+                </button>
+
+                {langOpen && (
+                  <ul
+                    role="listbox"
+                    className="absolute top-full right-0 mt-1 min-w-[10rem] bg-white border border-gray-200 rounded-lg shadow-lg overflow-hidden z-50"
+                  >
+                    {languages
+                      .filter(l => l.code !== language)
+                      .map(lang => (
+                        <li key={lang.code}>
+                          <button
+                            type="button"
+                            onClick={() => {
+                              setLanguage(lang.code);
+                              setLangOpen(false);
+                            }}
+                            className="block w-full text-left px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50 hover:text-brand-blue"
+                          >
+                            {lang.label}
+                          </button>
+                        </li>
+                      ))}
+                  </ul>
+                )}
               </div>
             </div>
 

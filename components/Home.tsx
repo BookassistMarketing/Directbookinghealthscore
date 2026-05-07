@@ -49,7 +49,7 @@ export const Home: React.FC<HomeProps> = ({ onStart, recentEn, recentIt, recentE
       {/* Hero — full viewport width; only the radial blue glow lives here.
           The dotted background is now provided site-wide by AppShell. */}
       <section
-        className="relative w-full isolate overflow-hidden mb-12 sm:mb-20 print:overflow-visible"
+        className="relative w-full isolate mb-12 sm:mb-20"
       >
         {/* Ambient atmosphere — hero-specific radial glow only */}
         <div aria-hidden="true" className="absolute inset-0 -z-10 print:hidden">
@@ -217,8 +217,8 @@ const Heartbeat: React.FC<{ isActive: boolean; animKey: number }> = ({ isActive,
   // the default baseline sits — pushing baseline down for those locales keeps
   // the line under the words instead of cutting through them.
   const baselineByLanguage: Record<Language, number> = {
-    en: 230,
-    it: 190,
+    en: 215,
+    it: 183,
     es: 194,
     pl: 230,
     fr: 230,
@@ -249,7 +249,7 @@ const Heartbeat: React.FC<{ isActive: boolean; animKey: number }> = ({ isActive,
   return (
     <div
       aria-hidden="true"
-      className="hidden lg:block absolute inset-y-0 left-8 right-[calc(36rem-50vw)] -z-[1] pointer-events-none print:hidden"
+      className="hidden lg:block absolute top-0 -bottom-24 left-8 right-[calc(36rem-50vw)] z-[1] pointer-events-none print:hidden"
     >
       <style>{`
         @keyframes hb-trace {

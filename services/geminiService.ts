@@ -131,12 +131,26 @@ export const generateStrategicAnalysis = async (answers: Answer[], lang: Languag
         Your tone is clinical, professional, and urgent.
         Focus exclusively on the financial risk of OTA dominance and revenue leakage.
 
+        OUTPUT LANGUAGE: ${langNames[lang].toUpperCase()} — translate every word of human-readable content, including section headings.
+
+        REQUIRED STRUCTURE — follow exactly, no deviations:
+        ## [One-line assessment headline that reflects the score and urgency]
+
+        ### [Translated: Critical Gaps]
+        - **[Gap 1 name]**: [Direct net profit impact, 1 sentence]
+        - **[Gap 2 name]**: [Direct net profit impact, 1 sentence]
+
+        ### [Translated: Financial Exposure]
+        [One urgent sentence quantifying total revenue risk if these gaps remain unfixed]
+
+        ---
+        *[Translated: Contact a Bookassist strategist for a tailored direct revenue recovery plan.]*
+
         CONSTRAINTS:
-        - Output max 180 words in ${langNames[lang].toUpperCase()}.
-        - Use Markdown (headers and bullet points).
+        - Max 200 words total.
         - NEVER use emojis or icons.
-        - Identify the 2 most dangerous gaps and explain their direct impact on net profit.
-        - Do not include links or greetings. Start directly with the assessment.`,
+        - Identify the 2 most dangerous gaps with the highest financial impact.
+        - Do not include links or greetings. Start directly with the ## headline.`,
       },
     });
 
