@@ -2,7 +2,7 @@
 
 import React, { useEffect, useRef, useState } from 'react';
 import { useRouter } from 'next/navigation';
-import { Sparkles, Globe, Loader2, AlertCircle, ArrowRight, RotateCcw } from 'lucide-react';
+import { Sparkles, Globe, Loader2, AlertCircle, ArrowRight, RotateCcw, ExternalLink } from 'lucide-react';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 import { Button } from './Button';
@@ -33,6 +33,9 @@ const labelsMap: Record<Language, {
   another: string;
   disclosure: string;
   seeMore: string;
+  ctaTitle: string;
+  ctaSub: string;
+  ctaButton: string;
 }> = {
   en: {
     eyebrow: 'AI Visibility Audit',
@@ -51,6 +54,9 @@ const labelsMap: Record<Language, {
     another: 'Audit another site',
     disclosure: 'Your URL is sent to Google Gemini for analysis. We do not store it.',
     seeMore: 'See full report',
+    ctaTitle: 'Improve your AI Visibility today',
+    ctaSub: 'Book a free consultation with a Bookassist strategist',
+    ctaButton: 'Book a Demo',
   },
   it: {
     eyebrow: 'Audit di Visibilità AI',
@@ -69,6 +75,9 @@ const labelsMap: Record<Language, {
     another: 'Audit di un altro sito',
     disclosure: "Il tuo URL viene inviato a Google Gemini per l'analisi. Non lo conserviamo.",
     seeMore: 'Visualizza il report completo',
+    ctaTitle: 'Migliora la tua visibilità AI oggi',
+    ctaSub: 'Prenota una consulenza gratuita con uno stratega Bookassist',
+    ctaButton: 'Prenota una Demo',
   },
   es: {
     eyebrow: 'Auditoría de Visibilidad IA',
@@ -87,6 +96,9 @@ const labelsMap: Record<Language, {
     another: 'Auditar otro sitio',
     disclosure: 'Tu URL se envía a Google Gemini para el análisis. No la almacenamos.',
     seeMore: 'Ver informe completo',
+    ctaTitle: 'Mejora tu visibilidad en IA hoy',
+    ctaSub: 'Reserva una consulta gratuita con un estratega de Bookassist',
+    ctaButton: 'Reservar una Demo',
   },
   pl: {
     eyebrow: 'Audyt Widoczności AI',
@@ -105,6 +117,9 @@ const labelsMap: Record<Language, {
     another: 'Audyt innej strony',
     disclosure: 'Twój URL jest wysyłany do Google Gemini w celu analizy. Nie przechowujemy go.',
     seeMore: 'Zobacz pełny raport',
+    ctaTitle: 'Popraw swoją widoczność AI już dziś',
+    ctaSub: 'Umów bezpłatną konsultację ze strategiem Bookassist',
+    ctaButton: 'Zamów Demo',
   },
   fr: {
     eyebrow: 'Audit Visibilité IA',
@@ -123,6 +138,9 @@ const labelsMap: Record<Language, {
     another: 'Auditer un autre site',
     disclosure: "Votre URL est envoyée à Google Gemini pour analyse. Nous ne la conservons pas.",
     seeMore: 'Voir le rapport complet',
+    ctaTitle: "Améliorez votre visibilité IA aujourd'hui",
+    ctaSub: 'Réservez une consultation gratuite avec un stratège Bookassist',
+    ctaButton: 'Réserver une Démo',
   },
   de: {
     eyebrow: 'KI-Sichtbarkeitsaudit',
@@ -141,6 +159,9 @@ const labelsMap: Record<Language, {
     another: 'Eine andere Website auditieren',
     disclosure: 'Ihre URL wird zur Analyse an Google Gemini gesendet. Wir speichern sie nicht.',
     seeMore: 'Vollständigen Bericht anzeigen',
+    ctaTitle: 'Verbessern Sie Ihre KI-Sichtbarkeit noch heute',
+    ctaSub: 'Buchen Sie eine kostenlose Beratung mit einem Bookassist-Strategen',
+    ctaButton: 'Demo buchen',
   },
   cs: {
     eyebrow: 'Audit AI viditelnosti',
@@ -159,6 +180,9 @@ const labelsMap: Record<Language, {
     another: 'Auditovat jiný web',
     disclosure: 'Vaše URL se odesílá k analýze do Google Gemini. Neukládáme ji.',
     seeMore: 'Zobrazit celý přehled',
+    ctaTitle: 'Zlepšete svou AI viditelnost ještě dnes',
+    ctaSub: 'Rezervujte si bezplatnou konzultaci se strategem Bookassist',
+    ctaButton: 'Rezervovat demo',
   },
 };
 
@@ -455,6 +479,24 @@ export const AiAudit: React.FC = () => {
               {report}
             </ReactMarkdown>
           </article>
+
+          <a
+            href="https://bookassist.com/book-a-demo"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex flex-col md:flex-row items-center gap-6 bg-brand-blue text-white p-8 rounded-2xl shadow-xl mt-6 transition-all hover:scale-[1.01] no-underline"
+          >
+            <div className="flex-shrink-0 w-14 h-14 bg-white/10 rounded-full flex items-center justify-center">
+              <ExternalLink className="w-7 h-7 text-white" />
+            </div>
+            <div className="flex-1 text-center md:text-left">
+              <p className="text-xl sm:text-2xl font-black leading-tight tracking-tight text-white">{l.ctaTitle}</p>
+              <p className="text-blue-200 text-xs font-semibold uppercase tracking-widest mt-1">{l.ctaSub}</p>
+            </div>
+            <div className="flex items-center gap-2 bg-white text-brand-blue px-6 py-3 rounded-xl font-black text-sm uppercase tracking-widest shadow-md whitespace-nowrap flex-shrink-0">
+              {l.ctaButton} <ArrowRight size={16} className="ml-1" />
+            </div>
+          </a>
         </div>
       )}
     </div>

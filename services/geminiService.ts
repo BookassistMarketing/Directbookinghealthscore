@@ -226,12 +226,6 @@ Include 5–8 issues. For each zero-score category include at least one issue.
 
 **Projected Score After Fixes: [new score] / 100**
 
----
-
-## How Bookassist Helps
-
-[Write a short, persuasive paragraph explaining how Bookassist directly addresses the specific gaps identified above and improves AI search discoverability.]
-
 SCORING AND TOPICS TO BE ANALYZED
 1. Structured Data Completeness (25 pts)
 6 pts: Organization/LocalBusiness/Hotel/Resort entity present with Name + Address + Phone
