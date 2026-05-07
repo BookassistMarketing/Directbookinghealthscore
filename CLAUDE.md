@@ -9,7 +9,7 @@ This file is automatically loaded by Claude Code at the start of every session. 
 The Direct Booking Health Score is a hotel technology and marketing audit tool built for Bookassist. It exposes **two distinct tools** to hoteliers, both powered by Google Gemini:
 
 1. **Hotel Tech Audit** (`/hotel-audit`) — a 15-question quiz across categories (Direct Booking, Metasearch, Analytics, CRM, SEO & AI Search) that scores the hotel's stack and produces an AI-written strategic narrative.
-2. **AI Visibility Audit** (`/ai-visibility-audit`) — a single-URL input that submits the hotel's website to Gemini with the "Bookassist AI Readiness Auditor" system prompt and renders the structured report (with weighted scoring breakdown, recurring issues table, and projected score uplift).
+2. **AI Visibility Audit** (`/ai-visibility-audit`) — a single-URL input that submits the hotel's website to Gemini with the "Bookassist AI Readiness Auditor" system prompt and renders a structured markdown report with: `## AI Visibility & Optimisation Summary` header, weighted scoring breakdown table, recurring issues table (impact on AI & GEO search), recommended fixes & score uplift table, and a static "Book a Demo" CTA card. The loading screen shows rotating "Did you know?" fact cards (7 s interval, 10 facts × 7 languages).
 
 Live at: https://directbookinghealthscore.com — hosted on **AWS Amplify** (rebuilds on `git push origin main`).
 
@@ -19,7 +19,7 @@ Live at: https://directbookinghealthscore.com — hosted on **AWS Amplify** (reb
 
 - **Framework:** Next.js 15 App Router with React 19, TypeScript
 - **Styling:** Tailwind CSS 4
-- **AI:** Google Gemini API (`@google/genai`) — `gemini-2.0-flash`, server-only via Next.js API routes
+- **AI:** Google Gemini API (`@google/genai`) — `gemini-3-flash-preview`, server-only via Next.js API routes
 - **Markdown rendering:** `react-markdown` + `remark-gfm` (table support for the AI Readiness Report)
 - **Charts:** Recharts
 - **Icons:** Lucide React
@@ -43,9 +43,9 @@ WELCOME → QUIZ → SCORE → FULL_RESULTS
 
 ### AI Visibility Audit (`/ai-visibility-audit`)
 
-Three-state client component (`components/AiAudit.tsx`):
+Five-state client component (`components/AiAudit.tsx`):
 ```
-idle (URL form) → loading → done (markdown report rendered)
+idle (URL form) → loading (Did You Know? cards) → preview (blurred teaser) → form_gate (lead capture) → done (full markdown report + CTA)
 ```
 
 ### Consent gating
@@ -100,9 +100,11 @@ Supported locales: **English (en), Italian (it), Spanish (es), Polish (pl), Fren
 | `constants.ts` | All quiz questions and category translations |
 | `types.ts` | `Language`, `AppState`, `Question`, `Answer` |
 | `components/AuditTool.tsx` | Quiz tool state machine |
-| `components/AiAudit.tsx` | AI Visibility Audit page (URL form → Gemini → markdown) |
+| `components/AiAudit.tsx` | AI Visibility Audit — URL form, Did You Know loading cards, blurred preview gate, full report with Book a Demo CTA |
 | `components/ConsentModal.tsx` | Gemini-processing disclosure (used by both tools, includes EU AI Act Article 50 phrasing) |
-| `components/AppShell.tsx` | Header (logo, language switcher, two CTAs, mobile menu), footer |
+| `components/AppShell.tsx` | Header: logo left; desktop nav right (Home, Blog, Contact, Hotel Tech Audit, AI Visibility Audit, **language switcher**); mobile hamburger |
+| `components/Home.tsx` | Home page hero; contains `Heartbeat` ECG component — per-locale baseline y-values control line position (`en:215`, `it:183`, others `~230`) |
+| `components/FullResults.tsx` | Hotel Tech Audit results: score card, AI Strategic Assessment (blue box with structured markdown), PDF export, Book a Demo CTA |
 
 ---
 
@@ -136,7 +138,7 @@ The key is referenced only inside `services/geminiService.ts`, which has `import
 - The `'server-only'` import in `services/geminiService.ts` — removing it can leak the API key to the browser bundle
 - The `runtime = 'nodejs'` directive in `app/api/*/route.ts` — needed because `@google/genai` doesn't support edge runtime
 - The CDN script tags for html2canvas/jsPDF/html2pdf in `app/layout.tsx` — removing them breaks PDF export
-- The Gemini model name (`gemini-2.0-flash`) — only change if explicitly asked
+- The Gemini model name (`gemini-3-flash-preview`) — only change if explicitly asked
 - The `.env.local` file — never commit
 - `lib/i18n.ts` constants (LOCALES, LOCALIZED_LOCALES) — adding/removing a locale touches every translation map
 
