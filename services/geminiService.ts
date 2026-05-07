@@ -124,7 +124,7 @@ export const generateStrategicAnalysis = async (answers: Answer[], lang: Languag
 
   try {
     const response = await ai.models.generateContent({
-      model: 'gemini-2.5-flash',
+      model: 'gemini-3-flash-preview',
       contents: `Perform a digital health diagnosis for a hotel that scored ${scorePercent}% in their technical audit. Technical gaps identified:\n${gapsList}${siteUrl ? `\n\nThe hotel's website is: ${siteUrl}. Reference it by name where relevant.` : ''}`,
       config: {
         systemInstruction: `You are the "Bookassist Digital Health Strategist."
@@ -281,7 +281,7 @@ export async function generateAiReadinessReport(
 
   try {
     const response = await ai.models.generateContent({
-      model: 'gemini-2.5-flash',
+      model: 'gemini-3-flash-preview',
       contents: `Analyse this hotel website and produce the AI Readiness Report following the exact structure in your instructions: ${url}`,
       config: {
         systemInstruction: AI_READINESS_SYSTEM_PROMPT(lang),
