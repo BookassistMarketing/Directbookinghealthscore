@@ -36,6 +36,7 @@ const labelsMap: Record<Language, {
   ctaTitle: string;
   ctaSub: string;
   ctaButton: string;
+  didYouKnow: string;
 }> = {
   en: {
     eyebrow: 'AI Visibility Audit',
@@ -57,6 +58,7 @@ const labelsMap: Record<Language, {
     ctaTitle: 'Improve your AI Visibility today',
     ctaSub: 'Book a free consultation with a Bookassist strategist',
     ctaButton: 'Book a Demo',
+    didYouKnow: 'Did you know?',
   },
   it: {
     eyebrow: 'Audit di Visibilità AI',
@@ -78,6 +80,7 @@ const labelsMap: Record<Language, {
     ctaTitle: 'Migliora la tua visibilità AI oggi',
     ctaSub: 'Prenota una consulenza gratuita con uno stratega Bookassist',
     ctaButton: 'Prenota una Demo',
+    didYouKnow: 'Lo sapevi?',
   },
   es: {
     eyebrow: 'Auditoría de Visibilidad IA',
@@ -99,6 +102,7 @@ const labelsMap: Record<Language, {
     ctaTitle: 'Mejora tu visibilidad en IA hoy',
     ctaSub: 'Reserva una consulta gratuita con un estratega de Bookassist',
     ctaButton: 'Reservar una Demo',
+    didYouKnow: '¿Sabías que?',
   },
   pl: {
     eyebrow: 'Audyt Widoczności AI',
@@ -120,6 +124,7 @@ const labelsMap: Record<Language, {
     ctaTitle: 'Popraw swoją widoczność AI już dziś',
     ctaSub: 'Umów bezpłatną konsultację ze strategiem Bookassist',
     ctaButton: 'Zamów Demo',
+    didYouKnow: 'Czy wiedziałeś?',
   },
   fr: {
     eyebrow: 'Audit Visibilité IA',
@@ -141,6 +146,7 @@ const labelsMap: Record<Language, {
     ctaTitle: "Améliorez votre visibilité IA aujourd'hui",
     ctaSub: 'Réservez une consultation gratuite avec un stratège Bookassist',
     ctaButton: 'Réserver une Démo',
+    didYouKnow: 'Le saviez-vous ?',
   },
   de: {
     eyebrow: 'KI-Sichtbarkeitsaudit',
@@ -162,6 +168,7 @@ const labelsMap: Record<Language, {
     ctaTitle: 'Verbessern Sie Ihre KI-Sichtbarkeit noch heute',
     ctaSub: 'Buchen Sie eine kostenlose Beratung mit einem Bookassist-Strategen',
     ctaButton: 'Demo buchen',
+    didYouKnow: 'Wussten Sie?',
   },
   cs: {
     eyebrow: 'Audit AI viditelnosti',
@@ -183,21 +190,96 @@ const labelsMap: Record<Language, {
     ctaTitle: 'Zlepšete svou AI viditelnost ještě dnes',
     ctaSub: 'Rezervujte si bezplatnou konzultaci se strategem Bookassist',
     ctaButton: 'Rezervovat demo',
+    didYouKnow: 'Věděli jste?',
   },
 };
 
-const FACTS: { text: string; category: string }[] = [
-  { text: "Hotels that invest in direct booking technology see up to **30% lower distribution costs** compared to OTA-dependent properties.", category: "Revenue" },
-  { text: "**AI-powered search tools** like ChatGPT and Perplexity now influence over 20% of hotel discovery journeys.", category: "AI Search" },
-  { text: "Hotels with structured data markup are **3x more likely** to appear in AI-generated travel recommendations.", category: "GEO" },
-  { text: "The average OTA commission is **15–25% per booking** — direct bookings cost a fraction of that.", category: "Strategy" },
-  { text: "Hotels with an **llms.txt file** give AI crawlers explicit content permissions, improving generative search visibility.", category: "Technology" },
-  { text: "A **1% shift from OTA to direct** bookings can increase net revenue per booking by up to 20%.", category: "Revenue" },
-  { text: "Over **60% of travellers** visit a hotel's own website before booking — but fewer than 40% complete their reservation there.", category: "Direct Booking" },
-  { text: "Google AI Overviews now appear in **over 30% of hotel-related searches** — structured data is your ticket in.", category: "AI Search" },
-  { text: "Hotels using **FAQ schema markup** are significantly more likely to be cited directly in AI-generated answers.", category: "GEO" },
-  { text: "Measuring your **direct booking KPIs** on a regular basis is the first step to reducing OTA dependency.", category: "Strategy" },
-];
+const FACTS: Record<string, { text: string; category: string }[]> = {
+  en: [
+    { text: "Hotels that invest in direct booking technology see up to **30% lower distribution costs** compared to OTA-dependent properties.", category: "Revenue" },
+    { text: "**AI-powered search tools** like ChatGPT and Perplexity now influence over 20% of hotel discovery journeys.", category: "AI Search" },
+    { text: "Hotels with structured data markup are **3x more likely** to appear in AI-generated travel recommendations.", category: "GEO" },
+    { text: "The average OTA commission is **15–25% per booking** — direct bookings cost a fraction of that.", category: "Strategy" },
+    { text: "Hotels with an **llms.txt file** give AI crawlers explicit content permissions, improving generative search visibility.", category: "Technology" },
+    { text: "A **1% shift from OTA to direct** bookings can increase net revenue per booking by up to 20%.", category: "Revenue" },
+    { text: "Over **60% of travellers** visit a hotel's own website before booking — but fewer than 40% complete their reservation there.", category: "Direct Booking" },
+    { text: "Google AI Overviews now appear in **over 30% of hotel-related searches** — structured data is your ticket in.", category: "AI Search" },
+    { text: "Hotels using **FAQ schema markup** are significantly more likely to be cited directly in AI-generated answers.", category: "GEO" },
+    { text: "Measuring your **direct booking KPIs** on a regular basis is the first step to reducing OTA dependency.", category: "Strategy" },
+  ],
+  it: [
+    { text: "Gli hotel che investono nella tecnologia di prenotazione diretta registrano fino al **30% in meno di costi di distribuzione** rispetto a quelli dipendenti dalle OTA.", category: "Ricavi" },
+    { text: "**Strumenti di ricerca basati sull'IA** come ChatGPT e Perplexity influenzano oggi oltre il 20% dei percorsi di scoperta degli hotel.", category: "Ricerca AI" },
+    { text: "Gli hotel con markup di dati strutturati hanno **3 volte più probabilità** di apparire nelle raccomandazioni generate dall'IA.", category: "GEO" },
+    { text: "La commissione media delle OTA è del **15–25% per prenotazione** — le prenotazioni dirette costano una frazione di questo.", category: "Strategia" },
+    { text: "Gli hotel con un **file llms.txt** forniscono ai crawler AI autorizzazioni esplicite sui contenuti, migliorando la visibilità nella ricerca generativa.", category: "Tecnologia" },
+    { text: "Un **aumento dell'1% dal canale OTA a quello diretto** può incrementare il ricavo netto per prenotazione fino al 20%.", category: "Ricavi" },
+    { text: "Oltre il **60% dei viaggiatori** visita il sito dell'hotel prima di prenotare — ma meno del 40% completa la prenotazione lì.", category: "Prenotazione Diretta" },
+    { text: "Google AI Overviews appaiono in **oltre il 30% delle ricerche relative agli hotel** — i dati strutturati sono il tuo biglietto d'ingresso.", category: "Ricerca AI" },
+    { text: "Gli hotel che utilizzano il **markup dello schema FAQ** hanno molte più probabilità di essere citati nelle risposte generate dall'IA.", category: "GEO" },
+    { text: "Monitorare regolarmente i tuoi **KPI di prenotazione diretta** è il primo passo per ridurre la dipendenza dalle OTA.", category: "Strategia" },
+  ],
+  es: [
+    { text: "Los hoteles que invierten en tecnología de reserva directa ven hasta un **30% menos en costes de distribución** en comparación con los dependientes de las OTA.", category: "Ingresos" },
+    { text: "**Herramientas de búsqueda con IA** como ChatGPT y Perplexity influyen ahora en más del 20% de los viajes de descubrimiento de hoteles.", category: "Búsqueda IA" },
+    { text: "Los hoteles con marcado de datos estructurados tienen **3 veces más probabilidades** de aparecer en recomendaciones generadas por IA.", category: "GEO" },
+    { text: "La comisión media de las OTA es del **15–25% por reserva** — las reservas directas cuestan una fracción de eso.", category: "Estrategia" },
+    { text: "Los hoteles con un **archivo llms.txt** dan a los rastreadores de IA permisos explícitos de contenido, mejorando la visibilidad en la búsqueda generativa.", category: "Tecnología" },
+    { text: "Un **aumento del 1% de OTA a directo** puede incrementar el ingreso neto por reserva hasta un 20%.", category: "Ingresos" },
+    { text: "Más del **60% de los viajeros** visita el sitio web del hotel antes de reservar — pero menos del 40% completa su reserva allí.", category: "Reserva Directa" },
+    { text: "Los AI Overviews de Google aparecen en **más del 30% de las búsquedas relacionadas con hoteles** — los datos estructurados son tu entrada.", category: "Búsqueda IA" },
+    { text: "Los hoteles que usan el **marcado de esquema FAQ** tienen muchas más probabilidades de ser citados en las respuestas generadas por IA.", category: "GEO" },
+    { text: "Medir regularmente tus **KPIs de reserva directa** es el primer paso para reducir la dependencia de las OTA.", category: "Estrategia" },
+  ],
+  pl: [
+    { text: "Hotele inwestujące w technologię bezpośrednich rezerwacji osiągają nawet **30% niższe koszty dystrybucji** w porównaniu z hotelami zależnymi od OTA.", category: "Przychody" },
+    { text: "**Narzędzia wyszukiwania oparte na AI**, takie jak ChatGPT i Perplexity, wpływają na ponad 20% podróży odkrywania hoteli.", category: "Wyszukiwanie AI" },
+    { text: "Hotele z oznaczeniem danych strukturalnych mają **3 razy większe szanse** na pojawienie się w rekomendacjach generowanych przez AI.", category: "GEO" },
+    { text: "Średnia prowizja OTA wynosi **15–25% za rezerwację** — bezpośrednie rezerwacje kosztują ułamek tego.", category: "Strategia" },
+    { text: "Hotele z **plikiem llms.txt** dają crawlerom AI wyraźne uprawnienia do treści, poprawiając widoczność w wyszukiwaniu generatywnym.", category: "Technologia" },
+    { text: "**1% przesunięcia z OTA na bezpośrednie** rezerwacje może zwiększyć przychód netto na rezerwację nawet o 20%.", category: "Przychody" },
+    { text: "Ponad **60% podróżnych** odwiedza stronę hotelu przed rezerwacją — ale mniej niż 40% finalizuje tam rezerwację.", category: "Rezerwacja Bezpośrednia" },
+    { text: "Google AI Overviews pojawiają się w **ponad 30% wyszukiwań związanych z hotelami** — dane strukturalne to Twój bilet wstępu.", category: "Wyszukiwanie AI" },
+    { text: "Hotele używające **oznaczenia schematu FAQ** mają znacznie większe szanse na cytowanie w odpowiedziach generowanych przez AI.", category: "GEO" },
+    { text: "Regularne mierzenie **KPI bezpośrednich rezerwacji** to pierwszy krok do zmniejszenia zależności od OTA.", category: "Strategia" },
+  ],
+  fr: [
+    { text: "Les hôtels qui investissent dans la technologie de réservation directe enregistrent jusqu'à **30% de coûts de distribution en moins** par rapport aux propriétés dépendantes des OTA.", category: "Revenus" },
+    { text: "**Les outils de recherche alimentés par l'IA**, comme ChatGPT et Perplexity, influencent désormais plus de 20% des parcours de découverte hôtelière.", category: "Recherche IA" },
+    { text: "Les hôtels avec un balisage de données structurées ont **3 fois plus de chances** d'apparaître dans les recommandations générées par l'IA.", category: "GEO" },
+    { text: "La commission OTA moyenne est de **15 à 25% par réservation** — les réservations directes coûtent une fraction de cela.", category: "Stratégie" },
+    { text: "Les hôtels dotés d'un **fichier llms.txt** donnent aux robots IA des autorisations explicites sur le contenu, améliorant la visibilité dans la recherche générative.", category: "Technologie" },
+    { text: "Un **glissement de 1% des OTA vers le direct** peut augmenter le revenu net par réservation jusqu'à 20%.", category: "Revenus" },
+    { text: "Plus de **60% des voyageurs** visitent le site web d'un hôtel avant de réserver — mais moins de 40% finalisent leur réservation là-bas.", category: "Réservation Directe" },
+    { text: "Google AI Overviews apparaît dans **plus de 30% des recherches liées aux hôtels** — les données structurées sont votre sésame.", category: "Recherche IA" },
+    { text: "Les hôtels utilisant le **balisage de schéma FAQ** sont beaucoup plus susceptibles d'être cités dans les réponses générées par l'IA.", category: "GEO" },
+    { text: "Mesurer régulièrement vos **KPIs de réservation directe** est la première étape pour réduire la dépendance aux OTA.", category: "Stratégie" },
+  ],
+  de: [
+    { text: "Hotels, die in Direktbuchungstechnologie investieren, verzeichnen bis zu **30% niedrigere Vertriebskosten** im Vergleich zu OTA-abhängigen Häusern.", category: "Umsatz" },
+    { text: "**KI-gestützte Suchwerkzeuge** wie ChatGPT und Perplexity beeinflussen inzwischen über 20% der Hotel-Entdeckungsreisen.", category: "KI-Suche" },
+    { text: "Hotels mit strukturierten Daten-Markups haben eine **3-fach höhere Chance**, in KI-generierten Reiseempfehlungen zu erscheinen.", category: "GEO" },
+    { text: "Die durchschnittliche OTA-Provision beträgt **15–25% pro Buchung** — Direktbuchungen kosten einen Bruchteil davon.", category: "Strategie" },
+    { text: "Hotels mit einer **llms.txt-Datei** geben KI-Crawlern explizite Inhaltsberechtigungen und verbessern so die Sichtbarkeit in der generativen Suche.", category: "Technologie" },
+    { text: "Eine **1%-Verschiebung von OTA zu Direkt** kann den Nettoumsatz pro Buchung um bis zu 20% steigern.", category: "Umsatz" },
+    { text: "Über **60% der Reisenden** besuchen die Hotel-Website vor der Buchung — aber weniger als 40% schließen die Buchung dort ab.", category: "Direktbuchung" },
+    { text: "Google AI Overviews erscheinen in **über 30% der hotelbezogenen Suchanfragen** — strukturierte Daten sind Ihr Eintrittspunkt.", category: "KI-Suche" },
+    { text: "Hotels mit **FAQ-Schema-Markup** werden deutlich häufiger direkt in KI-generierten Antworten zitiert.", category: "GEO" },
+    { text: "Die regelmäßige Messung Ihrer **Direktbuchungs-KPIs** ist der erste Schritt zur Reduzierung der OTA-Abhängigkeit.", category: "Strategie" },
+  ],
+  cs: [
+    { text: "Hotely investující do technologie přímých rezervací dosahují až **o 30% nižší distribuční náklady** ve srovnání s hotely závislými na OTA.", category: "Příjmy" },
+    { text: "**Nástroje vyhledávání poháněné AI**, jako ChatGPT a Perplexity, nyní ovlivňují více než 20% cest za objevováním hotelů.", category: "Vyhledávání AI" },
+    { text: "Hotely se strukturovanými daty mají **3x vyšší pravděpodobnost** zobrazení v doporučeních generovaných AI.", category: "GEO" },
+    { text: "Průměrná provize OTA je **15–25% za rezervaci** — přímé rezervace stojí zlomek toho.", category: "Strategie" },
+    { text: "Hotely se **souborem llms.txt** dávají AI crawlerům explicitní oprávnění k obsahu, čímž zlepšují viditelnost v generativním vyhledávání.", category: "Technologie" },
+    { text: "**1% přesun z OTA na přímé** rezervace může zvýšit čistý příjem na rezervaci až o 20%.", category: "Příjmy" },
+    { text: "Více než **60% cestujících** navštíví webové stránky hotelu před rezervací — ale méně než 40% tam rezervaci dokončí.", category: "Přímá rezervace" },
+    { text: "Google AI Overviews se zobrazují v **více než 30% vyhledávání souvisejících s hotely** — strukturovaná data jsou vaší vstupenkou.", category: "Vyhledávání AI" },
+    { text: "Hotely používající **značkování schématu FAQ** mají výrazně vyšší pravděpodobnost přímého citování v odpovědích generovaných AI.", category: "GEO" },
+    { text: "Pravidelné měření vašich **KPI přímých rezervací** je prvním krokem ke snížení závislosti na OTA.", category: "Strategie" },
+  ],
+};
 
 function renderFact(text: string) {
   return text.split(/\*\*(.*?)\*\*/g).map((part, i) =>
@@ -252,10 +334,11 @@ export const AiAudit: React.FC = () => {
 
   useEffect(() => {
     if (view !== 'loading') return;
-    setFactIndex(Math.floor(Math.random() * FACTS.length));
-    const id = setInterval(() => setFactIndex(i => (i + 1) % FACTS.length), 5000);
+    const facts = FACTS[language] ?? FACTS.en;
+    setFactIndex(Math.floor(Math.random() * facts.length));
+    const id = setInterval(() => setFactIndex(i => (i + 1) % facts.length), 5000);
     return () => clearInterval(id);
-  }, [view]);
+  }, [view, language]);
 
   const handleConsentAccept = () => {
     if (typeof window !== 'undefined') sessionStorage.setItem(CONSENT_KEY, 'accepted');
@@ -396,21 +479,27 @@ export const AiAudit: React.FC = () => {
           <p className="text-base text-gray-500 max-w-md mx-auto mb-10">{l.loadingSub}</p>
 
           <div className="max-w-sm mx-auto">
-            <p className="text-[10px] font-black uppercase tracking-[0.2em] text-gray-400 mb-3">Did you know?</p>
-            <div
-              key={factIndex}
-              className="bg-brand-success rounded-2xl p-6 text-left shadow-lg"
-              style={{ animation: 'factFadeIn 0.5s ease-out' }}
-            >
-              <p className="text-white text-base sm:text-lg font-semibold leading-relaxed">
-                {renderFact(FACTS[factIndex].text)}
-              </p>
-              <div className="mt-5 flex justify-end">
-                <span className="bg-brand-blue text-white text-[10px] font-black uppercase tracking-widest px-4 py-2 rounded-full">
-                  {FACTS[factIndex].category}
-                </span>
-              </div>
-            </div>
+            <p className="text-[10px] font-black uppercase tracking-[0.2em] text-gray-400 mb-3">{l.didYouKnow}</p>
+            {(() => {
+              const facts = FACTS[language] ?? FACTS.en;
+              const fact = facts[factIndex % facts.length];
+              return (
+                <div
+                  key={factIndex}
+                  className="bg-brand-success rounded-2xl p-6 text-left shadow-lg"
+                  style={{ animation: 'factFadeIn 0.5s ease-out' }}
+                >
+                  <p className="text-white text-base sm:text-lg font-semibold leading-relaxed">
+                    {renderFact(fact.text)}
+                  </p>
+                  <div className="mt-5 flex justify-end">
+                    <span className="bg-brand-blue text-white text-[10px] font-black uppercase tracking-widest px-4 py-2 rounded-full">
+                      {fact.category}
+                    </span>
+                  </div>
+                </div>
+              );
+            })()}
           </div>
 
           <style>{`
