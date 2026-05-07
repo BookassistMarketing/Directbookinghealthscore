@@ -336,7 +336,7 @@ export const AiAudit: React.FC = () => {
     if (view !== 'loading') return;
     const facts = FACTS[language] ?? FACTS.en;
     setFactIndex(Math.floor(Math.random() * facts.length));
-    const id = setInterval(() => setFactIndex(i => (i + 1) % facts.length), 5000);
+    const id = setInterval(() => setFactIndex(i => (i + 1) % facts.length), 7000);
     return () => clearInterval(id);
   }, [view, language]);
 
