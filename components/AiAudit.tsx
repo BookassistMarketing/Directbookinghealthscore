@@ -186,6 +186,27 @@ const labelsMap: Record<Language, {
   },
 };
 
+const FACTS: { text: string; category: string }[] = [
+  { text: "Hotels that invest in direct booking technology see up to **30% lower distribution costs** compared to OTA-dependent properties.", category: "Revenue" },
+  { text: "**AI-powered search tools** like ChatGPT and Perplexity now influence over 20% of hotel discovery journeys.", category: "AI Search" },
+  { text: "Hotels with structured data markup are **3x more likely** to appear in AI-generated travel recommendations.", category: "GEO" },
+  { text: "The average OTA commission is **15–25% per booking** — direct bookings cost a fraction of that.", category: "Strategy" },
+  { text: "Hotels with an **llms.txt file** give AI crawlers explicit content permissions, improving generative search visibility.", category: "Technology" },
+  { text: "A **1% shift from OTA to direct** bookings can increase net revenue per booking by up to 20%.", category: "Revenue" },
+  { text: "Over **60% of travellers** visit a hotel's own website before booking — but fewer than 40% complete their reservation there.", category: "Direct Booking" },
+  { text: "Google AI Overviews now appear in **over 30% of hotel-related searches** — structured data is your ticket in.", category: "AI Search" },
+  { text: "Hotels using **FAQ schema markup** are significantly more likely to be cited directly in AI-generated answers.", category: "GEO" },
+  { text: "Measuring your **direct booking KPIs** on a regular basis is the first step to reducing OTA dependency.", category: "Strategy" },
+];
+
+function renderFact(text: string) {
+  return text.split(/\*\*(.*?)\*\*/g).map((part, i) =>
+    i % 2 === 1
+      ? <span key={i} className="text-yellow-300 font-black">{part}</span>
+      : <span key={i}>{part}</span>
+  );
+}
+
 function normaliseUrl(raw: string): string | null {
   const trimmed = raw.trim();
   if (!trimmed) return null;
@@ -220,6 +241,7 @@ export const AiAudit: React.FC = () => {
   // submit instantly. Both signals are checked server-side in /api/ai-audit.
   const [honeypot, setHoneypot] = useState('');
   const formRenderedAt = useRef<number>(Date.now());
+  const [factIndex, setFactIndex] = useState(0);
 
   useEffect(() => {
     if (typeof window === 'undefined') return;
@@ -227,6 +249,13 @@ export const AiAudit: React.FC = () => {
     setConsentChecked(true);
     formRenderedAt.current = Date.now();
   }, []);
+
+  useEffect(() => {
+    if (view !== 'loading') return;
+    setFactIndex(Math.floor(Math.random() * FACTS.length));
+    const id = setInterval(() => setFactIndex(i => (i + 1) % FACTS.length), 5000);
+    return () => clearInterval(id);
+  }, [view]);
 
   const handleConsentAccept = () => {
     if (typeof window !== 'undefined') sessionStorage.setItem(CONSENT_KEY, 'accepted');
@@ -361,10 +390,35 @@ export const AiAudit: React.FC = () => {
       )}
 
       {view === 'loading' && (
-        <div className="text-center py-20 sm:py-32">
-          <Loader2 className="w-12 h-12 text-brand-blue mx-auto mb-6 animate-spin" />
-          <h2 className="text-2xl sm:text-3xl font-black text-gray-900 mb-3">{l.loading}</h2>
-          <p className="text-base text-gray-500 max-w-md mx-auto">{l.loadingSub}</p>
+        <div className="text-center py-12 sm:py-20">
+          <Loader2 className="w-10 h-10 text-brand-blue mx-auto mb-5 animate-spin" />
+          <h2 className="text-2xl sm:text-3xl font-black text-gray-900 mb-2">{l.loading}</h2>
+          <p className="text-base text-gray-500 max-w-md mx-auto mb-10">{l.loadingSub}</p>
+
+          <div className="max-w-sm mx-auto">
+            <p className="text-[10px] font-black uppercase tracking-[0.2em] text-gray-400 mb-3">Did you know?</p>
+            <div
+              key={factIndex}
+              className="bg-brand-success rounded-2xl p-6 text-left shadow-lg"
+              style={{ animation: 'factFadeIn 0.5s ease-out' }}
+            >
+              <p className="text-white text-base sm:text-lg font-semibold leading-relaxed">
+                {renderFact(FACTS[factIndex].text)}
+              </p>
+              <div className="mt-5 flex justify-end">
+                <span className="bg-brand-blue text-white text-[10px] font-black uppercase tracking-widest px-4 py-2 rounded-full">
+                  {FACTS[factIndex].category}
+                </span>
+              </div>
+            </div>
+          </div>
+
+          <style>{`
+            @keyframes factFadeIn {
+              from { opacity: 0; transform: translateY(8px); }
+              to   { opacity: 1; transform: translateY(0); }
+            }
+          `}</style>
         </div>
       )}
 
