@@ -98,20 +98,22 @@ export const Quiz: React.FC<QuizProps> = ({ questions, onComplete }) => {
 
         <div className="bg-gray-50 p-4 sm:p-10 border-t border-gray-100 grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4 mt-auto">
           <button
+            key={`no-${currentIndex}`}
             onClick={() => handleAnswer(AnswerValue.NO)}
-            className="flex items-center justify-center gap-3 p-4 rounded-xl border-2 border-gray-200 bg-white text-gray-600 hover:border-brand-accent hover:text-brand-accent hover:bg-red-50 transition-all duration-200 group active:scale-[0.98]"
+            className="flex items-center justify-center gap-3 p-4 rounded-xl border-2 border-gray-200 bg-white text-gray-600 [@media(hover:hover)]:hover:border-brand-accent [@media(hover:hover)]:hover:text-brand-accent [@media(hover:hover)]:hover:bg-red-50 active:border-brand-accent active:text-brand-accent active:bg-red-50 transition-all duration-200 group active:scale-[0.98]"
           >
-            <XCircle className="w-6 h-6 group-hover:scale-110 transition-transform flex-shrink-0" />
+            <XCircle className="w-6 h-6 [@media(hover:hover)]:group-hover:scale-110 transition-transform flex-shrink-0" />
             <span className="font-semibold text-lg">
                <EditableText id="quiz.btn.no" defaultText={labels.no} as="span" />
             </span>
           </button>
 
           <button
+            key={`yes-${currentIndex}`}
             onClick={() => handleAnswer(AnswerValue.YES)}
-            className="flex items-center justify-center gap-3 p-4 rounded-xl border-2 border-gray-200 bg-white text-gray-600 hover:border-brand-success hover:text-brand-success hover:bg-teal-50 transition-all duration-200 group active:scale-[0.98]"
+            className="flex items-center justify-center gap-3 p-4 rounded-xl border-2 border-gray-200 bg-white text-gray-600 [@media(hover:hover)]:hover:border-brand-success [@media(hover:hover)]:hover:text-brand-success [@media(hover:hover)]:hover:bg-teal-50 active:border-brand-success active:text-brand-success active:bg-teal-50 transition-all duration-200 group active:scale-[0.98]"
           >
-            <CheckCircle2 className="w-6 h-6 group-hover:scale-110 transition-transform flex-shrink-0" />
+            <CheckCircle2 className="w-6 h-6 [@media(hover:hover)]:group-hover:scale-110 transition-transform flex-shrink-0" />
             <span className="font-semibold text-lg">
                <EditableText id="quiz.btn.yes" defaultText={labels.yes} as="span" />
             </span>
