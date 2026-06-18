@@ -20,6 +20,7 @@ const PROJECT_ROOT = process.cwd();
 const ALLOWED_PATHS = [
   'services/geminiService.ts',
   'lib/api-security.ts',
+  'lib/staff-auth.ts',
   'app/api/', // any file under the API routes directory
 ];
 
@@ -28,6 +29,8 @@ const ALLOWED_PATHS = [
 const FORBIDDEN_PATTERNS = [
   /process\.env\.GEMINI_API_KEY/,
   /process\.env\.AUDIT_RATE_LIMIT_SECRET/,
+  /process\.env\.STAFF_PASSWORD/,
+  /process\.env\.STAFF_TOKEN_SECRET/,
 ];
 
 // Directories to scan. Skip node_modules, .next, build output, scripts itself.

@@ -30,6 +30,21 @@ export function middleware(req: NextRequest) {
     return NextResponse.next();
   }
 
+  // /staff is the hidden English-only staff bypass hub. Don't rewrite it
+  // based on the user's locale cookie — the page has no localised version
+  // and the redirect would 404.
+  if (pathname === '/staff' || pathname.startsWith('/staff/')) {
+    return NextResponse.next();
+  }
+
+  // Signed-in staff stay on English everywhere. The cookie is set by the
+  // /staff hub on sign-in and cleared on sign-out. Non-authoritative — actual
+  // audit bypass still requires server-verified token; cookie just suppresses
+  // the locale redirect.
+  if (req.cookies.get('hhc_staff')?.value === '1') {
+    return NextResponse.next();
+  }
+
   // Respect explicit cookie set by the language switcher. If the user manually
   // chose a locale, don't second-guess them on future visits.
   const cookieLocale = req.cookies.get(COOKIE_NAME)?.value;

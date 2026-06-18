@@ -2,7 +2,7 @@
 
 import React, { useEffect, useRef, useState } from 'react';
 import { useRouter } from 'next/navigation';
-import { Sparkles, Globe, Loader2, AlertCircle, ArrowRight, RotateCcw, ExternalLink } from 'lucide-react';
+import { Sparkles, Globe, Loader2, AlertCircle, ArrowRight, RotateCcw, ExternalLink, ShieldCheck } from 'lucide-react';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 import { Button } from './Button';
@@ -11,6 +11,7 @@ import { LeadCapture } from './LeadCapture';
 import { useContent } from '../contexts/ContentContext';
 import { Language } from '../types';
 import { generateAiReadinessReport } from '../services/aiService';
+import { checkStaffBypass } from '../lib/staffBypass';
 
 const CONSENT_KEY = 'hhc_gemini_consent';
 
@@ -324,12 +325,20 @@ export const AiAudit: React.FC = () => {
   const [honeypot, setHoneypot] = useState('');
   const formRenderedAt = useRef<number>(Date.now());
   const [factIndex, setFactIndex] = useState(0);
+  const [isStaffBypass, setIsStaffBypass] = useState(false);
 
   useEffect(() => {
     if (typeof window === 'undefined') return;
     setConsentAccepted(sessionStorage.getItem(CONSENT_KEY) === 'accepted');
     setConsentChecked(true);
     formRenderedAt.current = Date.now();
+    let cancelled = false;
+    checkStaffBypass().then(ok => {
+      if (!cancelled) setIsStaffBypass(ok);
+    });
+    return () => {
+      cancelled = true;
+    };
   }, []);
 
   useEffect(() => {
@@ -404,7 +413,14 @@ export const AiAudit: React.FC = () => {
         <ConsentModal onAccept={handleConsentAccept} onDecline={handleConsentDecline} />
       )}
 
-      {view === 'form_gate' && (
+      {isStaffBypass && (
+        <div className="mb-4 inline-flex items-center gap-2 px-3 py-1 rounded-full bg-brand-yellow text-gray-900 text-xs font-bold uppercase tracking-widest shadow-sm">
+          <ShieldCheck className="w-3.5 h-3.5" />
+          Bookassist Staff Mode
+        </div>
+      )}
+
+      {view === 'form_gate' && !isStaffBypass && (
         <LeadCapture onUnlock={() => setView('done')} />
       )}
 
@@ -561,7 +577,7 @@ export const AiAudit: React.FC = () => {
 
           <div className="text-center mt-8">
             <Button
-              onClick={() => setView('form_gate')}
+              onClick={() => setView(isStaffBypass ? 'done' : 'form_gate')}
               className="px-10 py-4 text-base shadow-lg"
             >
               {l.seeMore} <ArrowRight size={18} className="ml-2 inline-block" />

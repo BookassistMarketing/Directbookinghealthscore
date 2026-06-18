@@ -1,13 +1,14 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { PieChart, Pie, Cell, ResponsiveContainer } from 'recharts';
-import { RefreshCcw, ArrowRight, ExternalLink } from 'lucide-react';
+import { RefreshCcw, ArrowRight, ExternalLink, ShieldCheck } from 'lucide-react';
 import { Answer, AnswerValue, Language } from '../types';
 import type { DynamicQuestion } from '../types';
 import { useContent } from '../contexts/ContentContext';
 import { Button } from './Button';
 import { LeadCapture } from './LeadCapture';
+import { checkStaffBypass } from '../lib/staffBypass';
 
 interface ResultsProps {
   questions: DynamicQuestion[];
@@ -18,7 +19,26 @@ interface ResultsProps {
 
 export const Results: React.FC<ResultsProps> = ({ questions, answers, onReset, onGetFullReport }) => {
   const [showGate, setShowGate] = useState(false);
+  const [isStaffBypass, setIsStaffBypass] = useState(false);
   const { language } = useContent();
+
+  useEffect(() => {
+    let cancelled = false;
+    checkStaffBypass().then(ok => {
+      if (!cancelled) setIsStaffBypass(ok);
+    });
+    return () => {
+      cancelled = true;
+    };
+  }, []);
+
+  const handleFullReportClick = () => {
+    if (isStaffBypass) {
+      onGetFullReport();
+    } else {
+      setShowGate(true);
+    }
+  };
 
   const maxScore = questions.reduce((acc, q) => acc + q.weight, 0);
 
@@ -75,8 +95,15 @@ export const Results: React.FC<ResultsProps> = ({ questions, answers, onReset, o
 
   return (
     <div className="w-full max-w-4xl px-4 sm:px-6 py-12 flex flex-col items-center mx-auto">
-      {showGate && (
+      {showGate && !isStaffBypass && (
         <LeadCapture onUnlock={() => { setShowGate(false); onGetFullReport(); }} />
+      )}
+
+      {isStaffBypass && (
+        <div className="mb-6 inline-flex items-center gap-2 px-3 py-1 rounded-full bg-brand-yellow text-gray-900 text-xs font-bold uppercase tracking-widest shadow-sm">
+          <ShieldCheck className="w-3.5 h-3.5" />
+          Bookassist Staff Mode
+        </div>
       )}
 
       <div className="w-full flex justify-center">
@@ -125,7 +152,7 @@ export const Results: React.FC<ResultsProps> = ({ questions, answers, onReset, o
             <ExternalLink size={18} />
             {l.bookDemo}
           </Button>
-          <Button onClick={() => setShowGate(true)} className="w-full sm:w-auto px-8 py-4 rounded-xl font-black text-sm uppercase tracking-widest shadow-xl">
+          <Button onClick={handleFullReportClick} className="w-full sm:w-auto px-8 py-4 rounded-xl font-black text-sm uppercase tracking-widest shadow-xl">
             {l.getFullReport} <ArrowRight size={18} />
           </Button>
         </div>
