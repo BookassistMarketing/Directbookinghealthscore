@@ -2,7 +2,7 @@
 
 import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
-import { Lock, ShieldCheck, AlertCircle, Loader2, LogOut, ArrowRight, ClipboardCheck, Sparkles } from 'lucide-react';
+import { Lock, ShieldCheck, AlertCircle, Loader2, LogOut, ArrowRight, ClipboardCheck, Sparkles, Eye, EyeOff } from 'lucide-react';
 import {
   storeStaffToken,
   clearStaffToken,
@@ -15,6 +15,7 @@ type Status = 'checking' | 'signed_out' | 'signed_in';
 export function StaffHub() {
   const [status, setStatus] = useState<Status>('checking');
   const [password, setPassword] = useState('');
+  const [showPassword, setShowPassword] = useState(false);
   const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [expiresAt, setExpiresAt] = useState<number | null>(null);
@@ -107,17 +108,28 @@ export function StaffHub() {
               <label htmlFor="staff-password" className="block text-xs font-bold uppercase tracking-widest text-gray-500 mb-2">
                 Password
               </label>
-              <input
-                id="staff-password"
-                type="password"
-                autoComplete="current-password"
-                value={password}
-                onChange={e => setPassword(e.target.value)}
-                disabled={submitting}
-                className="w-full px-4 py-3 text-base bg-white border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-brand-blue focus:border-transparent disabled:opacity-50"
-                aria-invalid={Boolean(error)}
-                aria-describedby={error ? 'staff-password-error' : undefined}
-              />
+              <div className="relative">
+                <input
+                  id="staff-password"
+                  type={showPassword ? 'text' : 'password'}
+                  autoComplete="current-password"
+                  value={password}
+                  onChange={e => setPassword(e.target.value)}
+                  disabled={submitting}
+                  className="w-full pl-4 pr-12 py-3 text-base bg-white border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-brand-blue focus:border-transparent disabled:opacity-50"
+                  aria-invalid={Boolean(error)}
+                  aria-describedby={error ? 'staff-password-error' : undefined}
+                />
+                <button
+                  type="button"
+                  onClick={() => setShowPassword(prev => !prev)}
+                  className="absolute right-3 top-1/2 -translate-y-1/2 p-1 text-gray-400 hover:text-gray-700 transition-colors"
+                  aria-label={showPassword ? 'Hide password' : 'Show password'}
+                  tabIndex={-1}
+                >
+                  {showPassword ? <EyeOff size={18} /> : <Eye size={18} />}
+                </button>
+              </div>
             </div>
 
             {error && (
