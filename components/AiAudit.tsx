@@ -398,6 +398,46 @@ function safeHostnameForFilename(url: string): string {
   }
 }
 
+// Walk upwards from idealY looking for a row of pixels that's mostly
+// background-coloured (i.e. between cards / between table rows). Returns the
+// Y position of the cleanest row within `maxSearchUpPx`, or `idealY` if no
+// safe break is found. Used so PDF page breaks don't slice through table
+// rows mid-cell.
+function findSafePageBreakY(
+  canvas: HTMLCanvasElement,
+  idealY: number,
+  maxSearchUpPx: number,
+): number {
+  const ctx = canvas.getContext('2d');
+  if (!ctx) return idealY;
+  const width = canvas.width;
+  const sampleEvery = Math.max(2, Math.floor(width / 200));
+
+  const isCleanRow = (y: number): boolean => {
+    if (y < 0 || y >= canvas.height) return false;
+    const data = ctx.getImageData(0, y, width, 1).data;
+    let nonBackground = 0;
+    for (let x = 0; x < width; x += sampleEvery) {
+      const i = x * 4;
+      const r = data[i];
+      const g = data[i + 1];
+      const b = data[i + 2];
+      // Background is either page bg #F4F6F8 (244,246,248) or card white
+      // (~255,255,255). Anything darker than ~230 on any channel is content.
+      if (r < 230 || g < 230 || b < 230) {
+        nonBackground += 1;
+        if (nonBackground > 2) return false; // tolerate a couple of stray pixels
+      }
+    }
+    return true;
+  };
+
+  for (let dy = 0; dy <= maxSearchUpPx; dy += 1) {
+    if (isCleanRow(idealY - dy)) return idealY - dy;
+  }
+  return idealY;
+}
+
 function normaliseUrl(raw: string): string | null {
   const trimmed = raw.trim();
   if (!trimmed) return null;
@@ -489,13 +529,32 @@ export const AiAudit: React.FC = () => {
 
       let consumedMm = 0;
       let pageIndex = 0;
+      // Pull the page break up to a clean (background-only) row when possible,
+      // so tables and cards don't get sliced mid-content. Search window is
+      // ~30% of a page — enough to step over a tall card without skipping
+      // whole pages.
+      const maxSearchUpPx = Math.floor(usablePageHeightMm * 0.3 / pxToMm);
       while (consumedMm < totalHeightMm - 0.5) {
         if (pageIndex > 0) pdf.addPage();
         pdf.setFillColor(244, 246, 248);
         pdf.rect(0, 0, pageWidth, pageHeight, 'F');
 
         const remainingMm = totalHeightMm - consumedMm;
-        const sliceMm = Math.min(usablePageHeightMm, remainingMm);
+        let sliceMm: number;
+        if (remainingMm <= usablePageHeightMm) {
+          // Final page — take everything left, no break-point search needed.
+          sliceMm = remainingMm;
+        } else {
+          const idealEndYPx = Math.floor((consumedMm + usablePageHeightMm) / pxToMm);
+          const safeEndYPx = findSafePageBreakY(canvas, idealEndYPx, maxSearchUpPx);
+          const candidateSliceMm = safeEndYPx * pxToMm - consumedMm;
+          // Never produce a page < 50% of usable height (would waste paper if
+          // the search jumped too aggressively).
+          sliceMm =
+            candidateSliceMm >= usablePageHeightMm * 0.5
+              ? candidateSliceMm
+              : usablePageHeightMm;
+        }
         const sliceCanvasY = consumedMm / pxToMm;
         const sliceCanvasH = sliceMm / pxToMm;
 
