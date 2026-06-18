@@ -382,10 +382,12 @@ export const AiAudit: React.FC = () => {
         formAgeMs,
       });
       setReport(result);
-      // Staff bypass: skip the blurred preview teaser and go straight to the
-      // full dashboard. Real users see the preview → form_gate (or done if
-      // they unlock) flow.
-      setView(isStaffBypass ? 'done' : 'preview');
+      // Re-check bypass at transition time — the mount-time check might still
+      // be in flight if the user submitted quickly. Staff bypass skips the
+      // blurred preview entirely and lands on the full dashboard.
+      const bypassNow = isStaffBypass || (await checkStaffBypass());
+      if (bypassNow && !isStaffBypass) setIsStaffBypass(true);
+      setView(bypassNow ? 'done' : 'preview');
     } catch (err) {
       console.error('[AiAudit] Audit failed:', err);
       setRequestError(l.errorBody);

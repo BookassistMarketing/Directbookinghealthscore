@@ -312,6 +312,40 @@ function safeHostname(url: string): string {
   }
 }
 
+// Inject a <script> tag if the expected global isn't already there. Resolves
+// to whatever the getGlobal() returns once the script has loaded (or
+// immediately if the script was already loaded by app/layout.tsx). We do this
+// inside the component instead of trusting the layout-level CDN preloads
+// because Next.js App Router's <Script strategy="beforeInteractive"> has
+// proven flaky across deploys, and we want the PDF button to "just work".
+function ensureScript<T>(src: string, getGlobal: () => T): Promise<T> {
+  return new Promise((resolve) => {
+    const existing = getGlobal();
+    if (existing) {
+      resolve(existing);
+      return;
+    }
+    if (typeof document === 'undefined') {
+      resolve(getGlobal());
+      return;
+    }
+    // Avoid double-injecting if another caller is already loading the same URL.
+    const previous = document.querySelector(`script[data-pdf-src="${src}"]`);
+    if (previous) {
+      previous.addEventListener('load', () => resolve(getGlobal()), { once: true });
+      previous.addEventListener('error', () => resolve(getGlobal()), { once: true });
+      return;
+    }
+    const tag = document.createElement('script');
+    tag.src = src;
+    tag.async = true;
+    tag.dataset.pdfSrc = src;
+    tag.addEventListener('load', () => resolve(getGlobal()), { once: true });
+    tag.addEventListener('error', () => resolve(getGlobal()), { once: true });
+    document.head.appendChild(tag);
+  });
+}
+
 export const AiReadinessReport: React.FC<AiReadinessReportProps> = ({
   markdown,
   auditedUrl,
@@ -337,15 +371,28 @@ export const AiReadinessReport: React.FC<AiReadinessReportProps> = ({
   const handleDownloadPdf = async () => {
     if (isGeneratingPdf || !dashboardRef.current) return;
 
-    const html2canvas = (window as any).html2canvas;
-    const jsPDFConstructor = (window as any).jspdf?.jsPDF || (window as any).jsPDF;
-    if (!html2canvas || !jsPDFConstructor) {
-      window.print();
-      return;
-    }
-
     setIsGeneratingPdf(true);
     try {
+      const html2canvas = await ensureScript(
+        'https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js',
+        () => (window as any).html2canvas,
+      );
+      const jsPDFConstructor = await ensureScript(
+        'https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js',
+        () => (window as any).jspdf?.jsPDF || (window as any).jsPDF,
+      );
+
+      if (!html2canvas || !jsPDFConstructor) {
+        console.warn('[AiReadinessReport] PDF libs missing', {
+          html2canvas: !!html2canvas,
+          jsPDF: !!jsPDFConstructor,
+          knownGlobals: Object.keys(window).filter(k =>
+            /html2|jspdf|pdf/i.test(k),
+          ),
+        });
+        window.print();
+        return;
+      }
       const canvas = await html2canvas(dashboardRef.current, {
         scale: 2,
         useCORS: true,
