@@ -14,6 +14,12 @@ import {
   ArrowRight,
   ExternalLink,
   FileText,
+  Check,
+  Minus,
+  X,
+  HelpCircle,
+  ChevronDown,
+  ChevronUp,
 } from 'lucide-react';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
@@ -23,6 +29,12 @@ import {
   tierColor,
   type TierKey,
 } from '../lib/parseAiReport';
+import {
+  SCORING_CATEGORIES,
+  categoryUiStrings,
+  type CriterionStatus,
+  type ScoringCategory,
+} from '../lib/scoringCategories';
 import type { Language } from '../types';
 import { Button } from './Button';
 
@@ -312,6 +324,46 @@ function safeHostname(url: string): string {
   }
 }
 
+function statusVisual(
+  status: CriterionStatus | null,
+  cu: { legendMet: string; legendPartial: string; legendMissed: string; legendUnknown: string },
+) {
+  switch (status) {
+    case 'met':
+      return {
+        Icon: Check,
+        bg: 'bg-emerald-100',
+        ring: 'ring-1 ring-emerald-200',
+        text: 'text-emerald-700',
+        label: cu.legendMet,
+      };
+    case 'partial':
+      return {
+        Icon: Minus,
+        bg: 'bg-amber-100',
+        ring: 'ring-1 ring-amber-200',
+        text: 'text-amber-700',
+        label: cu.legendPartial,
+      };
+    case 'not-met':
+      return {
+        Icon: X,
+        bg: 'bg-rose-100',
+        ring: 'ring-1 ring-rose-200',
+        text: 'text-brand-accent',
+        label: cu.legendMissed,
+      };
+    default:
+      return {
+        Icon: HelpCircle,
+        bg: 'bg-gray-100',
+        ring: 'ring-1 ring-gray-200',
+        text: 'text-gray-400',
+        label: cu.legendUnknown,
+      };
+  }
+}
+
 // Inject a <script> tag if the expected global isn't already there. Resolves
 // to whatever the getGlobal() returns once the script has loaded (or
 // immediately if the script was already loaded by app/layout.tsx). We do this
@@ -359,6 +411,23 @@ export const AiReadinessReport: React.FC<AiReadinessReportProps> = ({
 
   const dashboardRef = useRef<HTMLDivElement>(null);
   const [isGeneratingPdf, setIsGeneratingPdf] = useState(false);
+  const [expandedCategories, setExpandedCategories] = useState<Set<string>>(new Set());
+  const cu = categoryUiStrings[language] ?? categoryUiStrings.en;
+
+  const toggleCategory = (key: string) => {
+    setExpandedCategories(prev => {
+      const next = new Set(prev);
+      if (next.has(key)) next.delete(key);
+      else next.add(key);
+      return next;
+    });
+  };
+
+  const allCategoryKeys = SCORING_CATEGORIES.map(c => c.key);
+  const allExpanded = allCategoryKeys.every(k => expandedCategories.has(k));
+  const expandAll = () => {
+    setExpandedCategories(allExpanded ? new Set() : new Set(allCategoryKeys));
+  };
 
   const parsedSomething =
     parsed.overallScore !== null ||
@@ -584,38 +653,94 @@ export const AiReadinessReport: React.FC<AiReadinessReportProps> = ({
           </section>
         )}
 
-        {/* SCORING BREAKDOWN */}
+        {/* SCORING BREAKDOWN — each category expands to its sub-criteria */}
         {parsed.scoringRows && parsed.scoringRows.length > 0 && (
           <section className="bg-white rounded-3xl shadow-sm border border-gray-100 overflow-hidden pdf-avoid-break">
-            <div className="px-6 sm:px-10 pt-6 pb-4 flex items-center justify-between gap-3">
+            <div className="px-6 sm:px-10 pt-6 pb-4 flex items-center justify-between gap-3 flex-wrap">
               <div className="flex items-center gap-3">
                 <div className="w-10 h-10 rounded-xl bg-emerald-50 text-emerald-700 flex items-center justify-center">
                   <Gauge className="w-5 h-5" />
                 </div>
                 <h3 className="text-lg font-bold text-gray-900 tracking-tight">{l.scoring}</h3>
               </div>
+              <button
+                onClick={expandAll}
+                className="text-xs font-bold uppercase tracking-widest text-brand-blue hover:underline"
+              >
+                {allExpanded ? cu.hide : cu.details}
+              </button>
             </div>
-            <div className="px-6 sm:px-10 pb-8 space-y-4">
+            <div className="px-6 sm:px-10 pb-8 space-y-3">
               {parsed.scoringRows.map((row, i) => {
                 const ratio = row.weight > 0 ? Math.max(0, Math.min(1, row.score / row.weight)) : 0;
                 const barColor =
                   ratio >= 0.8 ? '#2A9D8F' :
                   ratio >= 0.5 ? '#F59E0B' :
                   ratio > 0 ? '#FF8F1B' : '#E63946';
+                // Map this scoringRow to the static category metadata by
+                // position — Gemini emits categories in the order defined
+                // in the system prompt, and SCORING_CATEGORIES mirrors that
+                // order.
+                const meta: ScoringCategory | undefined = SCORING_CATEGORIES[i];
+                const isExpanded = meta ? expandedCategories.has(meta.key) : false;
                 return (
-                  <div key={i}>
-                    <div className="flex items-baseline justify-between gap-4 mb-1.5">
-                      <span className="text-sm sm:text-base font-semibold text-gray-800 leading-tight">{row.category}</span>
-                      <span className="text-sm font-black text-gray-900 whitespace-nowrap">
-                        {row.score}<span className="text-gray-400 font-normal"> / {row.weight}</span>
-                      </span>
-                    </div>
-                    <div className="h-2.5 w-full bg-gray-100 rounded-full overflow-hidden">
-                      <div
-                        className="h-full rounded-full transition-all"
-                        style={{ width: `${ratio * 100}%`, backgroundColor: barColor }}
-                      />
-                    </div>
+                  <div key={i} className="rounded-2xl border border-gray-100 overflow-hidden">
+                    <button
+                      type="button"
+                      onClick={() => meta && toggleCategory(meta.key)}
+                      className="w-full px-4 py-3 text-left bg-white hover:bg-gray-50 transition-colors"
+                      disabled={!meta}
+                    >
+                      <div className="flex items-baseline justify-between gap-4 mb-2">
+                        <span className="text-sm sm:text-base font-semibold text-gray-800 leading-tight">{row.category}</span>
+                        <div className="flex items-center gap-3 flex-shrink-0">
+                          <span className="text-sm font-black text-gray-900 whitespace-nowrap">
+                            {row.score}<span className="text-gray-400 font-normal"> / {row.weight}</span>
+                          </span>
+                          {meta && (
+                            isExpanded
+                              ? <ChevronUp className="w-4 h-4 text-gray-400" />
+                              : <ChevronDown className="w-4 h-4 text-gray-400" />
+                          )}
+                        </div>
+                      </div>
+                      <div className="h-2.5 w-full bg-gray-100 rounded-full overflow-hidden">
+                        <div
+                          className="h-full rounded-full transition-all"
+                          style={{ width: `${ratio * 100}%`, backgroundColor: barColor }}
+                        />
+                      </div>
+                    </button>
+
+                    {meta && isExpanded && (
+                      <div className="px-4 pt-3 pb-4 border-t border-gray-100 bg-gray-50/40">
+                        <p className="text-xs text-gray-500 leading-relaxed mb-3">{meta.shortDescription}</p>
+                        <ul className="space-y-2">
+                          {meta.criteria.map(c => {
+                            const status: CriterionStatus | null =
+                              parsed.criterionStatuses?.[`${meta.key}/${c.key}`] ?? null;
+                            const { Icon, ring, bg, text, label } = statusVisual(status, cu);
+                            return (
+                              <li key={c.key} className="flex items-start gap-3">
+                                <span
+                                  className={`mt-0.5 flex-shrink-0 w-5 h-5 rounded-full flex items-center justify-center ${bg} ${ring}`}
+                                  title={label}
+                                  aria-label={label}
+                                >
+                                  <Icon className={`w-3 h-3 ${text}`} />
+                                </span>
+                                <span className="flex-1 text-sm text-gray-700 leading-snug">
+                                  {c.label}
+                                  <span className="text-[10px] uppercase tracking-widest font-bold text-gray-400 ml-2 whitespace-nowrap">
+                                    {cu.weighs} {c.maxPoints} {cu.outOf}
+                                  </span>
+                                </span>
+                              </li>
+                            );
+                          })}
+                        </ul>
+                      </div>
+                    )}
                   </div>
                 );
               })}

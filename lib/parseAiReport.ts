@@ -20,6 +20,9 @@ export interface ParsedReport {
   issuesRows: IssueRow[] | null;
   fixesRows: FixRow[] | null;
   strategicAdvantage: string | null;
+  /** Map of "category-key/criterion-key" → status. Emitted by Gemini in a
+   *  machine-readable block; null if the block wasn't found. */
+  criterionStatuses: Record<string, 'met' | 'partial' | 'not-met'> | null;
   unrecognisedSections: { heading: string; body: string }[];
 }
 
@@ -172,12 +175,36 @@ export function parseAiReadinessReport(markdown: string): ParsedReport {
     issuesRows: null,
     fixesRows: null,
     strategicAdvantage: null,
+    criterionStatuses: null,
     unrecognisedSections: [],
   };
 
   if (!markdown || typeof markdown !== 'string') return empty;
 
-  const lines = markdown.split('\n');
+  // Per-criterion status block: collect all "category-key/criterion-key: status"
+  // lines from anywhere in the document. The keys are stable English
+  // identifiers (intentionally untranslated by Gemini per the prompt).
+  // Then strip those lines from the markdown so they don't bleed into any
+  // rendered section (notably the trailing Strategic Advantage paragraph).
+  const STATUS_LINE = /^[ \t]*([a-z][a-z0-9-]*)\/([a-z][a-z0-9-]*)[ \t]*:[ \t]*(met|partial|not[- ]?met)[ \t]*$/i;
+  const statuses: Record<string, 'met' | 'partial' | 'not-met'> = {};
+  const rawLines = markdown.split('\n');
+  const filteredLines: string[] = [];
+  for (const line of rawLines) {
+    const m = line.match(STATUS_LINE);
+    if (m) {
+      const raw = m[3].toLowerCase().replace(/\s+/g, '-');
+      const status: 'met' | 'partial' | 'not-met' =
+        raw === 'met' ? 'met' : raw === 'partial' ? 'partial' : 'not-met';
+      statuses[`${m[1]}/${m[2]}`] = status;
+    } else {
+      filteredLines.push(line);
+    }
+  }
+  if (Object.keys(statuses).length > 0) {
+    empty.criterionStatuses = statuses;
+  }
+  const lines = filteredLines;
 
   // 1. Overall score + tier label (first "X/100" in the document)
   const scoreMatch = markdown.match(OVERALL_SCORE_RE);

@@ -35,7 +35,34 @@ The Grand Hotel maintains a polished brand presentation with strong visual story
 Projected Score After Fixes: 66 / 100
 
 ## Strategic Advantage for Bookassist
-Bookassist's AI Readiness programme directly addresses every gap surfaced above through structured-data automation.`;
+Bookassist's AI Readiness programme directly addresses every gap surfaced above through structured-data automation.
+
+structured-data/organization: met
+structured-data/hotel-room: not-met
+structured-data/aggregate-rating: not-met
+structured-data/geo-coordinates: met
+structured-data/id-graph: not-met
+technical-crawlability/indexable: met
+technical-crawlability/clean-canonical: met
+technical-crawlability/no-render-blockers: met
+local-entity-linking/nearby-references: not-met
+local-entity-linking/address-neighborhood: met
+local-entity-linking/map-directions: not-met
+faq-presence/faq-schema-or-section: not-met
+semantic-coverage/topical-coverage: met
+semantic-coverage/question-headings: partial
+semantic-coverage/entity-rich-descriptions: not-met
+semantic-coverage/internal-links: not-met
+booking-pathway/direct-cta: met
+booking-pathway/direct-advantages: met
+booking-pathway/room-differentiators: met
+booking-pathway/pricing-framing: not-met
+metadata-diversity/unique-titles-meta: met
+metadata-diversity/descriptive-headings: not-met
+persona-use-case/persona-intents: partial
+media-alt/alt-strategy: partial
+voice-search/speakable-spec: not-met
+voice-search/nap-consistency: not-met`;
 
 const parsed = parseAiReadinessReport(sample);
 
@@ -60,6 +87,12 @@ const checks = [
   ['tier from score 82 = optimised', tierFromScore(82) === 'optimised'],
   ['tier from score 65 = near', tierFromScore(65) === 'near'],
   ['tier from score 20 = low', tierFromScore(20) === 'low'],
+  ['criterionStatuses extracted', parsed.criterionStatuses !== null],
+  ['criterionStatuses count = 26', parsed.criterionStatuses && Object.keys(parsed.criterionStatuses).length === 26],
+  ['structured-data/organization = met', parsed.criterionStatuses?.['structured-data/organization'] === 'met'],
+  ['structured-data/hotel-room = not-met', parsed.criterionStatuses?.['structured-data/hotel-room'] === 'not-met'],
+  ['semantic-coverage/question-headings = partial', parsed.criterionStatuses?.['semantic-coverage/question-headings'] === 'partial'],
+  ['strategic advantage does NOT contain status lines', !parsed.strategicAdvantage?.includes('organization:')],
 ];
 
 let pass = 0, fail = 0;
