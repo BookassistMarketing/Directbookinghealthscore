@@ -1,18 +1,19 @@
-// Verifies the AI Readiness Report parser handles the documented Gemini
-// output structure. Run with: node scripts/test-parser.mjs
-// (Uses Node 22+ native TS import via --experimental-strip-types.)
+// Verifies the AI Readiness Report parser handles the actual Gemini output
+// format — plain-text section labels (no `## ` markdown headers), tables,
+// score lines.
+// Run with: node --experimental-strip-types scripts/test-parser.mjs
 
 import { parseAiReadinessReport, tierFromScore } from '../lib/parseAiReport.ts';
 
-const sample = `## AI Visibility & Optimisation Summary
+const sample = `ai visibility & optimization summary
 The Grand Hotel, Dublin
-Overall score: 42 / 100 — Below AI-optimised threshold
-URL analysed: https://thegrandhotel.example.com
+overall score: 42 / 100 — Below AI-optimized threshold
+url analyzed: https://thegrandhotel.example.com
 
-## What we observed
+What we observed
 The Grand Hotel maintains a polished brand presentation with strong visual storytelling. However, our analysis surfaced multiple gaps in structured data, semantic coverage, and AI discoverability.
 
-## Weighted scoring breakdown
+Weighted scoring breakdown
 | Category | Weight | Score |
 | --- | --- | --- |
 | Structured Data Completeness | 25 | 8 |
@@ -20,13 +21,13 @@ The Grand Hotel maintains a polished brand presentation with strong visual story
 | Local Entity Linking | 10 | 5 |
 | FAQ/Q&A Presence | 10 | 0 |
 
-## Recurring issues across the website
+Recurring issues across the website
 | Issue | Impact | Pages Affected |
 | --- | --- | --- |
 | Missing FAQPage schema | AI assistants cannot extract Q&A pairs | Homepage, Rooms |
 | No HotelRoom schema | Room availability invisible to AI | Rooms, Suites |
 
-## Estimated score uplift if issues are resolved
+Estimated score uplift if issues are resolved
 | Fix | Estimated Score Increase |
 | --- | --- |
 | Add FAQPage schema with 8 questions | +10 points |
@@ -34,45 +35,21 @@ The Grand Hotel maintains a polished brand presentation with strong visual story
 
 Projected Score After Fixes: 66 / 100
 
-## Strategic Advantage for Bookassist
-Bookassist's AI Readiness programme directly addresses every gap surfaced above through structured-data automation.
-
-structured-data/organization: met
-structured-data/hotel-room: not-met
-structured-data/aggregate-rating: not-met
-structured-data/geo-coordinates: met
-structured-data/id-graph: not-met
-technical-crawlability/indexable: met
-technical-crawlability/clean-canonical: met
-technical-crawlability/no-render-blockers: met
-local-entity-linking/nearby-references: not-met
-local-entity-linking/address-neighborhood: met
-local-entity-linking/map-directions: not-met
-faq-presence/faq-schema-or-section: not-met
-semantic-coverage/topical-coverage: met
-semantic-coverage/question-headings: partial
-semantic-coverage/entity-rich-descriptions: not-met
-semantic-coverage/internal-links: not-met
-booking-pathway/direct-cta: met
-booking-pathway/direct-advantages: met
-booking-pathway/room-differentiators: met
-booking-pathway/pricing-framing: not-met
-metadata-diversity/unique-titles-meta: met
-metadata-diversity/descriptive-headings: not-met
-persona-use-case/persona-intents: partial
-media-alt/alt-strategy: partial
-voice-search/speakable-spec: not-met
-voice-search/nap-consistency: not-met`;
+Strategic Advantage for Bookassist
+Bookassist's AI Readiness programme directly addresses every gap surfaced above through structured-data automation.`;
 
 const parsed = parseAiReadinessReport(sample);
 
 const checks = [
-  ['overallScore', parsed.overallScore === 42],
-  ['projectedScore', parsed.projectedScore === 66],
-  ['url', parsed.url === 'https://thegrandhotel.example.com'],
-  ['tierLabel', typeof parsed.tierLabel === 'string' && parsed.tierLabel.length > 0],
-  ['observedParagraph length', (parsed.observedParagraph?.length ?? 0) > 50],
+  ['overallScore = 42', parsed.overallScore === 42],
+  ['projectedScore = 66', parsed.projectedScore === 66],
+  ['url extracted', parsed.url === 'https://thegrandhotel.example.com'],
+  ['tierLabel populated', typeof parsed.tierLabel === 'string' && parsed.tierLabel.length > 0],
+  ['hotelName = "The Grand Hotel, Dublin"', parsed.hotelName === 'The Grand Hotel, Dublin'],
+  ['hotelName NOT the report title', !parsed.hotelName?.toLowerCase().includes('visibility')],
   ['observedParagraph starts with right text', parsed.observedParagraph?.startsWith('The Grand Hotel maintains')],
+  ['observedParagraph does NOT contain "What we observed"', !parsed.observedParagraph?.includes('What we observed')],
+  ['observedParagraph does NOT contain "Weighted scoring"', !parsed.observedParagraph?.includes('Weighted scoring')],
   ['scoringRows length 4', parsed.scoringRows?.length === 4],
   ['scoringRows[0] category', parsed.scoringRows?.[0]?.category === 'Structured Data Completeness'],
   ['scoringRows[0] weight 25', parsed.scoringRows?.[0]?.weight === 25],
@@ -83,16 +60,12 @@ const checks = [
   ['fixesRows length 2', parsed.fixesRows?.length === 2],
   ['fixesRows[0] pointsIncrease 10', parsed.fixesRows?.[0]?.pointsIncrease === 10],
   ['strategicAdvantage contains Bookassist', parsed.strategicAdvantage?.includes('Bookassist')],
+  ['strategicAdvantage does NOT contain "Strategic Advantage"', !parsed.strategicAdvantage?.startsWith('Strategic Advantage')],
   ['tier from score 42 = below', tierFromScore(42) === 'below'],
   ['tier from score 82 = optimised', tierFromScore(82) === 'optimised'],
   ['tier from score 65 = near', tierFromScore(65) === 'near'],
   ['tier from score 20 = low', tierFromScore(20) === 'low'],
-  ['criterionStatuses extracted', parsed.criterionStatuses !== null],
-  ['criterionStatuses count = 26', parsed.criterionStatuses && Object.keys(parsed.criterionStatuses).length === 26],
-  ['structured-data/organization = met', parsed.criterionStatuses?.['structured-data/organization'] === 'met'],
-  ['structured-data/hotel-room = not-met', parsed.criterionStatuses?.['structured-data/hotel-room'] === 'not-met'],
-  ['semantic-coverage/question-headings = partial', parsed.criterionStatuses?.['semantic-coverage/question-headings'] === 'partial'],
-  ['strategic advantage does NOT contain status lines', !parsed.strategicAdvantage?.includes('organization:')],
+  ['criterionStatuses null (prompt no longer asks for them)', parsed.criterionStatuses === null],
 ];
 
 let pass = 0, fail = 0;

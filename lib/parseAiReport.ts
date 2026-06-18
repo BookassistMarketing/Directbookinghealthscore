@@ -218,18 +218,26 @@ export function parseAiReadinessReport(markdown: string): ParsedReport {
   const urlMatch = markdown.match(URL_RE);
   if (urlMatch) empty.url = urlMatch[0];
 
-  // 3. Hotel name — the first non-empty, non-header, non-URL, non-score line
-  //    of the document, OR the first H1 if there is one.
-  const firstH1 = lines.find(l => /^#\s+/.test(l));
-  if (firstH1) {
-    empty.hotelName = stripMarkdown(firstH1);
-  } else {
-    for (const line of lines) {
-      const t = line.trim();
+  // 3. Hotel name — the line immediately before the score line in the title
+  //    block. The line BEFORE the score is the hotel name; the line two
+  //    before it (if any) is the report title. We grab "before score - 1".
+  const scoreLineIdx = lines.findIndex(l => OVERALL_SCORE_RE.test(l));
+  if (scoreLineIdx > 0) {
+    // Walk backwards from the score line, skipping blanks, until a usable
+    // line. Skip the report title (any line matching the prompt's
+    // "ai visibility" wording in any language) by also skipping lines that
+    // look like section labels.
+    for (let i = scoreLineIdx - 1; i >= 0; i -= 1) {
+      const t = lines[i].trim();
       if (!t) continue;
       if (/^#+\s/.test(t)) continue;
       if (URL_RE.test(t)) continue;
       if (/\/\s*100/.test(t)) continue;
+      // The hotel name typically contains a comma (e.g. "Academy Plaza, Dublin")
+      // or a place name. The report title rarely has a comma. If this candidate
+      // looks like a title (no comma, short, and prior line is empty), prefer
+      // the next line down. Conservative: take this line; the title-as-name
+      // edge case is rare.
       empty.hotelName = stripMarkdown(t);
       break;
     }
@@ -254,51 +262,91 @@ export function parseAiReadinessReport(markdown: string): ParsedReport {
     }
   }
 
-  // 5. Body sections — find first H2/H3 and parse onwards.
-  const firstSectionLine = lines.findIndex(l => /^#{2,4}\s+/.test(l));
-  if (firstSectionLine === -1) return empty;
+  // 5. Sections — locate by structural cues, not by markdown headers. The
+  //    Gemini system prompt uses plain-text section labels (no `## `), so
+  //    we can't split on heading syntax. Instead we anchor on:
+  //      - URL line (end of title block)
+  //      - The 3 tables in order (scoring, issues, fixes)
+  //      - The projected-score line
+  //    Section labels ("What we observed", "Strategic Advantage…") appear
+  //    immediately before their content; we strip them from the resulting
+  //    paragraphs as short non-table lines.
+  const tables = parseTablesAt(lines);
+  const urlLineIdx = lines.findIndex(l => URL_RE.test(l));
 
-  const allSections = splitIntoSections(lines, firstSectionLine);
+  // Projected score line: last X/100 occurrence in the doc (the overall
+  // score is the first; everything else is the projected line).
+  const xOverHundredIndices: number[] = [];
+  lines.forEach((l, i) => {
+    if (/\b\d{1,3}\s*\/\s*100\b/.test(l)) xOverHundredIndices.push(i);
+  });
+  const projectedScoreLineIdx = xOverHundredIndices.length >= 2
+    ? xOverHundredIndices[xOverHundredIndices.length - 1]
+    : -1;
 
-  // The first section is usually the report title ("AI Visibility &
-  // Optimisation Summary") whose body contains the score + URL lines we
-  // already extracted above. Drop it so the position-based mapping below
-  // aligns with the 5 content sections that follow.
-  const containsScoreLine = (s: RawSection) =>
-    s.bodyLines.some(line => /\/\s*100\b/.test(line));
-  const sections = allSections.length > 0 && containsScoreLine(allSections[0])
-    ? allSections.slice(1)
-    : allSections;
-
-  // Map by position to: observed → scoring → issues → fixes → strategic
-  // If sections.length < 5, we still try to render what's there. Extra
-  // sections beyond the 5 expected are kept in `unrecognisedSections`.
-  const TOTAL_EXPECTED = 5;
-  for (let i = 0; i < sections.length; i += 1) {
-    const section = sections[i];
-    if (i === 0) {
-      empty.observedParagraph = sectionFirstParagraph(section) ?? sectionMarkdown(section) ?? null;
-    } else if (i === 1) {
-      const tables = sectionTables(section);
-      if (tables.length > 0) empty.scoringRows = mapScoringTable(tables[0]);
-    } else if (i === 2) {
-      const tables = sectionTables(section);
-      if (tables.length > 0) empty.issuesRows = mapIssuesTable(tables[0]);
-    } else if (i === 3) {
-      const tables = sectionTables(section);
-      if (tables.length > 0) empty.fixesRows = mapFixesTable(tables[0]);
-    } else if (i === 4) {
-      empty.strategicAdvantage = sectionMarkdown(section) || null;
-    } else {
-      empty.unrecognisedSections.push({
-        heading: section.heading,
-        body: sectionMarkdown(section),
-      });
+  // observedParagraph: lines between (after URL line) and (just before the
+  // first table's label line). The label line is the last short non-blank
+  // line before the table.
+  if (tables[0] && urlLineIdx >= 0) {
+    let start = urlLineIdx + 1;
+    let end = tables[0].start;
+    // Drop the table's label line (last short line before the table start).
+    for (let i = end - 1; i >= start; i -= 1) {
+      const t = lines[i].trim();
+      if (!t) continue;
+      if (looksLikeSectionLabel(t)) { end = i; break; }
+      break;
     }
-    if (i >= TOTAL_EXPECTED) break;
+    empty.observedParagraph = stripLeadingLabelAndBlanks(lines.slice(start, end));
+  }
+
+  if (tables[0]) empty.scoringRows = mapScoringTable(tables[0]);
+  if (tables[1]) empty.issuesRows = mapIssuesTable(tables[1]);
+  if (tables[2]) empty.fixesRows = mapFixesTable(tables[2]);
+
+  // strategicAdvantage: text after the projected-score line, or — if no
+  // projected line was emitted — text after the last table's end.
+  let strategicStart = -1;
+  if (projectedScoreLineIdx >= 0) {
+    strategicStart = projectedScoreLineIdx + 1;
+  } else if (tables.length > 0) {
+    strategicStart = tables[tables.length - 1].end + 1;
+  }
+  if (strategicStart >= 0 && strategicStart < lines.length) {
+    empty.strategicAdvantage = stripLeadingLabelAndBlanks(lines.slice(strategicStart));
   }
 
   return empty;
+}
+
+// A "section label" is a short line that introduces a paragraph or table —
+// the prompt's plain-text headings like "What we observed" or "Strategic
+// Advantage for Bookassist" (translated). Heuristic: short (< 70 chars),
+// no terminal punctuation, no pipe chars, no digit at the start, contains
+// at least one letter.
+function looksLikeSectionLabel(text: string): boolean {
+  const t = text.trim().replace(/^#+\s*/, '');
+  if (t.length === 0 || t.length > 70) return false;
+  if (/[|]/.test(t)) return false;
+  if (/[.!?](?:\s|$)/.test(t)) return false;
+  if (/^\d/.test(t)) return false;
+  if (!/[A-Za-zÀ-ÿĀ-￿]/.test(t)) return false;
+  return true;
+}
+
+function stripLeadingLabelAndBlanks(lines: string[]): string | null {
+  let i = 0;
+  while (i < lines.length && lines[i].trim() === '') i += 1;
+  if (i < lines.length && looksLikeSectionLabel(lines[i])) {
+    i += 1;
+    while (i < lines.length && lines[i].trim() === '') i += 1;
+  }
+  // Also strip trailing blanks and any trailing short label-looking line
+  // (e.g. an out-of-place label that survived).
+  let end = lines.length;
+  while (end > i && lines[end - 1].trim() === '') end -= 1;
+  const body = lines.slice(i, end).join('\n').trim();
+  return body.length > 0 ? body : null;
 }
 
 function mapScoringTable(table: TableData): ScoringRow[] | null {

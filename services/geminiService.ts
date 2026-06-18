@@ -217,42 +217,6 @@ Projected Score After Fixes: [new score] / 100
 Strategic Advantage for Bookassist
 Write a short, persuasive paragraph explaining how Bookassist improves the scores.
 
-PER-CRITERION STATUS BLOCK (REQUIRED — APPENDS TO THE END OF THE REPORT)
-At the very end of the report, after the Strategic Advantage paragraph, emit ONE LINE per sub-criterion in this exact format on its own line:
-    category-key/criterion-key: STATUS
-Where STATUS is exactly one of: met / partial / not-met
-
-These are stable English identifiers. NEVER translate the keys or punctuation. Emit all 26 lines in this exact order, one per line, with no markdown header above them, no blank lines between them, and no surrounding prose:
-
-structured-data/organization: <status>
-structured-data/hotel-room: <status>
-structured-data/aggregate-rating: <status>
-structured-data/geo-coordinates: <status>
-structured-data/id-graph: <status>
-technical-crawlability/indexable: <status>
-technical-crawlability/clean-canonical: <status>
-technical-crawlability/no-render-blockers: <status>
-local-entity-linking/nearby-references: <status>
-local-entity-linking/address-neighborhood: <status>
-local-entity-linking/map-directions: <status>
-faq-presence/faq-schema-or-section: <status>
-semantic-coverage/topical-coverage: <status>
-semantic-coverage/question-headings: <status>
-semantic-coverage/entity-rich-descriptions: <status>
-semantic-coverage/internal-links: <status>
-booking-pathway/direct-cta: <status>
-booking-pathway/direct-advantages: <status>
-booking-pathway/room-differentiators: <status>
-booking-pathway/pricing-framing: <status>
-metadata-diversity/unique-titles-meta: <status>
-metadata-diversity/descriptive-headings: <status>
-persona-use-case/persona-intents: <status>
-media-alt/alt-strategy: <status>
-voice-search/speakable-spec: <status>
-voice-search/nap-consistency: <status>
-
-Use "met" only when the criterion is fully evidenced, "partial" for partial credit, "not-met" otherwise. The total points earned across these statuses must match the per-category scores in the table above.
-
 SCORING AND TOPICS TO BE ANALYZED
 1. Structured Data Completeness (25 pts)
 6 pts: Organization/LocalBusiness/Hotel/Resort entity present with Name + Address + Phone
