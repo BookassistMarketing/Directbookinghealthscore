@@ -9,6 +9,22 @@ interface LeadCaptureProps {
   onUnlock: () => void;
 }
 
+// HubSpot portal — shared across all locales.
+const HUBSPOT_PORTAL_ID = "6862341";
+
+// Default HubSpot form (English). Used by any locale not listed in the
+// override map below — currently: en, fr, de, cs.
+const DEFAULT_HUBSPOT_FORM_ID = "f5a4b323-e8ff-4c48-bcd9-0f2014220dd0";
+
+// Per-language form override. Add an entry when a locale should send leads to
+// a different HubSpot form (different list, owner, or workflow). Unlisted
+// locales fall back to DEFAULT_HUBSPOT_FORM_ID.
+const HUBSPOT_FORM_ID_BY_LANGUAGE: Partial<Record<Language, string>> = {
+  // it: 'paste-italian-form-id-here',
+  // es: 'paste-spanish-form-id-here',
+  // pl: 'paste-polish-form-id-here',
+};
+
 export const LeadCapture: React.FC<LeadCaptureProps> = ({ onUnlock }) => {
   const { language } = useContent();
   const [isLoaded, setIsLoaded] = useState(false);
@@ -85,9 +101,8 @@ export const LeadCapture: React.FC<LeadCaptureProps> = ({ onUnlock }) => {
   const l = labelsMap[language];
 
   useEffect(() => {
-    // UPDATED IDs from your provided embed snippet
-    const portalId = "6862341";
-    const formId = "f5a4b323-e8ff-4c48-bcd9-0f2014220dd0";
+    const portalId = HUBSPOT_PORTAL_ID;
+    const formId = HUBSPOT_FORM_ID_BY_LANGUAGE[language] ?? DEFAULT_HUBSPOT_FORM_ID;
     
     const bypassTimer = setTimeout(() => setShowBypass(true), 8000);
 
