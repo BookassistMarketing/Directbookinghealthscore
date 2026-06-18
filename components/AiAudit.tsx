@@ -2,7 +2,7 @@
 
 import React, { useEffect, useMemo, useRef, useState } from 'react';
 import { useRouter } from 'next/navigation';
-import { Sparkles, Globe, Loader2, AlertCircle, ArrowRight, RotateCcw, ExternalLink, ShieldCheck } from 'lucide-react';
+import { Sparkles, Globe, Loader2, AlertCircle, ArrowRight, RotateCcw, ExternalLink, ShieldCheck, Download } from 'lucide-react';
 import { PieChart, Pie, Cell, ResponsiveContainer } from 'recharts';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
@@ -339,6 +339,39 @@ Projected Score After Fixes: 85 / 100
 Strategic Advantage for Bookassist
 Bookassist's AI Readiness programme directly closes every gap surfaced above. Our structured-data automation populates FAQPage, SpeakableSpecification, and @id graph relationships in a single deployment, while our content optimisation surfaces persona blocks and local-entity references that elevate the property in generative search. Hotels onboarded with Bookassist typically reach AI-optimised status within 90 days, translating to material lifts in direct-booking visibility across ChatGPT, Perplexity, and Google AI Overviews.`;
 
+// Inject a <script> tag if the expected global isn't already present. Resolves
+// to whatever getGlobal() returns once loaded. Used for html2canvas / jsPDF
+// because Next.js Script strategy="beforeInteractive" in app/layout.tsx is
+// not always reliable in App Router production builds.
+function ensureScript<T>(src: string, getGlobal: () => T): Promise<T> {
+  return new Promise((resolve) => {
+    const existing = getGlobal();
+    if (existing) { resolve(existing); return; }
+    if (typeof document === 'undefined') { resolve(getGlobal()); return; }
+    const previous = document.querySelector(`script[data-pdf-src="${src}"]`);
+    if (previous) {
+      previous.addEventListener('load', () => resolve(getGlobal()), { once: true });
+      previous.addEventListener('error', () => resolve(getGlobal()), { once: true });
+      return;
+    }
+    const tag = document.createElement('script');
+    tag.src = src;
+    tag.async = true;
+    tag.dataset.pdfSrc = src;
+    tag.addEventListener('load', () => resolve(getGlobal()), { once: true });
+    tag.addEventListener('error', () => resolve(getGlobal()), { once: true });
+    document.head.appendChild(tag);
+  });
+}
+
+function safeHostnameForFilename(url: string): string {
+  try {
+    return new URL(url).hostname.replace(/^www\./, '').replace(/[^a-z0-9.-]+/gi, '');
+  } catch {
+    return 'report';
+  }
+}
+
 function normaliseUrl(raw: string): string | null {
   const trimmed = raw.trim();
   if (!trimmed) return null;
@@ -377,6 +410,81 @@ export const AiAudit: React.FC = () => {
   const [staffRole, setStaffRole] = useState<StaffRole | null>(null);
   const isStaffBypass = staffRole !== null;
   const isMarketing = staffRole === 'marketing';
+
+  const pdfCaptureRef = useRef<HTMLDivElement>(null);
+  const [isGeneratingPdf, setIsGeneratingPdf] = useState(false);
+
+  const handleDownloadPdf = async () => {
+    if (isGeneratingPdf || !pdfCaptureRef.current) return;
+    setIsGeneratingPdf(true);
+    try {
+      const html2canvas = await ensureScript(
+        'https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js',
+        () => (window as any).html2canvas,
+      );
+      const jsPDFConstructor = await ensureScript(
+        'https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js',
+        () => (window as any).jspdf?.jsPDF || (window as any).jsPDF,
+      );
+      if (!html2canvas || !jsPDFConstructor) {
+        console.warn('[AiAudit] PDF libs failed to load — skipping download');
+        return;
+      }
+
+      const canvas = await html2canvas(pdfCaptureRef.current, {
+        scale: 2,
+        useCORS: true,
+        logging: false,
+        backgroundColor: '#F4F6F8',
+      });
+
+      const pdf = new jsPDFConstructor({ orientation: 'p', unit: 'mm', format: 'a4' });
+      const pageWidth = pdf.internal.pageSize.getWidth();
+      const pageHeight = pdf.internal.pageSize.getHeight();
+      const marginX = 8;
+      const marginY = 10;
+      const targetWidth = pageWidth - marginX * 2;
+      const pxToMm = targetWidth / canvas.width;
+      const totalHeightMm = canvas.height * pxToMm;
+      const usablePageHeightMm = pageHeight - marginY * 2;
+
+      let consumedMm = 0;
+      let pageIndex = 0;
+      while (consumedMm < totalHeightMm - 0.5) {
+        if (pageIndex > 0) pdf.addPage();
+        pdf.setFillColor(244, 246, 248);
+        pdf.rect(0, 0, pageWidth, pageHeight, 'F');
+
+        const remainingMm = totalHeightMm - consumedMm;
+        const sliceMm = Math.min(usablePageHeightMm, remainingMm);
+        const sliceCanvasY = consumedMm / pxToMm;
+        const sliceCanvasH = sliceMm / pxToMm;
+
+        const sliceCanvas = document.createElement('canvas');
+        sliceCanvas.width = canvas.width;
+        sliceCanvas.height = Math.ceil(sliceCanvasH);
+        const ctx = sliceCanvas.getContext('2d');
+        if (ctx) {
+          ctx.fillStyle = '#F4F6F8';
+          ctx.fillRect(0, 0, sliceCanvas.width, sliceCanvas.height);
+          ctx.drawImage(canvas, 0, -sliceCanvasY);
+        }
+
+        const imgData = sliceCanvas.toDataURL('image/jpeg', 0.92);
+        pdf.addImage(imgData, 'JPEG', marginX, marginY, targetWidth, sliceMm);
+
+        consumedMm += sliceMm;
+        pageIndex += 1;
+      }
+
+      const hostname = safeHostnameForFilename(auditedUrl);
+      pdf.save(`AI-Readiness-${hostname}.pdf`);
+    } catch (err) {
+      console.error('[AiAudit] PDF generation failed', err);
+    } finally {
+      setIsGeneratingPdf(false);
+    }
+  };
 
   // Extract just the overall score + tier label from the Gemini markdown to
   // power the score-preview donut card at the top of the done view. The
@@ -695,13 +803,25 @@ export const AiAudit: React.FC = () => {
               </h1>
               <p className="text-sm text-gray-500 mt-1 break-all">{auditedUrl}</p>
             </div>
-            <button
-              onClick={reset}
-              className="inline-flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-semibold text-gray-700 bg-white border border-gray-200 hover:border-brand-blue hover:text-brand-blue transition-colors"
-            >
-              <RotateCcw size={14} /> {l.another}
-            </button>
+            <div className="flex flex-wrap gap-2">
+              <button
+                onClick={handleDownloadPdf}
+                disabled={isGeneratingPdf}
+                className="inline-flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-semibold text-white bg-brand-blue hover:bg-blue-900 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+              >
+                {isGeneratingPdf ? <Loader2 size={14} className="animate-spin" /> : <Download size={14} />}
+                {isGeneratingPdf ? 'Exporting…' : 'Download PDF'}
+              </button>
+              <button
+                onClick={reset}
+                className="inline-flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-semibold text-gray-700 bg-white border border-gray-200 hover:border-brand-blue hover:text-brand-blue transition-colors"
+              >
+                <RotateCcw size={14} /> {l.another}
+              </button>
+            </div>
           </div>
+
+          <div ref={pdfCaptureRef}>
 
           {scorePreview && (
             <div className="bg-white rounded-3xl shadow-xl border border-gray-100 overflow-hidden mb-6">
@@ -808,6 +928,7 @@ export const AiAudit: React.FC = () => {
               {l.ctaButton} <ArrowRight size={16} className="ml-1" />
             </div>
           </a>
+          </div>
         </div>
       )}
     </div>
