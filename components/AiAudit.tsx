@@ -341,18 +341,33 @@ Bookassist's AI Readiness programme directly closes every gap surfaced above. Ou
 
 // Inject a <script> tag if the expected global isn't already present. Polls
 // for up to 3 seconds after the load event fires because some CDN bundles
-// (jsPDF in particular) defer setting their global until after `load`.
-function ensureScript<T>(src: string, getGlobal: () => T): Promise<T | undefined> {
+// (jsPDF in particular) defer setting their global until after `load`. The
+// `loadedFlag` argument lets us force-load a script even when a same-named
+// global already exists (we use this for html2canvas-pro, which has to
+// override the older html2canvas that app/layout.tsx still preloads).
+function ensureScript<T>(
+  src: string,
+  getGlobal: () => T,
+  loadedFlag?: string,
+): Promise<T | undefined> {
   return new Promise((resolve) => {
-    const existing = getGlobal();
-    if (existing) { resolve(existing); return; }
+    const w = window as any;
+    if (loadedFlag && w[loadedFlag]) { resolve(getGlobal()); return; }
+    if (!loadedFlag) {
+      const existing = getGlobal();
+      if (existing) { resolve(existing); return; }
+    }
     if (typeof document === 'undefined') { resolve(undefined); return; }
 
     const pollUntilReady = () => {
       const start = Date.now();
       const tick = () => {
         const value = getGlobal();
-        if (value) { resolve(value); return; }
+        if (value) {
+          if (loadedFlag) w[loadedFlag] = true;
+          resolve(value);
+          return;
+        }
         if (Date.now() - start > 3000) { resolve(undefined); return; }
         setTimeout(tick, 50);
       };
@@ -431,9 +446,15 @@ export const AiAudit: React.FC = () => {
     setIsGeneratingPdf(true);
     setPdfError(null);
     try {
+      // html2canvas-pro: a maintained fork that supports the oklch() color
+      // function Tailwind v4 ships in its CSS variables. The older
+      // html2canvas (still preloaded by app/layout.tsx for the Hotel Tech
+      // Audit's PDF export) throws on oklch — we override window.html2canvas
+      // here by force-loading pro and tracking it with a flag.
       const html2canvas = await ensureScript(
-        'https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js',
+        'https://cdn.jsdelivr.net/npm/html2canvas-pro@1.5.8/dist/html2canvas-pro.min.js',
         () => (window as any).html2canvas,
+        '__html2canvasProLoaded',
       );
       const jsPDFConstructor = await ensureScript(
         'https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js',
