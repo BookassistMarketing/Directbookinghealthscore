@@ -2,13 +2,12 @@
 
 import React, { useEffect, useRef, useState } from 'react';
 import { useRouter } from 'next/navigation';
-import { Sparkles, Globe, Loader2, AlertCircle, ArrowRight, ShieldCheck } from 'lucide-react';
+import { Sparkles, Globe, Loader2, AlertCircle, ArrowRight, RotateCcw, ExternalLink, ShieldCheck } from 'lucide-react';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 import { Button } from './Button';
 import { ConsentModal, ConsentDeclinedScreen } from './ConsentModal';
 import { LeadCapture } from './LeadCapture';
-import { AiReadinessReport } from './AiReadinessReport';
 import { useContent } from '../contexts/ContentContext';
 import { Language } from '../types';
 import { generateAiReadinessReport } from '../services/aiService';
@@ -382,12 +381,7 @@ export const AiAudit: React.FC = () => {
         formAgeMs,
       });
       setReport(result);
-      // Re-check bypass at transition time — the mount-time check might still
-      // be in flight if the user submitted quickly. Staff bypass skips the
-      // blurred preview entirely and lands on the full dashboard.
-      const bypassNow = isStaffBypass || (await checkStaffBypass());
-      if (bypassNow && !isStaffBypass) setIsStaffBypass(true);
-      setView(bypassNow ? 'done' : 'preview');
+      setView('preview');
     } catch (err) {
       console.error('[AiAudit] Audit failed:', err);
       setRequestError(l.errorBody);
@@ -593,12 +587,76 @@ export const AiAudit: React.FC = () => {
       )}
 
       {view === 'done' && (
-        <AiReadinessReport
-          markdown={report}
-          auditedUrl={auditedUrl}
-          language={language}
-          onReset={reset}
-        />
+        <div>
+          <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4 mb-6">
+            <div>
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-50 text-brand-blue text-xs font-bold uppercase tracking-widest mb-3">
+                <Sparkles className="w-3.5 h-3.5" /> {l.eyebrow}
+              </div>
+              <h1 className="text-2xl sm:text-3xl font-bold text-gray-900 tracking-tight">
+                {l.reportHeading}
+              </h1>
+              <p className="text-sm text-gray-500 mt-1 break-all">{auditedUrl}</p>
+            </div>
+            <button
+              onClick={reset}
+              className="inline-flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-semibold text-gray-700 bg-white border border-gray-200 hover:border-brand-blue hover:text-brand-blue transition-colors"
+            >
+              <RotateCcw size={14} /> {l.another}
+            </button>
+          </div>
+
+          <article className="prose prose-slate max-w-none bg-white rounded-2xl shadow-sm border border-gray-100 p-6 sm:p-10">
+            <ReactMarkdown
+              remarkPlugins={[remarkGfm]}
+              components={{
+                table: ({ children }) => (
+                  <div className="overflow-x-auto my-6">
+                    <table className="w-full border-collapse text-sm">{children}</table>
+                  </div>
+                ),
+                thead: ({ children }) => <thead className="bg-blue-50">{children}</thead>,
+                th: ({ children }) => (
+                  <th className="text-left p-3 border border-gray-200 font-semibold text-gray-900">
+                    {children}
+                  </th>
+                ),
+                td: ({ children }) => (
+                  <td className="p-3 border border-gray-200 align-top">{children}</td>
+                ),
+                h1: ({ children }) => (
+                  <h2 className="text-2xl font-bold text-gray-900 mt-8 mb-4">{children}</h2>
+                ),
+                h2: ({ children }) => (
+                  <h3 className="text-xl font-bold text-brand-blue mt-8 mb-3">{children}</h3>
+                ),
+                h3: ({ children }) => (
+                  <h4 className="text-lg font-semibold text-gray-900 mt-6 mb-2">{children}</h4>
+                ),
+              }}
+            >
+              {report}
+            </ReactMarkdown>
+          </article>
+
+          <a
+            href="https://bookassist.com/book-a-demo"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex flex-col md:flex-row items-center gap-6 bg-brand-blue text-white p-8 rounded-2xl shadow-xl mt-6 transition-all hover:scale-[1.01] no-underline"
+          >
+            <div className="flex-shrink-0 w-14 h-14 bg-white/10 rounded-full flex items-center justify-center">
+              <ExternalLink className="w-7 h-7 text-white" />
+            </div>
+            <div className="flex-1 text-center md:text-left">
+              <p className="text-xl sm:text-2xl font-black leading-tight tracking-tight text-white">{l.ctaTitle}</p>
+              <p className="text-blue-200 text-xs font-semibold uppercase tracking-widest mt-1">{l.ctaSub}</p>
+            </div>
+            <div className="flex items-center gap-2 bg-white text-brand-blue px-6 py-3 rounded-xl font-black text-sm uppercase tracking-widest shadow-md whitespace-nowrap flex-shrink-0">
+              {l.ctaButton} <ArrowRight size={16} className="ml-1" />
+            </div>
+          </a>
+        </div>
       )}
     </div>
   );
