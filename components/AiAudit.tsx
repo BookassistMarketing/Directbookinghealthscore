@@ -339,27 +339,38 @@ Projected Score After Fixes: 85 / 100
 Strategic Advantage for Bookassist
 Bookassist's AI Readiness programme directly closes every gap surfaced above. Our structured-data automation populates FAQPage, SpeakableSpecification, and @id graph relationships in a single deployment, while our content optimisation surfaces persona blocks and local-entity references that elevate the property in generative search. Hotels onboarded with Bookassist typically reach AI-optimised status within 90 days, translating to material lifts in direct-booking visibility across ChatGPT, Perplexity, and Google AI Overviews.`;
 
-// Inject a <script> tag if the expected global isn't already present. Resolves
-// to whatever getGlobal() returns once loaded. Used for html2canvas / jsPDF
-// because Next.js Script strategy="beforeInteractive" in app/layout.tsx is
-// not always reliable in App Router production builds.
-function ensureScript<T>(src: string, getGlobal: () => T): Promise<T> {
+// Inject a <script> tag if the expected global isn't already present. Polls
+// for up to 3 seconds after the load event fires because some CDN bundles
+// (jsPDF in particular) defer setting their global until after `load`.
+function ensureScript<T>(src: string, getGlobal: () => T): Promise<T | undefined> {
   return new Promise((resolve) => {
     const existing = getGlobal();
     if (existing) { resolve(existing); return; }
-    if (typeof document === 'undefined') { resolve(getGlobal()); return; }
+    if (typeof document === 'undefined') { resolve(undefined); return; }
+
+    const pollUntilReady = () => {
+      const start = Date.now();
+      const tick = () => {
+        const value = getGlobal();
+        if (value) { resolve(value); return; }
+        if (Date.now() - start > 3000) { resolve(undefined); return; }
+        setTimeout(tick, 50);
+      };
+      tick();
+    };
+
     const previous = document.querySelector(`script[data-pdf-src="${src}"]`);
     if (previous) {
-      previous.addEventListener('load', () => resolve(getGlobal()), { once: true });
-      previous.addEventListener('error', () => resolve(getGlobal()), { once: true });
+      previous.addEventListener('load', pollUntilReady, { once: true });
+      previous.addEventListener('error', () => resolve(undefined), { once: true });
       return;
     }
     const tag = document.createElement('script');
     tag.src = src;
     tag.async = true;
     tag.dataset.pdfSrc = src;
-    tag.addEventListener('load', () => resolve(getGlobal()), { once: true });
-    tag.addEventListener('error', () => resolve(getGlobal()), { once: true });
+    tag.addEventListener('load', pollUntilReady, { once: true });
+    tag.addEventListener('error', () => resolve(undefined), { once: true });
     document.head.appendChild(tag);
   });
 }
@@ -413,10 +424,12 @@ export const AiAudit: React.FC = () => {
 
   const pdfCaptureRef = useRef<HTMLDivElement>(null);
   const [isGeneratingPdf, setIsGeneratingPdf] = useState(false);
+  const [pdfError, setPdfError] = useState<string | null>(null);
 
   const handleDownloadPdf = async () => {
     if (isGeneratingPdf || !pdfCaptureRef.current) return;
     setIsGeneratingPdf(true);
+    setPdfError(null);
     try {
       const html2canvas = await ensureScript(
         'https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js',
@@ -427,7 +440,12 @@ export const AiAudit: React.FC = () => {
         () => (window as any).jspdf?.jsPDF || (window as any).jsPDF,
       );
       if (!html2canvas || !jsPDFConstructor) {
-        console.warn('[AiAudit] PDF libs failed to load — skipping download');
+        console.warn('[AiAudit] PDF libs missing — falling back to print', {
+          html2canvas: !!html2canvas,
+          jsPDF: !!jsPDFConstructor,
+        });
+        setPdfError("Couldn't load the PDF library. Opening your browser's print dialog as a fallback — choose 'Save as PDF' there.");
+        window.print();
         return;
       }
 
@@ -481,6 +499,9 @@ export const AiAudit: React.FC = () => {
       pdf.save(`AI-Readiness-${hostname}.pdf`);
     } catch (err) {
       console.error('[AiAudit] PDF generation failed', err);
+      const message = err instanceof Error ? err.message : 'unknown error';
+      setPdfError(`PDF generation failed (${message}). Opening your browser's print dialog as a fallback — choose 'Save as PDF' there.`);
+      window.print();
     } finally {
       setIsGeneratingPdf(false);
     }
@@ -820,6 +841,13 @@ export const AiAudit: React.FC = () => {
               </button>
             </div>
           </div>
+
+          {pdfError && (
+            <div className="mb-6 flex items-start gap-2 text-sm text-amber-700 bg-amber-50 border border-amber-200 rounded-lg p-3">
+              <AlertCircle size={16} className="flex-shrink-0 mt-0.5" />
+              <span>{pdfError}</span>
+            </div>
+          )}
 
           <div ref={pdfCaptureRef}>
 
