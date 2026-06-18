@@ -39,11 +39,12 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ error: 'INVALID_REQUEST' }, { status: 400 });
   }
 
-  if (!verifyStaffPassword(body.password)) {
+  const role = verifyStaffPassword(body.password);
+  if (!role) {
     await randomAuthDelay();
     return NextResponse.json({ error: 'INVALID_PASSWORD' }, { status: 401 });
   }
 
-  const { token, expiresAt } = signStaffToken();
-  return NextResponse.json({ token, expiresAt });
+  const { token, expiresAt } = signStaffToken(role);
+  return NextResponse.json({ token, expiresAt, role });
 }

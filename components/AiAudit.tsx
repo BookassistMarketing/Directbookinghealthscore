@@ -12,7 +12,7 @@ import { LeadCapture } from './LeadCapture';
 import { useContent } from '../contexts/ContentContext';
 import { Language } from '../types';
 import { generateAiReadinessReport } from '../services/aiService';
-import { checkStaffBypass } from '../lib/staffBypass';
+import { checkStaffBypass, type StaffRole } from '../lib/staffBypass';
 
 const CONSENT_KEY = 'hhc_gemini_consent';
 
@@ -374,7 +374,9 @@ export const AiAudit: React.FC = () => {
   const [honeypot, setHoneypot] = useState('');
   const formRenderedAt = useRef<number>(Date.now());
   const [factIndex, setFactIndex] = useState(0);
-  const [isStaffBypass, setIsStaffBypass] = useState(false);
+  const [staffRole, setStaffRole] = useState<StaffRole | null>(null);
+  const isStaffBypass = staffRole !== null;
+  const isMarketing = staffRole === 'marketing';
 
   // Extract just the overall score + tier label from the Gemini markdown to
   // power the score-preview donut card at the top of the done view. The
@@ -400,8 +402,8 @@ export const AiAudit: React.FC = () => {
     setConsentChecked(true);
     formRenderedAt.current = Date.now();
     let cancelled = false;
-    checkStaffBypass().then(ok => {
-      if (!cancelled) setIsStaffBypass(ok);
+    checkStaffBypass().then(role => {
+      if (!cancelled) setStaffRole(role);
     });
     return () => {
       cancelled = true;
@@ -448,7 +450,15 @@ export const AiAudit: React.FC = () => {
         formAgeMs,
       });
       setReport(result);
-      setView('preview');
+      // Skip the blurred preview teaser for staff (any role) and land on
+      // the full report. Re-check the bypass in case the mount-time fetch
+      // hasn't resolved yet for fast submitters.
+      let activeRole: StaffRole | null = staffRole;
+      if (!activeRole) {
+        activeRole = await checkStaffBypass();
+        if (activeRole) setStaffRole(activeRole);
+      }
+      setView(activeRole ? 'done' : 'preview');
     } catch (err) {
       console.error('[AiAudit] Audit failed:', err);
       setRequestError(l.errorBody);
@@ -562,13 +572,13 @@ export const AiAudit: React.FC = () => {
               {l.submit} <ArrowRight size={18} className="ml-2 inline-block" />
             </Button>
             <p className="mt-4 text-xs text-gray-400">{l.disclosure}</p>
-            {isStaffBypass && (
+            {isMarketing && (
               <button
                 type="button"
                 onClick={loadDemoReport}
                 className="mt-6 text-xs font-bold uppercase tracking-widest text-brand-blue hover:underline"
               >
-                Preview end page with sample report (staff only — no Gemini call)
+                Preview end page with sample report (marketing only — no Gemini call)
               </button>
             )}
           </form>

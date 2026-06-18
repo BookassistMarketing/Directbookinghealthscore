@@ -30,6 +30,7 @@ const FORBIDDEN_PATTERNS = [
   /process\.env\.GEMINI_API_KEY/,
   /process\.env\.AUDIT_RATE_LIMIT_SECRET/,
   /process\.env\.STAFF_PASSWORD/,
+  /process\.env\.STAFF_MARKETING_PASSWORD/,
   /process\.env\.STAFF_TOKEN_SECRET/,
 ];
 

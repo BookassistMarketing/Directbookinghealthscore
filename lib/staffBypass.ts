@@ -11,18 +11,18 @@ export const STAFF_TOKEN_EXPIRES_KEY = 'bookassist_staff_token_expires_at';
 // staff on English pages regardless of their locale preference.
 const STAFF_COOKIE_NAME = 'hhc_staff';
 
+export type StaffRole = 'staff' | 'marketing';
+
 /**
- * Returns true if a valid (server-verified) staff token is present in
- * localStorage. Safe to call during SSR — returns false on the server.
- *
- * Each call hits /api/staff/verify. Callers should cache the result in
- * component state for the lifetime of the component to avoid extra round
- * trips.
+ * Returns the role embedded in the server-verified staff token, or null if
+ * no valid token is present. Safe to call during SSR — returns null on the
+ * server. Each call hits /api/staff/verify; cache the result in component
+ * state for the lifetime of the component to avoid extra round trips.
  */
-export async function checkStaffBypass(): Promise<boolean> {
-  if (typeof window === 'undefined') return false;
+export async function checkStaffBypass(): Promise<StaffRole | null> {
+  if (typeof window === 'undefined') return null;
   const token = localStorage.getItem(STAFF_TOKEN_KEY);
-  if (!token) return false;
+  if (!token) return null;
 
   try {
     const res = await fetch('/api/staff/verify', {
@@ -30,12 +30,16 @@ export async function checkStaffBypass(): Promise<boolean> {
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ token }),
     });
-    if (res.ok) return true;
+    if (res.ok) {
+      const data = (await res.json().catch(() => null)) as { valid?: boolean; role?: string } | null;
+      const role = data?.role === 'marketing' ? 'marketing' : 'staff';
+      return role;
+    }
     // Token rejected — purge it so subsequent calls don't loop.
     if (res.status === 401) clearStaffToken();
-    return false;
+    return null;
   } catch {
-    return false;
+    return null;
   }
 }
 

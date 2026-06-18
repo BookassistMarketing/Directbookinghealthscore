@@ -17,9 +17,10 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ error: 'INVALID_REQUEST' }, { status: 400 });
   }
 
-  if (!verifyStaffToken(body.token)) {
+  const verified = verifyStaffToken(body.token);
+  if (!verified) {
     return NextResponse.json({ error: 'INVALID_TOKEN' }, { status: 401 });
   }
 
-  return NextResponse.json({ valid: true });
+  return NextResponse.json({ valid: true, role: verified.role });
 }

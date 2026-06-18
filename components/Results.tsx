@@ -24,8 +24,8 @@ export const Results: React.FC<ResultsProps> = ({ questions, answers, onReset, o
 
   useEffect(() => {
     let cancelled = false;
-    checkStaffBypass().then(ok => {
-      if (!cancelled) setIsStaffBypass(ok);
+    checkStaffBypass().then(role => {
+      if (!cancelled) setIsStaffBypass(role !== null);
     });
     return () => {
       cancelled = true;
