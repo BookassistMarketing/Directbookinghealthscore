@@ -398,11 +398,13 @@ function safeHostnameForFilename(url: string): string {
   }
 }
 
-// Walk upwards from idealY looking for a row of pixels that's mostly
-// background-coloured (i.e. between cards / between table rows). Returns the
-// Y position of the cleanest row within `maxSearchUpPx`, or `idealY` if no
-// safe break is found. Used so PDF page breaks don't slice through table
-// rows mid-cell.
+// Walk upwards from idealY looking for a thick strip of background-coloured
+// pixels (the gap between cards), not just a single clean row. A 1-2px clean
+// row would match the internal borders between table cells — slicing there
+// still cuts the table in half, which is what we're trying to avoid. We
+// require N consecutive clean rows so we only break on real "between cards"
+// gaps. Returns the Y at the bottom of the found strip, or idealY if no
+// suitable strip exists within `maxSearchUpPx`.
 function findSafePageBreakY(
   canvas: HTMLCanvasElement,
   idealY: number,
@@ -412,28 +414,42 @@ function findSafePageBreakY(
   if (!ctx) return idealY;
   const width = canvas.width;
   const sampleEvery = Math.max(2, Math.floor(width / 200));
+  const requiredCleanStripPx = Math.max(15, Math.floor(canvas.height / 80));
+
+  // Pull the whole canvas in one ImageData call instead of one per row —
+  // ~100x faster for tall canvases.
+  const imageData = ctx.getImageData(0, 0, width, canvas.height).data;
 
   const isCleanRow = (y: number): boolean => {
     if (y < 0 || y >= canvas.height) return false;
-    const data = ctx.getImageData(0, y, width, 1).data;
+    const rowStart = y * width * 4;
     let nonBackground = 0;
     for (let x = 0; x < width; x += sampleEvery) {
-      const i = x * 4;
-      const r = data[i];
-      const g = data[i + 1];
-      const b = data[i + 2];
-      // Background is either page bg #F4F6F8 (244,246,248) or card white
-      // (~255,255,255). Anything darker than ~230 on any channel is content.
+      const i = rowStart + x * 4;
+      const r = imageData[i];
+      const g = imageData[i + 1];
+      const b = imageData[i + 2];
+      // Background is page bg #F4F6F8 (244,246,248) or card white. Anything
+      // darker than ~230 on any channel is content.
       if (r < 230 || g < 230 || b < 230) {
         nonBackground += 1;
-        if (nonBackground > 2) return false; // tolerate a couple of stray pixels
+        if (nonBackground > 2) return false;
       }
     }
     return true;
   };
 
+  // Walk upwards from idealY. For each candidate end-of-page Y, verify that
+  // the strip immediately above it (last requiredCleanStripPx rows) is all
+  // background. If so, that's a real gap — break there.
   for (let dy = 0; dy <= maxSearchUpPx; dy += 1) {
-    if (isCleanRow(idealY - dy)) return idealY - dy;
+    const candidateY = idealY - dy;
+    let strip = 0;
+    for (let s = 0; s < requiredCleanStripPx; s += 1) {
+      if (isCleanRow(candidateY - s)) strip += 1;
+      else break;
+    }
+    if (strip >= requiredCleanStripPx) return candidateY;
   }
   return idealY;
 }
