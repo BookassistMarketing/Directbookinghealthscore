@@ -1,8 +1,9 @@
 'use client';
 
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useMemo, useRef, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { Sparkles, Globe, Loader2, AlertCircle, ArrowRight, RotateCcw, ExternalLink, ShieldCheck } from 'lucide-react';
+import { PieChart, Pie, Cell, ResponsiveContainer } from 'recharts';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 import { Button } from './Button';
@@ -327,6 +328,24 @@ export const AiAudit: React.FC = () => {
   const [factIndex, setFactIndex] = useState(0);
   const [isStaffBypass, setIsStaffBypass] = useState(false);
 
+  // Extract just the overall score + tier label from the Gemini markdown to
+  // power the score-preview donut card at the top of the done view. The
+  // markdown body itself is rendered untouched below the card; this regex
+  // only reads, never rewrites.
+  const scorePreview = useMemo(() => {
+    if (!report) return null;
+    const m = report.match(/\b(\d{1,3})\s*\/\s*100\b(?:\s*[—–-]\s*([^\n]+))?/);
+    if (!m) return null;
+    const n = parseInt(m[1], 10);
+    if (!Number.isFinite(n) || n < 0 || n > 100) return null;
+    const tierLabel = m[2] ? m[2].replace(/[*`_]/g, '').trim() : null;
+    const color =
+      n >= 80 ? '#2A9D8F' :
+      n >= 60 ? '#F59E0B' :
+      n >= 40 ? '#FF8F1B' : '#E63946';
+    return { score: n, tierLabel, color };
+  }, [report]);
+
   useEffect(() => {
     if (typeof window === 'undefined') return;
     setConsentAccepted(sessionStorage.getItem(CONSENT_KEY) === 'accepted');
@@ -605,6 +624,61 @@ export const AiAudit: React.FC = () => {
               <RotateCcw size={14} /> {l.another}
             </button>
           </div>
+
+          {scorePreview && (
+            <div className="bg-white rounded-3xl shadow-xl border border-gray-100 overflow-hidden mb-6">
+              <div className="p-8 sm:p-10 flex flex-col md:flex-row items-center gap-8 md:gap-12">
+                <div className="flex-shrink-0 relative w-40 h-40 sm:w-48 sm:h-48">
+                  <ResponsiveContainer width="100%" height="100%">
+                    <PieChart>
+                      <Pie
+                        data={[
+                          { name: 'Score', value: scorePreview.score },
+                          { name: 'Gap', value: 100 - scorePreview.score },
+                        ]}
+                        cx="50%"
+                        cy="50%"
+                        innerRadius="80%"
+                        outerRadius="100%"
+                        startAngle={90}
+                        endAngle={-270}
+                        dataKey="value"
+                        stroke="none"
+                        isAnimationActive={false}
+                      >
+                        <Cell fill={scorePreview.color} />
+                        <Cell fill="#F3F4F6" />
+                      </Pie>
+                    </PieChart>
+                  </ResponsiveContainer>
+                  <div className="absolute inset-0 flex flex-col items-center justify-center">
+                    <span className="text-4xl sm:text-5xl font-black" style={{ color: scorePreview.color }}>
+                      {scorePreview.score}
+                    </span>
+                    <span className="text-[10px] text-gray-400 font-black uppercase tracking-widest mt-1">
+                      / 100
+                    </span>
+                  </div>
+                </div>
+                <div className="flex-1 text-center md:text-left">
+                  {scorePreview.tierLabel && (
+                    <div
+                      className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-[11px] font-black uppercase tracking-widest mb-3"
+                      style={{ backgroundColor: `${scorePreview.color}1A`, color: scorePreview.color }}
+                    >
+                      {scorePreview.tierLabel}
+                    </div>
+                  )}
+                  <h2 className="text-xl sm:text-2xl font-bold text-gray-900 leading-tight">
+                    {l.reportHeading}
+                  </h2>
+                  <p className="text-sm text-gray-500 mt-2 break-all">
+                    <span className="text-brand-blue font-semibold">{auditedUrl}</span>
+                  </p>
+                </div>
+              </div>
+            </div>
+          )}
 
           <article className="prose prose-slate max-w-none bg-white rounded-2xl shadow-sm border border-gray-100 p-6 sm:p-10">
             <ReactMarkdown
