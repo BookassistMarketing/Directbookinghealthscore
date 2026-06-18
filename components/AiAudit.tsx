@@ -398,60 +398,23 @@ function safeHostnameForFilename(url: string): string {
   }
 }
 
-// Walk upwards from idealY looking for a thick strip of background-coloured
-// pixels (the gap between cards), not just a single clean row. A 1-2px clean
-// row would match the internal borders between table cells — slicing there
-// still cuts the table in half, which is what we're trying to avoid. We
-// require N consecutive clean rows so we only break on real "between cards"
-// gaps. Returns the Y at the bottom of the found strip, or idealY if no
-// suitable strip exists within `maxSearchUpPx`.
-function findSafePageBreakY(
-  canvas: HTMLCanvasElement,
-  idealY: number,
-  maxSearchUpPx: number,
-): number {
-  const ctx = canvas.getContext('2d');
-  if (!ctx) return idealY;
-  const width = canvas.width;
-  const sampleEvery = Math.max(2, Math.floor(width / 200));
-  const requiredCleanStripPx = Math.max(15, Math.floor(canvas.height / 80));
-
-  // Pull the whole canvas in one ImageData call instead of one per row —
-  // ~100x faster for tall canvases.
-  const imageData = ctx.getImageData(0, 0, width, canvas.height).data;
-
-  const isCleanRow = (y: number): boolean => {
-    if (y < 0 || y >= canvas.height) return false;
-    const rowStart = y * width * 4;
-    let nonBackground = 0;
-    for (let x = 0; x < width; x += sampleEvery) {
-      const i = rowStart + x * 4;
-      const r = imageData[i];
-      const g = imageData[i + 1];
-      const b = imageData[i + 2];
-      // Background is page bg #F4F6F8 (244,246,248) or card white. Anything
-      // darker than ~230 on any channel is content.
-      if (r < 230 || g < 230 || b < 230) {
-        nonBackground += 1;
-        if (nonBackground > 2) return false;
+// Collect the "atomic" blocks inside the PDF capture region: the score card,
+// each direct child of the markdown article (so each heading / paragraph /
+// table is its own block), and any other top-level element. Each block is
+// captured separately and laid out on the PDF as a unit, so a table is
+// never sliced through.
+function collectPdfBlocks(root: HTMLElement): HTMLElement[] {
+  const blocks: HTMLElement[] = [];
+  for (const child of Array.from(root.children) as HTMLElement[]) {
+    if (child.tagName === 'ARTICLE') {
+      for (const grand of Array.from(child.children) as HTMLElement[]) {
+        blocks.push(grand);
       }
+    } else {
+      blocks.push(child);
     }
-    return true;
-  };
-
-  // Walk upwards from idealY. For each candidate end-of-page Y, verify that
-  // the strip immediately above it (last requiredCleanStripPx rows) is all
-  // background. If so, that's a real gap — break there.
-  for (let dy = 0; dy <= maxSearchUpPx; dy += 1) {
-    const candidateY = idealY - dy;
-    let strip = 0;
-    for (let s = 0; s < requiredCleanStripPx; s += 1) {
-      if (isCleanRow(candidateY - s)) strip += 1;
-      else break;
-    }
-    if (strip >= requiredCleanStripPx) return candidateY;
   }
-  return idealY;
+  return blocks;
 }
 
 function normaliseUrl(raw: string): string | null {
@@ -526,12 +489,18 @@ export const AiAudit: React.FC = () => {
         return;
       }
 
-      const canvas = await html2canvas(pdfCaptureRef.current, {
+      const blocks = collectPdfBlocks(pdfCaptureRef.current);
+      if (blocks.length === 0) {
+        setPdfError('Nothing to export.');
+        return;
+      }
+
+      const captureOpts = {
         scale: 2,
         useCORS: true,
         logging: false,
         backgroundColor: '#F4F6F8',
-      });
+      };
 
       const pdf = new jsPDFConstructor({ orientation: 'p', unit: 'mm', format: 'a4' });
       const pageWidth = pdf.internal.pageSize.getWidth();
@@ -539,56 +508,70 @@ export const AiAudit: React.FC = () => {
       const marginX = 8;
       const marginY = 10;
       const targetWidth = pageWidth - marginX * 2;
-      const pxToMm = targetWidth / canvas.width;
-      const totalHeightMm = canvas.height * pxToMm;
       const usablePageHeightMm = pageHeight - marginY * 2;
 
-      let consumedMm = 0;
+      let yCursor = marginY;
       let pageIndex = 0;
-      // Pull the page break up to a clean (background-only) row when possible,
-      // so tables and cards don't get sliced mid-content. Search window is
-      // ~30% of a page — enough to step over a tall card without skipping
-      // whole pages.
-      const maxSearchUpPx = Math.floor(usablePageHeightMm * 0.3 / pxToMm);
-      while (consumedMm < totalHeightMm - 0.5) {
-        if (pageIndex > 0) pdf.addPage();
+
+      const paintPageBackground = () => {
         pdf.setFillColor(244, 246, 248);
         pdf.rect(0, 0, pageWidth, pageHeight, 'F');
+      };
 
-        const remainingMm = totalHeightMm - consumedMm;
-        let sliceMm: number;
-        if (remainingMm <= usablePageHeightMm) {
-          // Final page — take everything left, no break-point search needed.
-          sliceMm = remainingMm;
-        } else {
-          const idealEndYPx = Math.floor((consumedMm + usablePageHeightMm) / pxToMm);
-          const safeEndYPx = findSafePageBreakY(canvas, idealEndYPx, maxSearchUpPx);
-          const candidateSliceMm = safeEndYPx * pxToMm - consumedMm;
-          // Never produce a page < 50% of usable height (would waste paper if
-          // the search jumped too aggressively).
-          sliceMm =
-            candidateSliceMm >= usablePageHeightMm * 0.5
-              ? candidateSliceMm
-              : usablePageHeightMm;
-        }
-        const sliceCanvasY = consumedMm / pxToMm;
-        const sliceCanvasH = sliceMm / pxToMm;
-
-        const sliceCanvas = document.createElement('canvas');
-        sliceCanvas.width = canvas.width;
-        sliceCanvas.height = Math.ceil(sliceCanvasH);
-        const ctx = sliceCanvas.getContext('2d');
-        if (ctx) {
-          ctx.fillStyle = '#F4F6F8';
-          ctx.fillRect(0, 0, sliceCanvas.width, sliceCanvas.height);
-          ctx.drawImage(canvas, 0, -sliceCanvasY);
-        }
-
-        const imgData = sliceCanvas.toDataURL('image/jpeg', 0.92);
-        pdf.addImage(imgData, 'JPEG', marginX, marginY, targetWidth, sliceMm);
-
-        consumedMm += sliceMm;
+      const startNewPage = () => {
+        if (pageIndex > 0) pdf.addPage();
+        paintPageBackground();
+        yCursor = marginY;
         pageIndex += 1;
+      };
+
+      startNewPage();
+
+      for (const block of blocks) {
+        // Skip purely-empty blocks (markdown can render stray empty <p>s).
+        if (block.offsetHeight === 0) continue;
+        const canvas = await html2canvas(block, captureOpts);
+        const pxToMm = targetWidth / canvas.width;
+        const blockHeightMm = canvas.height * pxToMm;
+        const imgData = canvas.toDataURL('image/jpeg', 0.92);
+
+        if (blockHeightMm <= usablePageHeightMm) {
+          // Fits as a single image — drop it on the current page if there's
+          // room, otherwise spill to a fresh page.
+          if (yCursor + blockHeightMm > pageHeight - marginY) {
+            startNewPage();
+          }
+          pdf.addImage(imgData, 'JPEG', marginX, yCursor, targetWidth, blockHeightMm);
+          yCursor += blockHeightMm + 4; // small gap between blocks
+        } else {
+          // Block is taller than a single A4 page (rare — a giant table).
+          // Slice this one block across pages at strict page boundaries.
+          // Other blocks stay intact.
+          if (yCursor > marginY) startNewPage();
+          let consumedPx = 0;
+          const totalPx = canvas.height;
+          while (consumedPx < totalPx - 0.5) {
+            const sliceMm = Math.min(usablePageHeightMm, (totalPx - consumedPx) * pxToMm);
+            const sliceHeightPx = sliceMm / pxToMm;
+            const sliceCanvas = document.createElement('canvas');
+            sliceCanvas.width = canvas.width;
+            sliceCanvas.height = Math.ceil(sliceHeightPx);
+            const ctx = sliceCanvas.getContext('2d');
+            if (ctx) {
+              ctx.fillStyle = '#F4F6F8';
+              ctx.fillRect(0, 0, sliceCanvas.width, sliceCanvas.height);
+              ctx.drawImage(canvas, 0, -consumedPx);
+            }
+            const sliceData = sliceCanvas.toDataURL('image/jpeg', 0.92);
+            pdf.addImage(sliceData, 'JPEG', marginX, marginY, targetWidth, sliceMm);
+            consumedPx += sliceHeightPx;
+            if (consumedPx < totalPx - 0.5) {
+              startNewPage();
+            } else {
+              yCursor = marginY + sliceMm + 4;
+            }
+          }
+        }
       }
 
       const hostname = safeHostnameForFilename(auditedUrl);
