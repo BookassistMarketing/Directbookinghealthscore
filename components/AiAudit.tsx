@@ -960,23 +960,25 @@ export const AiAudit: React.FC = () => {
             </ReactMarkdown>
           </article>
 
-          <a
-            href="https://bookassist.com/book-a-demo"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="flex flex-col md:flex-row items-center gap-6 bg-brand-blue text-white p-8 rounded-2xl shadow-xl mt-6 transition-all hover:scale-[1.01] no-underline"
-          >
-            <div className="flex-shrink-0 w-14 h-14 bg-white/10 rounded-full flex items-center justify-center">
-              <ExternalLink className="w-7 h-7 text-white" />
-            </div>
-            <div className="flex-1 text-center md:text-left">
-              <p className="text-xl sm:text-2xl font-black leading-tight tracking-tight text-white">{l.ctaTitle}</p>
-              <p className="text-blue-200 text-xs font-semibold uppercase tracking-widest mt-1">{l.ctaSub}</p>
-            </div>
-            <div className="flex items-center gap-2 bg-white text-brand-blue px-6 py-3 rounded-xl font-black text-sm uppercase tracking-widest shadow-md whitespace-nowrap flex-shrink-0">
-              {l.ctaButton} <ArrowRight size={16} className="ml-1" />
-            </div>
-          </a>
+          {!isStaffBypass && (
+            <a
+              href="https://bookassist.com/book-a-demo"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex flex-col md:flex-row items-center gap-6 bg-brand-blue text-white p-8 rounded-2xl shadow-xl mt-6 transition-all hover:scale-[1.01] no-underline"
+            >
+              <div className="flex-shrink-0 w-14 h-14 bg-white/10 rounded-full flex items-center justify-center">
+                <ExternalLink className="w-7 h-7 text-white" />
+              </div>
+              <div className="flex-1 text-center md:text-left">
+                <p className="text-xl sm:text-2xl font-black leading-tight tracking-tight text-white">{l.ctaTitle}</p>
+                <p className="text-blue-200 text-xs font-semibold uppercase tracking-widest mt-1">{l.ctaSub}</p>
+              </div>
+              <div className="flex items-center gap-2 bg-white text-brand-blue px-6 py-3 rounded-xl font-black text-sm uppercase tracking-widest shadow-md whitespace-nowrap flex-shrink-0">
+                {l.ctaButton} <ArrowRight size={16} className="ml-1" />
+              </div>
+            </a>
+          )}
           </div>
         </div>
       )}
