@@ -336,27 +336,67 @@ export const AiReadinessReport: React.FC<AiReadinessReportProps> = ({
 
   const handleDownloadPdf = async () => {
     if (isGeneratingPdf || !dashboardRef.current) return;
+
+    const html2canvas = (window as any).html2canvas;
+    const jsPDFConstructor = (window as any).jspdf?.jsPDF || (window as any).jsPDF;
+    if (!html2canvas || !jsPDFConstructor) {
+      window.print();
+      return;
+    }
+
     setIsGeneratingPdf(true);
     try {
-      const html2pdf = (window as any).html2pdf;
+      const canvas = await html2canvas(dashboardRef.current, {
+        scale: 2,
+        useCORS: true,
+        logging: false,
+        backgroundColor: '#F4F6F8',
+      });
+
+      const pdf = new jsPDFConstructor({ orientation: 'p', unit: 'mm', format: 'a4' });
+      const pageWidth = pdf.internal.pageSize.getWidth();
+      const pageHeight = pdf.internal.pageSize.getHeight();
+      const marginX = 8;
+      const marginY = 10;
+      const targetWidth = pageWidth - marginX * 2;
+      const pxToMm = targetWidth / canvas.width;
+      const totalHeightMm = canvas.height * pxToMm;
+      const usablePageHeightMm = pageHeight - marginY * 2;
+
+      let consumedMm = 0;
+      let pageIndex = 0;
+      while (consumedMm < totalHeightMm - 0.5) {
+        if (pageIndex > 0) pdf.addPage();
+        pdf.setFillColor(244, 246, 248);
+        pdf.rect(0, 0, pageWidth, pageHeight, 'F');
+
+        const remainingMm = totalHeightMm - consumedMm;
+        const sliceMm = Math.min(usablePageHeightMm, remainingMm);
+        const sliceCanvasY = consumedMm / pxToMm;
+        const sliceCanvasH = sliceMm / pxToMm;
+
+        const sliceCanvas = document.createElement('canvas');
+        sliceCanvas.width = canvas.width;
+        sliceCanvas.height = Math.ceil(sliceCanvasH);
+        const ctx = sliceCanvas.getContext('2d');
+        if (ctx) {
+          ctx.fillStyle = '#F4F6F8';
+          ctx.fillRect(0, 0, sliceCanvas.width, sliceCanvas.height);
+          ctx.drawImage(canvas, 0, -sliceCanvasY);
+        }
+
+        const imgData = sliceCanvas.toDataURL('image/jpeg', 0.92);
+        pdf.addImage(imgData, 'JPEG', marginX, marginY, targetWidth, sliceMm);
+
+        consumedMm += sliceMm;
+        pageIndex += 1;
+      }
+
       const hostname = safeHostname(auditedUrl);
       const filename = `AI-Readiness-${hostname}-${parsed.overallScore ?? 'report'}.pdf`;
-      if (html2pdf) {
-        await html2pdf()
-          .from(dashboardRef.current)
-          .set({
-            margin: [10, 8, 10, 8],
-            filename,
-            image: { type: 'jpeg', quality: 0.95 },
-            html2canvas: { scale: 2, useCORS: true, backgroundColor: '#F4F6F8' },
-            jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' },
-            pagebreak: { mode: ['css', 'legacy'], avoid: ['.pdf-avoid-break'] },
-          })
-          .save();
-      } else {
-        window.print();
-      }
-    } catch {
+      pdf.save(filename);
+    } catch (err) {
+      console.error('[AiReadinessReport] PDF generation failed', err);
       window.print();
     } finally {
       setIsGeneratingPdf(false);

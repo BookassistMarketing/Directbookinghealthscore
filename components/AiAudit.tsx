@@ -382,7 +382,10 @@ export const AiAudit: React.FC = () => {
         formAgeMs,
       });
       setReport(result);
-      setView('preview');
+      // Staff bypass: skip the blurred preview teaser and go straight to the
+      // full dashboard. Real users see the preview → form_gate (or done if
+      // they unlock) flow.
+      setView(isStaffBypass ? 'done' : 'preview');
     } catch (err) {
       console.error('[AiAudit] Audit failed:', err);
       setRequestError(l.errorBody);
