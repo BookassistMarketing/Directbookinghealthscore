@@ -2,6 +2,12 @@ import { MetadataRoute } from 'next';
 import { getAllPostSlugs } from '../lib/blog';
 import { LOCALES, BASE_URL, localePrefix, buildHreflang } from '../lib/i18n';
 
+// Regenerate hourly so scheduled blog posts appear in the sitemap shortly
+// after their date passes (see isPublished in lib/blog.ts). Search engines
+// crawling sitemap.xml within an hour of midnight UTC will see the new
+// post.
+export const revalidate = 3600;
+
 export default function sitemap(): MetadataRoute.Sitemap {
   const now = new Date().toISOString();
 

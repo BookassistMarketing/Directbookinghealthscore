@@ -5,6 +5,11 @@ import { getAllPosts } from '../../lib/blog';
 import { buildHreflang, canonicalFor } from '../../lib/i18n';
 import type { Language } from '../../types';
 
+// Regenerate hourly so scheduled blog posts (see isPublished in lib/blog.ts)
+// appear in the localised "Recent posts" module within ~1 hour of their
+// date passing, without needing a fresh Amplify build.
+export const revalidate = 3600;
+
 const localizedHomeMeta: Record<Language, { title: string; description: string; ogDescription: string }> = {
   en: {
     title: 'Direct Booking Health Score | Free Hotel Tech Audit',

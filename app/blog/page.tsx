@@ -4,6 +4,11 @@ import { BlogClientPage } from '../../components/BlogClientPage';
 import { JsonLd, blogListingSchema } from '../../lib/schema';
 import { buildHreflang, canonicalFor } from '../../lib/i18n';
 
+// Regenerate hourly so scheduled blog posts (see isPublished in lib/blog.ts)
+// appear in the listing within ~1 hour of their date passing, without
+// needing a fresh Amplify build.
+export const revalidate = 3600;
+
 export const metadata: Metadata = {
   title: 'Direct Booking Insights | Hotel Revenue & Technology Blog',
   description:

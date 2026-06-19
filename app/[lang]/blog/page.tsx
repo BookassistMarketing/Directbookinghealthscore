@@ -5,6 +5,11 @@ import { JsonLd, blogListingSchema } from '../../../lib/schema';
 import { buildHreflang, canonicalFor } from '../../../lib/i18n';
 import type { Language } from '../../../types';
 
+// Regenerate hourly so scheduled blog posts (see isPublished in lib/blog.ts)
+// appear in the localised listing within ~1 hour of their date passing,
+// without needing a fresh Amplify build.
+export const revalidate = 3600;
+
 const localizedMeta: Record<Language, { title: string; description: string }> = {
   en: {
     title: 'Direct Booking Insights | Hotel Revenue & Technology Blog',

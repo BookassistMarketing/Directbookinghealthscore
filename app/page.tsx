@@ -4,6 +4,11 @@ import { JsonLd, organizationSchema, webSiteSchema } from '../lib/schema';
 import { getAllPosts } from '../lib/blog';
 import { buildHreflang, canonicalFor } from '../lib/i18n';
 
+// Regenerate hourly so scheduled blog posts (see isPublished in lib/blog.ts)
+// appear in the "Recent posts" module within ~1 hour of their date passing,
+// without needing a fresh Amplify build.
+export const revalidate = 3600;
+
 export const metadata: Metadata = {
   title: 'Direct Booking Health Score | Free Hotel Tech Audit',
   description:
