@@ -583,13 +583,13 @@ export const AiAudit: React.FC = () => {
         'font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif',
       ].join(';');
       letterhead.innerHTML = `
-        <div style="width: 64px; height: 64px; background: #2A9D8F; border-radius: 14px; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
+        <div style="width: 64px; height: 64px; background: #003366; border-radius: 14px; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
           <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
             <path d="M22 12h-2.48a2 2 0 0 0-1.93 1.46l-2.35 8.36a.5.5 0 0 1-.96 0L9.68 3.18a.5.5 0 0 0-.96 0l-2.35 8.36A2 2 0 0 1 4.44 13H2"/>
           </svg>
         </div>
         <div style="line-height: 1.2;">
-          <div style="font-size: 24px; font-weight: 700; color: #2A9D8F; letter-spacing: -0.02em;">Hotel Health Clinic</div>
+          <div style="font-size: 24px; font-weight: 700; color: #003366; letter-spacing: -0.02em;">Hotel Health Clinic</div>
           <div style="font-size: 11px; font-weight: 600; color: #6b7280; text-transform: uppercase; letter-spacing: 0.12em; margin-top: 6px;">Powered by Bookassist</div>
         </div>
         ${bookassistLogoLoaded ? `
@@ -644,6 +644,11 @@ export const AiAudit: React.FC = () => {
         const pxToMm = targetWidth / canvas.width;
         const blockHeightMm = canvas.height * pxToMm;
         const imgData = canvas.toDataURL('image/jpeg', 0.92);
+        // If this block is an anchor tag (e.g. the Book a Demo CTA card at
+        // the bottom of the report), capture its href so we can attach a
+        // PDF link annotation at the same coordinates as the image. Without
+        // this the CTA renders as a static picture in the PDF.
+        const blockHref = block.tagName === 'A' ? (block as HTMLAnchorElement).href : null;
 
         if (blockHeightMm <= usablePageHeightMm) {
           // Keep-with-next: if this is a short heading-style block (e.g. a
@@ -669,6 +674,9 @@ export const AiAudit: React.FC = () => {
             startNewPage();
           }
           pdf.addImage(imgData, 'JPEG', marginX, yCursor, targetWidth, blockHeightMm);
+          if (blockHref) {
+            pdf.link(marginX, yCursor, targetWidth, blockHeightMm, { url: blockHref });
+          }
           yCursor += blockHeightMm + 4; // small gap between blocks
         } else {
           // Block is taller than a single A4 page (rare — a giant table).

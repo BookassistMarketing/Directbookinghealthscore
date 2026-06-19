@@ -445,6 +445,11 @@ export const FullResults: React.FC<FullResultsProps> = ({
         const pxToMm = targetWidth / canvas.width;
         const blockHeightMm = canvas.height * pxToMm;
         const imgData = canvas.toDataURL('image/jpeg', 0.92);
+        // If this block is an anchor tag (e.g. the Book a Demo CTA card at
+        // the bottom of the report), capture its href so we can attach a
+        // PDF link annotation at the same coordinates as the image. Without
+        // this the CTA renders as a static picture in the PDF.
+        const blockHref = block.tagName === 'A' ? (block as HTMLAnchorElement).href : null;
 
         if (blockHeightMm <= usablePageHeightMm) {
           let nextHeightMm = 0;
@@ -464,6 +469,9 @@ export const FullResults: React.FC<FullResultsProps> = ({
             startNewPage();
           }
           pdf.addImage(imgData, 'JPEG', marginX, yCursor, targetWidth, blockHeightMm);
+          if (blockHref) {
+            pdf.link(marginX, yCursor, targetWidth, blockHeightMm, { url: blockHref });
+          }
           yCursor += blockHeightMm + 4;
         } else {
           if (yCursor > marginY) startNewPage();
