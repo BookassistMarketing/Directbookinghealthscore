@@ -444,6 +444,18 @@ function normaliseUrl(raw: string): string | null {
   }
 }
 
+// Staff-only picker label — lets a Bookassist user audit a hotel in a language
+// different from the UI locale they're browsing. Public visitors don't see this.
+const reportLangPickerLabel: Record<Language, string> = {
+  en: 'Generate report in',
+  it: 'Genera report in',
+  es: 'Generar informe en',
+  pl: 'Generuj raport w',
+  fr: 'Générer le rapport en',
+  de: 'Bericht erstellen auf',
+  cs: 'Vygenerovat report v',
+};
+
 export const AiAudit: React.FC = () => {
   const { language } = useContent();
   const router = useRouter();
@@ -455,6 +467,7 @@ export const AiAudit: React.FC = () => {
 
   const [view, setView] = useState<ViewState>('idle');
   const [rawUrl, setRawUrl] = useState('');
+  const [reportLang, setReportLang] = useState<Language>(language);
   const [urlError, setUrlError] = useState<string | null>(null);
   const [report, setReport] = useState('');
   const [auditedUrl, setAuditedUrl] = useState('');
@@ -789,7 +802,7 @@ export const AiAudit: React.FC = () => {
     setView('loading');
     const formAgeMs = Date.now() - formRenderedAt.current;
     try {
-      const result = await generateAiReadinessReport(url, language, {
+      const result = await generateAiReadinessReport(url, reportLang, {
         honeypot,
         formAgeMs,
       });
@@ -873,6 +886,27 @@ export const AiAudit: React.FC = () => {
           </p>
 
           <form onSubmit={submit} className="max-w-xl mx-auto">
+            {isStaffBypass && (
+              <div className="mb-4 flex items-center justify-center gap-2 text-sm">
+                <label htmlFor="ai-audit-report-lang" className="text-gray-500 font-medium">
+                  {reportLangPickerLabel[language]}:
+                </label>
+                <select
+                  id="ai-audit-report-lang"
+                  value={reportLang}
+                  onChange={e => setReportLang(e.target.value as Language)}
+                  className="bg-white border border-gray-200 rounded-lg px-3 py-1.5 text-gray-700 focus:outline-none focus:ring-2 focus:ring-brand-success"
+                >
+                  <option value="en">English</option>
+                  <option value="it">Italiano</option>
+                  <option value="es">Español</option>
+                  <option value="pl">Polski</option>
+                  <option value="fr">Français</option>
+                  <option value="de">Deutsch</option>
+                  <option value="cs">Čeština</option>
+                </select>
+              </div>
+            )}
             <label htmlFor="ai-audit-url" className="sr-only">{l.inputLabel}</label>
             {/* Honeypot — hidden from real users, attractive to bots */}
             <div aria-hidden="true" style={{ position: 'absolute', left: '-9999px', top: 'auto', width: '1px', height: '1px', overflow: 'hidden' }}>
