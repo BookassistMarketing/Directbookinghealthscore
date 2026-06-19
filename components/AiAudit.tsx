@@ -16,6 +16,11 @@ import { checkStaffBypass, type StaffRole } from '../lib/staffBypass';
 
 const CONSENT_KEY = 'hhc_gemini_consent';
 
+// Local-dev escape hatch: show the "Preview end page" demo button without a
+// staff token when running `npm run dev`. Production builds inline `false`
+// here so the gate stays marketing-only on the live site.
+const IS_DEV_PREVIEW = process.env.NODE_ENV !== 'production';
+
 type ViewState = 'idle' | 'loading' | 'preview' | 'form_gate' | 'done';
 
 const labelsMap: Record<Language, {
@@ -294,15 +299,20 @@ function renderFact(text: string) {
 // Sample Gemini AI Readiness Report used by the "Preview end page" link that
 // appears on the idle view for signed-in staff. Lets us iterate on the
 // rendering without burning Gemini credits on every reload.
-const DEMO_REPORT = `ai visibility & optimization summary
-The Grand Harbour Hotel, Galway
-overall score: 62 / 100 — Near AI-ready
-url analyzed: https://grandharbour-demo.example.com
+const DEMO_REPORT = `# AI Visibility & Optimisation Summary
 
-What we observed
+**The Grand Harbour Hotel, Galway**
+
+Overall score: 62 / 100 — Near AI-ready
+
+URL analysed: https://grandharbour-demo.example.com
+
+## What we observed
+
 The Grand Harbour Hotel maintains a clean, brand-aligned presentation with strong booking pathways and solid metadata coverage. AI assistants can readily identify the property and its booking surface, but several structural signals — notably FAQPage schema, SpeakableSpecification, and entity-level @id linking — are absent. These gaps prevent the site from reaching the AI-optimised tier and limit visibility in generative search experiences such as ChatGPT, Perplexity, and Google AI Overviews.
 
-Weighted scoring breakdown
+## Weighted scoring breakdown
+
 | Category | Weight | Score |
 | --- | --- | --- |
 | Structured Data Completeness | 25 | 14 |
@@ -316,7 +326,8 @@ Weighted scoring breakdown
 | Media/ALT Optimisation | 2 | 2 |
 | Voice-Search Readiness | 6 | 0 |
 
-Recurring issues across the website
+## Recurring issues across the website
+
 | Issue | Impact | Pages Affected |
 | --- | --- | --- |
 | Missing FAQPage schema | AI assistants cannot extract structured Q&A pairs | Homepage, Rooms, Contact |
@@ -325,7 +336,8 @@ Recurring issues across the website
 | Limited persona-targeted content | AI search cannot match the property to specific traveller intents | Landing pages |
 | No nearby attraction references in schema | Local AI search downranks the property | Homepage, Location |
 
-Estimated score uplift if issues are resolved
+## Estimated score uplift if issues are resolved
+
 | Fix | Estimated Score Increase |
 | --- | --- |
 | Add FAQPage schema with 8 location and booking questions | +10 points |
@@ -334,9 +346,10 @@ Estimated score uplift if issues are resolved
 | Add "For Business" and "For Families" intent blocks | +3 points |
 | Expand nearby attractions narrative on Location page | +3 points |
 
-Projected Score After Fixes: 85 / 100
+**Projected Score After Fixes: 85 / 100**
 
-Strategic Advantage for Bookassist
+## Strategic Advantage for Bookassist
+
 Bookassist's AI Readiness programme directly closes every gap surfaced above. Our structured-data automation populates FAQPage, SpeakableSpecification, and @id graph relationships in a single deployment, while our content optimisation surfaces persona blocks and local-entity references that elevate the property in generative search. Hotels onboarded with Bookassist typically reach AI-optimised status within 90 days, translating to material lifts in direct-booking visibility across ChatGPT, Perplexity, and Google AI Overviews.`;
 
 // Inject a <script> tag if the expected global isn't already present. Polls
@@ -495,11 +508,16 @@ export const AiAudit: React.FC = () => {
         return;
       }
 
+      // Capture each block on a white background. The PDF page itself is
+      // painted #F4F6F8 (see paintPageBackground), so a white capture makes
+      // each block read as a distinct white "card" on a gray page. The
+      // tinted score card has its own inline background and is captured as
+      // tinted because the element's own bg wins over the canvas fallback.
       const captureOpts = {
         scale: 2,
         useCORS: true,
         logging: false,
-        backgroundColor: '#F4F6F8',
+        backgroundColor: '#ffffff',
       };
 
       const pdf = new jsPDFConstructor({ orientation: 'p', unit: 'mm', format: 'a4' });
@@ -513,8 +531,12 @@ export const AiAudit: React.FC = () => {
       let yCursor = marginY;
       let pageIndex = 0;
 
+      // PDF page background. White so the white-captured content blocks merge
+      // into one continuous document body; only intentionally-tinted blocks
+      // (the score card) stand out. The score card carries the tier colour,
+      // which is the only colour cue the page needs.
       const paintPageBackground = () => {
-        pdf.setFillColor(244, 246, 248);
+        pdf.setFillColor(255, 255, 255);
         pdf.rect(0, 0, pageWidth, pageHeight, 'F');
       };
 
@@ -527,7 +549,95 @@ export const AiAudit: React.FC = () => {
 
       startNewPage();
 
-      for (const block of blocks) {
+      // Page-1 letterhead — heartbeat mark + "Hotel Health Clinic / Powered
+      // by Bookassist" on the left, Bookassist wordmark on the right. Built
+      // off-screen so the user never sees it on the page, captured once,
+      // painted at the top of page 1 only. Mirrors the look of the site
+      // header (see AppShell.tsx) so the PDF feels like part of the same
+      // brand surface.
+
+      // Preload the Bookassist logo so html2canvas captures the image rather
+      // than an empty <img>. If the file is missing or fails to load, fall
+      // back to a logo-less letterhead instead of breaking the PDF.
+      const BOOKASSIST_LOGO_URL = '/Bookassist%20-%20Logo.png';
+      const bookassistLogoLoaded = await new Promise<boolean>((resolve) => {
+        const preload = new Image();
+        preload.onload = () => resolve(true);
+        preload.onerror = () => resolve(false);
+        preload.src = BOOKASSIST_LOGO_URL;
+      });
+
+      const letterhead = document.createElement('div');
+      letterhead.style.cssText = [
+        'position: absolute',
+        'left: -9999px',
+        'top: 0',
+        'width: 800px',
+        'background: #ffffff',
+        'border-radius: 16px',
+        'border: 1px solid #f3f4f6',
+        'padding: 28px 32px',
+        'display: flex',
+        'align-items: center',
+        'gap: 20px',
+        'font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif',
+      ].join(';');
+      letterhead.innerHTML = `
+        <div style="width: 64px; height: 64px; background: #2A9D8F; border-radius: 14px; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
+          <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M22 12h-2.48a2 2 0 0 0-1.93 1.46l-2.35 8.36a.5.5 0 0 1-.96 0L9.68 3.18a.5.5 0 0 0-.96 0l-2.35 8.36A2 2 0 0 1 4.44 13H2"/>
+          </svg>
+        </div>
+        <div style="line-height: 1.2;">
+          <div style="font-size: 24px; font-weight: 700; color: #2A9D8F; letter-spacing: -0.02em;">Hotel Health Clinic</div>
+          <div style="font-size: 11px; font-weight: 600; color: #6b7280; text-transform: uppercase; letter-spacing: 0.12em; margin-top: 6px;">Powered by Bookassist</div>
+        </div>
+        ${bookassistLogoLoaded ? `
+          <img
+            src="${BOOKASSIST_LOGO_URL}"
+            alt="Bookassist"
+            style="height: 52px; width: auto; margin-left: auto; display: block; flex-shrink: 0;"
+          />
+        ` : ''}
+      `;
+      document.body.appendChild(letterhead);
+      try {
+        const lhCanvas = await html2canvas(letterhead, captureOpts);
+        const lhHeightMm = (lhCanvas.height * targetWidth) / lhCanvas.width;
+        pdf.addImage(
+          lhCanvas.toDataURL('image/jpeg', 0.92),
+          'JPEG',
+          marginX,
+          yCursor,
+          targetWidth,
+          lhHeightMm,
+        );
+        // Make the whole letterhead area a clickable link to bookassist.com.
+        // jsPDF embeds this as a PDF link annotation, so it works in any
+        // PDF reader (Acrobat, Preview, browsers, print-to-PDF re-opens).
+        pdf.link(marginX, yCursor, targetWidth, lhHeightMm, {
+          url: 'https://bookassist.com',
+        });
+        yCursor += lhHeightMm + 6;
+      } finally {
+        document.body.removeChild(letterhead);
+      }
+
+      // Estimate a block's printed height without rendering it. Used to peek
+      // at upcoming blocks for the "keep with next" check below. Mirrors the
+      // ratio html2canvas will produce: targetWidth (the column width in mm)
+      // divided by the on-screen offsetWidth gives mm-per-CSS-px.
+      const estimateBlockHeightMm = (el: HTMLElement): number => {
+        if (el.offsetWidth === 0 || el.offsetHeight === 0) return 0;
+        return (el.offsetHeight * targetWidth) / el.offsetWidth;
+      };
+      // Short blocks (one- or two-line "headings" like "Recurring issues
+      // across the website") under this height get the keep-with-next check.
+      // Anything taller is treated as real content and can stand alone.
+      const KEEP_WITH_NEXT_MAX_MM = 40;
+
+      for (let i = 0; i < blocks.length; i++) {
+        const block = blocks[i];
         // Skip purely-empty blocks (markdown can render stray empty <p>s).
         if (block.offsetHeight === 0) continue;
         const canvas = await html2canvas(block, captureOpts);
@@ -536,9 +646,26 @@ export const AiAudit: React.FC = () => {
         const imgData = canvas.toDataURL('image/jpeg', 0.92);
 
         if (blockHeightMm <= usablePageHeightMm) {
-          // Fits as a single image — drop it on the current page if there's
-          // room, otherwise spill to a fresh page.
-          if (yCursor + blockHeightMm > pageHeight - marginY) {
+          // Keep-with-next: if this is a short heading-style block (e.g. a
+          // "## Recurring issues" line that markdown renders as a plain <p>)
+          // and the block right after it is a normal-sized block that won't
+          // fit on the current page, push this one to a fresh page too so
+          // heading and content stay together. The next-block-fits-alone
+          // guard avoids cascading when the follower is itself page-sized.
+          let nextHeightMm = 0;
+          for (let j = i + 1; j < blocks.length; j++) {
+            if (blocks[j].offsetHeight > 0) {
+              nextHeightMm = estimateBlockHeightMm(blocks[j]);
+              break;
+            }
+          }
+          const wouldOrphanNext =
+            blockHeightMm < KEEP_WITH_NEXT_MAX_MM &&
+            nextHeightMm > 0 &&
+            nextHeightMm <= usablePageHeightMm &&
+            yCursor + blockHeightMm + 4 + nextHeightMm > pageHeight - marginY;
+
+          if (wouldOrphanNext || yCursor + blockHeightMm > pageHeight - marginY) {
             startNewPage();
           }
           pdf.addImage(imgData, 'JPEG', marginX, yCursor, targetWidth, blockHeightMm);
@@ -558,7 +685,7 @@ export const AiAudit: React.FC = () => {
             sliceCanvas.height = Math.ceil(sliceHeightPx);
             const ctx = sliceCanvas.getContext('2d');
             if (ctx) {
-              ctx.fillStyle = '#F4F6F8';
+              ctx.fillStyle = '#ffffff';
               ctx.fillRect(0, 0, sliceCanvas.width, sliceCanvas.height);
               ctx.drawImage(canvas, 0, -consumedPx);
             }
@@ -722,7 +849,7 @@ export const AiAudit: React.FC = () => {
 
       {view === 'idle' && (
         <div className="text-center">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-50 text-brand-blue text-xs font-bold uppercase tracking-widest mb-6">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-teal-50 text-brand-success text-xs font-bold uppercase tracking-widest mb-6">
             <Sparkles className="w-3.5 h-3.5" /> {l.eyebrow}
           </div>
           <h1 className="text-3xl sm:text-5xl font-bold text-gray-900 tracking-tight mb-4 leading-tight">
@@ -760,7 +887,7 @@ export const AiAudit: React.FC = () => {
                 value={rawUrl}
                 onChange={e => setRawUrl(e.target.value)}
                 placeholder={l.placeholder}
-                className="w-full pl-12 pr-4 py-4 text-base sm:text-lg bg-white border border-gray-200 rounded-xl shadow-sm focus:outline-none focus:ring-2 focus:ring-brand-blue focus:border-transparent"
+                className="w-full pl-12 pr-4 py-4 text-base sm:text-lg bg-white border border-gray-200 rounded-xl shadow-sm focus:outline-none focus:ring-2 focus:ring-brand-success focus:border-transparent"
                 aria-invalid={Boolean(urlError)}
                 aria-describedby={urlError ? 'ai-audit-url-error' : undefined}
               />
@@ -780,13 +907,13 @@ export const AiAudit: React.FC = () => {
               {l.submit} <ArrowRight size={18} className="ml-2 inline-block" />
             </Button>
             <p className="mt-4 text-xs text-gray-400">{l.disclosure}</p>
-            {isMarketing && (
+            {(isMarketing || IS_DEV_PREVIEW) && (
               <button
                 type="button"
                 onClick={loadDemoReport}
-                className="mt-6 text-xs font-bold uppercase tracking-widest text-brand-blue hover:underline"
+                className="mt-6 text-xs font-bold uppercase tracking-widest text-brand-success hover:underline"
               >
-                Preview end page with sample report (marketing only — no Gemini call)
+                Preview end page with sample report (no Gemini call)
               </button>
             )}
           </form>
@@ -795,7 +922,7 @@ export const AiAudit: React.FC = () => {
 
       {view === 'loading' && (
         <div className="text-center py-12 sm:py-20">
-          <Loader2 className="w-10 h-10 text-brand-blue mx-auto mb-5 animate-spin" />
+          <Loader2 className="w-10 h-10 text-brand-success mx-auto mb-5 animate-spin" />
           <h2 className="text-2xl sm:text-3xl font-black text-gray-900 mb-2">{l.loading}</h2>
           <p className="text-base text-gray-500 max-w-md mx-auto mb-10">{l.loadingSub}</p>
 
@@ -814,7 +941,7 @@ export const AiAudit: React.FC = () => {
                     {renderFact(fact.text)}
                   </p>
                   <div className="mt-5 flex justify-end">
-                    <span className="bg-brand-blue text-white text-[10px] font-black uppercase tracking-widest px-4 py-2 rounded-full">
+                    <span className="bg-brand-success text-white text-[10px] font-black uppercase tracking-widest px-4 py-2 rounded-full">
                       {fact.category}
                     </span>
                   </div>
@@ -836,7 +963,7 @@ export const AiAudit: React.FC = () => {
         <div>
           <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4 mb-6">
             <div>
-              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-50 text-brand-blue text-xs font-bold uppercase tracking-widest mb-3">
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-teal-50 text-brand-success text-xs font-bold uppercase tracking-widest mb-3">
                 <Sparkles className="w-3.5 h-3.5" /> {l.eyebrow}
               </div>
               <h1 className="text-2xl sm:text-3xl font-bold text-gray-900 tracking-tight">
@@ -856,7 +983,7 @@ export const AiAudit: React.FC = () => {
                       <table className="w-full border-collapse text-sm">{children}</table>
                     </div>
                   ),
-                  thead: ({ children }) => <thead className="bg-blue-50">{children}</thead>,
+                  thead: ({ children }) => <thead className="bg-teal-50">{children}</thead>,
                   th: ({ children }) => (
                     <th className="text-left p-3 border border-gray-200 font-semibold text-gray-900">{children}</th>
                   ),
@@ -867,7 +994,7 @@ export const AiAudit: React.FC = () => {
                     <h2 className="text-2xl font-bold text-gray-900 mt-8 mb-4">{children}</h2>
                   ),
                   h2: ({ children }) => (
-                    <h3 className="text-xl font-bold text-brand-blue mt-8 mb-3">{children}</h3>
+                    <h3 className="text-xl font-bold text-brand-success mt-8 mb-3">{children}</h3>
                   ),
                   h3: ({ children }) => (
                     <h4 className="text-lg font-semibold text-gray-900 mt-6 mb-2">{children}</h4>
@@ -895,7 +1022,7 @@ export const AiAudit: React.FC = () => {
         <div>
           <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4 mb-6">
             <div>
-              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-50 text-brand-blue text-xs font-bold uppercase tracking-widest mb-3">
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-teal-50 text-brand-success text-xs font-bold uppercase tracking-widest mb-3">
                 <Sparkles className="w-3.5 h-3.5" /> {l.eyebrow}
               </div>
               <h1 className="text-2xl sm:text-3xl font-bold text-gray-900 tracking-tight">
@@ -907,14 +1034,14 @@ export const AiAudit: React.FC = () => {
               <button
                 onClick={handleDownloadPdf}
                 disabled={isGeneratingPdf}
-                className="inline-flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-semibold text-white bg-brand-blue hover:bg-blue-900 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                className="inline-flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-semibold text-white bg-brand-success hover:bg-teal-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
               >
                 {isGeneratingPdf ? <Loader2 size={14} className="animate-spin" /> : <Download size={14} />}
                 {isGeneratingPdf ? 'Exporting…' : 'Download PDF'}
               </button>
               <button
                 onClick={reset}
-                className="inline-flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-semibold text-gray-700 bg-white border border-gray-200 hover:border-brand-blue hover:text-brand-blue transition-colors"
+                className="inline-flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-semibold text-gray-700 bg-white border border-gray-200 hover:border-brand-success hover:text-brand-success transition-colors"
               >
                 <RotateCcw size={14} /> {l.another}
               </button>
@@ -931,7 +1058,10 @@ export const AiAudit: React.FC = () => {
           <div ref={pdfCaptureRef}>
 
           {scorePreview && (
-            <div className="bg-white rounded-3xl shadow-xl border border-gray-100 overflow-hidden mb-6">
+            <div
+              className="rounded-3xl shadow-xl border border-gray-100 overflow-hidden mb-6"
+              style={{ backgroundColor: `${scorePreview.color}1A` }}
+            >
               <div className="p-8 sm:p-10 flex flex-col md:flex-row items-center gap-8 md:gap-12">
                 <div className="flex-shrink-0 relative w-40 h-40 sm:w-48 sm:h-48">
                   <ResponsiveContainer width="100%" height="100%">
@@ -978,7 +1108,7 @@ export const AiAudit: React.FC = () => {
                     {l.reportHeading}
                   </h2>
                   <p className="text-sm text-gray-500 mt-2 break-all">
-                    <span className="text-brand-blue font-semibold">{auditedUrl}</span>
+                    <span className="text-brand-success font-semibold">{auditedUrl}</span>
                   </p>
                 </div>
               </div>
@@ -994,7 +1124,7 @@ export const AiAudit: React.FC = () => {
                     <table className="w-full border-collapse text-sm">{children}</table>
                   </div>
                 ),
-                thead: ({ children }) => <thead className="bg-blue-50">{children}</thead>,
+                thead: ({ children }) => <thead className="bg-teal-50">{children}</thead>,
                 th: ({ children }) => (
                   <th className="text-left p-3 border border-gray-200 font-semibold text-gray-900">
                     {children}
@@ -1007,7 +1137,7 @@ export const AiAudit: React.FC = () => {
                   <h2 className="text-2xl font-bold text-gray-900 mt-8 mb-4">{children}</h2>
                 ),
                 h2: ({ children }) => (
-                  <h3 className="text-xl font-bold text-brand-blue mt-8 mb-3">{children}</h3>
+                  <h3 className="text-xl font-bold text-brand-success mt-8 mb-3">{children}</h3>
                 ),
                 h3: ({ children }) => (
                   <h4 className="text-lg font-semibold text-gray-900 mt-6 mb-2">{children}</h4>
@@ -1023,16 +1153,16 @@ export const AiAudit: React.FC = () => {
               href="https://bookassist.com/book-a-demo"
               target="_blank"
               rel="noopener noreferrer"
-              className="flex flex-col md:flex-row items-center gap-6 bg-brand-blue text-white p-8 rounded-2xl shadow-xl mt-6 transition-all hover:scale-[1.01] no-underline"
+              className="flex flex-col md:flex-row items-center gap-6 bg-brand-success text-white p-8 rounded-2xl shadow-xl mt-6 transition-all hover:scale-[1.01] no-underline"
             >
               <div className="flex-shrink-0 w-14 h-14 bg-white/10 rounded-full flex items-center justify-center">
                 <ExternalLink className="w-7 h-7 text-white" />
               </div>
               <div className="flex-1 text-center md:text-left">
                 <p className="text-xl sm:text-2xl font-black leading-tight tracking-tight text-white">{l.ctaTitle}</p>
-                <p className="text-blue-200 text-xs font-semibold uppercase tracking-widest mt-1">{l.ctaSub}</p>
+                <p className="text-teal-200 text-xs font-semibold uppercase tracking-widest mt-1">{l.ctaSub}</p>
               </div>
-              <div className="flex items-center gap-2 bg-white text-brand-blue px-6 py-3 rounded-xl font-black text-sm uppercase tracking-widest shadow-md whitespace-nowrap flex-shrink-0">
+              <div className="flex items-center gap-2 bg-white text-brand-success px-6 py-3 rounded-xl font-black text-sm uppercase tracking-widest shadow-md whitespace-nowrap flex-shrink-0">
                 {l.ctaButton} <ArrowRight size={16} className="ml-1" />
               </div>
             </a>
