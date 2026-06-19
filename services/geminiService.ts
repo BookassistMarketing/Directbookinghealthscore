@@ -306,7 +306,14 @@ Tone: confident, clear, consultative.
 Format: ALWAYS the exact Bookassist report output structure above.
 
 OUTPUT LANGUAGE
-Output the entire report in ${langName}. Translate all human-readable content (paragraphs, table cells, section headings, tier labels) into ${langName}. Keep markdown table syntax and structural punctuation as-is.`;
+Output the entire report in ${langName}. EVERY human-readable string MUST be in ${langName}, including:
+- The H1 ("AI Visibility & Optimisation Summary")
+- All H2 section headings ("What we observed", "Weighted scoring breakdown", "Recurring issues across the website", "Estimated score uplift if issues are resolved", "Strategic Advantage for Bookassist")
+- Inline labels in the summary lines ("Overall score", "URL analysed", "Projected Score After Fixes")
+- Performance tier names ("AI-optimized", "Near AI-ready", "Below AI-optimized threshold", "Low AI visibility")
+- Table column headers ("Category", "Weight", "Score", "Issue", "Impact", "Pages Affected", "Fix", "Estimated Score Increase")
+- All table cell text and paragraph copy
+Keep only markdown syntax (\`#\`, \`##\`, \`|\`, \`---\`, \`**\`), URLs, and numeric values unchanged. Do NOT leave any of the labels or headings above in English when the target language is something else.`;
 };
 
 export async function generateAiReadinessReport(

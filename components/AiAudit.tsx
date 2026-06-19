@@ -45,6 +45,8 @@ const labelsMap: Record<Language, {
   ctaSub: string;
   ctaButton: string;
   didYouKnow: string;
+  downloadPdf: string;
+  exporting: string;
 }> = {
   en: {
     eyebrow: 'AI Visibility Audit',
@@ -67,6 +69,8 @@ const labelsMap: Record<Language, {
     ctaSub: 'Book a free consultation with a Bookassist strategist',
     ctaButton: 'Book a Demo',
     didYouKnow: 'Did you know?',
+    downloadPdf: 'Download PDF',
+    exporting: 'Exporting…',
   },
   it: {
     eyebrow: 'Audit di Visibilità AI',
@@ -89,6 +93,8 @@ const labelsMap: Record<Language, {
     ctaSub: 'Prenota una consulenza gratuita con uno stratega Bookassist',
     ctaButton: 'Prenota una Demo',
     didYouKnow: 'Lo sapevi?',
+    downloadPdf: 'Scarica PDF',
+    exporting: 'Esportazione…',
   },
   es: {
     eyebrow: 'Auditoría de Visibilidad IA',
@@ -111,6 +117,8 @@ const labelsMap: Record<Language, {
     ctaSub: 'Reserva una consulta gratuita con un estratega de Bookassist',
     ctaButton: 'Reservar una Demo',
     didYouKnow: '¿Sabías que?',
+    downloadPdf: 'Descargar PDF',
+    exporting: 'Exportando…',
   },
   pl: {
     eyebrow: 'Audyt Widoczności AI',
@@ -133,6 +141,8 @@ const labelsMap: Record<Language, {
     ctaSub: 'Umów bezpłatną konsultację ze strategiem Bookassist',
     ctaButton: 'Zamów Demo',
     didYouKnow: 'Czy wiedziałeś?',
+    downloadPdf: 'Pobierz PDF',
+    exporting: 'Eksportowanie…',
   },
   fr: {
     eyebrow: 'Audit Visibilité IA',
@@ -155,6 +165,8 @@ const labelsMap: Record<Language, {
     ctaSub: 'Réservez une consultation gratuite avec un stratège Bookassist',
     ctaButton: 'Réserver une Démo',
     didYouKnow: 'Le saviez-vous ?',
+    downloadPdf: 'Télécharger le PDF',
+    exporting: 'Export en cours…',
   },
   de: {
     eyebrow: 'KI-Sichtbarkeitsaudit',
@@ -177,6 +189,8 @@ const labelsMap: Record<Language, {
     ctaSub: 'Buchen Sie eine kostenlose Beratung mit einem Bookassist-Strategen',
     ctaButton: 'Demo buchen',
     didYouKnow: 'Wussten Sie?',
+    downloadPdf: 'PDF herunterladen',
+    exporting: 'Wird exportiert…',
   },
   cs: {
     eyebrow: 'Audit AI viditelnosti',
@@ -199,6 +213,8 @@ const labelsMap: Record<Language, {
     ctaSub: 'Rezervujte si bezplatnou konzultaci se strategem Bookassist',
     ctaButton: 'Rezervovat demo',
     didYouKnow: 'Věděli jste?',
+    downloadPdf: 'Stáhnout PDF',
+    exporting: 'Probíhá export…',
   },
 };
 
@@ -468,6 +484,11 @@ export const AiAudit: React.FC = () => {
   const [view, setView] = useState<ViewState>('idle');
   const [rawUrl, setRawUrl] = useState('');
   const [reportLang, setReportLang] = useState<Language>(language);
+  // Chrome around the rendered report (eyebrow, headings, PDF/reset buttons)
+  // follows the report language, not the UI locale — so a staff member on the
+  // English UI generating a Spanish report still sees Spanish labels on the
+  // results page and in the captured PDF.
+  const reportL = labelsMap[reportLang];
   const [urlError, setUrlError] = useState<string | null>(null);
   const [report, setReport] = useState('');
   const [auditedUrl, setAuditedUrl] = useState('');
@@ -1070,10 +1091,10 @@ export const AiAudit: React.FC = () => {
           <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4 mb-6">
             <div>
               <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-teal-50 text-brand-success text-xs font-bold uppercase tracking-widest mb-3">
-                <Sparkles className="w-3.5 h-3.5" /> {l.eyebrow}
+                <Sparkles className="w-3.5 h-3.5" /> {reportL.eyebrow}
               </div>
               <h1 className="text-2xl sm:text-3xl font-bold text-gray-900 tracking-tight">
-                {l.reportHeading}
+                {reportL.reportHeading}
               </h1>
               <p className="text-sm text-gray-500 mt-1 break-all">{auditedUrl}</p>
             </div>
@@ -1084,13 +1105,13 @@ export const AiAudit: React.FC = () => {
                 className="inline-flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-semibold text-white bg-brand-success hover:bg-teal-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
               >
                 {isGeneratingPdf ? <Loader2 size={14} className="animate-spin" /> : <Download size={14} />}
-                {isGeneratingPdf ? 'Exporting…' : 'Download PDF'}
+                {isGeneratingPdf ? reportL.exporting : reportL.downloadPdf}
               </button>
               <button
                 onClick={reset}
                 className="inline-flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-semibold text-gray-700 bg-white border border-gray-200 hover:border-brand-success hover:text-brand-success transition-colors"
               >
-                <RotateCcw size={14} /> {l.another}
+                <RotateCcw size={14} /> {reportL.another}
               </button>
             </div>
           </div>
@@ -1152,7 +1173,7 @@ export const AiAudit: React.FC = () => {
                     </div>
                   )}
                   <h2 className="text-xl sm:text-2xl font-bold text-gray-900 leading-tight">
-                    {l.reportHeading}
+                    {reportL.reportHeading}
                   </h2>
                   <p className="text-sm text-gray-500 mt-2 break-all">
                     <span className="text-brand-success font-semibold">{auditedUrl}</span>
