@@ -14,6 +14,7 @@ import { useContent } from '../contexts/ContentContext';
 import { Language } from '../types';
 import { generateAiReadinessReport } from '../services/aiService';
 import { checkStaffBypass, clearStaffToken, type StaffRole } from '../lib/staffBypass';
+import { DEMO_REPORTS } from '../lib/aiAuditDemoReport';
 
 const CONSENT_KEY = 'hhc_gemini_consent';
 
@@ -312,62 +313,6 @@ function renderFact(text: string) {
       : <span key={i}>{part}</span>
   );
 }
-
-// Sample Gemini AI Readiness Report used by the "Preview end page" link that
-// appears on the idle view for signed-in staff. Lets us iterate on the
-// rendering without burning Gemini credits on every reload.
-const DEMO_REPORT = `# AI Visibility & Optimisation Summary
-
-**The Grand Harbour Hotel, Galway**
-
-Overall score: 62 / 100 — Near AI-ready
-
-URL analysed: https://grandharbour-demo.example.com
-
-## What we observed
-
-The Grand Harbour Hotel maintains a clean, brand-aligned presentation with strong booking pathways and solid metadata coverage. AI assistants can readily identify the property and its booking surface, but several structural signals — notably FAQPage schema, SpeakableSpecification, and entity-level @id linking — are absent. These gaps prevent the site from reaching the AI-optimised tier and limit visibility in generative search experiences such as ChatGPT, Perplexity, and Google AI Overviews.
-
-## Weighted scoring breakdown
-
-| Category | Weight | Score |
-| --- | --- | --- |
-| Structured Data Completeness | 25 | 14 |
-| Technical Crawlability | 9 | 9 |
-| Local Entity Linking | 10 | 7 |
-| FAQ/Q&A Presence | 10 | 0 |
-| Semantic Coverage | 15 | 10 |
-| Booking Pathway Clarity | 12 | 12 |
-| Metadata Diversity | 6 | 6 |
-| Persona & Use-Case Mapping | 5 | 2 |
-| Media/ALT Optimisation | 2 | 2 |
-| Voice-Search Readiness | 6 | 0 |
-
-## Recurring issues across the website
-
-| Issue | Impact | Pages Affected |
-| --- | --- | --- |
-| Missing FAQPage schema | AI assistants cannot extract structured Q&A pairs | Homepage, Rooms, Contact |
-| No SpeakableSpecification | Voice assistants skip the site entirely | All pages |
-| Thin @id graph linking | Entities not connected as a knowledge graph | Homepage, Rooms |
-| Limited persona-targeted content | AI search cannot match the property to specific traveller intents | Landing pages |
-| No nearby attraction references in schema | Local AI search downranks the property | Homepage, Location |
-
-## Estimated score uplift if issues are resolved
-
-| Fix | Estimated Score Increase |
-| --- | --- |
-| Add FAQPage schema with 8 location and booking questions | +10 points |
-| Add SpeakableSpecification to top 3 landing pages | +3 points |
-| Reinforce @id graph linking across Hotel + LocalBusiness entities | +4 points |
-| Add "For Business" and "For Families" intent blocks | +3 points |
-| Expand nearby attractions narrative on Location page | +3 points |
-
-**Projected Score After Fixes: 85 / 100**
-
-## Strategic Advantage for Bookassist
-
-Bookassist's AI Readiness programme directly closes every gap surfaced above. Our structured-data automation populates FAQPage, SpeakableSpecification, and @id graph relationships in a single deployment, while our content optimisation surfaces persona blocks and local-entity references that elevate the property in generative search. Hotels onboarded with Bookassist typically reach AI-optimised status within 90 days, translating to material lifts in direct-booking visibility across ChatGPT, Perplexity, and Google AI Overviews.`;
 
 // Inject a <script> tag if the expected global isn't already present. Polls
 // for up to 3 seconds after the load event fires because some CDN bundles
@@ -860,7 +805,7 @@ export const AiAudit: React.FC = () => {
     setUrlError(null);
     setRequestError(null);
     setAuditedUrl('https://grandharbour-demo.example.com');
-    setReport(DEMO_REPORT);
+    setReport(DEMO_REPORTS[reportLang] ?? DEMO_REPORTS.en);
     setView('done');
   };
 
