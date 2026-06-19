@@ -2,7 +2,7 @@
 
 import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
-import { AppState, AnswerValue, type Answer, type DynamicQuestion } from '../types';
+import { AppState, AnswerValue, type Answer, type DynamicQuestion, type Language } from '../types';
 import { QUESTIONS } from '../constants';
 import { useContent } from '../contexts/ContentContext';
 import { WelcomeScreen } from './WelcomeScreen';
@@ -10,6 +10,21 @@ import { Quiz } from './Quiz';
 import { FullResults } from './FullResults';
 import { ConsentModal, ConsentDeclinedScreen } from './ConsentModal';
 import { generateStrategicAnalysis } from '../services/aiService';
+import { checkStaffBypass, type StaffRole } from '../lib/staffBypass';
+import { DEMO_ANALYSES } from '../lib/techAuditDemoAnalysis';
+
+// Staff-only picker label — lets a Bookassist user run the Tech Audit in a
+// language different from the UI locale they're browsing. Public visitors
+// never see this control.
+const reportLangPickerLabel: Record<Language, string> = {
+  en: 'Generate report in',
+  it: 'Genera report in',
+  es: 'Generar informe en',
+  pl: 'Generuj raport w',
+  fr: 'Générer le rapport en',
+  de: 'Bericht erstellen auf',
+  cs: 'Vygenerovat report v',
+};
 
 const CONSENT_KEY = 'hhc_gemini_consent';
 
@@ -40,27 +55,6 @@ const DEMO_ANSWERS: Answer[] = [
   { questionId: 15, value: AnswerValue.YES },
 ];
 
-// Sample analysis in the same shape Gemini emits via the
-// "Bookassist Digital Health Strategist" prompt (H2 headline, ### Critical
-// Gaps, ### Financial Exposure, italic footer). Used so the FullResults
-// markdown article renders meaningfully in the preview.
-const DEMO_ANALYSIS = `## Tech Score reveals significant revenue leakage
-
-Your hotel is missing high-impact automations that quietly reroute high-margin demand toward commission-heavy channels every month.
-
-### Critical Gaps
-
-- **Missing Brand Protection PPC**: OTAs are intercepting brand-name searches and reselling your own demand back to you at 15–25% commission per booking.
-- **No CPA-guaranteed Metasearch**: Standard CPC spending wastes budget on clicks that never convert, eroding ROI across every Google Hotel Ads and Trivago impression.
-
-### Financial Exposure
-
-Left unresolved, these gaps typically translate to an estimated 18–22% of total room revenue routed through OTA channels at full commission — a five- to six-figure annual margin loss for a property of your size.
-
----
-
-*Contact a Bookassist strategist for a tailored direct revenue recovery plan.*`;
-
 export const AuditTool: React.FC = () => {
   const { language } = useContent();
   const router = useRouter();
@@ -74,10 +68,20 @@ export const AuditTool: React.FC = () => {
   const [analysisLoading, setAnalysisLoading] = useState(false);
   const [analysisError, setAnalysisError] = useState<string | null>(null);
 
+  const [staffRole, setStaffRole] = useState<StaffRole | null>(null);
+  const isStaffBypass = staffRole !== null;
+  const isMarketing = staffRole === 'marketing';
+
+  // Staff picker — defaults to the UI locale at mount and persists across
+  // demo loads / quiz runs in this session. Public visitors never see the
+  // control and always get language = UI locale.
+  const [reportLang, setReportLang] = useState<Language>(language);
+
   useEffect(() => {
     if (typeof window === 'undefined') return;
     setConsentAccepted(sessionStorage.getItem(CONSENT_KEY) === 'accepted');
     setConsentChecked(true);
+    void checkStaffBypass().then(role => setStaffRole(role));
   }, []);
 
   const handleConsentAccept = () => {
@@ -106,7 +110,7 @@ export const AuditTool: React.FC = () => {
     setAnalysisLoading(true);
     setAnalysisError(null);
     setAnalysis('');
-    generateStrategicAnalysis(completedAnswers, language, null)
+    generateStrategicAnalysis(completedAnswers, reportLang, null)
       .then(result => setAnalysis(result))
       .catch(err => {
         console.error('[AuditTool] Strategic analysis failed:', err);
@@ -128,7 +132,7 @@ export const AuditTool: React.FC = () => {
   // on rendering and PDF output without spending Gemini credits.
   const loadDemoFullResults = () => {
     setAnswers(DEMO_ANSWERS);
-    setAnalysis(DEMO_ANALYSIS);
+    setAnalysis(DEMO_ANALYSES[reportLang] ?? DEMO_ANALYSES.en);
     setAnalysisLoading(false);
     setAnalysisError(null);
     setAppState(AppState.FULL_RESULTS);
@@ -151,7 +155,28 @@ export const AuditTool: React.FC = () => {
       {appState === AppState.WELCOME && (
         <>
           <WelcomeScreen onStart={handleStart} />
-          {IS_DEV_PREVIEW && (
+          {isStaffBypass && (
+            <div className="mt-6 flex items-center justify-center gap-2 text-sm">
+              <label htmlFor="tech-audit-report-lang" className="text-gray-500 font-medium">
+                {reportLangPickerLabel[language]}:
+              </label>
+              <select
+                id="tech-audit-report-lang"
+                value={reportLang}
+                onChange={e => setReportLang(e.target.value as Language)}
+                className="bg-white border border-gray-200 rounded-lg px-3 py-1.5 text-gray-700 focus:outline-none focus:ring-2 focus:ring-brand-blue"
+              >
+                <option value="en">English</option>
+                <option value="it">Italiano</option>
+                <option value="es">Español</option>
+                <option value="pl">Polski</option>
+                <option value="fr">Français</option>
+                <option value="de">Deutsch</option>
+                <option value="cs">Čeština</option>
+              </select>
+            </div>
+          )}
+          {(isMarketing || IS_DEV_PREVIEW) && (
             <button
               type="button"
               onClick={loadDemoFullResults}
@@ -172,6 +197,7 @@ export const AuditTool: React.FC = () => {
           analysisError={analysisError}
           siteUrl={null}
           onReset={handleReset}
+          reportLang={reportLang}
         />
       )}
     </div>

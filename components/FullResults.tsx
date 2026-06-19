@@ -73,6 +73,12 @@ interface FullResultsProps {
   analysisError: string | null;
   onReset: () => void;
   siteUrl: string | null;
+  // When provided, chrome around the report (eyebrow, headings, PDF /
+  // retake buttons, tier labels) follows this language instead of the UI
+  // locale — used by the staff-only Tech Audit picker so a staff member
+  // on the English UI generating a Spanish analysis sees Spanish labels
+  // on the results page and in the captured PDF.
+  reportLang?: Language;
 }
 
 const labelsMap: Record<Language, {
@@ -238,10 +244,11 @@ const labelsMap: Record<Language, {
 };
 
 export const FullResults: React.FC<FullResultsProps> = ({
-  questions, answers, analysis, analysisLoading, analysisError, onReset, siteUrl,
+  questions, answers, analysis, analysisLoading, analysisError, onReset, siteUrl, reportLang,
 }) => {
   const { language } = useContent();
-  const l = labelsMap[language];
+  const labelLang = reportLang ?? language;
+  const l = labelsMap[labelLang];
 
   // Score arithmetic (preserved from previous version).
   const maxScore = questions.reduce((acc, q) => acc + q.weight, 0);
