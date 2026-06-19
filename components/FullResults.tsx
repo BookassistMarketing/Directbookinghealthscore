@@ -4,13 +4,14 @@ import React, { useEffect, useRef, useState } from 'react';
 import { PieChart, Pie, Cell, ResponsiveContainer } from 'recharts';
 import {
   Activity, Download, Loader2, RotateCcw, AlertCircle,
-  ArrowRight, ExternalLink, ShieldCheck,
+  ArrowRight, ExternalLink,
 } from 'lucide-react';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 import { Answer, AnswerValue, Language, type DynamicQuestion } from '../types';
 import { useContent } from '../contexts/ContentContext';
-import { checkStaffBypass, type StaffRole } from '../lib/staffBypass';
+import { checkStaffBypass, clearStaffToken, type StaffRole } from '../lib/staffBypass';
+import { StaffBadge } from './StaffBadge';
 
 // Duplicated from components/AiAudit.tsx. Inject a <script> tag if the
 // expected global isn't already present. Polls for up to 3 seconds after the
@@ -515,11 +516,15 @@ export const FullResults: React.FC<FullResultsProps> = ({
 
   return (
     <div className="w-full max-w-4xl mx-auto px-4 py-6 sm:py-12 lg:px-8">
-      {isStaffBypass && (
-        <div className="mb-4 inline-flex items-center gap-2 px-3 py-1 rounded-full bg-brand-yellow text-gray-900 text-xs font-bold uppercase tracking-widest shadow-sm">
-          <ShieldCheck className="w-3.5 h-3.5" />
-          Bookassist Staff Mode
-        </div>
+      {staffRole && (
+        <StaffBadge
+          role={staffRole}
+          onSignOut={() => {
+            clearStaffToken();
+            setStaffRole(null);
+          }}
+          className="mb-4"
+        />
       )}
 
       <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4 mb-6">

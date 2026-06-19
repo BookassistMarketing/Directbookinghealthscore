@@ -2,18 +2,21 @@
 
 import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
-import { Lock, ShieldCheck, AlertCircle, Loader2, LogOut, ArrowRight, ClipboardCheck, Sparkles, Eye, EyeOff } from 'lucide-react';
+import { Lock, AlertCircle, Loader2, ArrowRight, ClipboardCheck, Sparkles, Eye, EyeOff } from 'lucide-react';
 import {
   storeStaffToken,
   clearStaffToken,
   checkStaffBypass,
   getStoredExpiresAt,
+  type StaffRole,
 } from '../../lib/staffBypass';
+import { StaffBadge } from '../../components/StaffBadge';
 
 type Status = 'checking' | 'signed_out' | 'signed_in';
 
 export function StaffHub() {
   const [status, setStatus] = useState<Status>('checking');
+  const [role, setRole] = useState<StaffRole | null>(null);
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
   const [submitting, setSubmitting] = useState(false);
@@ -23,9 +26,10 @@ export function StaffHub() {
   useEffect(() => {
     let cancelled = false;
     (async () => {
-      const ok = await checkStaffBypass();
+      const detectedRole = await checkStaffBypass();
       if (cancelled) return;
-      if (ok) {
+      if (detectedRole) {
+        setRole(detectedRole);
         setExpiresAt(getStoredExpiresAt());
         setStatus('signed_in');
       } else {
@@ -63,9 +67,10 @@ export function StaffHub() {
         setError('Sign-in failed. Try again in a moment.');
         return;
       }
-      const data = (await res.json()) as { token: string; expiresAt: number };
+      const data = (await res.json()) as { token: string; expiresAt: number; role?: StaffRole };
       storeStaffToken(data.token, data.expiresAt);
       setExpiresAt(data.expiresAt);
+      setRole(data.role === 'marketing' ? 'marketing' : 'staff');
       setPassword('');
       setStatus('signed_in');
     } catch {
@@ -78,6 +83,7 @@ export function StaffHub() {
   const handleSignOut = () => {
     clearStaffToken();
     setStatus('signed_out');
+    setRole(null);
     setExpiresAt(null);
   };
 
@@ -161,18 +167,8 @@ export function StaffHub() {
   return (
     <div className="min-h-[80vh] flex items-center justify-center px-4 py-12">
       <div className="w-full max-w-2xl">
-        <div className="flex items-center justify-between mb-6">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-brand-yellow text-gray-900 text-xs font-bold uppercase tracking-widest shadow-sm">
-            <ShieldCheck className="w-3.5 h-3.5" />
-            Signed in as Bookassist staff
-          </div>
-          <button
-            onClick={handleSignOut}
-            className="inline-flex items-center gap-2 text-sm font-semibold text-gray-500 hover:text-brand-accent transition-colors"
-          >
-            <LogOut size={14} />
-            Sign out
-          </button>
+        <div className="mb-6">
+          {role && <StaffBadge role={role} onSignOut={handleSignOut} />}
         </div>
 
         <h1 className="text-3xl sm:text-4xl font-bold text-gray-900 tracking-tight mb-2">Run an audit</h1>

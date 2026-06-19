@@ -2,17 +2,18 @@
 
 import React, { useEffect, useMemo, useRef, useState } from 'react';
 import { useRouter } from 'next/navigation';
-import { Sparkles, Globe, Loader2, AlertCircle, ArrowRight, RotateCcw, ExternalLink, ShieldCheck, Download } from 'lucide-react';
+import { Sparkles, Globe, Loader2, AlertCircle, ArrowRight, RotateCcw, ExternalLink, Download } from 'lucide-react';
 import { PieChart, Pie, Cell, ResponsiveContainer } from 'recharts';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 import { Button } from './Button';
 import { ConsentModal, ConsentDeclinedScreen } from './ConsentModal';
 import { LeadCapture } from './LeadCapture';
+import { StaffBadge } from './StaffBadge';
 import { useContent } from '../contexts/ContentContext';
 import { Language } from '../types';
 import { generateAiReadinessReport } from '../services/aiService';
-import { checkStaffBypass, type StaffRole } from '../lib/staffBypass';
+import { checkStaffBypass, clearStaffToken, type StaffRole } from '../lib/staffBypass';
 
 const CONSENT_KEY = 'hhc_gemini_consent';
 
@@ -844,11 +845,15 @@ export const AiAudit: React.FC = () => {
         <ConsentModal onAccept={handleConsentAccept} onDecline={handleConsentDecline} />
       )}
 
-      {isStaffBypass && (
-        <div className="mb-4 inline-flex items-center gap-2 px-3 py-1 rounded-full bg-brand-yellow text-gray-900 text-xs font-bold uppercase tracking-widest shadow-sm">
-          <ShieldCheck className="w-3.5 h-3.5" />
-          Bookassist Staff Mode
-        </div>
+      {staffRole && (
+        <StaffBadge
+          role={staffRole}
+          onSignOut={() => {
+            clearStaffToken();
+            setStaffRole(null);
+          }}
+          className="mb-4"
+        />
       )}
 
       {view === 'form_gate' && !isStaffBypass && (
