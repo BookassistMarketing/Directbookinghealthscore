@@ -25,6 +25,17 @@ function preferredLocales(header: string): string[] {
 export function middleware(req: NextRequest) {
   const { pathname } = req.nextUrl;
 
+  // /<locale>/staff(/anything) → /staff(/anything). The staff hub is
+  // English-only — staff sign in once and the per-tool report-language
+  // picker handles output language — so the localised entry points would
+  // 404 otherwise. Must run before the locale-prefixed early-return below.
+  const localisedStaff = pathname.match(/^\/(?:it|es|pl|fr|de|cs)(\/staff(?:\/.*)?)$/);
+  if (localisedStaff) {
+    const url = req.nextUrl.clone();
+    url.pathname = localisedStaff[1];
+    return NextResponse.redirect(url);
+  }
+
   // Skip if already on a locale-prefixed path
   if (ALL_LOCALES.some(loc => pathname === `/${loc}` || pathname.startsWith(`/${loc}/`))) {
     return NextResponse.next();
