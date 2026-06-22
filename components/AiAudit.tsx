@@ -953,7 +953,22 @@ export const AiAudit: React.FC = () => {
         <div className="text-center py-12 sm:py-20">
           <Loader2 className="w-10 h-10 text-brand-success mx-auto mb-5 animate-spin" />
           <h2 className="text-2xl sm:text-3xl font-black text-gray-900 mb-2">{l.loading}</h2>
-          <p className="text-base text-gray-500 max-w-md mx-auto mb-10">{l.loadingSub}</p>
+          <p className="text-base text-gray-500 max-w-md mx-auto mb-8">{l.loadingSub}</p>
+
+          {/* Non-staff get a 28s progress bar to make the wait feel intentional
+              instead of broken. The bar fills 0→95% over 28s on a single CSS
+              animation (no JS ticks). When the audit completes, the view
+              changes and the bar unmounts with it — the 95% cap means we
+              never claim "done" before we actually are. Staff skip the bar
+              so testing isn't artificially slowed. */}
+          {!staffRole && (
+            <div className="max-w-sm mx-auto mb-8 h-1.5 bg-gray-200 rounded-full overflow-hidden" aria-hidden>
+              <div
+                className="h-full bg-brand-success rounded-full"
+                style={{ animation: 'auditProgress 28s linear forwards' }}
+              />
+            </div>
+          )}
 
           <div className="max-w-sm mx-auto">
             <p className="text-[10px] font-black uppercase tracking-[0.2em] text-gray-400 mb-3">{l.didYouKnow}</p>
@@ -983,6 +998,10 @@ export const AiAudit: React.FC = () => {
             @keyframes factFadeIn {
               from { opacity: 0; transform: translateY(8px); }
               to   { opacity: 1; transform: translateY(0); }
+            }
+            @keyframes auditProgress {
+              from { width: 0%; }
+              to   { width: 95%; }
             }
           `}</style>
         </div>
