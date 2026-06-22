@@ -151,6 +151,8 @@ export const generateStrategicAnalysis = async (answers: Answer[], lang: Languag
         - NEVER use emojis or icons.
         - Identify the 2 most dangerous gaps with the highest financial impact.
         - Do not include links or greetings. Start directly with the ## headline.`,
+        temperature: 0,
+        topP: 0.1,
       },
     });
 
@@ -335,6 +337,8 @@ export async function generateAiReadinessReport(
       config: {
         systemInstruction: AI_READINESS_SYSTEM_PROMPT(lang),
         tools: [{ urlContext: {} }],
+        temperature: 0,
+        topP: 0.1,
       },
     });
 

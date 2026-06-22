@@ -4,13 +4,25 @@
 
 import type { Language, Answer } from '../types';
 
-async function parseError(res: Response): Promise<Error> {
+export interface ApiError extends Error {
+  status?: number;
+  code?: string;
+  requestId?: string;
+}
+
+async function parseError(res: Response): Promise<ApiError> {
   const fallback = `HTTP_${res.status}`;
   try {
     const body = await res.json();
-    return new Error(body?.detail || body?.error || fallback);
+    const err = new Error(body?.detail || body?.error || fallback) as ApiError;
+    err.status = res.status;
+    err.code = typeof body?.error === 'string' ? body.error : undefined;
+    err.requestId = typeof body?.requestId === 'string' ? body.requestId : undefined;
+    return err;
   } catch {
-    return new Error(fallback);
+    const err = new Error(fallback) as ApiError;
+    err.status = res.status;
+    return err;
   }
 }
 

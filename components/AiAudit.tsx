@@ -12,7 +12,7 @@ import { LeadCapture } from './LeadCapture';
 import { StaffBadge } from './StaffBadge';
 import { useContent } from '../contexts/ContentContext';
 import { Language } from '../types';
-import { generateAiReadinessReport } from '../services/aiService';
+import { generateAiReadinessReport, type ApiError } from '../services/aiService';
 import { checkStaffBypass, clearStaffToken, type StaffRole } from '../lib/staffBypass';
 import { DEMO_REPORTS } from '../lib/aiAuditDemoReport';
 
@@ -438,6 +438,7 @@ export const AiAudit: React.FC = () => {
   const [report, setReport] = useState('');
   const [auditedUrl, setAuditedUrl] = useState('');
   const [requestError, setRequestError] = useState<string | null>(null);
+  const [debugInfo, setDebugInfo] = useState<string | null>(null);
 
   // Bot defence: honeypot field (real users never see it) + timestamp of when
   // the form was rendered. Bots fill all fields including hidden ones, and
@@ -785,6 +786,15 @@ export const AiAudit: React.FC = () => {
     } catch (err) {
       console.error('[AiAudit] Audit failed:', err);
       setRequestError(l.errorBody);
+      // Staff-only diagnostics: surface the actual error code + requestId so we
+      // can identify which failure path triggered (RATE_LIMITED vs
+      // INVALID_RESPONSE vs UPSTREAM_ERROR vs CONTENT_BLOCKED). Real visitors
+      // still see only the generic errorBody.
+      const apiErr = err as ApiError;
+      const status = apiErr?.status ?? '?';
+      const code = apiErr?.code ?? apiErr?.message ?? 'unknown';
+      const reqId = apiErr?.requestId ?? '—';
+      setDebugInfo(`status=${status} code=${code} requestId=${reqId}`);
       setView('idle');
     }
   };
@@ -793,6 +803,7 @@ export const AiAudit: React.FC = () => {
     setRawUrl('');
     setUrlError(null);
     setRequestError(null);
+    setDebugInfo(null);
     setReport('');
     setAuditedUrl('');
     setView('idle');
@@ -915,6 +926,11 @@ export const AiAudit: React.FC = () => {
                 <AlertCircle size={16} className="flex-shrink-0 mt-0.5" />
                 <span>{requestError}</span>
               </div>
+            )}
+            {staffRole && debugInfo && (
+              <p className="mt-2 text-xs font-mono text-left text-gray-500 break-all">
+                [debug] {debugInfo}
+              </p>
             )}
             <Button type="submit" className="w-full sm:w-auto mt-6 px-10 py-4 text-base shadow-lg">
               {l.submit} <ArrowRight size={18} className="ml-2 inline-block" />
