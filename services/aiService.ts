@@ -3,6 +3,13 @@
 // Swapping to a different provider later = change the routes, not this file.
 
 import type { Language, Answer } from '../types';
+import { STAFF_TOKEN_KEY } from '../lib/staffBypass';
+
+function readStaffToken(): string | undefined {
+  if (typeof window === 'undefined') return undefined;
+  const token = window.localStorage.getItem(STAFF_TOKEN_KEY);
+  return token || undefined;
+}
 
 export interface ApiError extends Error {
   status?: number;
@@ -59,6 +66,7 @@ export async function generateAiReadinessReport(
       language: lang,
       honeypot: bot.honeypot,
       formAgeMs: bot.formAgeMs,
+      staffToken: readStaffToken(),
     }),
   });
   if (!res.ok) throw await parseError(res);

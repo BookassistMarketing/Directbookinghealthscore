@@ -179,6 +179,7 @@ export type PublicErrorCode =
   | 'RATE_LIMITED'
   | 'SERVICE_UNAVAILABLE'
   | 'UPSTREAM_ERROR'
+  | 'UPSTREAM_TIMEOUT'
   | 'CONTENT_BLOCKED'
   | 'INVALID_RESPONSE';
 
@@ -196,6 +197,9 @@ export function sanitiseGeminiError(err: unknown, route: string): {
 
   if (message === 'MISSING_API_KEY') {
     return { code: 'SERVICE_UNAVAILABLE', status: 503 };
+  }
+  if (message === 'UPSTREAM_TIMEOUT') {
+    return { code: 'UPSTREAM_TIMEOUT', status: 504 };
   }
   if (/\b429\b/.test(message) || /quota/i.test(message) || /RESOURCE_EXHAUSTED/i.test(message)) {
     return { code: 'RATE_LIMITED', status: 429 };

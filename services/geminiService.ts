@@ -100,6 +100,22 @@ const retryDelay = (attempt: number) => {
   return base + Math.random() * base * 0.3;
 };
 
+// Amplify Hosting caps Next.js SSR/API requests at 30s — if Gemini hasn't
+// returned by then, the Lambda is killed and CloudFront returns a 504 to the
+// browser. We race the SDK call against a 25s budget so we can return a clean
+// UPSTREAM_TIMEOUT before AWS yanks the connection, and the UI can show a
+// meaningful "site too slow to crawl" message instead of a mystery error.
+const UPSTREAM_TIMEOUT_MS = 25000;
+function withTimeout<T>(promise: Promise<T>, ms: number, code: string): Promise<T> {
+  return new Promise<T>((resolve, reject) => {
+    const timer = setTimeout(() => reject(new Error(code)), ms);
+    promise.then(
+      (value) => { clearTimeout(timer); resolve(value); },
+      (err) => { clearTimeout(timer); reject(err); },
+    );
+  });
+}
+
 export const generateStrategicAnalysis = async (answers: Answer[], lang: Language, siteUrl: string | null = null, attempt: number = 1): Promise<string> => {
   const apiKey = process.env.GEMINI_API_KEY;
   const passedItems = answers.filter(a => a.value === AnswerValue.YES).length;
@@ -331,16 +347,20 @@ export async function generateAiReadinessReport(
   const ai = new GoogleGenAI({ apiKey });
 
   try {
-    const response = await ai.models.generateContent({
-      model: 'gemini-3-flash-preview',
-      contents: `Analyse this hotel website and produce the AI Readiness Report following the exact structure in your instructions: ${url}`,
-      config: {
-        systemInstruction: AI_READINESS_SYSTEM_PROMPT(lang),
-        tools: [{ urlContext: {} }],
-        temperature: 0,
-        topP: 0.1,
-      },
-    });
+    const response = await withTimeout(
+      ai.models.generateContent({
+        model: 'gemini-3-flash-preview',
+        contents: `Analyse this hotel website and produce the AI Readiness Report following the exact structure in your instructions: ${url}`,
+        config: {
+          systemInstruction: AI_READINESS_SYSTEM_PROMPT(lang),
+          tools: [{ urlContext: {} }],
+          temperature: 0,
+          topP: 0.1,
+        },
+      }),
+      UPSTREAM_TIMEOUT_MS,
+      'UPSTREAM_TIMEOUT',
+    );
 
     const text = response.text?.trim() ?? '';
     if (!text) {

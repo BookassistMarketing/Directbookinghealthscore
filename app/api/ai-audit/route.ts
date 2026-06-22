@@ -9,6 +9,7 @@ import {
   sanitiseGeminiError,
   looksLikeAiReadinessReport,
 } from '../../../lib/api-security';
+import { verifyStaffToken } from '../../../lib/staff-auth';
 
 export const runtime = 'nodejs';
 export const dynamic = 'force-dynamic';
@@ -20,22 +21,28 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ error: 'FORBIDDEN_ORIGIN', requestId }, { status: 403 });
   }
 
-  const retryAfter = checkAuditRateLimit(req);
-  if (retryAfter !== null) {
-    return NextResponse.json(
-      { error: 'RATE_LIMITED', retryAfter, requestId },
-      {
-        status: 429,
-        headers: { 'Retry-After': String(retryAfter) },
-      }
-    );
-  }
-
-  let body: { url?: unknown; language?: unknown; honeypot?: unknown; formAgeMs?: unknown };
+  let body: { url?: unknown; language?: unknown; honeypot?: unknown; formAgeMs?: unknown; staffToken?: unknown };
   try {
     body = await req.json();
   } catch {
     return NextResponse.json({ error: 'INVALID_JSON', requestId }, { status: 400 });
+  }
+
+  // Signed staff token (server-verified, not the cookie) skips the 20s
+  // throttle so internal QA can iterate. Real visitors still hit the limit.
+  const isStaff = body.staffToken ? verifyStaffToken(body.staffToken) !== null : false;
+
+  if (!isStaff) {
+    const retryAfter = checkAuditRateLimit(req);
+    if (retryAfter !== null) {
+      return NextResponse.json(
+        { error: 'RATE_LIMITED', retryAfter, requestId },
+        {
+          status: 429,
+          headers: { 'Retry-After': String(retryAfter) },
+        }
+      );
+    }
   }
 
   // Bot defence: honeypot must be empty, form must have been visible for ≥1.5s.
@@ -74,7 +81,10 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: 'INVALID_RESPONSE', requestId }, { status: 502 });
     }
 
-    return attachRateLimitCookie(NextResponse.json({ report, requestId }));
+    // Skip the throttle cookie for staff so testing back-to-back doesn't
+    // self-rate-limit them. Real visitors still get the cookie.
+    const successResponse = NextResponse.json({ report, requestId });
+    return isStaff ? successResponse : attachRateLimitCookie(successResponse);
   } catch (err) {
     const { code, status } = sanitiseGeminiError(err, `api/ai-audit [${requestId}]`);
     return NextResponse.json({ error: code, requestId }, { status });
