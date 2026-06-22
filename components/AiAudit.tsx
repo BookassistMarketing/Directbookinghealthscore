@@ -829,6 +829,68 @@ export const AiAudit: React.FC = () => {
     );
   }
 
+  // Score donut + tier badge card. Rendered in both `preview` (as a lead-gen
+  // teaser — visitors see their score even before they fill in the form) and
+  // `done` (as the headline of the full report). Single source so the two
+  // views stay visually identical.
+  const scoreCardElement = scorePreview && (
+    <div
+      className="rounded-3xl shadow-xl border border-gray-100 overflow-hidden mb-6"
+      style={{ backgroundColor: `${scorePreview.color}1A` }}
+    >
+      <div className="p-8 sm:p-10 flex flex-col md:flex-row items-center gap-8 md:gap-12">
+        <div className="flex-shrink-0 relative w-40 h-40 sm:w-48 sm:h-48">
+          <ResponsiveContainer width="100%" height="100%">
+            <PieChart>
+              <Pie
+                data={[
+                  { name: 'Score', value: scorePreview.score },
+                  { name: 'Gap', value: 100 - scorePreview.score },
+                ]}
+                cx="50%"
+                cy="50%"
+                innerRadius="80%"
+                outerRadius="100%"
+                startAngle={90}
+                endAngle={-270}
+                dataKey="value"
+                stroke="none"
+                isAnimationActive={false}
+              >
+                <Cell fill={scorePreview.color} />
+                <Cell fill="#F3F4F6" />
+              </Pie>
+            </PieChart>
+          </ResponsiveContainer>
+          <div className="absolute inset-0 flex flex-col items-center justify-center">
+            <span className="text-4xl sm:text-5xl font-black" style={{ color: scorePreview.color }}>
+              {scorePreview.score}
+            </span>
+            <span className="text-[10px] text-gray-400 font-black uppercase tracking-widest mt-1">
+              / 100
+            </span>
+          </div>
+        </div>
+        <div className="flex-1 text-center md:text-left">
+          {scorePreview.tierLabel && (
+            <div
+              className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-[11px] font-black uppercase tracking-widest mb-3"
+              style={{ backgroundColor: `${scorePreview.color}1A`, color: scorePreview.color }}
+            >
+              {scorePreview.tierLabel}
+            </div>
+          )}
+          <h2 className="text-xl sm:text-2xl font-bold text-gray-900 leading-tight">
+            {reportL.reportHeading}
+          </h2>
+          <p className="text-sm text-gray-500 mt-2 break-all">
+            <span className="text-brand-success font-semibold">{auditedUrl}</span>
+          </p>
+        </div>
+      </div>
+    </div>
+  );
+
   return (
     <div className="w-full max-w-4xl mx-auto px-4 py-6 sm:py-12 lg:px-8">
       {consentChecked && !consentAccepted && (
@@ -1021,6 +1083,8 @@ export const AiAudit: React.FC = () => {
             </div>
           </div>
 
+          {scoreCardElement}
+
           <div className="relative">
             <article className="prose prose-slate max-w-none bg-white rounded-2xl shadow-sm border border-gray-100 p-6 sm:p-10 max-h-72 overflow-hidden">
               <ReactMarkdown
@@ -1105,63 +1169,7 @@ export const AiAudit: React.FC = () => {
 
           <div ref={pdfCaptureRef}>
 
-          {scorePreview && (
-            <div
-              className="rounded-3xl shadow-xl border border-gray-100 overflow-hidden mb-6"
-              style={{ backgroundColor: `${scorePreview.color}1A` }}
-            >
-              <div className="p-8 sm:p-10 flex flex-col md:flex-row items-center gap-8 md:gap-12">
-                <div className="flex-shrink-0 relative w-40 h-40 sm:w-48 sm:h-48">
-                  <ResponsiveContainer width="100%" height="100%">
-                    <PieChart>
-                      <Pie
-                        data={[
-                          { name: 'Score', value: scorePreview.score },
-                          { name: 'Gap', value: 100 - scorePreview.score },
-                        ]}
-                        cx="50%"
-                        cy="50%"
-                        innerRadius="80%"
-                        outerRadius="100%"
-                        startAngle={90}
-                        endAngle={-270}
-                        dataKey="value"
-                        stroke="none"
-                        isAnimationActive={false}
-                      >
-                        <Cell fill={scorePreview.color} />
-                        <Cell fill="#F3F4F6" />
-                      </Pie>
-                    </PieChart>
-                  </ResponsiveContainer>
-                  <div className="absolute inset-0 flex flex-col items-center justify-center">
-                    <span className="text-4xl sm:text-5xl font-black" style={{ color: scorePreview.color }}>
-                      {scorePreview.score}
-                    </span>
-                    <span className="text-[10px] text-gray-400 font-black uppercase tracking-widest mt-1">
-                      / 100
-                    </span>
-                  </div>
-                </div>
-                <div className="flex-1 text-center md:text-left">
-                  {scorePreview.tierLabel && (
-                    <div
-                      className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-[11px] font-black uppercase tracking-widest mb-3"
-                      style={{ backgroundColor: `${scorePreview.color}1A`, color: scorePreview.color }}
-                    >
-                      {scorePreview.tierLabel}
-                    </div>
-                  )}
-                  <h2 className="text-xl sm:text-2xl font-bold text-gray-900 leading-tight">
-                    {reportL.reportHeading}
-                  </h2>
-                  <p className="text-sm text-gray-500 mt-2 break-all">
-                    <span className="text-brand-success font-semibold">{auditedUrl}</span>
-                  </p>
-                </div>
-              </div>
-            </div>
-          )}
+          {scoreCardElement}
 
           <article className="prose prose-slate max-w-none bg-white rounded-2xl shadow-sm border border-gray-100 p-6 sm:p-10">
             <ReactMarkdown
