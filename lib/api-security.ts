@@ -181,7 +181,10 @@ export type PublicErrorCode =
   | 'UPSTREAM_ERROR'
   | 'UPSTREAM_TIMEOUT'
   | 'CONTENT_BLOCKED'
-  | 'INVALID_RESPONSE';
+  | 'INVALID_RESPONSE'
+  | 'URL_FETCH_FAILED'
+  | 'URL_FETCH_TIMEOUT'
+  | 'URL_NOT_HTML';
 
 /**
  * Map a raw exception from the Gemini SDK to a safe public error code +
@@ -200,6 +203,15 @@ export function sanitiseGeminiError(err: unknown, route: string): {
   }
   if (message === 'UPSTREAM_TIMEOUT') {
     return { code: 'UPSTREAM_TIMEOUT', status: 504 };
+  }
+  if (message === 'URL_FETCH_TIMEOUT') {
+    return { code: 'URL_FETCH_TIMEOUT', status: 504 };
+  }
+  if (message === 'URL_FETCH_FAILED') {
+    return { code: 'URL_FETCH_FAILED', status: 502 };
+  }
+  if (message === 'URL_NOT_HTML') {
+    return { code: 'URL_NOT_HTML', status: 422 };
   }
   if (/\b429\b/.test(message) || /quota/i.test(message) || /RESOURCE_EXHAUSTED/i.test(message)) {
     return { code: 'RATE_LIMITED', status: 429 };
