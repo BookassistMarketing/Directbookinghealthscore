@@ -238,10 +238,14 @@ export function sanitiseGeminiError(err: unknown, route: string): {
  */
 export function looksLikeAiReadinessReport(text: string): boolean {
   if (!text || text.length < 200) return false;
-  // Marker 1: the report's signature heading line
-  const hasSummaryHeading = /ai\s+visibility\s*&?\s*optim[iz]ation\s+summary/i.test(text);
-  // Marker 2: the explicit overall score line ("overall score: X / 100" — translated)
-  const hasOverallScore = /(overall|punteggio|puntuación|wynik|note|gesamt|celkové).{0,40}\/\s*100/i.test(text);
+  // Marker 1: H1 heading line containing a multilingual visibility/optimisation root.
+  // Matches "visibility / visibilidad / visibilità", widoczności, sichtbarkeit,
+  // viditelnost, plus a universal "optim" fallback. Not "summary"-anchored because
+  // the report title is now localised per the OUTPUT LANGUAGE rules.
+  const hasSummaryHeading = /^#\s+.{0,80}(visibili|widoczn|sichtbar|viditelnost|optim)/im.test(text);
+  // Marker 2: the explicit overall score line ("overall score: X / 100" — translated).
+  // "score" catches FR "Score global"; "celkové" catches CS "Celkové skóre".
+  const hasOverallScore = /(overall|score|punteggio|puntuación|wynik|gesamt|celkové).{0,40}\/\s*100/i.test(text);
   // Marker 3: at least one markdown table separator (| --- |)
   const hasMarkdownTable = /\|\s*-{2,}\s*\|/.test(text);
   // At least 2 of the 3 markers must be present
