@@ -39,6 +39,17 @@ export default function sitemap(): MetadataRoute.Sitemap {
     })
   );
 
+  // English-only pages: one entry total, no locale mirrors, no hreflang alternates.
+  // Move into staticPages when localised.
+  const englishOnlyEntries: MetadataRoute.Sitemap = [
+    {
+      url: `${BASE_URL}/revenue-simulator`,
+      lastModified: now,
+      changeFrequency: 'monthly',
+      priority: 0.8,
+    },
+  ];
+
   const blogSlugs = getAllPostSlugs();
   const blogEntries: MetadataRoute.Sitemap = blogSlugs.flatMap(({ slug }) =>
     LOCALES.map(lang => {
@@ -54,5 +65,5 @@ export default function sitemap(): MetadataRoute.Sitemap {
     })
   );
 
-  return [...staticEntries, ...blogEntries];
+  return [...staticEntries, ...englishOnlyEntries, ...blogEntries];
 }

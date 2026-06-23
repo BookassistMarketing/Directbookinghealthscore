@@ -72,14 +72,16 @@ export const AppShell: React.FC<{ children: React.ReactNode }> = ({ children }) 
     { code: 'cs', label: 'Čeština' },
   ];
 
-  const headerLabels: Record<Language, { contact: string; hotelAudit: string; aiAudit: string }> = {
-    en: { contact: 'Contact Us', hotelAudit: 'Hotel Tech Audit', aiAudit: 'AI Visibility Audit' },
-    it: { contact: 'Contattaci', hotelAudit: 'Audit Tecnologico', aiAudit: 'Audit Visibilità AI' },
-    es: { contact: 'Contáctanos', hotelAudit: 'Auditoría Técnica', aiAudit: 'Auditoría Visibilidad IA' },
-    pl: { contact: 'Kontakt', hotelAudit: 'Audyt Techniczny', aiAudit: 'Audyt Widoczności AI' },
-    fr: { contact: 'Contactez-nous', hotelAudit: 'Audit Technique', aiAudit: 'Audit Visibilité IA' },
-    de: { contact: 'Kontakt', hotelAudit: 'Technologie-Audit', aiAudit: 'KI-Sichtbarkeitsaudit' },
-    cs: { contact: 'Kontakt', hotelAudit: 'Technický audit', aiAudit: 'Audit AI viditelnosti' },
+  // Revenue Simulator is English-only for now, so the label stays in English
+  // across every locale until we localise the page.
+  const headerLabels: Record<Language, { contact: string; hotelAudit: string; aiAudit: string; revenueSimulator: string }> = {
+    en: { contact: 'Contact Us', hotelAudit: 'Hotel Tech Audit', aiAudit: 'AI Visibility Audit', revenueSimulator: 'Revenue Simulator' },
+    it: { contact: 'Contattaci', hotelAudit: 'Audit Tecnologico', aiAudit: 'Audit Visibilità AI', revenueSimulator: 'Revenue Simulator' },
+    es: { contact: 'Contáctanos', hotelAudit: 'Auditoría Técnica', aiAudit: 'Auditoría Visibilidad IA', revenueSimulator: 'Revenue Simulator' },
+    pl: { contact: 'Kontakt', hotelAudit: 'Audyt Techniczny', aiAudit: 'Audyt Widoczności AI', revenueSimulator: 'Revenue Simulator' },
+    fr: { contact: 'Contactez-nous', hotelAudit: 'Audit Technique', aiAudit: 'Audit Visibilité IA', revenueSimulator: 'Revenue Simulator' },
+    de: { contact: 'Kontakt', hotelAudit: 'Technologie-Audit', aiAudit: 'KI-Sichtbarkeitsaudit', revenueSimulator: 'Revenue Simulator' },
+    cs: { contact: 'Kontakt', hotelAudit: 'Technický audit', aiAudit: 'Audit AI viditelnosti', revenueSimulator: 'Revenue Simulator' },
   };
 
   const labels = headerLabels[language];
@@ -162,6 +164,12 @@ export const AppShell: React.FC<{ children: React.ReactNode }> = ({ children }) 
                   className={`bg-brand-success text-white px-3 lg:px-4 py-2 rounded-lg text-xs lg:text-sm font-medium hover:bg-teal-700 transition-colors shadow-sm whitespace-nowrap ${isActive('/ai-visibility-audit') ? 'ring-2 ring-teal-300' : ''}`}
                 >
                   {labels.aiAudit}
+                </button>
+                <button
+                  onClick={() => navigateTo('/revenue-simulator')}
+                  className={`bg-white text-brand-blue border border-brand-blue px-3 lg:px-4 py-2 rounded-lg text-xs lg:text-sm font-medium hover:bg-brand-blue hover:text-white transition-colors shadow-sm whitespace-nowrap ${isActive('/revenue-simulator') ? 'ring-2 ring-blue-300' : ''}`}
+                >
+                  {labels.revenueSimulator}
                 </button>
               </div>
 
@@ -289,6 +297,12 @@ export const AppShell: React.FC<{ children: React.ReactNode }> = ({ children }) 
                   className="w-full bg-brand-success text-white px-4 py-4 rounded-xl text-lg font-medium shadow-md active:scale-[0.98] transition-transform"
                 >
                   {labels.aiAudit}
+                </button>
+                <button
+                  onClick={() => navigateTo('/revenue-simulator')}
+                  className="w-full bg-white text-brand-blue border border-brand-blue px-4 py-4 rounded-xl text-lg font-medium shadow-md active:scale-[0.98] transition-transform"
+                >
+                  {labels.revenueSimulator}
                 </button>
               </div>
             </div>

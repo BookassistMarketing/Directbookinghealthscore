@@ -36,6 +36,16 @@ export function middleware(req: NextRequest) {
     return NextResponse.redirect(url);
   }
 
+  // /<locale>/revenue-simulator → /revenue-simulator. English-only for now;
+  // when localised it'll move under app/[lang]/revenue-simulator and this rule
+  // can be removed.
+  const localisedSimulator = pathname.match(/^\/(?:it|es|pl|fr|de|cs)\/revenue-simulator$/);
+  if (localisedSimulator) {
+    const url = req.nextUrl.clone();
+    url.pathname = '/revenue-simulator';
+    return NextResponse.redirect(url);
+  }
+
   // Skip if already on a locale-prefixed path
   if (ALL_LOCALES.some(loc => pathname === `/${loc}` || pathname.startsWith(`/${loc}/`))) {
     return NextResponse.next();
