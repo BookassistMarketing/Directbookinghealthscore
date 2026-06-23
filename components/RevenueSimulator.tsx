@@ -30,25 +30,13 @@ function metrics(
   const otaShare = (100 - sharePct) / 100;
   const directRev = gross * directShare;
   const otaRev = gross * otaShare;
-  const dirCommissionCost = directRev * (dirComPct / 100);
   const mktSpend = directRev * (mktPct / 100);
-  const directCost = dirCommissionCost + mktSpend + svcFees;
+  const directCost = directRev * (dirComPct / 100) + mktSpend + svcFees;
   const otaCost = otaRev * (otaPct / 100);
   const totalCost = directCost + otaCost;
   const netRevenue = gross - totalCost;
   const totalCPA = gross > 0 ? (totalCost / gross) * 100 : 0;
-  return {
-    directRev,
-    otaRev,
-    dirCommissionCost,
-    mktSpend,
-    svcFees,
-    directCost,
-    otaCost,
-    totalCost,
-    netRevenue,
-    totalCPA,
-  };
+  return { directRev, otaRev, mktSpend, directCost, otaCost, totalCost, netRevenue, totalCPA };
 }
 
 export const RevenueSimulator: React.FC = () => {
@@ -365,91 +353,39 @@ export const RevenueSimulator: React.FC = () => {
             </div>
           </div>
 
-          {/* Mix + cost-composition shift */}
-          {(() => {
-            const maxCost = Math.max(current.totalCost, target.totalCost, 1);
-            const costRowWidthPct = (cost: number) => (cost / maxCost) * 100;
-            const seg = (val: number, total: number) =>
-              total > 0 ? (val / total) * 100 : 0;
-            const CostBar: React.FC<{ m: typeof current }> = ({ m }) => (
-              <div
-                className="h-2.5 rounded-full overflow-hidden flex"
-                style={{ width: `${costRowWidthPct(m.totalCost)}%` }}
-                title={`Total cost €${Math.round(m.totalCost).toLocaleString('en-IE')}`}
-              >
-                <div style={{ width: `${seg(m.otaCost, m.totalCost)}%`, background: '#64748B' }} />
-                <div style={{ width: `${seg(m.dirCommissionCost, m.totalCost)}%`, background: '#003366' }} />
-                <div style={{ width: `${seg(m.mktSpend, m.totalCost)}%`, background: '#F4A261' }} />
-                <div style={{ width: `${seg(m.svcFees, m.totalCost)}%`, background: '#CBD5E1' }} />
-              </div>
-            );
-            return (
-              <div className="mt-6">
-                <div className="flex items-baseline justify-between mb-2">
-                  <div className="text-xs font-semibold text-slate-500">
-                    Booking mix &amp; cost composition
-                  </div>
-                  <div className="text-[11px] text-slate-400">
-                    cost bars scaled to current total
-                  </div>
+          {/* Mix bar */}
+          <div className="mt-6">
+            <div className="text-xs font-semibold text-slate-500 mb-2">Booking mix shift</div>
+            <div className="space-y-2">
+              <div>
+                <div className="flex justify-between text-xs mb-1">
+                  <span className="text-slate-500">Now</span>
+                  <span className="num-tabular">
+                    {cur}% direct · {100 - cur}% OTA
+                  </span>
                 </div>
-                <div className="space-y-4">
-                  <div>
-                    <div className="flex justify-between text-xs mb-1">
-                      <span className="text-slate-500 font-medium">Now</span>
-                      <span className="num-tabular text-slate-600">
-                        {cur}% direct · {100 - cur}% OTA · CPA{' '}
-                        <span className="font-semibold">{current.totalCPA.toFixed(2)}%</span>{' '}
-                        · cost {fmtEUR(current.totalCost)}
-                      </span>
-                    </div>
-                    <div className="h-3 rounded-full overflow-hidden flex bg-slate-100 mb-1">
-                      <div className="bg-brand-blue h-full" style={{ width: `${cur}%` }} />
-                      <div className="bg-slate-300 h-full flex-1" />
-                    </div>
-                    <CostBar m={current} />
-                  </div>
-                  <div>
-                    <div className="flex justify-between text-xs mb-1">
-                      <span className="text-brand-success font-semibold">After</span>
-                      <span className="num-tabular text-slate-600">
-                        {tgt}% direct · {100 - tgt}% OTA · CPA{' '}
-                        <span className="font-semibold">{target.totalCPA.toFixed(2)}%</span>{' '}
-                        · cost {fmtEUR(target.totalCost)}
-                      </span>
-                    </div>
-                    <div className="h-3 rounded-full overflow-hidden flex bg-slate-100 mb-1">
-                      <div
-                        className="bg-brand-success h-full"
-                        style={{ width: `${tgt}%` }}
-                      />
-                      <div className="bg-slate-300 h-full flex-1" />
-                    </div>
-                    <CostBar m={target} />
-                  </div>
-                </div>
-                {/* Legend */}
-                <div className="flex flex-wrap gap-x-4 gap-y-1.5 mt-3 text-[11px] text-slate-500">
-                  <span className="inline-flex items-center gap-1.5">
-                    <span className="inline-block w-2.5 h-2.5 rounded-sm" style={{ background: '#64748B' }} />
-                    OTA commission
-                  </span>
-                  <span className="inline-flex items-center gap-1.5">
-                    <span className="inline-block w-2.5 h-2.5 rounded-sm" style={{ background: '#003366' }} />
-                    Direct commission
-                  </span>
-                  <span className="inline-flex items-center gap-1.5">
-                    <span className="inline-block w-2.5 h-2.5 rounded-sm" style={{ background: '#F4A261' }} />
-                    Marketing
-                  </span>
-                  <span className="inline-flex items-center gap-1.5">
-                    <span className="inline-block w-2.5 h-2.5 rounded-sm" style={{ background: '#CBD5E1' }} />
-                    Service fees
-                  </span>
+                <div className="h-3 rounded-full overflow-hidden flex bg-slate-100">
+                  <div className="bg-brand-blue h-full" style={{ width: `${cur}%` }} />
+                  <div className="bg-slate-300 h-full flex-1" />
                 </div>
               </div>
-            );
-          })()}
+              <div>
+                <div className="flex justify-between text-xs mb-1">
+                  <span className="text-brand-success font-semibold">After</span>
+                  <span className="num-tabular">
+                    {tgt}% direct · {100 - tgt}% OTA
+                  </span>
+                </div>
+                <div className="h-3 rounded-full overflow-hidden flex bg-slate-100">
+                  <div
+                    className="bg-brand-success h-full"
+                    style={{ width: `${tgt}%` }}
+                  />
+                  <div className="bg-slate-300 h-full flex-1" />
+                </div>
+              </div>
+            </div>
+          </div>
 
           {/* Industry benchmark line */}
           {gross > 0 && (
