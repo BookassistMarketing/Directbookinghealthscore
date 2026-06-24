@@ -114,7 +114,7 @@ export const RevenueSimulator: React.FC = () => {
         </p>
       </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-5 gap-6">
+      <div className="grid grid-cols-1 lg:grid-cols-5 gap-6 lg:items-start">
         {/* INPUTS */}
         <section className="lg:col-span-2 bg-white rounded-2xl border border-slate-200 p-6 shadow-sm space-y-5">
           <div className="flex items-center justify-between">
@@ -272,7 +272,7 @@ export const RevenueSimulator: React.FC = () => {
               <div className="text-xs font-bold uppercase tracking-wider text-white/70 mb-2">
                 New Total CPA
               </div>
-              <div className="text-4xl sm:text-5xl font-black text-white num-tabular leading-none">
+              <div className="text-3xl sm:text-4xl font-black text-white num-tabular leading-none whitespace-nowrap tracking-tight">
                 {target.totalCPA.toFixed(2)}%
               </div>
               <div className="text-white/85 text-sm mt-2.5">
@@ -297,7 +297,7 @@ export const RevenueSimulator: React.FC = () => {
               <div className="text-xs font-bold uppercase tracking-wider text-white/70 mb-2">
                 Annual net revenue uplift
               </div>
-              <div className="text-4xl sm:text-5xl font-black text-white num-tabular leading-none">
+              <div className="text-3xl sm:text-4xl font-black text-white num-tabular leading-none whitespace-nowrap tracking-tight">
                 {fmtSignedEUR(uplift)}
               </div>
               <div className="text-white/85 text-sm mt-2.5">
