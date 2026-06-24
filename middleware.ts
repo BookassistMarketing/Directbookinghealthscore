@@ -58,6 +58,15 @@ export function middleware(req: NextRequest) {
     return NextResponse.next();
   }
 
+  // /revenue-simulator is English-only (see the /<locale>/revenue-simulator
+  // strip rule above). Don't prefix it with the visitor's locale — that would
+  // bounce to /<locale>/revenue-simulator, which redirects straight back here,
+  // producing an infinite redirect loop (ERR_TOO_MANY_REDIRECTS) for any
+  // non-English-locale visitor.
+  if (pathname === '/revenue-simulator') {
+    return NextResponse.next();
+  }
+
   // Signed-in staff stay on English everywhere. The cookie is set by the
   // /staff hub on sign-in and cleared on sign-out. Non-authoritative — actual
   // audit bypass still requires server-verified token; cookie just suppresses
