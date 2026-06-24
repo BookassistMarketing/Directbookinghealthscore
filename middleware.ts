@@ -36,16 +36,6 @@ export function middleware(req: NextRequest) {
     return NextResponse.redirect(url);
   }
 
-  // /<locale>/revenue-simulator → /revenue-simulator. English-only for now;
-  // when localised it'll move under app/[lang]/revenue-simulator and this rule
-  // can be removed.
-  const localisedSimulator = pathname.match(/^\/(?:it|es|pl|fr|de|cs)\/revenue-simulator$/);
-  if (localisedSimulator) {
-    const url = req.nextUrl.clone();
-    url.pathname = '/revenue-simulator';
-    return NextResponse.redirect(url);
-  }
-
   // Skip if already on a locale-prefixed path
   if (ALL_LOCALES.some(loc => pathname === `/${loc}` || pathname.startsWith(`/${loc}/`))) {
     return NextResponse.next();
@@ -55,15 +45,6 @@ export function middleware(req: NextRequest) {
   // based on the user's locale cookie — the page has no localised version
   // and the redirect would 404.
   if (pathname === '/staff' || pathname.startsWith('/staff/')) {
-    return NextResponse.next();
-  }
-
-  // /revenue-simulator is English-only (see the /<locale>/revenue-simulator
-  // strip rule above). Don't prefix it with the visitor's locale — that would
-  // bounce to /<locale>/revenue-simulator, which redirects straight back here,
-  // producing an infinite redirect loop (ERR_TOO_MANY_REDIRECTS) for any
-  // non-English-locale visitor.
-  if (pathname === '/revenue-simulator') {
     return NextResponse.next();
   }
 

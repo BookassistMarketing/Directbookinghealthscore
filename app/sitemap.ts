@@ -21,6 +21,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { slug: '/', changeFrequency: 'weekly', priority: 1.0 },
     { slug: '/hotel-audit', changeFrequency: 'monthly', priority: 0.9 },
     { slug: '/ai-visibility-audit', changeFrequency: 'monthly', priority: 0.9 },
+    { slug: '/revenue-simulator', changeFrequency: 'monthly', priority: 0.8 },
     { slug: '/blog', changeFrequency: 'weekly', priority: 0.8 },
     { slug: '/security', changeFrequency: 'yearly', priority: 0.3 },
   ];
@@ -39,17 +40,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
     })
   );
 
-  // English-only pages: one entry total, no locale mirrors, no hreflang alternates.
-  // Move into staticPages when localised.
-  const englishOnlyEntries: MetadataRoute.Sitemap = [
-    {
-      url: `${BASE_URL}/revenue-simulator`,
-      lastModified: now,
-      changeFrequency: 'monthly',
-      priority: 0.8,
-    },
-  ];
-
   const blogSlugs = getAllPostSlugs();
   const blogEntries: MetadataRoute.Sitemap = blogSlugs.flatMap(({ slug }) =>
     LOCALES.map(lang => {
@@ -65,5 +55,5 @@ export default function sitemap(): MetadataRoute.Sitemap {
     })
   );
 
-  return [...staticEntries, ...englishOnlyEntries, ...blogEntries];
+  return [...staticEntries, ...blogEntries];
 }
