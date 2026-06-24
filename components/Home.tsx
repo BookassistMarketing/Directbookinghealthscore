@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { Button } from './Button';
 import { ShieldCheck, BarChart2, Globe, Zap, RotateCw } from 'lucide-react';
@@ -29,6 +29,39 @@ export const Home: React.FC<HomeProps> = ({ onStart, recentEn, recentIt, recentE
   const [hbKey, setHbKey] = useState(0);
   const [flipped, setFlipped] = useState([false, false, false, false]);
 
+  // Heartbeat baseline auto-alignment — measure the title's actual bottom edge
+  // so the ECG line sits just under it in every language and at every width,
+  // instead of relying on hardcoded per-language y-values that drift when the
+  // title wraps to a different height.
+  const heroWrapRef = useRef<HTMLDivElement>(null);
+  const titleRef = useRef<HTMLDivElement>(null);
+  const [hbBaseline, setHbBaseline] = useState<number | null>(null);
+
+  useEffect(() => {
+    const measure = () => {
+      const wrap = heroWrapRef.current;
+      const title = titleRef.current;
+      if (!wrap || !title) return;
+      const wrapRect = wrap.getBoundingClientRect();
+      const titleRect = title.getBoundingClientRect();
+      const overlayHeight = wrapRect.height + 96; // matches the overlay's -bottom-24 (6rem)
+      if (overlayHeight <= 0) return;
+      const GAP_PX = 6; // small gap so the line sits just under the text
+      const fraction = (titleRect.bottom - wrapRect.top + GAP_PX) / overlayHeight;
+      // viewBox is 0..400; clamp to a sane band so odd layouts never throw the line off-canvas.
+      setHbBaseline(Math.max(120, Math.min(330, fraction * 400)));
+    };
+    measure();
+    const ro = new ResizeObserver(measure);
+    if (heroWrapRef.current) ro.observe(heroWrapRef.current);
+    if (titleRef.current) ro.observe(titleRef.current);
+    window.addEventListener('resize', measure);
+    return () => {
+      ro.disconnect();
+      window.removeEventListener('resize', measure);
+    };
+  }, [language]);
+
   const toggleCard = (i: number) =>
     setFlipped(f => f.map((v, j) => (j === i ? !v : v)));
 
@@ -56,9 +89,9 @@ export const Home: React.FC<HomeProps> = ({ onStart, recentEn, recentIt, recentE
           <div className="absolute -top-40 left-1/2 -translate-x-1/2 w-[140vw] h-[800px] bg-[radial-gradient(ellipse_at_center,rgba(37,99,235,0.12),rgba(37,99,235,0.03)_45%,transparent_70%)] blur-2xl" />
         </div>
 
-        <div className="relative w-full max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div ref={heroWrapRef} className="relative w-full max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           {/* Heartbeat — anchored to the content wrapper so it starts at the heading's left edge */}
-          <Heartbeat isActive={hbActive} animKey={hbKey} />
+          <Heartbeat isActive={hbActive} animKey={hbKey} baseline={hbBaseline} />
           <div className="relative grid grid-cols-1 lg:grid-cols-12 gap-8 sm:gap-10 lg:gap-12 items-center min-h-[560px] py-6 sm:py-10 lg:py-14">
           {/* Left: copy column */}
           <div className="lg:col-span-7 space-y-7 sm:space-y-8 z-10">
@@ -72,12 +105,14 @@ export const Home: React.FC<HomeProps> = ({ onStart, recentEn, recentIt, recentE
               </span>
             </div>
 
-            <EditableText
-              id="home.hero.title"
-              as="h1"
-              defaultText={l.title}
-              className="text-4xl sm:text-6xl lg:text-7xl xl:text-[88px] font-black tracking-[-0.03em] leading-[0.98] text-gray-900"
-            />
+            <div ref={titleRef}>
+              <EditableText
+                id="home.hero.title"
+                as="h1"
+                defaultText={l.title}
+                className="text-4xl sm:text-6xl lg:text-7xl xl:text-[88px] font-black tracking-[-0.03em] leading-[0.98] text-gray-900"
+              />
+            </div>
 
             <EditableText
               id="home.hero.subtitle"
@@ -209,13 +244,12 @@ export const Home: React.FC<HomeProps> = ({ onStart, recentEn, recentIt, recentE
  * runs the full width; the QRS-T complex fires between x=620 and x=900
  * (visually the right column on lg+). A small T-wave bump follows.
  */
-const Heartbeat: React.FC<{ isActive: boolean; animKey: number }> = ({ isActive, animKey }) => {
+const Heartbeat: React.FC<{ isActive: boolean; animKey: number; baseline: number | null }> = ({ isActive, animKey, baseline }) => {
   const { language } = useContent();
-  // Spike X position is fixed (right-column dead space) so it looks the same
-  // in every language. Baseline Y is per-language because Italian and Spanish
-  // titles wrap with a trailing word (Digitale / Digitales) at the row where
-  // the default baseline sits — pushing baseline down for those locales keeps
-  // the line under the words instead of cutting through them.
+  // Spike X position is fixed (right-column dead space) so it looks the same in
+  // every language. Baseline Y is measured live from the title (see Home's
+  // useEffect) so the line always sits under the heading. These per-language
+  // numbers are only the first-paint fallback before that measurement lands.
   const baselineByLanguage: Record<Language, number> = {
     en: 215,
     it: 183,
@@ -225,7 +259,7 @@ const Heartbeat: React.FC<{ isActive: boolean; animKey: number }> = ({ isActive,
     de: 230,
     cs: 230,
   };
-  const b = baselineByLanguage[language] ?? 230;
+  const b = baseline ?? baselineByLanguage[language] ?? 230;
   const s = b - 230; // shift applied to all spike y-coordinates
 
   const PATH_D =
