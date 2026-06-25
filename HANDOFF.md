@@ -69,11 +69,35 @@ mobile menu (`headerLabels.revenueSimulator`), home hero `cta3`, and the simulat
 
 (DE "Simulator" is identical spelling, so unchanged.)
 
+## 6. IHI brochure ad — A4 print PDF (marketing deliverable, OUTSIDE the repo)
+
+Built a one-page A4 print ad for the Irish Hospitality Institute (ihi.ie) brochure, promoting the
+free AI Visibility Audit. **Lives outside this repo** at `C:\Users\fafab\Documents\Bookassist-IHI-Ad\`
+(`ad.html` source + `Bookassist-IHI-Ad.pdf` deliverable + `logo-black.png` / `qr.png` / `ai-logo.svg`
+assets). Rendered to PDF with headless Chrome: `chrome --headless --no-pdf-header-footer
+--print-to-pdf` against `ad.html`, which uses `@page { size: A4; margin: 0 }` and a `grid-template-rows:
+1fr auto` body so the slate CTA footer locks flush to the page bottom. Edit `ad.html` and re-render to
+regenerate.
+
+- **Brand:** Bookassist master brand (NOT the Hotel Health Clinic sub-brand) — Corporate Teal
+  `#45AEB1`, Slate `#3B5772`, Montserrat ExtraBold + Roboto, brand orange `#FF8F1B` accents.
+- **Content:** headline "Is your hotel visible to AI search?", AI/GEO discovery hook, a "What the free
+  AI Visibility Audit shows you" panel (3 points), real brand proof stats (CPA < 8% · DM ROI 25:1 ·
+  CVR > 15%), and a slate CTA band with a QR to `directbookinghealthscore.com/ai-visibility-audit`,
+  the URL, and "Powered by Bookassist".
+- **Decisions through iteration:** AI-visibility-audit only (Health Score card dropped); master brand
+  not the clinic look; heartbeat motif removed; no "7 languages" / no Irish wording (single market);
+  AI logo tried beside the headline then removed; "audit takes less than 30 seconds" added; orange
+  kept as a light accent via the eyebrow + "free AI Visibility Audit" words.
+- Logo/QR assets were pulled from the live brand host (`bookassist.org/hubfs/...`) and qrserver.com;
+  `ai-logo.svg` was copied from this repo's `public/ai-logo.svg`.
+
 ## State at end of session
 
 - Commit `04cebc2` pushed to `main`; Amplify rebuild triggered. Verified on localhost + emulated
   375px mobile (tsc clean, no clipping, no horizontal scroll, menu buttons fit). **Not yet checked
   on a real device or confirmed Amplify went green.**
+- IHI brochure ad delivered as a PDF (see §6) — outside the repo, not version controlled.
 
 ## Open / carry-over
 
