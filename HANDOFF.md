@@ -4,6 +4,95 @@ Single rolling handoff for the project. Newest session at the top. Older session
 
 ---
 
+# 25 June 2026 — Mobile pass: compact figures, hamburger redesign, horizontal-overflow fix, Simulator label localised
+
+Working session driven by Des O'Mahony's mobile feedback on the Revenue Simulator (screenshot:
+truncated euro figures) plus the user's note that the mobile layout was "not great" and the
+revenue calculator felt "missing". One commit landed on `main` and deployed to Amplify.
+
+## 1. Revenue Simulator — compact k/m figures (Des's asks)
+
+Des: "a few number glitches on mobile" + "maybe switch to k rather than '000s". Both were the
+same root issue — the result tiles are locked to `grid-cols-3` on every breakpoint with
+`text-xl` figures, so `+€180,000` could not fit in a third-of-a-phone-width tile and clipped.
+
+- `components/RevenueSimulator.tsx` — added a `compactNum` helper and repointed the existing
+  `fmtEUR` / `fmtSignedEUR` at it (names kept, so every call site became compact automatically):
+  `130500 → €131k`, `180000 → €180k`, `28000 → €28k`, `5000000 → €5m`. Uses the U+2212 minus for
+  negatives (no-hyphen rule). The "on €X gross" subtitle now uses `compactNum(gross)`. The Total
+  online revenue **input** stays a raw editable number.
+- Result tiles made mobile-safe: `grid-cols-3 gap-2 sm:gap-3`, `p-3 sm:p-4`, `min-w-0`, figures
+  `text-base sm:text-xl whitespace-nowrap` so `+€` can never wrap to its own line.
+
+## 2. Mobile hamburger menu — rebuilt twice
+
+First pass fixed the user's structural asks; second pass filled it out (it looked empty).
+
+- Security & Privacy **removed** from the menu (it lives in the footer; reachable by scrolling).
+- Language moved to the **bottom** as a native `<select>` dropdown, replacing the 7-button grid
+  that was overflowing on the right.
+- Tools are now **descriptive cards** (icon in a `bg-white/20` square + name + the translated
+  one-line description that already lived in `headerLabels`), left-aligned, solid brand colour.
+- New **quick-links row**: Blog · Security · Contact (Security → `/security`, Contact → book-a-demo).
+- New outlined **Book a Demo** CTA (outlined so it doesn't clash with the blue Hotel Tech Audit
+  card), then the language dropdown — both pinned to the bottom with `mt-auto` + `min-h-full`.
+- Added two new translated label keys to `headerLabels` (all 7 langs): `security`, `bookDemo`
+  (bookDemo reuses the Revenue Simulator wording).
+
+## 3. App-wide horizontal-overflow fix (the real menu-overflow cause)
+
+The hamburger tool buttons kept spilling past the panel's right edge. Root cause was **not** the
+menu — it was app-wide horizontal overflow (the home hero glow is `140vw`, `Home.tsx:89`). On
+mobile that widens the *layout viewport*, and a `position: fixed` element sized with `inset-x-0`
+stretches to that wider layout viewport, rendering wider than the visible screen.
+
+Fix: `overflow-x-clip` on the AppShell root div (`components/AppShell.tsx`). `overflow-x-clip`
+clips without establishing a scroll container, so it does **not** break the `sticky` header or
+clip the `fixed` menu. This snaps the layout viewport back to the visible width — fixing the menu
+buttons **and** removing any sideways scroll site-wide.
+
+## 4. Home hero — Revenue Simulator CTA mobile-only
+
+User: don't want the Revenue Simulator button on the **desktop** homepage (header pills already
+cover it). Added a third coral CTA in the hero (`components/Home.tsx`) gated `sm:hidden` — shows
+on mobile only; desktop keeps the two audit CTAs. Added a `cta3` label to all 7 `labelsMap` entries.
+
+## 5. "Simulator" localised (Revenue stays English)
+
+User rule: keep "Revenue" English, translate "Simulator". Applied consistently across header pills,
+mobile menu (`headerLabels.revenueSimulator`), home hero `cta3`, and the simulator page eyebrow
+(`RevenueSimulator.tsx` `LABELS[*].eyebrow`):
+
+| EN | IT | ES | PL | FR | DE | CS |
+|---|---|---|---|---|---|---|
+| Revenue Simulator | Revenue Simulatore | Revenue Simulador | Revenue Symulator | Revenue Simulateur | Revenue Simulator | Revenue Simulátor |
+
+(DE "Simulator" is identical spelling, so unchanged.)
+
+## State at end of session
+
+- Commit `04cebc2` pushed to `main`; Amplify rebuild triggered. Verified on localhost + emulated
+  375px mobile (tsc clean, no clipping, no horizontal scroll, menu buttons fit). **Not yet checked
+  on a real device or confirmed Amplify went green.**
+
+## Open / carry-over
+
+1. **Real-device check** of the menu + simulator figures in a couple of languages after deploy.
+2. **Translation QA** — the new `security` / `bookDemo` strings and the "Simulator" forms are
+   Claude-translated, not native-reviewed (same caveat as the rest of the simulator copy).
+3. **`previews/` still uncommitted** — `what-if-direct-revenue.html`, `cpa-dashboard.html`,
+   `header-options.html`, `header-option-b.html`. Decide commit-as-artefacts vs gitignore.
+
+## Files touched
+
+```
+M  components/RevenueSimulator.tsx   — compactNum + fmtEUR repoint, mobile tiles, eyebrow localised
+M  components/AppShell.tsx           — menu rebuild, overflow-x-clip, security/bookDemo labels, Simulator localised
+M  components/Home.tsx               — mobile-only Revenue Simulator hero CTA, cta3 labels, Simulator localised
+```
+
+---
+
 # 24 June 2026 — Header redesign implemented & iterated, Revenue Simulator polished + fully localised, heartbeat auto-align
 
 Working session continuing from the 23 June handoff. Five commits landed on `main` across two pushes, all deployed to Amplify. Picked up the open "implement Option B header" item — the header then evolved well beyond the original Option B spec through live iteration with the user.
