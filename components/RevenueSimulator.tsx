@@ -16,9 +16,16 @@ const DEFAULTS = {
 
 const INDUSTRY_BENCHMARK_CPA = 13; // % — Bookassist managed-client target
 
-const fmtEUR = (n: number) =>
-  '€' + Math.round(Math.abs(n)).toLocaleString('en-IE');
-const fmtSignedEUR = (n: number) => (n < 0 ? '-' : '+') + fmtEUR(n);
+// Compact figures — "k rather than '000s" (180000 -> €180k, 5000000 -> €5m).
+// Keeps the result tiles readable and uncramped on mobile.
+const compactNum = (n: number): string => {
+  const a = Math.abs(n);
+  if (a >= 1_000_000) { const m = a / 1_000_000; return (m >= 10 ? Math.round(m) : +m.toFixed(1)) + 'm'; }
+  if (a >= 1_000)     { const k = a / 1_000;     return (k >= 100 ? Math.round(k) : +k.toFixed(1)) + 'k'; }
+  return String(Math.round(a));
+};
+const fmtEUR = (n: number) => '€' + compactNum(n);
+const fmtSignedEUR = (n: number) => (n < 0 ? '−' : '+') + fmtEUR(n);
 
 type RSLabels = {
   eyebrow: string;
@@ -117,7 +124,7 @@ const LABELS: Record<Language, RSLabels> = {
       'Estimates derived from the inputs above. Directional planning tool; actual results vary with demand mix, channel cost, conversion rate, and seasonality.',
   },
   it: {
-    eyebrow: 'Revenue Simulator',
+    eyebrow: 'Revenue Simulatore',
     titleLead: 'E se il tuo hotel spostasse',
     titleHighlight: 'più prenotazioni sul diretto?',
     subtitle:
@@ -166,7 +173,7 @@ const LABELS: Record<Language, RSLabels> = {
       'Stime derivate dai dati inseriti sopra. Strumento di pianificazione indicativo; i risultati reali variano con il mix di domanda, il costo dei canali, il tasso di conversione e la stagionalità.',
   },
   es: {
-    eyebrow: 'Revenue Simulator',
+    eyebrow: 'Revenue Simulador',
     titleLead: '¿Y si tu hotel moviera',
     titleHighlight: 'más reservas a directo?',
     subtitle:
@@ -215,7 +222,7 @@ const LABELS: Record<Language, RSLabels> = {
       'Estimaciones derivadas de los datos anteriores. Herramienta de planificación orientativa; los resultados reales varían según el mix de demanda, el coste de canal, la tasa de conversión y la estacionalidad.',
   },
   pl: {
-    eyebrow: 'Revenue Simulator',
+    eyebrow: 'Revenue Symulator',
     titleLead: 'A gdyby Twój hotel przeniósł',
     titleHighlight: 'więcej rezerwacji na bezpośrednie?',
     subtitle:
@@ -264,7 +271,7 @@ const LABELS: Record<Language, RSLabels> = {
       'Szacunki na podstawie powyższych danych. Narzędzie planowania poglądowego; rzeczywiste wyniki różnią się w zależności od miksu popytu, kosztu kanału, współczynnika konwersji i sezonowości.',
   },
   fr: {
-    eyebrow: 'Revenue Simulator',
+    eyebrow: 'Revenue Simulateur',
     titleLead: 'Et si votre hôtel basculait',
     titleHighlight: 'plus de réservations en direct ?',
     subtitle:
@@ -362,7 +369,7 @@ const LABELS: Record<Language, RSLabels> = {
       'Schätzungen auf Basis der obigen Eingaben. Richtungsweisendes Planungstool; die tatsächlichen Ergebnisse variieren je nach Nachfragemix, Kanalkosten, Konversionsrate und Saisonalität.',
   },
   cs: {
-    eyebrow: 'Revenue Simulator',
+    eyebrow: 'Revenue Simulátor',
     titleLead: 'Co kdyby váš hotel získal',
     titleHighlight: 'více přímých rezervací?',
     subtitle:
@@ -692,19 +699,19 @@ export const RevenueSimulator: React.FC = () => {
               <div className="text-white/85 text-sm mt-2.5">
                 {tgt <= cur
                   ? t.upliftZero
-                  : t.shifting(cur, tgt, Math.round(gross).toLocaleString('en-IE'))}
+                  : t.shifting(cur, tgt, compactNum(gross))}
               </div>
             </div>
           </div>
 
           {/* Stat tiles */}
-          <div className="grid grid-cols-3 gap-3">
-            <div className="rounded-xl bg-brand-light p-4">
+          <div className="grid grid-cols-3 gap-2 sm:gap-3">
+            <div className="rounded-xl bg-brand-light p-3 sm:p-4 min-w-0">
               <div className="text-[11px] font-bold uppercase tracking-wider text-slate-500 mb-1">
                 {t.cpaVsCurrent}
               </div>
               <div
-                className={`text-xl font-black num-tabular ${
+                className={`text-base sm:text-xl font-black num-tabular whitespace-nowrap ${
                   cpaDeltaPts <= 0 ? 'text-brand-success' : 'text-brand-accent'
                 }`}
               >
@@ -715,12 +722,12 @@ export const RevenueSimulator: React.FC = () => {
                 {t.fromCpa(current.totalCPA.toFixed(2))}
               </div>
             </div>
-            <div className="rounded-xl bg-brand-light p-4">
+            <div className="rounded-xl bg-brand-light p-3 sm:p-4 min-w-0">
               <div className="text-[11px] font-bold uppercase tracking-wider text-slate-500 mb-1">
                 {t.otaSavedLabel}
               </div>
               <div
-                className={`text-xl font-black num-tabular ${
+                className={`text-base sm:text-xl font-black num-tabular whitespace-nowrap ${
                   otaSaved >= 0 ? 'text-brand-success' : 'text-brand-accent'
                 }`}
               >
@@ -728,12 +735,12 @@ export const RevenueSimulator: React.FC = () => {
               </div>
               <div className="text-[11px] text-slate-500 mt-0.5">{t.vsCurrentScenario}</div>
             </div>
-            <div className="rounded-xl bg-brand-light p-4">
+            <div className="rounded-xl bg-brand-light p-3 sm:p-4 min-w-0">
               <div className="text-[11px] font-bold uppercase tracking-wider text-slate-500 mb-1">
                 {t.directMktReinvested}
               </div>
               <div
-                className="text-xl font-black num-tabular"
+                className="text-base sm:text-xl font-black num-tabular whitespace-nowrap"
                 style={{ color: '#F4A261' }}
               >
                 {(mktDelta >= 0 ? '+' : '−') + fmtEUR(mktDelta)}

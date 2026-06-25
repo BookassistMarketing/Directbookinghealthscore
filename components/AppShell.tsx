@@ -78,6 +78,8 @@ export const AppShell: React.FC<{ children: React.ReactNode }> = ({ children }) 
     Language,
     {
       contact: string;
+      security: string;
+      bookDemo: string;
       hotelAudit: string;
       aiAudit: string;
       revenueSimulator: string;
@@ -88,6 +90,8 @@ export const AppShell: React.FC<{ children: React.ReactNode }> = ({ children }) 
   > = {
     en: {
       contact: 'Contact Us',
+      security: 'Security & Privacy',
+      bookDemo: 'Book a Demo',
       hotelAudit: 'Hotel Tech Audit',
       aiAudit: 'AI Visibility Audit',
       revenueSimulator: 'Revenue Simulator',
@@ -97,42 +101,52 @@ export const AppShell: React.FC<{ children: React.ReactNode }> = ({ children }) 
     },
     it: {
       contact: 'Contattaci',
+      security: 'Sicurezza e Privacy',
+      bookDemo: 'Prenota una demo',
       hotelAudit: 'Audit Tecnologico',
       aiAudit: 'Audit Visibilità AI',
-      revenueSimulator: 'Revenue Simulator',
+      revenueSimulator: 'Revenue Simulatore',
       hotelAuditDesc: 'Valuta in 15 domande il tuo stack di prenotazioni, marketing, analytics e SEO.',
       aiAuditDesc: 'Invia il tuo URL per un report con punteggio sulla prontezza alla ricerca AI e GEO.',
       revenueSimulatorDesc: 'Scopri il guadagno netto di fatturato spostando più prenotazioni sul diretto.',
     },
     es: {
       contact: 'Contáctanos',
+      security: 'Seguridad y Privacidad',
+      bookDemo: 'Reserva una demo',
       hotelAudit: 'Auditoría Técnica',
       aiAudit: 'Auditoría Visibilidad IA',
-      revenueSimulator: 'Revenue Simulator',
+      revenueSimulator: 'Revenue Simulador',
       hotelAuditDesc: 'Evalúa en 15 preguntas tu stack de reservas, marketing, analítica y SEO.',
       aiAuditDesc: 'Envía tu URL y recibe un informe puntuado de preparación para búsqueda con IA y GEO.',
       revenueSimulatorDesc: 'Descubre la ganancia neta de ingresos al pasar más reservas a directo.',
     },
     pl: {
       contact: 'Kontakt',
+      security: 'Bezpieczeństwo i Prywatność',
+      bookDemo: 'Zamów prezentację',
       hotelAudit: 'Audyt Techniczny',
       aiAudit: 'Audyt Widoczności AI',
-      revenueSimulator: 'Revenue Simulator',
+      revenueSimulator: 'Revenue Symulator',
       hotelAuditDesc: 'Sprawdź w 15 pytaniach swój system rezerwacji, marketingu, analityki i SEO.',
       aiAuditDesc: 'Prześlij adres URL i otrzymaj oceniony raport gotowości na wyszukiwanie AI i GEO.',
       revenueSimulatorDesc: 'Zobacz wzrost przychodów netto dzięki przeniesieniu większej liczby rezerwacji na bezpośrednie.',
     },
     fr: {
       contact: 'Contactez-nous',
+      security: 'Sécurité et Confidentialité',
+      bookDemo: 'Réserver une démo',
       hotelAudit: 'Audit Technique',
       aiAudit: 'Audit Visibilité IA',
-      revenueSimulator: 'Revenue Simulator',
+      revenueSimulator: 'Revenue Simulateur',
       hotelAuditDesc: 'Évaluez en 15 questions votre stack réservation, marketing, analytics et SEO.',
       aiAuditDesc: 'Soumettez votre URL pour un rapport noté de préparation à la recherche IA et GEO.',
       revenueSimulatorDesc: 'Visualisez le gain net de revenus en basculant plus de réservations en direct.',
     },
     de: {
       contact: 'Kontakt',
+      security: 'Sicherheit & Datenschutz',
+      bookDemo: 'Eine Demo buchen',
       hotelAudit: 'Technologie-Audit',
       aiAudit: 'KI-Sichtbarkeitsaudit',
       revenueSimulator: 'Revenue Simulator',
@@ -142,9 +156,11 @@ export const AppShell: React.FC<{ children: React.ReactNode }> = ({ children }) 
     },
     cs: {
       contact: 'Kontakt',
+      security: 'Bezpečnost a Soukromí',
+      bookDemo: 'Rezervujte si ukázku',
       hotelAudit: 'Technický audit',
       aiAudit: 'Audit AI viditelnosti',
-      revenueSimulator: 'Revenue Simulator',
+      revenueSimulator: 'Revenue Simulátor',
       hotelAuditDesc: 'Zkontrolujte v 15 otázkách svůj systém rezervací, marketingu, analytiky a SEO.',
       aiAuditDesc: 'Zadejte URL a získejte hodnocenou zprávu o připravenosti na AI a GEO vyhledávání.',
       revenueSimulatorDesc: 'Zjistěte čistý nárůst tržeb při přesunu více rezervací na přímé.',
@@ -186,7 +202,7 @@ export const AppShell: React.FC<{ children: React.ReactNode }> = ({ children }) 
   ];
 
   return (
-    <div className="relative isolate min-h-screen supports-[height:100dvh]:min-h-[100dvh] bg-[#F4F6F8] font-sans text-gray-900 flex flex-col print:bg-white print:h-auto print:min-h-0">
+    <div className="relative isolate min-h-screen supports-[height:100dvh]:min-h-[100dvh] overflow-x-clip bg-[#F4F6F8] font-sans text-gray-900 flex flex-col print:bg-white print:h-auto print:min-h-0">
       {/* Site-wide dotted background — sits behind every page */}
       <div
         aria-hidden="true"
@@ -338,63 +354,87 @@ export const AppShell: React.FC<{ children: React.ReactNode }> = ({ children }) 
         </div>
 
         {isMenuOpen && (
-          <div className="md:hidden fixed inset-x-0 top-16 sm:top-20 bottom-0 z-40 bg-white border-t border-gray-100 shadow-xl overflow-y-auto print:hidden">
-            <div className="px-4 py-6 space-y-3 flex flex-col pb-20">
-              <button
-                onClick={() => navigateTo('/blog')}
-                className={`text-left px-4 py-4 rounded-lg text-lg ${isActive('/blog') ? 'bg-blue-50 text-brand-blue font-semibold' : 'text-gray-700 hover:bg-gray-50'}`}
-              >
-                Blog
-              </button>
-              <button
-                onClick={() => navigateTo('/security')}
-                className={`text-left px-4 py-4 rounded-lg text-lg ${isActive('/security') ? 'bg-blue-50 text-brand-blue font-semibold' : 'text-gray-700 hover:bg-gray-50'}`}
-              >
-                Security & Privacy
-              </button>
-              <div className="pt-4 border-t border-gray-100 mt-2 space-y-3">
-                <p className="text-[10px] font-black text-gray-400 uppercase tracking-[0.2em] px-4 flex items-center gap-2">
-                  <Globe size={12} /> Language
-                </p>
-                <div className="grid grid-cols-2 gap-2">
-                  {languages.map(lang => (
+          <div className="md:hidden fixed inset-x-0 top-16 sm:top-20 bottom-0 z-40 bg-white border-t border-gray-100 shadow-xl overflow-y-auto overflow-x-hidden print:hidden">
+            <div className="px-4 py-6 flex flex-col gap-5 min-h-full pb-10">
+              {/* Tools — primary actions as descriptive cards */}
+              <div className="space-y-3">
+                {tools.map(tool => {
+                  const Icon = tool.Icon;
+                  return (
                     <button
-                      key={lang.code}
-                      onClick={() => {
-                        setLanguage(lang.code);
-                        setIsMenuOpen(false);
-                      }}
-                      className={`px-4 py-3 rounded-lg text-sm font-semibold transition-colors ${
-                        language === lang.code
-                          ? 'bg-brand-blue text-white shadow-sm'
-                          : 'bg-gray-50 text-gray-700 hover:bg-gray-100 border border-gray-200'
-                      }`}
+                      key={tool.path}
+                      onClick={() => navigateTo(tool.path)}
+                      className={`w-full ${tool.color} text-white rounded-xl p-4 shadow-md active:scale-[0.98] transition-transform flex items-start gap-3 text-left`}
                     >
-                      {lang.label}
+                      <span className="w-9 h-9 rounded-lg bg-white/20 flex items-center justify-center shrink-0">
+                        <Icon size={18} className="text-white" />
+                      </span>
+                      <span className="min-w-0">
+                        <span className="block text-base font-semibold leading-tight">{tool.label}</span>
+                        <span className="block text-sm text-white/85 leading-snug mt-0.5">{tool.desc}</span>
+                      </span>
                     </button>
-                  ))}
-                </div>
+                  );
+                })}
               </div>
 
-              <div className="pt-4 border-t border-gray-100 mt-2 space-y-3">
-                <button
-                  onClick={() => navigateTo('/hotel-audit')}
-                  className="w-full bg-brand-blue text-white px-4 py-4 rounded-xl text-lg font-medium shadow-md active:scale-[0.98] transition-transform"
-                >
-                  {labels.hotelAudit}
+              {/* Quick links */}
+              <div className="flex flex-wrap items-center gap-x-2 gap-y-1 text-sm font-medium text-gray-600 px-1">
+                <button onClick={() => navigateTo('/blog')} className="hover:text-brand-blue transition-colors">
+                  Blog
                 </button>
-                <button
-                  onClick={() => navigateTo('/ai-visibility-audit')}
-                  className="w-full bg-brand-success text-white px-4 py-4 rounded-xl text-lg font-medium shadow-md active:scale-[0.98] transition-transform"
-                >
-                  {labels.aiAudit}
+                <span className="text-gray-300" aria-hidden="true">·</span>
+                <button onClick={() => navigateTo('/security')} className="hover:text-brand-blue transition-colors">
+                  {labels.security}
                 </button>
-                <button
-                  onClick={() => navigateTo('/revenue-simulator')}
-                  className="w-full bg-brand-accent text-white px-4 py-4 rounded-xl text-lg font-medium shadow-md active:scale-[0.98] transition-transform"
+                <span className="text-gray-300" aria-hidden="true">·</span>
+                <a
+                  href="https://bookassist.com/book-a-demo"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  onClick={() => setIsMenuOpen(false)}
+                  className="hover:text-brand-blue transition-colors"
                 >
-                  {labels.revenueSimulator}
-                </button>
+                  {labels.contact}
+                </a>
+              </div>
+
+              {/* Book a Demo CTA + language, pinned to the bottom */}
+              <div className="mt-auto space-y-5">
+                <a
+                  href="https://bookassist.com/book-a-demo"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  onClick={() => setIsMenuOpen(false)}
+                  className="flex items-center justify-center gap-2 w-full border-2 border-brand-blue text-brand-blue bg-white px-5 py-3 rounded-xl text-base font-bold active:scale-[0.98] transition-all hover:bg-brand-blue hover:text-white"
+                >
+                  {labels.bookDemo}
+                  <ArrowUpRight size={18} className="shrink-0" />
+                </a>
+
+                <div className="pt-5 border-t border-gray-100">
+                  <label
+                    htmlFor="mobile-lang"
+                    className="flex items-center gap-2 text-[10px] font-black text-gray-400 uppercase tracking-[0.2em] mb-2"
+                  >
+                    <Globe size={12} /> Language
+                  </label>
+                  <select
+                    id="mobile-lang"
+                    value={language}
+                    onChange={e => {
+                      setLanguage(e.target.value as Language);
+                      setIsMenuOpen(false);
+                    }}
+                    className="w-full px-4 py-3 rounded-lg border border-gray-200 bg-gray-50 text-sm font-semibold text-gray-700 focus:outline-none focus:ring-2 focus:ring-brand-blue"
+                  >
+                    {languages.map(lang => (
+                      <option key={lang.code} value={lang.code}>
+                        {lang.label}
+                      </option>
+                    ))}
+                  </select>
+                </div>
               </div>
             </div>
           </div>
