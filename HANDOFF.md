@@ -4,6 +4,57 @@ Single rolling handoff for the project. Newest session at the top. Older session
 
 ---
 
+# 29 June 2026 — 4 new weekly blog posts, distinct hero images, SEO heading hierarchy across all posts, blog typography fixed and polished
+
+Content + frontend session. Confirmed the existing blog auto-publish pipeline is healthy, added the next batch of scheduled posts, then discovered and fixed two latent rendering bugs that meant the blog had never actually displayed with proper structure. Six commits to `main`, all deployed via Amplify. No interaction needed for the work; user approved the typography direction before the final polish shipped.
+
+## What landed (in order)
+
+| Commit | What |
+|---|---|
+| `9f22db4` | 4 new weekly posts scheduled (Jul 20 → Aug 10), all 7 languages = 28 files |
+| `6615207` | Each of the 4 new posts given a distinct, verified Unsplash hero image |
+| `c2d00a8` | H2/H3 heading hierarchy added to ALL 10 posts (56 files) + `prose-h3` style + CLAUDE.md rules |
+| `fe8f7b6` | `blog.ts` made CRLF-tolerant + `.gitattributes` (`*.md eol=lf`) |
+| `f53ddde` | Installed `@tailwindcss/typography` and loaded it via `@plugin` in `app/globals.css` |
+| `51dc805` | Editorial typography polish in `BlogPost.tsx` |
+
+## 1. New scheduled posts (Jul 20 → Aug 10)
+
+Four posts, 3 summer/seasonality-focused per the user's brief, continuing the Monday cadence and rotating service angles to fill the gaps (Vouchers, GDS had no dedicated post yet):
+
+| Date | Slug | Angle |
+|---|---|---|
+| 2026-07-20 | build-next-winter-direct-bookings-in-summer | Intelligence / CRM (summer) |
+| 2026-07-27 | the-summer-rate-trap | Booking Platform (summer) |
+| 2026-08-03 | turn-summer-demand-into-off-season-cash-with-vouchers | Vouchers (summer) |
+| 2026-08-10 | capturing-corporate-and-group-direct-bookings | GDS |
+
+English masters written by hand; the 24 translations produced by 6 parallel translation agents (one per language), matching the register of the existing localised posts. Writing follows the house rules: UK English, no hyphens/em-dashes, illustrative (not fabricated) stats, one product link + one internal `/blog/` link, closing audit tie-in. Hero images sourced fresh from Unsplash and HTTP-checked (200) before use; credits updated in all 7 language files per post.
+
+## 2. SEO heading hierarchy across ALL posts
+
+The articles previously used flat `##` only, with bold lead-in paragraphs (`**Label.** text`) acting as pseudo-subheadings. Converted those to real `### H3` across all 10 posts × 7 languages (56 files changed; metasearch + corporate posts already used bullet lists, so unchanged). Body text preserved verbatim — only heading structure changed. Title still renders as the single `<h1>`. Rules for future posts documented in **CLAUDE.md → "Blog article structure (SEO heading rules)"**.
+
+## 3. Two latent bugs fixed (the blog never rendered properly before)
+
+Found while previewing locally (`npm run dev`):
+
+- **CRLF broke frontmatter parsing.** `lib/blog.ts` parsed frontmatter with an LF-only regex (`/^---\n/`). In-place CLI edits (`perl -i`) and Windows checkouts (`core.autocrlf=true`) produce CRLF, so every post resolved to "Post not found" locally. Production was unaffected (git stored LF). Fix: normalise CRLF→LF on read in `blog.ts`, plus `.gitattributes` `*.md eol=lf`.
+- **Typography plugin was never installed.** The blog body uses `prose`/`prose-h2`/`prose-h3` classes, but `@tailwindcss/typography` was missing under Tailwind v4, so every `prose-*` class was a no-op and preflight flattened all headings to body size. **This affected every article since launch** — they rendered as a wall of same-size text. Fix: install the plugin + `@plugin "@tailwindcss/typography";` in `app/globals.css`.
+
+## 4. Editorial typography polish (`BlogPost.tsx`)
+
+After the plugin fix made `prose` work, refined the reading layout: H2 ~28px extra-bold in brand-blue with generous top spacing; H3 20px bold; body `gray-700` at 1.8 line-height; branded links with underline-offset + hover decoration; teal (`brand-success`) list markers; tidied table/hr/caption. Ran through the `ui-ux-pro-max` skill guidelines. Full production `npm run build` passed before pushing.
+
+## Open / follow-ups
+
+- **Double `<h1>` on blog pages** — the post `<h1>` plus one in the header/logo. One H1 per page is the SEO ideal; minor, pre-existing in AppShell. Not yet fixed.
+- **Translation QA** — the 24 new translations were Claude-written, not native-reviewed (same caveat as the earlier batch). Worth a read-through before the Jul/Aug posts publish.
+- **Live-deploy verification** of `51dc805` was in progress at session end (polling production for the new typography CSS).
+
+---
+
 # 25 June 2026 — Mobile pass: compact figures, hamburger redesign, horizontal-overflow fix, Simulator label localised
 
 Working session driven by Des O'Mahony's mobile feedback on the Revenue Simulator (screenshot:
