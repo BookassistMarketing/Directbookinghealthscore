@@ -60,7 +60,9 @@ function loadAllVersions(): Record<string, Record<string, { data: Record<string,
     const baseSlug = langMatch ? langMatch[1] : withoutExt;
     const fileLang = langMatch ? langMatch[2] : 'en';
 
-    const raw = fs.readFileSync(path.join(BLOG_DIR, filename), 'utf-8');
+    // Normalise CRLF to LF so frontmatter parsing works regardless of the
+    // checkout's line endings (Windows dev with core.autocrlf=true yields CRLF).
+    const raw = fs.readFileSync(path.join(BLOG_DIR, filename), 'utf-8').replace(/\r\n/g, '\n');
     const parsed = parseFrontmatter(raw);
     const resolvedSlug = parsed.data.slug || baseSlug;
 

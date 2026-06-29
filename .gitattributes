@@ -1,0 +1,4 @@
+# Keep Markdown content (blog posts) as LF in the working tree on every OS,
+# so the LF-based frontmatter parser in lib/blog.ts is never tripped up by
+# CRLF introduced via Windows checkouts or in-place CLI edits.
+*.md text eol=lf
