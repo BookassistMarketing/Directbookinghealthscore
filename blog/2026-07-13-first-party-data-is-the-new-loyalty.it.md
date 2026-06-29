@@ -21,23 +21,37 @@ L'economia è incomparabile. I dati di settore mostrano che le campagne email di
 
 ## I tre livelli di dato first-party alberghiero
 
-**Dato di identità.** Email, telefono, indirizzo — ciò che un ospite ti dà al momento della prenotazione. È il pavimento. La maggior parte degli hotel lo raccoglie perché deve. Pochi lo usano strategicamente dopo che l'ospite se n'è andato.
+### Dato di identità
 
-**Dato comportamentale.** Storico delle prenotazioni, preferenza di camera, durata del soggiorno, pattern di giorno della settimana, canale di origine, spesa per soggiorno. È ciò che trasforma l'identità in segmentazione. Un ospite che ha prenotato due volte di domenica per un venerdì sera è un chiaro candidato per il retargeting la domenica prima del suo probabile prossimo viaggio.
+Email, telefono, indirizzo — ciò che un ospite ti dà al momento della prenotazione. È il pavimento. La maggior parte degli hotel lo raccoglie perché deve. Pochi lo usano strategicamente dopo che l'ospite se n'è andato.
 
-**Dato di preferenza.** Preferenze dichiarate — tipo di cuscino, ora della colazione, esigenze di accessibilità, occasioni speciali. Raccolte alla prenotazione, al check-in o tramite un sondaggio post-soggiorno. È ciò che rende una relazione alberghiera personale e non transazionale. Ha anche un impatto sulla retention notevole: gli ospiti le cui preferenze vengono ricordate hanno 3× più probabilità di prenotare di nuovo direttamente.
+### Dato comportamentale
+
+Storico delle prenotazioni, preferenza di camera, durata del soggiorno, pattern di giorno della settimana, canale di origine, spesa per soggiorno. È ciò che trasforma l'identità in segmentazione. Un ospite che ha prenotato due volte di domenica per un venerdì sera è un chiaro candidato per il retargeting la domenica prima del suo probabile prossimo viaggio.
+
+### Dato di preferenza
+
+Preferenze dichiarate — tipo di cuscino, ora della colazione, esigenze di accessibilità, occasioni speciali. Raccolte alla prenotazione, al check-in o tramite un sondaggio post-soggiorno. È ciò che rende una relazione alberghiera personale e non transazionale. Ha anche un impatto sulla retention notevole: gli ospiti le cui preferenze vengono ricordate hanno 3× più probabilità di prenotare di nuovo direttamente.
 
 Un hotel con una strategia first-party coerente usa tutti e tre i livelli insieme — identità per raggiungere, comportamento per scegliere il momento, preferenza per personalizzare.
 
 ## Cosa manca alla maggior parte degli hotel
 
-**Un record ospite unificato.** Motore di prenotazione, PMS, POS del ristorante, sistema fedeltà e piattaforma email tipicamente contengono profili ospite parziali in formati diversi. Un ospite che ha prenotato diretto, ha mangiato al ristorante e ha chiamato per un appuntamento alla SPA esiste come tre record separati in tre sistemi diversi — e il tuo team marketing vede solo la prenotazione. L'unificazione è il fondamento del valore first-party ed è il singolo divario più comune.
+### Un record ospite unificato
 
-**Consenso che permette davvero l'uso.** Molti hotel raccolgono indirizzi email senza un chiaro consenso al marketing — il che significa che legalmente non possono inviare messaggi promozionali. GDPR e normative simili richiedono opt-in esplicito per il marketing. La correzione è nel flusso di prenotazione: una casella di consenso chiara, ben posizionata, con valore dichiarato.
+Motore di prenotazione, PMS, POS del ristorante, sistema fedeltà e piattaforma email tipicamente contengono profili ospite parziali in formati diversi. Un ospite che ha prenotato diretto, ha mangiato al ristorante e ha chiamato per un appuntamento alla SPA esiste come tre record separati in tre sistemi diversi — e il tuo team marketing vede solo la prenotazione. L'unificazione è il fondamento del valore first-party ed è il singolo divario più comune.
 
-**Trigger comportamentali che nessuno ha implementato.** L'email a più alta conversione del settore alberghiero è la riattivazione «abbiamo notato che non prenoti da 14 mesi». La seconda è l'upsell pre-stay inviato 7 giorni prima dell'arrivo. La maggior parte degli hotel non ha configurato né l'uno né l'altro.
+### Consenso che permette davvero l'uso
 
-**Nessun loop di misurazione.** I programmi first-party che non mostrano ROI quasi sempre falliscono allo stesso passaggio: l'attribuzione. La prenotazione arrivata dall'email della domenica sera è invisibile al report di campagna a meno che la piattaforma non colleghi il clic email alla prenotazione. Senza questo, il marketing non può difendere il budget e il programma si atrofizza.
+Molti hotel raccolgono indirizzi email senza un chiaro consenso al marketing — il che significa che legalmente non possono inviare messaggi promozionali. GDPR e normative simili richiedono opt-in esplicito per il marketing. La correzione è nel flusso di prenotazione: una casella di consenso chiara, ben posizionata, con valore dichiarato.
+
+### Trigger comportamentali che nessuno ha implementato
+
+L'email a più alta conversione del settore alberghiero è la riattivazione «abbiamo notato che non prenoti da 14 mesi». La seconda è l'upsell pre-stay inviato 7 giorni prima dell'arrivo. La maggior parte degli hotel non ha configurato né l'uno né l'altro.
+
+### Nessun loop di misurazione
+
+I programmi first-party che non mostrano ROI quasi sempre falliscono allo stesso passaggio: l'attribuzione. La prenotazione arrivata dall'email della domenica sera è invisibile al report di campagna a meno che la piattaforma non colleghi il clic email alla prenotazione. Senza questo, il marketing non può difendere il budget e il programma si atrofizza.
 
 ## Cosa produce un programma first-party in 12 mesi
 
@@ -52,13 +66,21 @@ Non sono numeri aspirazionali. Sono tipici per le strutture che completano il la
 
 ## Da dove cominciare
 
-**Audita il tuo record ospite.** Quanti sistemi tengono profili ospite? Il tuo team marketing può vedere il quadro completo di un singolo ospite in un solo posto? Se no, quello è il primo divario.
+### Audita il tuo record ospite
 
-**Audita il tuo consenso.** Estrai il testo di consenso del tuo flusso di prenotazione. Permette chiaramente il marketing? Dichiara cosa l'ospite riceverà? Se un ospite lo leggesse oggi, sceglierebbe attivamente di aderire?
+Quanti sistemi tengono profili ospite? Il tuo team marketing può vedere il quadro completo di un singolo ospite in un solo posto? Se no, quello è il primo divario.
 
-**Audita la tua lista di trigger.** Hai un sondaggio post-stay? Un upsell pre-arrivo? Una riattivazione a 12 mesi? Un messaggio di anniversario? Ogni trigger mancante è fatturato diretto che stai lasciando nel pool OTA.
+### Audita il tuo consenso
 
-**Collega l'attribuzione.** Qualunque piattaforma email o CRM tu usi, deve essere in grado di collegare i clic email alle prenotazioni. Se non può, stai gestendo un programma che non puoi misurare — e il marketing non misurato prima o poi viene tagliato.
+Estrai il testo di consenso del tuo flusso di prenotazione. Permette chiaramente il marketing? Dichiara cosa l'ospite riceverà? Se un ospite lo leggesse oggi, sceglierebbe attivamente di aderire?
+
+### Audita la tua lista di trigger
+
+Hai un sondaggio post-stay? Un upsell pre-arrivo? Una riattivazione a 12 mesi? Un messaggio di anniversario? Ogni trigger mancante è fatturato diretto che stai lasciando nel pool OTA.
+
+### Collega l'attribuzione
+
+Qualunque piattaforma email o CRM tu usi, deve essere in grado di collegare i clic email alle prenotazioni. Se non può, stai gestendo un programma che non puoi misurare — e il marketing non misurato prima o poi viene tagliato.
 
 ## Dove si inserisce Bookassist
 

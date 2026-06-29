@@ -21,23 +21,37 @@ The economics are uncomparable. Industry data shows first-party email retention 
 
 ## The Three Tiers of Hotel First-Party Data
 
-**Identity data.** Email, phone, address — the things a guest gives you at booking. This is the floor. Most hotels collect it because they have to. Few use it strategically once the guest leaves.
+### Identity data
 
-**Behavioural data.** Booking history, room preference, stay length, day-of-week pattern, channel-of-origin, spend per stay. This is what turns identity into segmentation. A guest who has booked twice on Sunday for a Friday night is a clear retargeting candidate the Sunday before their next likely trip.
+Email, phone, address — the things a guest gives you at booking. This is the floor. Most hotels collect it because they have to. Few use it strategically once the guest leaves.
 
-**Preference data.** Stated preferences — pillow type, breakfast time, accessibility needs, special occasions. Collected at booking, at check-in, or via a post-stay survey. This is what makes a hotel relationship feel personal rather than transactional. It also has remarkable retention impact: guests whose preferences are remembered are 3× more likely to book directly again.
+### Behavioural data
+
+Booking history, room preference, stay length, day-of-week pattern, channel-of-origin, spend per stay. This is what turns identity into segmentation. A guest who has booked twice on Sunday for a Friday night is a clear retargeting candidate the Sunday before their next likely trip.
+
+### Preference data
+
+Stated preferences — pillow type, breakfast time, accessibility needs, special occasions. Collected at booking, at check-in, or via a post-stay survey. This is what makes a hotel relationship feel personal rather than transactional. It also has remarkable retention impact: guests whose preferences are remembered are 3× more likely to book directly again.
 
 A hotel running a coherent first-party strategy uses all three tiers together — identity to reach, behaviour to time, preference to personalise.
 
 ## What Most Hotels Are Missing
 
-**A unified guest record.** Booking engine, PMS, restaurant POS, loyalty system, and email platform usually hold partial guest profiles in different formats. A guest who booked direct, ate at the restaurant, and called for a spa appointment exists as three separate records in three different systems — and your marketing team sees only the booking. Unification is the foundation of first-party value, and it is the single most common gap.
+### A unified guest record
 
-**Consent that actually permits use.** Many hotels collect email addresses without a clear marketing consent — meaning legally, they cannot send promotional messages. GDPR and similar regulations require explicit opt-in for marketing. The fix is at the booking flow: a clear, well-positioned consent checkbox with stated value.
+Booking engine, PMS, restaurant POS, loyalty system, and email platform usually hold partial guest profiles in different formats. A guest who booked direct, ate at the restaurant, and called for a spa appointment exists as three separate records in three different systems — and your marketing team sees only the booking. Unification is the foundation of first-party value, and it is the single most common gap.
 
-**Behavioural triggers nobody implemented.** The single highest-converting email in the hotel industry is the "we noticed you have not booked in 14 months" reactivation. The second is the pre-stay upsell sent 7 days before arrival. Most hotels have neither configured.
+### Consent that actually permits use
 
-**No measurement loop.** First-party programmes that show no ROI almost always fail at the same step: attribution. The booking that came from the Sunday-evening email is invisible to the campaign report unless the platform stitches the email click to the booking. Without that, marketing cannot defend the budget, and the programme atrophies.
+Many hotels collect email addresses without a clear marketing consent — meaning legally, they cannot send promotional messages. GDPR and similar regulations require explicit opt-in for marketing. The fix is at the booking flow: a clear, well-positioned consent checkbox with stated value.
+
+### Behavioural triggers nobody implemented
+
+The single highest-converting email in the hotel industry is the "we noticed you have not booked in 14 months" reactivation. The second is the pre-stay upsell sent 7 days before arrival. Most hotels have neither configured.
+
+### No measurement loop
+
+First-party programmes that show no ROI almost always fail at the same step: attribution. The booking that came from the Sunday-evening email is invisible to the campaign report unless the platform stitches the email click to the booking. Without that, marketing cannot defend the budget, and the programme atrophies.
 
 ## What a First-Party Programme Earns in 12 Months
 
@@ -52,13 +66,21 @@ These are not aspirational figures. They are typical for properties that complet
 
 ## Where to Start
 
-**Audit your guest record.** How many systems hold guest profiles? Can your marketing team see the full picture for a single guest in one place? If not, that is the first gap.
+### Audit your guest record
 
-**Audit your consent.** Pull your booking flow's consent text. Does it clearly permit marketing? Does it state what the guest will receive? If a guest read it today, would they actively opt in?
+How many systems hold guest profiles? Can your marketing team see the full picture for a single guest in one place? If not, that is the first gap.
 
-**Audit your trigger list.** Do you have a post-stay survey? A pre-arrival upsell? A 12-month reactivation? An anniversary message? Each missing trigger is direct revenue you are leaving in the OTA pool.
+### Audit your consent
 
-**Connect attribution.** Whatever email or CRM platform you use should be able to stitch email clicks to bookings. If it cannot, you are running a programme you cannot measure — and unmeasured marketing eventually gets cut.
+Pull your booking flow's consent text. Does it clearly permit marketing? Does it state what the guest will receive? If a guest read it today, would they actively opt in?
+
+### Audit your trigger list
+
+Do you have a post-stay survey? A pre-arrival upsell? A 12-month reactivation? An anniversary message? Each missing trigger is direct revenue you are leaving in the OTA pool.
+
+### Connect attribution
+
+Whatever email or CRM platform you use should be able to stitch email clicks to bookings. If it cannot, you are running a programme you cannot measure — and unmeasured marketing eventually gets cut.
 
 ## Where Bookassist Fits
 

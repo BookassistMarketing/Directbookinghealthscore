@@ -68,6 +68,16 @@ Supported locales: **English (en), Italian (it), Spanish (es), Polish (pl), Fren
 - All UI labels live in inline `Record<Language, ...>` maps inside their components
 - Blog posts use `<slug>.<lang>.md` filename pattern (e.g. `2026-03-20-why-hotels-lose-money-to-otas.fr.md`); the bare `<slug>.md` is English
 
+### Blog article structure (SEO heading rules)
+Every blog post MUST follow a clear heading hierarchy for SEO. The post `title` (frontmatter) renders as the single `<h1>` (`BlogPost.tsx`), so the body must never use `#`/H1.
+- **H2 (`##`)** for each main section of the article. Aim for 5 to 8 descriptive, keyword-aware section headings.
+- **H3 (`###`)** for sub-points inside a section. Do NOT use a bold lead-in paragraph (`**Label.** text...`) as a pseudo-heading — make it a real `### Label` followed by the paragraph. Bold is for inline emphasis and bullet-list labels only.
+- Never skip levels (no H3 without a parent H2) and keep headings in document order.
+- Headings carry no trailing full stop or colon. Keep them short and scannable.
+- Frontmatter keys required: `title`, `date`, `excerpt`, `metaDescription`, `image`, `slug`. `metaDescription` <= 160 chars and contains the primary keyword; `title` ideally leads with it.
+- Writing: UK English, no hyphens or em/en dashes, illustrative (never fabricated) stats, one woven product link, one internal `/blog/` link, closing tie-in to the free audit.
+- **Apply the same heading structure across all 7 language files** — translate the heading text, keep the `##`/`###` levels identical.
+
 ### Translation rules (Bookassist Translation skill)
 - Source language: UK English
 - Spanish uses `tú` (informal); German uses `Sie` (formal)

@@ -21,11 +21,17 @@ Je tu i druhá tichá výhoda. Významný podíl voucherů není nikdy uplatněn
 
 ## Tři publika, která v létě nakupují
 
-**Současný host.** Někdo, kdo si svůj pobyt právě teď užívá, je připraven koupit si návštěvu znovu nebo ji někomu darovat. Jednoduchá výzva při odhlášení nebo vkusná kartička na pokoji promění šťastný okamžik v budoucí rezervaci.
+### Současný host
 
-**Kupující dárků.** Vouchery jsou přirozeným dárkem k narozeninám, výročím, svatbám a na nadcházející sváteční období. Host, který si zamiloval svůj letní pobyt, je ideálním advokátem, jenž koupí váš hotel jako dárek pro přátele a rodinu a představí vás lidem, kteří u vás nikdy nebyli.
+Někdo, kdo si svůj pobyt právě teď užívá, je připraven koupit si návštěvu znovu nebo ji někomu darovat. Jednoduchá výzva při odhlášení nebo vkusná kartička na pokoji promění šťastný okamžik v budoucí rezervaci.
 
-**Bývalý host.** Pozdně letní voucherová kampaň cílená na minulé hosty, postavená kolem rozmazlení pro temnější měsíce, znovu oživuje vztahy, které by jinak vychladly až do příštího roku.
+### Kupující dárků
+
+Vouchery jsou přirozeným dárkem k narozeninám, výročím, svatbám a na nadcházející sváteční období. Host, který si zamiloval svůj letní pobyt, je ideálním advokátem, jenž koupí váš hotel jako dárek pro přátele a rodinu a představí vás lidem, kteří u vás nikdy nebyli.
+
+### Bývalý host
+
+Pozdně letní voucherová kampaň cílená na minulé hosty, postavená kolem rozmazlení pro temnější měsíce, znovu oživuje vztahy, které by jinak vychladly až do příštího roku.
 
 ## Jak to zařídit v praxi
 

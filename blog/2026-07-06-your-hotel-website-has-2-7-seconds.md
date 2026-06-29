@@ -17,25 +17,41 @@ This matters because hotel websites are unusually loading-heavy. A typical prope
 
 Google's Core Web Vitals are three numbers that together determine whether your site is "fast" by the standard search engines and travellers now apply:
 
-**Largest Contentful Paint (LCP)** — how long until the largest visible element (usually a hero image) is rendered. Target: under 2.5 seconds.
+### Largest Contentful Paint (LCP)
 
-**Interaction to Next Paint (INP)** — how responsive the page feels to taps and clicks. Target: under 200 milliseconds.
+— how long until the largest visible element (usually a hero image) is rendered. Target: under 2.5 seconds.
 
-**Cumulative Layout Shift (CLS)** — how much the page jumps around as it loads (ads, banners, images appearing late). Target: under 0.1.
+### Interaction to Next Paint (INP)
+
+— how responsive the page feels to taps and clicks. Target: under 200 milliseconds.
+
+### Cumulative Layout Shift (CLS)
+
+— how much the page jumps around as it loads (ads, banners, images appearing late). Target: under 0.1.
 
 These are not just SEO ranking factors (though they are). They are the difference between a guest who reaches your booking engine and a guest who closes the tab before they ever see your rates.
 
 ## Where Hotel Sites Quietly Fail
 
-**Oversized hero images.** A 4MB JPEG of the lobby looks beautiful on a Mac monitor and ruinous on a 4G phone. Modern hotel sites serve a hero image under 250KB through WebP or AVIF formats, with responsive sources for different screen sizes. Most hotel sites still serve the same 4MB JPEG to every device.
+### Oversized hero images
 
-**Render-blocking scripts.** Booking engines, chat widgets, tracking pixels, A/B testing tools — each one loaded synchronously delays the LCP by hundreds of milliseconds. The fix is straightforward (deferred or async loading) but requires discipline that most templated hotel sites lack.
+A 4MB JPEG of the lobby looks beautiful on a Mac monitor and ruinous on a 4G phone. Modern hotel sites serve a hero image under 250KB through WebP or AVIF formats, with responsive sources for different screen sizes. Most hotel sites still serve the same 4MB JPEG to every device.
 
-**Cookie banners that block content.** A consent dialog that pushes the hero image off-screen until accepted contributes to both LCP failure and high CLS. A modern implementation renders the banner as an overlay without shifting the underlying page.
+### Render-blocking scripts
 
-**Booking engine iframes.** A booking engine loaded as an iframe is a separate page inside your page, with its own scripts, fonts, and tracking. It is usually the slowest element on a hotel site. Modern direct booking platforms render inline as part of the same DOM, sharing fonts and removing the iframe penalty entirely.
+Booking engines, chat widgets, tracking pixels, A/B testing tools — each one loaded synchronously delays the LCP by hundreds of milliseconds. The fix is straightforward (deferred or async loading) but requires discipline that most templated hotel sites lack.
 
-**Auto-playing video heroes.** A muted 8MB MP4 looping behind text is the single biggest LCP killer on hotel sites. The fix is usually to swap it for a static image plus a "play video" interaction.
+### Cookie banners that block content
+
+A consent dialog that pushes the hero image off-screen until accepted contributes to both LCP failure and high CLS. A modern implementation renders the banner as an overlay without shifting the underlying page.
+
+### Booking engine iframes
+
+A booking engine loaded as an iframe is a separate page inside your page, with its own scripts, fonts, and tracking. It is usually the slowest element on a hotel site. Modern direct booking platforms render inline as part of the same DOM, sharing fonts and removing the iframe penalty entirely.
+
+### Auto-playing video heroes
+
+A muted 8MB MP4 looping behind text is the single biggest LCP killer on hotel sites. The fix is usually to swap it for a static image plus a "play video" interaction.
 
 ## What Profitable Speed Looks Like in 2026
 
@@ -57,15 +73,25 @@ This is why Core Web Vitals is no longer an SEO concern. It is a direct-booking 
 
 ## What Hoteliers Should Do This Quarter
 
-**Measure first.** Run your site through PageSpeed Insights and look at the "Field Data" section — that is what real users experience, not a synthetic test. If LCP exceeds 3 seconds, the site is losing bookings.
+### Measure first
 
-**Audit your hero.** If the homepage hero is a JPEG larger than 250KB or an auto-playing video, that is the single largest fix.
+Run your site through PageSpeed Insights and look at the "Field Data" section — that is what real users experience, not a synthetic test. If LCP exceeds 3 seconds, the site is losing bookings.
 
-**Inventory your scripts.** Any script that is not the booking engine, analytics, or strictly necessary should be deferred or removed.
+### Audit your hero
 
-**Check your booking engine integration.** If it loads as an iframe, you are paying a significant performance tax. Modern booking platforms render inline.
+If the homepage hero is a JPEG larger than 250KB or an auto-playing video, that is the single largest fix.
 
-**Set a budget.** Decide what mobile LCP target the site must hit, and treat anything exceeding it as a production bug, not a "nice to have."
+### Inventory your scripts
+
+Any script that is not the booking engine, analytics, or strictly necessary should be deferred or removed.
+
+### Check your booking engine integration
+
+If it loads as an iframe, you are paying a significant performance tax. Modern booking platforms render inline.
+
+### Set a budget
+
+Decide what mobile LCP target the site must hit, and treat anything exceeding it as a production bug, not a "nice to have."
 
 ## Where Bookassist Fits
 

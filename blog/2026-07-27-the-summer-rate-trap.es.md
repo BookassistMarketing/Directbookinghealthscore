@@ -15,11 +15,17 @@ Un hotel puede funcionar al 95% de ocupación y aun así dejar sobre la mesa una
 
 ## Las tres fugas que se esconden tras la alta demanda
 
-**Fuga uno: comisión OTA sobre demanda que ya era tuya.** En temporada alta, una parte significativa de las reservas OTA son huéspedes que te habrían reservado directamente de todas formas. Buscaron tu hotel por su nombre, vieron primero la ficha OTA y la pulsaron por costumbre. Llenaste la habitación, pero pagaste entre un 15% y un 25% de comisión por un huésped que ya era tuyo. La alta demanda hace que esto sea indoloro de ignorar, porque la habitación se vendió igualmente.
+### Fuga uno: comisión OTA sobre demanda que ya era tuya
 
-**Fuga dos: la paridad de tarifas resbalando cuando no estás mirando.** Durante los meses ajetreados, la atención va a las operaciones, no a la monitorización de tarifas. Este es exactamente el momento en que un programa de descuentos OTA o una tarifa de paquete opaca pueden socavar tu precio directo. Un huésped que encuentra una tarifa más barata en Booking.com que en tu propia web acaba de aprender a no reservarte nunca más en directo. Una sola tarifa descuadrada en julio puede costarte reservas directas durante años.
+En temporada alta, una parte significativa de las reservas OTA son huéspedes que te habrían reservado directamente de todas formas. Buscaron tu hotel por su nombre, vieron primero la ficha OTA y la pulsaron por costumbre. Llenaste la habitación, pero pagaste entre un 15% y un 25% de comisión por un huésped que ya era tuyo. La alta demanda hace que esto sea indoloro de ignorar, porque la habitación se vendió igualmente.
 
-**Fuga tres: un motor de reservas que convierte peor bajo presión.** El tráfico de verano es mayor, pero si tu motor de reservas es lento, tosco o está enterrado bajo enlaces OTA en tus propias páginas, los visitantes extra convierten a una tasa más baja y se derraman hacia la OTA. La habitación se vende igual. Solo que se vende por el canal más caro disponible.
+### Fuga dos: la paridad de tarifas resbalando cuando no estás mirando
+
+Durante los meses ajetreados, la atención va a las operaciones, no a la monitorización de tarifas. Este es exactamente el momento en que un programa de descuentos OTA o una tarifa de paquete opaca pueden socavar tu precio directo. Un huésped que encuentra una tarifa más barata en Booking.com que en tu propia web acaba de aprender a no reservarte nunca más en directo. Una sola tarifa descuadrada en julio puede costarte reservas directas durante años.
+
+### Fuga tres: un motor de reservas que convierte peor bajo presión
+
+El tráfico de verano es mayor, pero si tu motor de reservas es lento, tosco o está enterrado bajo enlaces OTA en tus propias páginas, los visitantes extra convierten a una tasa más baja y se derraman hacia la OTA. La habitación se vende igual. Solo que se vende por el canal más caro disponible.
 
 ## Lo que cuesta la temporada alta en términos reales
 

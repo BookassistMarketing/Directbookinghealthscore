@@ -15,11 +15,17 @@ Hotel może działać na poziomie 95 procent obłożenia i wciąż zostawiać na
 
 ## Trzy wycieki, które chowają się za wysokim popytem
 
-**Wyciek pierwszy: prowizja OTA od popytu, który już posiadałeś.** W szczycie sezonu znacząca część rezerwacji OTA to goście, którzy i tak zarezerwowaliby u Ciebie bezpośrednio. Szukali Twojego hotelu po nazwie, najpierw zobaczyli ogłoszenie OTA i kliknęli je z przyzwyczajenia. Zapełniłeś pokój, ale zapłaciłeś od 15 procent do 25 procent prowizji od gościa, który już był Twój. Wysoki popyt sprawia, że łatwo to bezboleśnie zignorować, bo pokój i tak się sprzedał.
+### Wyciek pierwszy: prowizja OTA od popytu, który już posiadałeś
 
-**Wyciek drugi: parytet stawek wymykający się spod kontroli, gdy nie patrzysz.** W ruchliwych miesiącach uwaga idzie na operacje, a nie na monitoring stawek. To jest dokładnie ten moment, gdy program rabatowy OTA lub nieprzejrzysta stawka pakietowa może podciąć Twoją cenę bezpośrednią. Gość, który znajduje tańszą stawkę na Booking.com niż na Twojej własnej stronie, właśnie nauczył się, by nigdy więcej nie rezerwować u Ciebie bezpośrednio. Jedna wymknięta stawka w lipcu może kosztować Cię rezerwacje bezpośrednie przez lata.
+W szczycie sezonu znacząca część rezerwacji OTA to goście, którzy i tak zarezerwowaliby u Ciebie bezpośrednio. Szukali Twojego hotelu po nazwie, najpierw zobaczyli ogłoszenie OTA i kliknęli je z przyzwyczajenia. Zapełniłeś pokój, ale zapłaciłeś od 15 procent do 25 procent prowizji od gościa, który już był Twój. Wysoki popyt sprawia, że łatwo to bezboleśnie zignorować, bo pokój i tak się sprzedał.
 
-**Wyciek trzeci: silnik rezerwacji, który gorzej konwertuje pod presją.** Letni ruch jest większy, ale jeśli Twój silnik rezerwacji jest wolny, niezgrabny lub schowany poniżej linków OTA na Twoich własnych stronach, dodatkowi odwiedzający konwertują po niższej stopie i przelewają się do OTA. Pokój wciąż się sprzedaje. Po prostu sprzedaje się przez najdroższy dostępny kanał.
+### Wyciek drugi: parytet stawek wymykający się spod kontroli, gdy nie patrzysz
+
+W ruchliwych miesiącach uwaga idzie na operacje, a nie na monitoring stawek. To jest dokładnie ten moment, gdy program rabatowy OTA lub nieprzejrzysta stawka pakietowa może podciąć Twoją cenę bezpośrednią. Gość, który znajduje tańszą stawkę na Booking.com niż na Twojej własnej stronie, właśnie nauczył się, by nigdy więcej nie rezerwować u Ciebie bezpośrednio. Jedna wymknięta stawka w lipcu może kosztować Cię rezerwacje bezpośrednie przez lata.
+
+### Wyciek trzeci: silnik rezerwacji, który gorzej konwertuje pod presją
+
+Letni ruch jest większy, ale jeśli Twój silnik rezerwacji jest wolny, niezgrabny lub schowany poniżej linków OTA na Twoich własnych stronach, dodatkowi odwiedzający konwertują po niższej stopie i przelewają się do OTA. Pokój wciąż się sprzedaje. Po prostu sprzedaje się przez najdroższy dostępny kanał.
 
 ## Co szczyt sezonu kosztuje w realnych liczbach
 

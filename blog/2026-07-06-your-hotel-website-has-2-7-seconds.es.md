@@ -17,25 +17,41 @@ Esto importa porque los sitios web de hoteles son inusualmente pesados de cargar
 
 Los Core Web Vitals de Google son tres números que juntos determinan si tu sitio es «rápido» según el estándar que aplican hoy los motores de búsqueda y los viajeros:
 
-**Largest Contentful Paint (LCP)** — cuánto tarda en renderizarse el elemento visible más grande (normalmente una imagen hero). Objetivo: menos de 2,5 segundos.
+### Largest Contentful Paint (LCP)
 
-**Interaction to Next Paint (INP)** — cómo de receptiva se siente la página ante toques y clics. Objetivo: menos de 200 milisegundos.
+— cuánto tarda en renderizarse el elemento visible más grande (normalmente una imagen hero). Objetivo: menos de 2,5 segundos.
 
-**Cumulative Layout Shift (CLS)** — cuánto salta la página mientras carga (anuncios, banners, imágenes que llegan tarde). Objetivo: menos de 0,1.
+### Interaction to Next Paint (INP)
+
+— cómo de receptiva se siente la página ante toques y clics. Objetivo: menos de 200 milisegundos.
+
+### Cumulative Layout Shift (CLS)
+
+— cuánto salta la página mientras carga (anuncios, banners, imágenes que llegan tarde). Objetivo: menos de 0,1.
 
 No son solo factores de ranking SEO (aunque lo son). Son la diferencia entre un huésped que alcanza tu motor de reserva y un huésped que cierra la pestaña antes de ver tus tarifas.
 
 ## Dónde fallan en silencio los sitios web de hotel
 
-**Imágenes hero sobredimensionadas.** Un JPEG de 4 MB del lobby se ve precioso en un monitor Mac y ruinoso en un teléfono 4G. Los sitios web de hotel modernos sirven una imagen hero por debajo de 250 KB en formato WebP o AVIF, con fuentes responsive para distintos tamaños de pantalla. La mayoría de sitios web de hotel siguen sirviendo el mismo JPEG de 4 MB a cada dispositivo.
+### Imágenes hero sobredimensionadas
 
-**Scripts que bloquean el renderizado.** Motores de reserva, widgets de chat, píxeles de tracking, herramientas de A/B testing — cada uno cargado de forma síncrona retrasa el LCP en cientos de milisegundos. La solución es directa (carga diferida o asíncrona) pero requiere una disciplina que falta en la mayoría de sitios web de hotel basados en plantillas.
+Un JPEG de 4 MB del lobby se ve precioso en un monitor Mac y ruinoso en un teléfono 4G. Los sitios web de hotel modernos sirven una imagen hero por debajo de 250 KB en formato WebP o AVIF, con fuentes responsive para distintos tamaños de pantalla. La mayoría de sitios web de hotel siguen sirviendo el mismo JPEG de 4 MB a cada dispositivo.
 
-**Banners de cookies que bloquean el contenido.** Un diálogo de consentimiento que empuja la imagen hero fuera de la pantalla hasta que sea aceptado contribuye tanto al fallo de LCP como a un CLS alto. Una implementación moderna renderiza el banner como overlay sin desplazar la página subyacente.
+### Scripts que bloquean el renderizado
 
-**Iframes de motor de reserva.** Un motor de reserva cargado como iframe es una página separada dentro de tu página, con sus propios scripts, fuentes y tracking. Suele ser el elemento más lento del sitio web de hotel. Las plataformas modernas de reserva directa se renderizan en línea como parte del mismo DOM, comparten fuentes y eliminan por completo la penalización del iframe.
+Motores de reserva, widgets de chat, píxeles de tracking, herramientas de A/B testing — cada uno cargado de forma síncrona retrasa el LCP en cientos de milisegundos. La solución es directa (carga diferida o asíncrona) pero requiere una disciplina que falta en la mayoría de sitios web de hotel basados en plantillas.
 
-**Vídeos hero en reproducción automática.** Un MP4 mudo de 8 MB en bucle detrás de texto es el mayor asesino de LCP en sitios web de hotel. La solución suele ser sustituirlo por una imagen estática más una interacción «reproducir vídeo».
+### Banners de cookies que bloquean el contenido
+
+Un diálogo de consentimiento que empuja la imagen hero fuera de la pantalla hasta que sea aceptado contribuye tanto al fallo de LCP como a un CLS alto. Una implementación moderna renderiza el banner como overlay sin desplazar la página subyacente.
+
+### Iframes de motor de reserva
+
+Un motor de reserva cargado como iframe es una página separada dentro de tu página, con sus propios scripts, fuentes y tracking. Suele ser el elemento más lento del sitio web de hotel. Las plataformas modernas de reserva directa se renderizan en línea como parte del mismo DOM, comparten fuentes y eliminan por completo la penalización del iframe.
+
+### Vídeos hero en reproducción automática
+
+Un MP4 mudo de 8 MB en bucle detrás de texto es el mayor asesino de LCP en sitios web de hotel. La solución suele ser sustituirlo por una imagen estática más una interacción «reproducir vídeo».
 
 ## Cómo se ve la velocidad rentable en 2026
 
@@ -57,15 +73,25 @@ Por eso los Core Web Vitals ya no son un asunto de SEO. Son un asunto de margen 
 
 ## Qué deben hacer los hoteleros este trimestre
 
-**Mide primero.** Pasa tu sitio por PageSpeed Insights y mira la sección «Field Data» — es lo que viven los usuarios reales, no un test sintético. Si el LCP supera los 3 segundos, el sitio está perdiendo reservas.
+### Mide primero
 
-**Audita tu hero.** Si el hero de la página de inicio es un JPEG mayor de 250 KB o un vídeo en autoplay, esa es la mayor corrección.
+Pasa tu sitio por PageSpeed Insights y mira la sección «Field Data» — es lo que viven los usuarios reales, no un test sintético. Si el LCP supera los 3 segundos, el sitio está perdiendo reservas.
 
-**Inventaría tus scripts.** Cualquier script que no sea el motor de reserva, analytics o estrictamente necesario debe ser diferido o eliminado.
+### Audita tu hero
 
-**Revisa tu integración del motor de reserva.** Si carga como iframe, estás pagando un impuesto de rendimiento significativo. Las plataformas modernas de reserva se renderizan en línea.
+Si el hero de la página de inicio es un JPEG mayor de 250 KB o un vídeo en autoplay, esa es la mayor corrección.
 
-**Fija un presupuesto.** Decide qué objetivo de LCP móvil debe alcanzar el sitio, y trata cualquier desviación como un bug de producción, no un «sería bonito».
+### Inventaría tus scripts
+
+Cualquier script que no sea el motor de reserva, analytics o estrictamente necesario debe ser diferido o eliminado.
+
+### Revisa tu integración del motor de reserva
+
+Si carga como iframe, estás pagando un impuesto de rendimiento significativo. Las plataformas modernas de reserva se renderizan en línea.
+
+### Fija un presupuesto
+
+Decide qué objetivo de LCP móvil debe alcanzar el sitio, y trata cualquier desviación como un bug de producción, no un «sería bonito».
 
 ## Dónde encaja Bookassist
 

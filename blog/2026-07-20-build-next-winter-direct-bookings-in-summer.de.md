@@ -21,11 +21,17 @@ Die Hotels, die ihren Direktumsatz steigern, behandeln den Sommeransturm als Fen
 
 ## Drei Schritte, die Sie vor dem Ende des Ansturms gehen sollten
 
-**Erfassen Sie bei jedem Check-in eine verifizierte E-Mail-Adresse.** Eine OTA-Buchung gibt Ihnen eine maskierte Adresse, die in dem Moment verschwindet, in dem der Gast abreist. Ein kurzer Check-in-Schritt, der eine echte Kontakt-E-Mail bestätigt, eingebettet in den digitalen Schlüssel, den WLAN-Login oder die Buchungsbestätigung, verwandelt einen anonymen OTA-Gast in jemanden, den Sie über Jahre direkt erreichen können.
+### Erfassen Sie bei jedem Check-in eine verifizierte E-Mail-Adresse
 
-**Erfassen Sie eine Präferenz pro Gast.** Sie brauchen kein vollständiges Profil. Ein nützliches Feld, ein Zimmertyp, ein besonderer Anlass, eine Ernährungsnotiz, ein Anreisegrund, genügt, um die nächste Nachricht zu personalisieren. Ein Gast, der im August einen Hochzeitstag bei Ihnen gefeiert hat, ist im nächsten August eine nahezu sichere Direktbuchung, wenn Sie sich erinnern und auf ihn zugehen.
+Eine OTA-Buchung gibt Ihnen eine maskierte Adresse, die in dem Moment verschwindet, in dem der Gast abreist. Ein kurzer Check-in-Schritt, der eine echte Kontakt-E-Mail bestätigt, eingebettet in den digitalen Schlüssel, den WLAN-Login oder die Buchungsbestätigung, verwandelt einen anonymen OTA-Gast in jemanden, den Sie über Jahre direkt erreichen können.
 
-**Markieren Sie den Kanal, über den der Gast kam.** Zu wissen, welche Sommergäste über eine OTA kamen, sagt Ihnen genau, wen Sie für den Direktkanal gewinnen sollten. Das sind die Gäste, für die sich ein maßgeschneidertes Herbstangebot lohnt, denn sie einmal umzuwandeln nimmt eine Provision weg, die Sie sonst bei jedem künftigen Aufenthalt zahlen würden.
+### Erfassen Sie eine Präferenz pro Gast
+
+Sie brauchen kein vollständiges Profil. Ein nützliches Feld, ein Zimmertyp, ein besonderer Anlass, eine Ernährungsnotiz, ein Anreisegrund, genügt, um die nächste Nachricht zu personalisieren. Ein Gast, der im August einen Hochzeitstag bei Ihnen gefeiert hat, ist im nächsten August eine nahezu sichere Direktbuchung, wenn Sie sich erinnern und auf ihn zugehen.
+
+### Markieren Sie den Kanal, über den der Gast kam
+
+Zu wissen, welche Sommergäste über eine OTA kamen, sagt Ihnen genau, wen Sie für den Direktkanal gewinnen sollten. Das sind die Gäste, für die sich ein maßgeschneidertes Herbstangebot lohnt, denn sie einmal umzuwandeln nimmt eine Provision weg, die Sie sonst bei jedem künftigen Aufenthalt zahlen würden.
 
 ## Vom Sommeraufenthalt zur Winterbuchung
 

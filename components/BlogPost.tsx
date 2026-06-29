@@ -74,6 +74,7 @@ export const BlogPost: React.FC<BlogPostProps> = ({ slug, content, onBack, onSta
       <div className="prose prose-lg max-w-none
         prose-headings:font-black prose-headings:text-gray-900
         prose-h2:text-2xl prose-h2:mt-10 prose-h2:mb-4
+        prose-h3:text-xl prose-h3:mt-8 prose-h3:mb-3
         prose-p:text-gray-600 prose-p:leading-relaxed
         prose-strong:text-gray-900 prose-strong:font-black
         prose-li:text-gray-600

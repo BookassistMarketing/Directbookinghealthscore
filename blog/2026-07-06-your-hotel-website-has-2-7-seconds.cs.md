@@ -17,25 +17,41 @@ To má váhu, protože hotelové weby jsou neobvykle náročné na načtení. Ty
 
 Core Web Vitals od Google jsou tři čísla, která společně určují, zda je váš web „rychlý" podle standardu, který dnes uplatňují vyhledávače i cestující:
 
-**Largest Contentful Paint (LCP)** — jak dlouho trvá, než se vykreslí největší viditelný prvek (obvykle hero obrázek). Cíl: pod 2,5 sekundy.
+### Largest Contentful Paint (LCP)
 
-**Interaction to Next Paint (INP)** — jak responzivně stránka reaguje na klepnutí a kliknutí. Cíl: pod 200 milisekund.
+— jak dlouho trvá, než se vykreslí největší viditelný prvek (obvykle hero obrázek). Cíl: pod 2,5 sekundy.
 
-**Cumulative Layout Shift (CLS)** — jak moc stránka při načítání poskakuje (reklamy, bannery, opožděně přicházející obrázky). Cíl: pod 0,1.
+### Interaction to Next Paint (INP)
+
+— jak responzivně stránka reaguje na klepnutí a kliknutí. Cíl: pod 200 milisekund.
+
+### Cumulative Layout Shift (CLS)
+
+— jak moc stránka při načítání poskakuje (reklamy, bannery, opožděně přicházející obrázky). Cíl: pod 0,1.
 
 Nejsou to jen faktory řazení SEO (i když jimi jsou). Je to rozdíl mezi hostem, který dorazí k vašemu rezervačnímu engine, a hostem, který kartu zavře dřív, než vůbec uvidí vaše sazby.
 
 ## Kde hotelové weby tiše selhávají
 
-**Předimenzované hero obrázky.** JPEG o velikosti 4 MB lobby vypadá nádherně na monitoru Macu a katastroficky na 4G telefonu. Moderní hotelové weby servírují hero obrázek pod 250 KB ve formátu WebP nebo AVIF, s responzivními zdroji pro různé velikosti obrazovek. Většina hotelových webů stále servíruje stejný 4MB JPEG na každé zařízení.
+### Předimenzované hero obrázky
 
-**Skripty blokující vykreslení.** Rezervační enginy, chat widgety, tracking pixely, A/B testing nástroje — každý načtený synchronně zpomaluje LCP o stovky milisekund. Řešení je přímočaré (deferred nebo async načítání), ale vyžaduje disciplínu, která většině šablonovaných hotelových webů chybí.
+JPEG o velikosti 4 MB lobby vypadá nádherně na monitoru Macu a katastroficky na 4G telefonu. Moderní hotelové weby servírují hero obrázek pod 250 KB ve formátu WebP nebo AVIF, s responzivními zdroji pro různé velikosti obrazovek. Většina hotelových webů stále servíruje stejný 4MB JPEG na každé zařízení.
 
-**Cookie bannery blokující obsah.** Souhlasový dialog, který vytlačí hero obrázek mimo obrazovku do přijetí, přispívá jak k selhání LCP, tak k vysokému CLS. Moderní implementace renderuje banner jako overlay bez posunutí stránky pod ním.
+### Skripty blokující vykreslení
 
-**Iframy rezervačního engine.** Rezervační engine načtený jako iframe je samostatná stránka uvnitř vaší stránky, s vlastními skripty, fonty a sledováním. Bývá nejpomalejším prvkem hotelového webu. Moderní platformy přímých rezervací se renderují inline jako součást stejného DOM, sdílejí fonty a kompletně odstraňují penalizaci iframe.
+Rezervační enginy, chat widgety, tracking pixely, A/B testing nástroje — každý načtený synchronně zpomaluje LCP o stovky milisekund. Řešení je přímočaré (deferred nebo async načítání), ale vyžaduje disciplínu, která většině šablonovaných hotelových webů chybí.
 
-**Auto-play video heroes.** Tiché 8MB MP4 smyčkující za textem je jediný největší zabiják LCP na hotelových webech. Řešením bývá nahradit ho statickým obrázkem a interakcí „přehrát video".
+### Cookie bannery blokující obsah
+
+Souhlasový dialog, který vytlačí hero obrázek mimo obrazovku do přijetí, přispívá jak k selhání LCP, tak k vysokému CLS. Moderní implementace renderuje banner jako overlay bez posunutí stránky pod ním.
+
+### Iframy rezervačního engine
+
+Rezervační engine načtený jako iframe je samostatná stránka uvnitř vaší stránky, s vlastními skripty, fonty a sledováním. Bývá nejpomalejším prvkem hotelového webu. Moderní platformy přímých rezervací se renderují inline jako součást stejného DOM, sdílejí fonty a kompletně odstraňují penalizaci iframe.
+
+### Auto-play video heroes
+
+Tiché 8MB MP4 smyčkující za textem je jediný největší zabiják LCP na hotelových webech. Řešením bývá nahradit ho statickým obrázkem a interakcí „přehrát video".
 
 ## Jak vypadá zisková rychlost v roce 2026
 
@@ -57,15 +73,25 @@ Proto Core Web Vitals už není věc SEO. Je to věc marže přímé rezervace, 
 
 ## Co by hoteliéři měli udělat v tomto čtvrtletí
 
-**Nejprve měřte.** Proženete svůj web přes PageSpeed Insights a podívejte se na sekci „Field Data" — to je, co prožívají reální uživatelé, ne syntetický test. Pokud LCP přesahuje 3 sekundy, web přichází o rezervace.
+### Nejprve měřte
 
-**Auditujte své hero.** Pokud je hero homepage JPEG větší než 250 KB nebo auto-play video, je to jediná největší oprava.
+Proženete svůj web přes PageSpeed Insights a podívejte se na sekci „Field Data" — to je, co prožívají reální uživatelé, ne syntetický test. Pokud LCP přesahuje 3 sekundy, web přichází o rezervace.
 
-**Sepište si skripty.** Jakýkoli skript, který není rezervační engine, analytika nebo striktně nezbytný, by měl být odložen nebo odstraněn.
+### Auditujte své hero
 
-**Zkontrolujte integraci rezervačního engine.** Pokud se načítá jako iframe, platíte výraznou výkonovou daň. Moderní rezervační platformy se renderují inline.
+Pokud je hero homepage JPEG větší než 250 KB nebo auto-play video, je to jediná největší oprava.
 
-**Nastavte rozpočet.** Rozhodněte, jaký cíl mobilního LCP musí web zasáhnout, a každé jeho překročení považujte za produkční bug, ne za „bylo by hezké".
+### Sepište si skripty
+
+Jakýkoli skript, který není rezervační engine, analytika nebo striktně nezbytný, by měl být odložen nebo odstraněn.
+
+### Zkontrolujte integraci rezervačního engine
+
+Pokud se načítá jako iframe, platíte výraznou výkonovou daň. Moderní rezervační platformy se renderují inline.
+
+### Nastavte rozpočet
+
+Rozhodněte, jaký cíl mobilního LCP musí web zasáhnout, a každé jeho překročení považujte za produkční bug, ne za „bylo by hezké".
 
 ## Kde do toho Bookassist zapadá
 

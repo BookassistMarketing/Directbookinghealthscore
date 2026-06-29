@@ -19,11 +19,17 @@ Classic Google SEO rewards keyword density, backlinks, and freshness. Generative
 
 Three signals matter most:
 
-**1. Structured data depth.** AI assistants extract entities (your hotel's name, address, amenities, price range), relationships (which rooms belong to which property, what attractions are nearby), and intent matches (does this property suit a business traveller, a family, a couple). Hotels with thin schema markup don't surface in generative answers because the assistant can't construct a confident recommendation.
+### 1. Structured data depth
 
-**2. Conversational content coverage.** AI models look for question-style phrasing — *"how far is the property from the airport?"*, *"is breakfast included?"*, *"is parking available?"* — and prioritise sites that answer those questions in plain language. FAQPage schema is now a baseline expectation, not a bonus.
+AI assistants extract entities (your hotel's name, address, amenities, price range), relationships (which rooms belong to which property, what attractions are nearby), and intent matches (does this property suit a business traveller, a family, a couple). Hotels with thin schema markup don't surface in generative answers because the assistant can't construct a confident recommendation.
 
-**3. Entity linking.** A property page mentioning "near St. Stephen's Green" without explicitly linking that entity to a knowledge graph gives an AI assistant nothing to verify. Hotels with `@id` graph linking, GeoCoordinates, and sameAs references to Google Business Profile and TripAdvisor entries are dramatically more likely to be cited.
+### 2. Conversational content coverage
+
+AI models look for question-style phrasing — *"how far is the property from the airport?"*, *"is breakfast included?"*, *"is parking available?"* — and prioritise sites that answer those questions in plain language. FAQPage schema is now a baseline expectation, not a bonus.
+
+### 3. Entity linking
+
+A property page mentioning "near St. Stephen's Green" without explicitly linking that entity to a knowledge graph gives an AI assistant nothing to verify. Hotels with `@id` graph linking, GeoCoordinates, and sameAs references to Google Business Profile and TripAdvisor entries are dramatically more likely to be cited.
 
 ## The Hidden OTA Advantage in Generative Search
 
@@ -35,15 +41,25 @@ This is the new commission leak. Hotels that solved Metasearch parity five years
 
 The fix isn't a rebuild — it's a deliberate sequence of structural additions to the site you already have.
 
-**Add FAQPage schema with at least eight entries.** Cover the questions every guest asks before booking: location, breakfast, parking, check-in time, family policy, accessibility, cancellation, deposit. Each entry should be a real question and a real answer in plain prose, marked up with `Question` and `Answer` schema.
+### Add FAQPage schema with at least eight entries
 
-**Strengthen your Hotel and LocalBusiness entity.** Ensure Name, Address, Phone, GeoCoordinates, and AggregateRating are populated and consistent across your direct site, Google Business Profile, and major directories. AI assistants cross-check these — discrepancies erode confidence in the recommendation.
+Cover the questions every guest asks before booking: location, breakfast, parking, check-in time, family policy, accessibility, cancellation, deposit. Each entry should be a real question and a real answer in plain prose, marked up with `Question` and `Answer` schema.
 
-**Add nearby attraction references in schema and copy.** *"Five minutes from St. Stephen's Green"* written in copy is good. The same statement linked to a structured `TouristAttraction` entity with `@id` references is what AI assistants actually parse to verify a local recommendation.
+### Strengthen your Hotel and LocalBusiness entity
 
-**Add SpeakableSpecification to your top three landing pages.** Voice assistants — increasingly handling travel queries — skip pages without this. The cost to add is small; the visibility cost of not having it is growing fast.
+Ensure Name, Address, Phone, GeoCoordinates, and AggregateRating are populated and consistent across your direct site, Google Business Profile, and major directories. AI assistants cross-check these — discrepancies erode confidence in the recommendation.
 
-**Create persona-targeted content blocks.** *"For Business Travellers"*, *"For Families"*, *"For Couples"* — each with two or three paragraphs of intent-specific content. AI assistants match recommendations to traveller intent, and properties without intent signals get filtered out before they're ever considered.
+### Add nearby attraction references in schema and copy
+
+*"Five minutes from St. Stephen's Green"* written in copy is good. The same statement linked to a structured `TouristAttraction` entity with `@id` references is what AI assistants actually parse to verify a local recommendation.
+
+### Add SpeakableSpecification to your top three landing pages
+
+Voice assistants — increasingly handling travel queries — skip pages without this. The cost to add is small; the visibility cost of not having it is growing fast.
+
+### Create persona-targeted content blocks
+
+*"For Business Travellers"*, *"For Families"*, *"For Couples"* — each with two or three paragraphs of intent-specific content. AI assistants match recommendations to traveller intent, and properties without intent signals get filtered out before they're ever considered.
 
 ## The 90-Day Window
 

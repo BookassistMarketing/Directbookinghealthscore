@@ -21,23 +21,37 @@ Die Ökonomie ist unvergleichbar. Branchendaten zeigen, dass First-Party-E-Mail-
 
 ## Die drei Ebenen von First-Party-Daten im Hotel
 
-**Identitätsdaten.** E-Mail, Telefon, Adresse — das, was ein Gast Ihnen beim Buchen gibt. Das ist der Boden. Die meisten Hotels erheben das, weil sie müssen. Wenige nutzen es strategisch, wenn der Gast wieder weg ist.
+### Identitätsdaten
 
-**Verhaltensdaten.** Buchungshistorie, Zimmerpräferenz, Aufenthaltsdauer, Wochentagsmuster, Herkunftskanal, Ausgaben pro Aufenthalt. Das macht aus Identität Segmentierung. Ein Gast, der zweimal sonntags für ein Freitag-Abend gebucht hat, ist ein klarer Retargeting-Kandidat am Sonntag vor seiner wahrscheinlich nächsten Reise.
+E-Mail, Telefon, Adresse — das, was ein Gast Ihnen beim Buchen gibt. Das ist der Boden. Die meisten Hotels erheben das, weil sie müssen. Wenige nutzen es strategisch, wenn der Gast wieder weg ist.
 
-**Präferenzdaten.** Erklärte Präferenzen — Kissenart, Frühstückszeit, Barrierefreiheits-Bedürfnisse, besondere Anlässe. Bei der Buchung, beim Check-in oder per Post-Stay-Umfrage erhoben. Das ist, was eine Hotelbeziehung persönlich statt transaktional anfühlen lässt. Es hat zudem eine bemerkenswerte Retention-Wirkung: Gäste, deren Präferenzen erinnert werden, buchen 3× häufiger erneut direkt.
+### Verhaltensdaten
+
+Buchungshistorie, Zimmerpräferenz, Aufenthaltsdauer, Wochentagsmuster, Herkunftskanal, Ausgaben pro Aufenthalt. Das macht aus Identität Segmentierung. Ein Gast, der zweimal sonntags für ein Freitag-Abend gebucht hat, ist ein klarer Retargeting-Kandidat am Sonntag vor seiner wahrscheinlich nächsten Reise.
+
+### Präferenzdaten
+
+Erklärte Präferenzen — Kissenart, Frühstückszeit, Barrierefreiheits-Bedürfnisse, besondere Anlässe. Bei der Buchung, beim Check-in oder per Post-Stay-Umfrage erhoben. Das ist, was eine Hotelbeziehung persönlich statt transaktional anfühlen lässt. Es hat zudem eine bemerkenswerte Retention-Wirkung: Gäste, deren Präferenzen erinnert werden, buchen 3× häufiger erneut direkt.
 
 Ein Hotel, das eine kohärente First-Party-Strategie fährt, nutzt alle drei Ebenen zusammen — Identität zum Erreichen, Verhalten fürs Timing, Präferenz fürs Personalisieren.
 
 ## Was den meisten Hotels fehlt
 
-**Ein vereinheitlichter Gastdatensatz.** Buchungsmaschine, PMS, Restaurant-POS, Loyalty-System und E-Mail-Plattform halten typischerweise Teilprofile in unterschiedlichen Formaten. Ein Gast, der direkt gebucht, im Restaurant gegessen und für einen Spa-Termin angerufen hat, existiert als drei getrennte Datensätze in drei verschiedenen Systemen — und Ihr Marketingteam sieht nur die Buchung. Vereinheitlichung ist das Fundament des First-Party-Werts und die häufigste einzelne Lücke.
+### Ein vereinheitlichter Gastdatensatz
 
-**Einwilligung, die Nutzung tatsächlich erlaubt.** Viele Hotels erheben E-Mail-Adressen ohne klare Marketing-Einwilligung — das heißt, sie dürfen rechtlich keine Promo-Mails schicken. DSGVO und ähnliche Regulierungen verlangen explizites Opt-in für Marketing. Die Korrektur liegt im Buchungsflow: eine klare, gut platzierte Einwilligungs-Checkbox mit benannter Gegenleistung.
+Buchungsmaschine, PMS, Restaurant-POS, Loyalty-System und E-Mail-Plattform halten typischerweise Teilprofile in unterschiedlichen Formaten. Ein Gast, der direkt gebucht, im Restaurant gegessen und für einen Spa-Termin angerufen hat, existiert als drei getrennte Datensätze in drei verschiedenen Systemen — und Ihr Marketingteam sieht nur die Buchung. Vereinheitlichung ist das Fundament des First-Party-Werts und die häufigste einzelne Lücke.
 
-**Verhaltens-Trigger, die niemand implementiert hat.** Die am besten konvertierende E-Mail in der Hotelbranche ist die Reaktivierung „uns ist aufgefallen, dass Sie seit 14 Monaten nicht gebucht haben". Die zweite ist der Pre-Stay-Upsell, der 7 Tage vor Anreise gesendet wird. Die meisten Hotels haben weder das eine noch das andere konfiguriert.
+### Einwilligung, die Nutzung tatsächlich erlaubt
 
-**Keine Messschleife.** First-Party-Programme, die keinen ROI zeigen, scheitern fast immer am selben Schritt: der Attribution. Die Buchung, die aus der Sonntagabend-E-Mail kam, ist im Kampagnenreport unsichtbar, wenn die Plattform den E-Mail-Klick nicht mit der Buchung zusammenfügt. Ohne das kann Marketing das Budget nicht verteidigen, und das Programm verkümmert.
+Viele Hotels erheben E-Mail-Adressen ohne klare Marketing-Einwilligung — das heißt, sie dürfen rechtlich keine Promo-Mails schicken. DSGVO und ähnliche Regulierungen verlangen explizites Opt-in für Marketing. Die Korrektur liegt im Buchungsflow: eine klare, gut platzierte Einwilligungs-Checkbox mit benannter Gegenleistung.
+
+### Verhaltens-Trigger, die niemand implementiert hat
+
+Die am besten konvertierende E-Mail in der Hotelbranche ist die Reaktivierung „uns ist aufgefallen, dass Sie seit 14 Monaten nicht gebucht haben". Die zweite ist der Pre-Stay-Upsell, der 7 Tage vor Anreise gesendet wird. Die meisten Hotels haben weder das eine noch das andere konfiguriert.
+
+### Keine Messschleife
+
+First-Party-Programme, die keinen ROI zeigen, scheitern fast immer am selben Schritt: der Attribution. Die Buchung, die aus der Sonntagabend-E-Mail kam, ist im Kampagnenreport unsichtbar, wenn die Plattform den E-Mail-Klick nicht mit der Buchung zusammenfügt. Ohne das kann Marketing das Budget nicht verteidigen, und das Programm verkümmert.
 
 ## Was ein First-Party-Programm in 12 Monaten einbringt
 
@@ -52,13 +66,21 @@ Das sind keine Wunschzahlen. Sie sind typisch für Häuser, die die technische A
 
 ## Wo anfangen
 
-**Auditieren Sie Ihren Gastdatensatz.** Wie viele Systeme halten Gastprofile? Kann Ihr Marketingteam das vollständige Bild eines einzelnen Gastes an einer Stelle sehen? Wenn nicht, ist das die erste Lücke.
+### Auditieren Sie Ihren Gastdatensatz
 
-**Auditieren Sie Ihre Einwilligung.** Holen Sie sich den Einwilligungs-Text aus Ihrem Buchungsflow. Erlaubt er klar Marketing? Sagt er, was der Gast erhalten wird? Würde ein Gast, der ihn heute liest, sich aktiv eintragen?
+Wie viele Systeme halten Gastprofile? Kann Ihr Marketingteam das vollständige Bild eines einzelnen Gastes an einer Stelle sehen? Wenn nicht, ist das die erste Lücke.
 
-**Auditieren Sie Ihre Trigger-Liste.** Haben Sie eine Post-Stay-Umfrage? Einen Pre-Arrival-Upsell? Eine 12-Monats-Reaktivierung? Eine Jubiläumsnachricht? Jeder fehlende Trigger ist Direktumsatz, den Sie im OTA-Pool zurücklassen.
+### Auditieren Sie Ihre Einwilligung
 
-**Verkabeln Sie die Attribution.** Welche E-Mail- oder CRM-Plattform Sie auch nutzen — sie sollte E-Mail-Klicks mit Buchungen verknüpfen können. Wenn nicht, fahren Sie ein Programm, das Sie nicht messen können — und ungemessenes Marketing wird irgendwann gekürzt.
+Holen Sie sich den Einwilligungs-Text aus Ihrem Buchungsflow. Erlaubt er klar Marketing? Sagt er, was der Gast erhalten wird? Würde ein Gast, der ihn heute liest, sich aktiv eintragen?
+
+### Auditieren Sie Ihre Trigger-Liste
+
+Haben Sie eine Post-Stay-Umfrage? Einen Pre-Arrival-Upsell? Eine 12-Monats-Reaktivierung? Eine Jubiläumsnachricht? Jeder fehlende Trigger ist Direktumsatz, den Sie im OTA-Pool zurücklassen.
+
+### Verkabeln Sie die Attribution
+
+Welche E-Mail- oder CRM-Plattform Sie auch nutzen — sie sollte E-Mail-Klicks mit Buchungen verknüpfen können. Wenn nicht, fahren Sie ein Programm, das Sie nicht messen können — und ungemessenes Marketing wird irgendwann gekürzt.
 
 ## Wo Bookassist hineinpasst
 

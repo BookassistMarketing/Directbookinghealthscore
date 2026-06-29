@@ -21,11 +21,17 @@ Les hôtels qui font croître leur revenu direct traitent la ruée estivale comm
 
 ## Trois actions à mener avant la fin de la ruée
 
-**Captez un email vérifié à l'arrivée, à chaque fois.** Une réservation OTA vous donne une adresse masquée qui disparaît dès que le client part. Une courte étape à l'arrivée qui confirme un email de contact réel, articulée autour de la clé digitale, de la connexion wifi ou de la confirmation de réservation, transforme un client OTA anonyme en quelqu'un que vous pouvez joindre directement pendant des années.
+### Captez un email vérifié à l'arrivée, à chaque fois
 
-**Notez une préférence par client.** Vous n'avez pas besoin d'un profil complet. Un seul champ utile, un type de chambre, une occasion spéciale, une note alimentaire, un motif d'arrivée, suffit à personnaliser le prochain message. Un client qui a célébré un anniversaire chez vous en août est une réservation directe quasi certaine en août prochain si vous vous en souvenez et le sollicitez.
+Une réservation OTA vous donne une adresse masquée qui disparaît dès que le client part. Une courte étape à l'arrivée qui confirme un email de contact réel, articulée autour de la clé digitale, de la connexion wifi ou de la confirmation de réservation, transforme un client OTA anonyme en quelqu'un que vous pouvez joindre directement pendant des années.
 
-**Étiquetez le canal par lequel il est arrivé.** Savoir quels clients estivaux sont venus via une OTA vous dit exactement qui convertir au direct. Ce sont les clients qui méritent une offre d'automne sur mesure, car les convertir une fois supprime une commission que vous paieriez sinon sur chaque séjour futur.
+### Notez une préférence par client
+
+Vous n'avez pas besoin d'un profil complet. Un seul champ utile, un type de chambre, une occasion spéciale, une note alimentaire, un motif d'arrivée, suffit à personnaliser le prochain message. Un client qui a célébré un anniversaire chez vous en août est une réservation directe quasi certaine en août prochain si vous vous en souvenez et le sollicitez.
+
+### Étiquetez le canal par lequel il est arrivé
+
+Savoir quels clients estivaux sont venus via une OTA vous dit exactement qui convertir au direct. Ce sont les clients qui méritent une offre d'automne sur mesure, car les convertir une fois supprime une commission que vous paieriez sinon sur chaque séjour futur.
 
 ## Du séjour d'été à la réservation d'hiver
 

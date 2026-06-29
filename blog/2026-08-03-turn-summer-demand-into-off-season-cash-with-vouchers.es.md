@@ -21,11 +21,17 @@ Hay una segunda ventaja silenciosa. Una parte significativa de los vales no se c
 
 ## Los tres públicos que compran en verano
 
-**El huésped actual.** Alguien que está disfrutando su estancia ahora mismo está predispuesto a comprar una visita de retorno o a regalarla. Un simple recordatorio en el check out, o una tarjeta con buen gusto en la habitación, convierte un momento feliz en una reserva futura.
+### El huésped actual
 
-**El comprador de regalos.** Los vales son un regalo natural para cumpleaños, aniversarios, bodas y la temporada festiva que viene. Un huésped que adoró su estancia de verano es un prescriptor ideal para comprar tu hotel como regalo para amigos y familia, presentándote a personas que nunca se han alojado antes.
+Alguien que está disfrutando su estancia ahora mismo está predispuesto a comprar una visita de retorno o a regalarla. Un simple recordatorio en el check out, o una tarjeta con buen gusto en la habitación, convierte un momento feliz en una reserva futura.
 
-**El huésped inactivo.** Una campaña de vales a finales de verano dirigida a huéspedes pasados, planteada en torno a un capricho para los meses más oscuros, reactiva relaciones que de otro modo se enfriarían hasta el año que viene.
+### El comprador de regalos
+
+Los vales son un regalo natural para cumpleaños, aniversarios, bodas y la temporada festiva que viene. Un huésped que adoró su estancia de verano es un prescriptor ideal para comprar tu hotel como regalo para amigos y familia, presentándote a personas que nunca se han alojado antes.
+
+### El huésped inactivo
+
+Una campaña de vales a finales de verano dirigida a huéspedes pasados, planteada en torno a un capricho para los meses más oscuros, reactiva relaciones que de otro modo se enfriarían hasta el año que viene.
 
 ## Hacer que funcione en la práctica
 

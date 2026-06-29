@@ -19,11 +19,17 @@ Większość hoteli wchodzi w zależność od OTA stopniowo. Nowy obiekt rejestr
 
 Trzy luki technologiczne przyspieszają ten proces:
 
-**1. Słaby lub nieistniejący silnik rezerwacyjny.** Jeśli Twój bezpośredni silnik rezerwacyjny jest wolny, źle zaprojektowany lub nie pokazuje konkurencyjnych cen, goście go porzucą i zarezerwują na OTA. Badania konsekwentnie pokazują, że silniki rezerwacyjne z więcej niż trzema krokami tracą ponad 40% użytkowników.
+### 1. Słaby lub nieistniejący silnik rezerwacyjny
 
-**2. Brak monitorowania parytetu cen.** OTA okazjonalnie zaniżają Twoją cenę bezpośrednią poprzez programy rabatowe lub nieprzejrzyste ceny. Gdy goście znajdą tańszą cenę na Booking.com niż na Twojej stronie, trwale tracisz tę bezpośrednią relację rezerwacyjną.
+Jeśli Twój bezpośredni silnik rezerwacyjny jest wolny, źle zaprojektowany lub nie pokazuje konkurencyjnych cen, goście go porzucą i zarezerwują na OTA. Badania konsekwentnie pokazują, że silniki rezerwacyjne z więcej niż trzema krokami tracą ponad 40% użytkowników.
 
-**3. Brak CRM lub systemu retencji gości.** Gość, który rezerwuje przez OTA, jest klientem OTA, nie Twoim. Nie otrzymujesz adresu e-mail, danych preferencji, niczego, na czym można zbudować relację. Bez CRM zbierającego dane bezpośrednich rezerwujących, nie możesz prowadzić kampanii lojalnościowych, upsellingu przed przyjazdem ani ofert powrotnych.
+### 2. Brak monitorowania parytetu cen
+
+OTA okazjonalnie zaniżają Twoją cenę bezpośrednią poprzez programy rabatowe lub nieprzejrzyste ceny. Gdy goście znajdą tańszą cenę na Booking.com niż na Twojej stronie, trwale tracisz tę bezpośrednią relację rezerwacyjną.
+
+### 3. Brak CRM lub systemu retencji gości
+
+Gość, który rezerwuje przez OTA, jest klientem OTA, nie Twoim. Nie otrzymujesz adresu e-mail, danych preferencji, niczego, na czym można zbudować relację. Bez CRM zbierającego dane bezpośrednich rezerwujących, nie możesz prowadzić kampanii lojalnościowych, upsellingu przed przyjazdem ani ofert powrotnych.
 
 ## Rzeczywisty Koszt w Skali 12 Miesięcy
 
@@ -33,13 +39,21 @@ Rozważmy hotel 40-pokojowy ze średnim obłożeniem 70% i średnią ceną dzien
 
 Najskuteczniejszym punktem startu nie jest płatna reklama ani wojny cenowe — lecz naprawa infrastruktury technologicznej, która sprawia, że rezerwacja bezpośrednia jest mniej atrakcyjna, niż powinna być.
 
-**Przeprowadź audyt silnika rezerwacyjnego.** Zmierz czas procesu checkoutu od początku do końca. Jeśli zajmuje więcej niż dwie minuty lub wymaga więcej niż czterech kliknięć, tracisz rezerwacje.
+### Przeprowadź audyt silnika rezerwacyjnego
 
-**Sprawdź swój profil Google Business.** Upewnij się, że Twój link do rezerwacji bezpośrednich pojawia się w widocznym miejscu, a Twoje ceny dorównują lub są lepsze niż OTA pokazywane w wynikach Google Hotel Ads.
+Zmierz czas procesu checkoutu od początku do końca. Jeśli zajmuje więcej niż dwie minuty lub wymaga więcej niż czterech kliknięć, tracisz rezerwacje.
 
-**Wdróż sekwencję e-maili po pobycie.** Nawet prosty trzyetapowy przepływ — podziękowanie, prośba o opinię, oferta powrotu — może odzyskać 8–12% gości, którzy w przeciwnym razie zarezerwowaliby następny pobyt przez OTA.
+### Sprawdź swój profil Google Business
 
-**Wykorzystaj metawyszukiwarki, by konkurować własną ceną.** Platformy takie jak Google Hotel Ads i Trivago pozwalają wyświetlać Twoją cenę bezpośrednią obok cen OTA. Hotele inwestujące choćby 500 € miesięcznie w metawyszukiwarki osiągają typowo zwrot 3:1 z wydatków reklamowych dzięki rezerwacjom bezpośrednim.
+Upewnij się, że Twój link do rezerwacji bezpośrednich pojawia się w widocznym miejscu, a Twoje ceny dorównują lub są lepsze niż OTA pokazywane w wynikach Google Hotel Ads.
+
+### Wdróż sekwencję e-maili po pobycie
+
+Nawet prosty trzyetapowy przepływ — podziękowanie, prośba o opinię, oferta powrotu — może odzyskać 8–12% gości, którzy w przeciwnym razie zarezerwowaliby następny pobyt przez OTA.
+
+### Wykorzystaj metawyszukiwarki, by konkurować własną ceną
+
+Platformy takie jak Google Hotel Ads i Trivago pozwalają wyświetlać Twoją cenę bezpośrednią obok cen OTA. Hotele inwestujące choćby 500 € miesięcznie w metawyszukiwarki osiągają typowo zwrot 3:1 z wydatków reklamowych dzięki rezerwacjom bezpośrednim.
 
 ## Efekt Kumulacji po Zamknięciu Luk
 

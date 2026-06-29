@@ -15,11 +15,17 @@ A hotel can run at 95 per cent occupancy and still leave a large share of its po
 
 ## The Three Leaks That Hide Behind High Demand
 
-**Leak one: OTA commission on demand you already owned.** In peak season, a meaningful portion of OTA bookings are guests who would have booked you directly anyway. They searched for your hotel by name, saw the OTA listing first, and clicked it out of habit. You filled the room, but you paid 15 per cent to 25 per cent commission on a guest who was already yours. High demand makes this painless to ignore, because the room sold regardless.
+### Leak one: OTA commission on demand you already owned
 
-**Leak two: rate parity slipping when you are not watching.** During the busy months, attention goes to operations, not rate monitoring. This is exactly when an OTA discount programme or an opaque package rate can undercut your direct price. A guest who finds a cheaper rate on Booking.com than on your own site has just learned to never book you directly again. One slipped rate in July can cost you direct bookings for years.
+In peak season, a meaningful portion of OTA bookings are guests who would have booked you directly anyway. They searched for your hotel by name, saw the OTA listing first, and clicked it out of habit. You filled the room, but you paid 15 per cent to 25 per cent commission on a guest who was already yours. High demand makes this painless to ignore, because the room sold regardless.
 
-**Leak three: a booking engine that converts worse under pressure.** Summer traffic is higher, but if your booking engine is slow, clunky or buried below OTA links on your own pages, the extra visitors convert at a lower rate and spill over to the OTA. The room still sells. It just sells through the most expensive channel available.
+### Leak two: rate parity slipping when you are not watching
+
+During the busy months, attention goes to operations, not rate monitoring. This is exactly when an OTA discount programme or an opaque package rate can undercut your direct price. A guest who finds a cheaper rate on Booking.com than on your own site has just learned to never book you directly again. One slipped rate in July can cost you direct bookings for years.
+
+### Leak three: a booking engine that converts worse under pressure
+
+Summer traffic is higher, but if your booking engine is slow, clunky or buried below OTA links on your own pages, the extra visitors convert at a lower rate and spill over to the OTA. The room still sells. It just sells through the most expensive channel available.
 
 ## What Peak Season Costs in Real Terms
 

@@ -17,31 +17,51 @@ Der Haken: Diese Verschiebung konvertiert nur, wenn die direkte Buchungsfläche 
 
 Ein Reisender, der von einer OTA kommt, bringt drei implizite Erwartungen mit:
 
-**1. Gleicher oder besserer Preis.** Ratenparität ist die Eintrittskarte. Wenn Ihre Direktseite dasselbe Zimmer zu einem höheren Preis listet als die soeben angesehene OTA, geht die Buchung zurück zur OTA — inklusive voller Provision. Hotels, die 2026 noch mit der Parität ringen, subventionieren still die OTA-Aktionäre.
+### 1. Gleicher oder besserer Preis
 
-**2. Bessere Bedingungen.** Kostenfreie Stornierung, flexible Terminänderungen, niedrigere Anzahlungen, Zimmertyp-Garantie — so verdient sich Direkt seinen Vorsprung. Der Reisende weiß bereits, was die OTA bietet. Direkt muss in mindestens einer Dimension sichtbar besser sein.
+Ratenparität ist die Eintrittskarte. Wenn Ihre Direktseite dasselbe Zimmer zu einem höheren Preis listet als die soeben angesehene OTA, geht die Buchung zurück zur OTA — inklusive voller Provision. Hotels, die 2026 noch mit der Parität ringen, subventionieren still die OTA-Aktionäre.
 
-**3. Ein schnelleres Buchungserlebnis.** OTAs haben ein Jahrzehnt damit verbracht, ihren Checkout zu schonungsloser Effizienz zu trimmen. Wenn Ihre direkte Buchungsmaschine noch mehr als drei Schritte braucht, mitten im Flow ein Passwort-Reset verlangt oder Steuern bis zum letzten Bildschirm verbirgt, kehrt der Reisende zu dem Kanal zurück, der funktioniert hat.
+### 2. Bessere Bedingungen
+
+Kostenfreie Stornierung, flexible Terminänderungen, niedrigere Anzahlungen, Zimmertyp-Garantie — so verdient sich Direkt seinen Vorsprung. Der Reisende weiß bereits, was die OTA bietet. Direkt muss in mindestens einer Dimension sichtbar besser sein.
+
+### 3. Ein schnelleres Buchungserlebnis
+
+OTAs haben ein Jahrzehnt damit verbracht, ihren Checkout zu schonungsloser Effizienz zu trimmen. Wenn Ihre direkte Buchungsmaschine noch mehr als drei Schritte braucht, mitten im Flow ein Passwort-Reset verlangt oder Steuern bis zum letzten Bildschirm verbirgt, kehrt der Reisende zu dem Kanal zurück, der funktioniert hat.
 
 ## Drei Technologielücken, die die Wende verlieren
 
-**Langsames Mobile.** Mehr als 60 % der Hotelsuchen finden inzwischen mobil statt, und Googles Daten zeigen: Die durchschnittliche mobile Seite, die länger als drei Sekunden lädt, verliert 53 % der Besuche. Ihre Buchungsmaschine und Ihre wichtigsten Landingpages müssen in unter 2,5 Sekunden auf einem Mittelklasse-Smartphone über 4G laden — gemessen am Median, nicht am Bestfall.
+### Langsames Mobile
 
-**Buchungsabbruch ohne Recovery.** Ein Gast, der Ihre Buchungsmaschine erreicht und nicht abschließt, ist der wertvollste Besucher Ihrer Seite im ganzen Monat. Die Absicht war eindeutig. Die meisten Hotels erfassen aus diesem Besuch nichts — keine E-Mail, keine Abandoned-Cart-Sequenz, kein zielgerichtetes Retargeting. OTAs erfassen jedes dieser Signale stellvertretend für Sie und verkaufen Ihnen diesen Reisenden anschließend gegen Provision zurück.
+Mehr als 60 % der Hotelsuchen finden inzwischen mobil statt, und Googles Daten zeigen: Die durchschnittliche mobile Seite, die länger als drei Sekunden lädt, verliert 53 % der Besuche. Ihre Buchungsmaschine und Ihre wichtigsten Landingpages müssen in unter 2,5 Sekunden auf einem Mittelklasse-Smartphone über 4G laden — gemessen am Median, nicht am Bestfall.
 
-**Keine Zimmer-Differenzierung auf der Buchungsseite.** Wenn OTAs Ihr Haus listen, zeigen sie jeden Zimmertyp mit Fotos, Ausstattung und Preis. Wenn Ihre direkte Buchungsmaschine dieselbe Auswahl als flache Liste aus Namen und Preisen darstellt, sieht der Reisende nicht, warum er 30 € mehr für die Junior Suite zahlen sollte als für das Standardzimmer. Differenzierung ist das, was den Preisvorteil von Direkt gegenüber der Parität rechtfertigt.
+### Buchungsabbruch ohne Recovery
+
+Ein Gast, der Ihre Buchungsmaschine erreicht und nicht abschließt, ist der wertvollste Besucher Ihrer Seite im ganzen Monat. Die Absicht war eindeutig. Die meisten Hotels erfassen aus diesem Besuch nichts — keine E-Mail, keine Abandoned-Cart-Sequenz, kein zielgerichtetes Retargeting. OTAs erfassen jedes dieser Signale stellvertretend für Sie und verkaufen Ihnen diesen Reisenden anschließend gegen Provision zurück.
+
+### Keine Zimmer-Differenzierung auf der Buchungsseite
+
+Wenn OTAs Ihr Haus listen, zeigen sie jeden Zimmertyp mit Fotos, Ausstattung und Preis. Wenn Ihre direkte Buchungsmaschine dieselbe Auswahl als flache Liste aus Namen und Preisen darstellt, sieht der Reisende nicht, warum er 30 € mehr für die Junior Suite zahlen sollte als für das Standardzimmer. Differenzierung ist das, was den Preisvorteil von Direkt gegenüber der Parität rechtfertigt.
 
 ## Was Sie diesen Quartal auf Ihrer direkten Buchungsfläche prüfen sollten
 
 Gehen Sie Ihren eigenen Buchungsflow durch wie ein Gast — auf dem Mobilgerät, idealerweise über eine langsame Verbindung. Stoppen Sie jeden Schritt.
 
-**Suche bis Bestätigung unter 90 Sekunden.** Alles darüber: Sie verlieren OTA-trainierte Reisende an jedem zusätzlichen Reibungspunkt.
+### Suche bis Bestätigung unter 90 Sekunden
 
-**Jede Rate sollte ihre Inklusivleistungen klar erklären.** „Member-Rate" oder „Bestverfügbar" ohne Kontext verwirrt Gäste, die mit OTA-Preisen vergleichen, die sie bereits verstehen.
+Alles darüber: Sie verlieren OTA-trainierte Reisende an jedem zusätzlichen Reibungspunkt.
 
-**Buchungsmaschine und Website sollten sich wie ein einziges Produkt anfühlen.** Wenn ein Klick auf „Jetzt buchen" eine Drittanbieter-Buchungsmaschine mit anderer Schrift, anderen Farben und anderem Cart-Flow startet, bricht das Vertrauenssignal im Moment der Konversion. Moderne direkte Buchungsplattformen erscheinen innerhalb Ihrer Domain und visuellen Identität.
+### Jede Rate sollte ihre Inklusivleistungen klar erklären
 
-**Die Bestätigung nach der Buchung sollte innerhalb von 30 Sekunden eintreffen.** Verspätete oder Standard-Vorlagen-Bestätigungen säen Zweifel daran, ob die Buchung erfolgreich war — und Zweifel schicken Gäste zur OTA zurück, wo sie zumindest wissen, dass die Buchung existiert.
+„Member-Rate" oder „Bestverfügbar" ohne Kontext verwirrt Gäste, die mit OTA-Preisen vergleichen, die sie bereits verstehen.
+
+### Buchungsmaschine und Website sollten sich wie ein einziges Produkt anfühlen
+
+Wenn ein Klick auf „Jetzt buchen" eine Drittanbieter-Buchungsmaschine mit anderer Schrift, anderen Farben und anderem Cart-Flow startet, bricht das Vertrauenssignal im Moment der Konversion. Moderne direkte Buchungsplattformen erscheinen innerhalb Ihrer Domain und visuellen Identität.
+
+### Die Bestätigung nach der Buchung sollte innerhalb von 30 Sekunden eintreffen
+
+Verspätete oder Standard-Vorlagen-Bestätigungen säen Zweifel daran, ob die Buchung erfolgreich war — und Zweifel schicken Gäste zur OTA zurück, wo sie zumindest wissen, dass die Buchung existiert.
 
 ## Die Wende zu erfassen, wirkt Jahr für Jahr zusammen
 

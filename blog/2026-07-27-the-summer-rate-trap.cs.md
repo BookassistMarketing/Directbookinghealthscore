@@ -15,11 +15,17 @@ Hotel může jet na 95% obsazenosti a stejně nechat velký podíl svého potenc
 
 ## Tři úniky, které se skrývají za vysokou poptávkou
 
-**Únik první: provize OTA z poptávky, kterou jste už vlastnili.** Ve špičkové sezóně je významná část rezervací přes OTA tvořena hosty, kteří by si u vás zarezervovali přímo tak jako tak. Hledali váš hotel podle jména, jako první uviděli listing OTA a klikli na něj ze zvyku. Pokoj jste naplnili, ale zaplatili jste 15 % až 25 % provize z hosta, který už byl váš. Vysoká poptávka umožňuje tohle bezbolestně přehlížet, protože pokoj se prodal tak jako tak.
+### Únik první: provize OTA z poptávky, kterou jste už vlastnili
 
-**Únik druhý: cenová parita, která se uvolní, když se nedíváte.** Během rušných měsíců míří pozornost na provoz, ne na hlídání sazeb. To je přesně chvíle, kdy slevový program OTA nebo neprůhledná sazba balíčku může podříznout vaši přímou cenu. Host, který najde levnější sazbu na Booking.com než na vašich vlastních stránkách, se právě naučil už si u vás nikdy nerezervovat přímo. Jedna uvolněná sazba v červenci vás může stát přímé rezervace na celé roky.
+Ve špičkové sezóně je významná část rezervací přes OTA tvořena hosty, kteří by si u vás zarezervovali přímo tak jako tak. Hledali váš hotel podle jména, jako první uviděli listing OTA a klikli na něj ze zvyku. Pokoj jste naplnili, ale zaplatili jste 15 % až 25 % provize z hosta, který už byl váš. Vysoká poptávka umožňuje tohle bezbolestně přehlížet, protože pokoj se prodal tak jako tak.
 
-**Únik třetí: rezervační engine, který pod tlakem konvertuje hůř.** Letní provoz je vyšší, ale pokud je váš rezervační engine pomalý, neohrabaný nebo zahrabaný pod odkazy na OTA na vašich vlastních stránkách, návštěvníci navíc konvertují nižší mírou a přelévají se k OTA. Pokoj se stejně prodá. Prodá se jen přes ten nejdražší dostupný kanál.
+### Únik druhý: cenová parita, která se uvolní, když se nedíváte
+
+Během rušných měsíců míří pozornost na provoz, ne na hlídání sazeb. To je přesně chvíle, kdy slevový program OTA nebo neprůhledná sazba balíčku může podříznout vaši přímou cenu. Host, který najde levnější sazbu na Booking.com než na vašich vlastních stránkách, se právě naučil už si u vás nikdy nerezervovat přímo. Jedna uvolněná sazba v červenci vás může stát přímé rezervace na celé roky.
+
+### Únik třetí: rezervační engine, který pod tlakem konvertuje hůř
+
+Letní provoz je vyšší, ale pokud je váš rezervační engine pomalý, neohrabaný nebo zahrabaný pod odkazy na OTA na vašich vlastních stránkách, návštěvníci navíc konvertují nižší mírou a přelévají se k OTA. Pokoj se stejně prodá. Prodá se jen přes ten nejdražší dostupný kanál.
 
 ## Co špičková sezóna stojí ve skutečných číslech
 

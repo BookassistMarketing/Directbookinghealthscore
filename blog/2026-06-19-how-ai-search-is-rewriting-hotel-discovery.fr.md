@@ -19,11 +19,17 @@ Le SEO Google classique récompense la densité de mots-clés, les backlinks et 
 
 Trois signaux comptent par-dessus tout :
 
-**1. Profondeur des données structurées.** Les assistants IA extraient des entités (nom de votre hôtel, adresse, équipements, fourchette de prix), des relations (quelles chambres appartiennent à quel établissement, quelles attractions se trouvent à proximité) et des correspondances d'intention (cet établissement convient-il à un voyageur d'affaires, à une famille, à un couple). Les hôtels au balisage schema appauvri n'apparaissent pas dans les réponses génératives car l'assistant ne peut pas construire une recommandation fiable.
+### 1. Profondeur des données structurées
 
-**2. Couverture conversationnelle du contenu.** Les modèles IA repèrent les formulations sous forme de questions — *« à quelle distance l'hôtel se trouve-t-il de l'aéroport ? »*, *« le petit-déjeuner est-il inclus ? »*, *« y a-t-il un parking ? »* — et privilégient les sites qui y répondent en langage clair. Le schema FAQPage est désormais une exigence de base, pas un bonus.
+Les assistants IA extraient des entités (nom de votre hôtel, adresse, équipements, fourchette de prix), des relations (quelles chambres appartiennent à quel établissement, quelles attractions se trouvent à proximité) et des correspondances d'intention (cet établissement convient-il à un voyageur d'affaires, à une famille, à un couple). Les hôtels au balisage schema appauvri n'apparaissent pas dans les réponses génératives car l'assistant ne peut pas construire une recommandation fiable.
 
-**3. Liaison d'entités.** Une page hôtel qui mentionne « près de St. Stephen's Green » sans relier explicitement cette entité à un graphe de connaissances ne donne aucun élément vérifiable à l'assistant IA. Les hôtels disposant de liens `@id`, de GeoCoordinates et de références sameAs vers Google Business Profile et TripAdvisor sont nettement plus susceptibles d'être cités.
+### 2. Couverture conversationnelle du contenu
+
+Les modèles IA repèrent les formulations sous forme de questions — *« à quelle distance l'hôtel se trouve-t-il de l'aéroport ? »*, *« le petit-déjeuner est-il inclus ? »*, *« y a-t-il un parking ? »* — et privilégient les sites qui y répondent en langage clair. Le schema FAQPage est désormais une exigence de base, pas un bonus.
+
+### 3. Liaison d'entités
+
+Une page hôtel qui mentionne « près de St. Stephen's Green » sans relier explicitement cette entité à un graphe de connaissances ne donne aucun élément vérifiable à l'assistant IA. Les hôtels disposant de liens `@id`, de GeoCoordinates et de références sameAs vers Google Business Profile et TripAdvisor sont nettement plus susceptibles d'être cités.
 
 ## L'avantage OTA invisible dans la recherche générative
 
@@ -35,15 +41,25 @@ C'est la nouvelle fuite de commission. Les hôtels qui ont réglé la parité Me
 
 La solution n'est pas une refonte — c'est une séquence délibérée d'ajouts structurels au site que vous avez déjà.
 
-**Ajoutez un schema FAQPage avec au moins huit entrées.** Couvrez les questions que chaque client se pose avant de réserver : emplacement, petit-déjeuner, parking, heure d'arrivée, politique famille, accessibilité, annulation, acompte. Chaque entrée doit être une véritable question et une véritable réponse en prose claire, balisée avec les schemas `Question` et `Answer`.
+### Ajoutez un schema FAQPage avec au moins huit entrées
 
-**Renforcez vos entités Hotel et LocalBusiness.** Veillez à ce que le nom, l'adresse, le téléphone, les GeoCoordinates et l'AggregateRating soient renseignés et cohérents entre votre site direct, votre Google Business Profile et les principaux annuaires. Les assistants IA croisent ces données — toute divergence érode la confiance dans la recommandation.
+Couvrez les questions que chaque client se pose avant de réserver : emplacement, petit-déjeuner, parking, heure d'arrivée, politique famille, accessibilité, annulation, acompte. Chaque entrée doit être une véritable question et une véritable réponse en prose claire, balisée avec les schemas `Question` et `Answer`.
 
-**Ajoutez des références aux attractions proches dans le schema et le contenu.** *« À cinq minutes de St. Stephen's Green »* en clair, c'est bien. La même mention reliée à une entité `TouristAttraction` structurée avec des références `@id` est ce que les assistants IA analysent réellement pour vérifier une recommandation locale.
+### Renforcez vos entités Hotel et LocalBusiness
 
-**Ajoutez SpeakableSpecification à vos trois pages de destination principales.** Les assistants vocaux — qui traitent de plus en plus de requêtes voyage — ignorent les pages qui n'en disposent pas. Le coût d'intégration est faible ; le coût de visibilité de son absence grimpe rapidement.
+Veillez à ce que le nom, l'adresse, le téléphone, les GeoCoordinates et l'AggregateRating soient renseignés et cohérents entre votre site direct, votre Google Business Profile et les principaux annuaires. Les assistants IA croisent ces données — toute divergence érode la confiance dans la recommandation.
 
-**Créez des blocs de contenu ciblés par persona.** *« Pour les voyageurs d'affaires »*, *« Pour les familles »*, *« Pour les couples »* — chacun avec deux ou trois paragraphes de contenu spécifique à l'intention. Les assistants IA associent les recommandations à l'intention du voyageur, et les établissements sans signaux d'intention sont écartés avant même d'être considérés.
+### Ajoutez des références aux attractions proches dans le schema et le contenu
+
+*« À cinq minutes de St. Stephen's Green »* en clair, c'est bien. La même mention reliée à une entité `TouristAttraction` structurée avec des références `@id` est ce que les assistants IA analysent réellement pour vérifier une recommandation locale.
+
+### Ajoutez SpeakableSpecification à vos trois pages de destination principales
+
+Les assistants vocaux — qui traitent de plus en plus de requêtes voyage — ignorent les pages qui n'en disposent pas. Le coût d'intégration est faible ; le coût de visibilité de son absence grimpe rapidement.
+
+### Créez des blocs de contenu ciblés par persona
+
+*« Pour les voyageurs d'affaires »*, *« Pour les familles »*, *« Pour les couples »* — chacun avec deux ou trois paragraphes de contenu spécifique à l'intention. Les assistants IA associent les recommandations à l'intention du voyageur, et les établissements sans signaux d'intention sont écartés avant même d'être considérés.
 
 ## La fenêtre des 90 jours
 

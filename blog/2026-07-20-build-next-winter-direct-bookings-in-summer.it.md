@@ -21,11 +21,17 @@ Gli hotel che fanno crescere il fatturato diretto trattano la corsa estiva come 
 
 ## Tre mosse da fare prima che finisca la corsa
 
-**Cattura un'email verificata al check in, ogni volta.** Una prenotazione OTA ti dà un indirizzo mascherato che scompare nel momento in cui l'ospite se ne va. Un breve passaggio al check in che conferma un'email di contatto reale, costruito attorno alla chiave digitale, al login wifi o alla conferma di prenotazione, trasforma un anonimo ospite OTA in qualcuno che puoi raggiungere direttamente per anni.
+### Cattura un'email verificata al check in, ogni volta
 
-**Registra una preferenza per ospite.** Non ti serve un profilo completo. Un solo campo utile, un tipo di camera, un'occasione speciale, una nota dietetica, un motivo di arrivo, basta per personalizzare il messaggio successivo. Un ospite che ha festeggiato un anniversario da te ad agosto è una prenotazione diretta quasi certa il prossimo agosto, se ti ricordi di lui e lo contatti.
+Una prenotazione OTA ti dà un indirizzo mascherato che scompare nel momento in cui l'ospite se ne va. Un breve passaggio al check in che conferma un'email di contatto reale, costruito attorno alla chiave digitale, al login wifi o alla conferma di prenotazione, trasforma un anonimo ospite OTA in qualcuno che puoi raggiungere direttamente per anni.
 
-**Etichetta il canale da cui è arrivato.** Sapere quali ospiti estivi sono arrivati tramite OTA ti dice esattamente chi conviene convertire al diretto. Sono questi gli ospiti che meritano un'offerta autunnale su misura, perché convertirli una volta elimina una commissione che altrimenti pagheresti su ogni soggiorno futuro.
+### Registra una preferenza per ospite
+
+Non ti serve un profilo completo. Un solo campo utile, un tipo di camera, un'occasione speciale, una nota dietetica, un motivo di arrivo, basta per personalizzare il messaggio successivo. Un ospite che ha festeggiato un anniversario da te ad agosto è una prenotazione diretta quasi certa il prossimo agosto, se ti ricordi di lui e lo contatti.
+
+### Etichetta il canale da cui è arrivato
+
+Sapere quali ospiti estivi sono arrivati tramite OTA ti dice esattamente chi conviene convertire al diretto. Sono questi gli ospiti che meritano un'offerta autunnale su misura, perché convertirli una volta elimina una commissione che altrimenti pagheresti su ogni soggiorno futuro.
 
 ## Dal soggiorno estivo alla prenotazione invernale
 

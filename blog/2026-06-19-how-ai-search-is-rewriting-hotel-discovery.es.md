@@ -19,11 +19,17 @@ El SEO clásico de Google premia la densidad de palabras clave, los backlinks y 
 
 Tres señales son las que más importan:
 
-**1. Profundidad de los datos estructurados.** Los asistentes de IA extraen entidades (nombre de tu hotel, dirección, servicios, franja de precio), relaciones (qué habitaciones pertenecen a qué establecimiento, qué atracciones hay cerca) y coincidencias de intención (¿es este alojamiento adecuado para un viajero de negocios, una familia, una pareja?). Los hoteles con marcado schema escaso no aparecen en las respuestas generativas porque el asistente no puede construir una recomendación fiable.
+### 1. Profundidad de los datos estructurados
 
-**2. Cobertura conversacional del contenido.** Los modelos de IA buscan formulaciones tipo pregunta — *«¿a qué distancia está el hotel del aeropuerto?»*, *«¿incluye desayuno?»*, *«¿hay aparcamiento?»* — y priorizan los sitios que las responden en lenguaje claro. El schema FAQPage es hoy un requisito básico, no un extra.
+Los asistentes de IA extraen entidades (nombre de tu hotel, dirección, servicios, franja de precio), relaciones (qué habitaciones pertenecen a qué establecimiento, qué atracciones hay cerca) y coincidencias de intención (¿es este alojamiento adecuado para un viajero de negocios, una familia, una pareja?). Los hoteles con marcado schema escaso no aparecen en las respuestas generativas porque el asistente no puede construir una recomendación fiable.
 
-**3. Vinculación de entidades.** Una página de hotel que menciona «cerca de St. Stephen's Green» sin enlazar explícitamente esa entidad a un grafo de conocimiento no le ofrece nada verificable al asistente de IA. Los hoteles con enlaces `@id`, GeoCoordinates y referencias sameAs hacia Google Business Profile y TripAdvisor tienen muchas más probabilidades de ser citados.
+### 2. Cobertura conversacional del contenido
+
+Los modelos de IA buscan formulaciones tipo pregunta — *«¿a qué distancia está el hotel del aeropuerto?»*, *«¿incluye desayuno?»*, *«¿hay aparcamiento?»* — y priorizan los sitios que las responden en lenguaje claro. El schema FAQPage es hoy un requisito básico, no un extra.
+
+### 3. Vinculación de entidades
+
+Una página de hotel que menciona «cerca de St. Stephen's Green» sin enlazar explícitamente esa entidad a un grafo de conocimiento no le ofrece nada verificable al asistente de IA. Los hoteles con enlaces `@id`, GeoCoordinates y referencias sameAs hacia Google Business Profile y TripAdvisor tienen muchas más probabilidades de ser citados.
 
 ## La ventaja oculta de las OTA en la búsqueda generativa
 
@@ -35,15 +41,25 @@ Esta es la nueva fuga de comisión. Los hoteles que resolvieron la paridad de Me
 
 La solución no es una reconstrucción — es una secuencia deliberada de añadidos estructurales al sitio que ya tienes.
 
-**Añade schema FAQPage con al menos ocho entradas.** Cubre las preguntas que cada huésped se hace antes de reservar: ubicación, desayuno, aparcamiento, hora de entrada, política familiar, accesibilidad, cancelación, depósito. Cada entrada debe ser una pregunta real y una respuesta real en prosa clara, marcada con los schemas `Question` y `Answer`.
+### Añade schema FAQPage con al menos ocho entradas
 
-**Refuerza tus entidades Hotel y LocalBusiness.** Asegúrate de que nombre, dirección, teléfono, GeoCoordinates y AggregateRating están rellenados y son consistentes entre tu sitio directo, tu Google Business Profile y los principales directorios. Los asistentes de IA cruzan estos datos — cualquier discrepancia erosiona la confianza en la recomendación.
+Cubre las preguntas que cada huésped se hace antes de reservar: ubicación, desayuno, aparcamiento, hora de entrada, política familiar, accesibilidad, cancelación, depósito. Cada entrada debe ser una pregunta real y una respuesta real en prosa clara, marcada con los schemas `Question` y `Answer`.
 
-**Añade referencias a atracciones cercanas en el schema y en el contenido.** *«A cinco minutos de St. Stephen's Green»* en prosa está bien. La misma afirmación enlazada a una entidad `TouristAttraction` estructurada con referencias `@id` es lo que los asistentes de IA realmente analizan para verificar una recomendación local.
+### Refuerza tus entidades Hotel y LocalBusiness
 
-**Añade SpeakableSpecification a tus tres páginas de destino principales.** Los asistentes de voz — que gestionan cada vez más consultas de viaje — saltan las páginas que no lo tienen. El coste de añadirlo es bajo; el coste de visibilidad por no tenerlo crece deprisa.
+Asegúrate de que nombre, dirección, teléfono, GeoCoordinates y AggregateRating están rellenados y son consistentes entre tu sitio directo, tu Google Business Profile y los principales directorios. Los asistentes de IA cruzan estos datos — cualquier discrepancia erosiona la confianza en la recomendación.
 
-**Crea bloques de contenido segmentados por persona.** *«Para viajeros de negocios»*, *«Para familias»*, *«Para parejas»* — cada uno con dos o tres párrafos de contenido específico para esa intención. Los asistentes de IA emparejan las recomendaciones con la intención del viajero, y los alojamientos sin señales de intención quedan descartados antes incluso de ser considerados.
+### Añade referencias a atracciones cercanas en el schema y en el contenido
+
+*«A cinco minutos de St. Stephen's Green»* en prosa está bien. La misma afirmación enlazada a una entidad `TouristAttraction` estructurada con referencias `@id` es lo que los asistentes de IA realmente analizan para verificar una recomendación local.
+
+### Añade SpeakableSpecification a tus tres páginas de destino principales
+
+Los asistentes de voz — que gestionan cada vez más consultas de viaje — saltan las páginas que no lo tienen. El coste de añadirlo es bajo; el coste de visibilidad por no tenerlo crece deprisa.
+
+### Crea bloques de contenido segmentados por persona
+
+*«Para viajeros de negocios»*, *«Para familias»*, *«Para parejas»* — cada uno con dos o tres párrafos de contenido específico para esa intención. Los asistentes de IA emparejan las recomendaciones con la intención del viajero, y los alojamientos sin señales de intención quedan descartados antes incluso de ser considerados.
 
 ## La ventana de 90 días
 

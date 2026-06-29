@@ -15,11 +15,17 @@ Un hôtel peut tourner à 95 % d'occupation et laisser malgré tout une large pa
 
 ## Les trois fuites qui se cachent derrière une forte demande
 
-**Fuite numéro un : la commission OTA sur une demande que vous déteniez déjà.** En haute saison, une part significative des réservations OTA sont des clients qui auraient réservé directement chez vous de toute façon. Ils ont cherché votre hôtel par son nom, vu la fiche OTA en premier, et cliqué dessus par habitude. Vous avez rempli la chambre, mais vous avez payé 15 % à 25 % de commission sur un client qui était déjà le vôtre. Une forte demande rend la chose indolore à ignorer, car la chambre s'est vendue de toute manière.
+### Fuite numéro un : la commission OTA sur une demande que vous déteniez déjà
 
-**Fuite numéro deux : la parité tarifaire qui dérape quand vous ne regardez pas.** Pendant les mois chargés, l'attention va aux opérations, pas au suivi des tarifs. C'est exactement le moment où un programme de remise OTA ou un tarif package opaque peut casser votre prix direct. Un client qui trouve un tarif moins cher sur Booking.com que sur votre propre site vient d'apprendre à ne plus jamais réserver directement chez vous. Un seul tarif qui dérape en juillet peut vous coûter des réservations directes pendant des années.
+En haute saison, une part significative des réservations OTA sont des clients qui auraient réservé directement chez vous de toute façon. Ils ont cherché votre hôtel par son nom, vu la fiche OTA en premier, et cliqué dessus par habitude. Vous avez rempli la chambre, mais vous avez payé 15 % à 25 % de commission sur un client qui était déjà le vôtre. Une forte demande rend la chose indolore à ignorer, car la chambre s'est vendue de toute manière.
 
-**Fuite numéro trois : un moteur de réservation qui convertit moins bien sous pression.** Le trafic estival est plus élevé, mais si votre moteur de réservation est lent, peu pratique ou enterré sous les liens OTA sur vos propres pages, les visiteurs supplémentaires convertissent à un taux plus faible et débordent vers l'OTA. La chambre se vend quand même. Elle se vend simplement via le canal le plus cher disponible.
+### Fuite numéro deux : la parité tarifaire qui dérape quand vous ne regardez pas
+
+Pendant les mois chargés, l'attention va aux opérations, pas au suivi des tarifs. C'est exactement le moment où un programme de remise OTA ou un tarif package opaque peut casser votre prix direct. Un client qui trouve un tarif moins cher sur Booking.com que sur votre propre site vient d'apprendre à ne plus jamais réserver directement chez vous. Un seul tarif qui dérape en juillet peut vous coûter des réservations directes pendant des années.
+
+### Fuite numéro trois : un moteur de réservation qui convertit moins bien sous pression
+
+Le trafic estival est plus élevé, mais si votre moteur de réservation est lent, peu pratique ou enterré sous les liens OTA sur vos propres pages, les visiteurs supplémentaires convertissent à un taux plus faible et débordent vers l'OTA. La chambre se vend quand même. Elle se vend simplement via le canal le plus cher disponible.
 
 ## Ce que la haute saison coûte en termes réels
 

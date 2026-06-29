@@ -17,25 +17,41 @@ To ma znaczenie, ponieważ hotelowe strony internetowe są nietypowo ciężkie p
 
 Core Web Vitals Google to trzy liczby, które razem decydują, czy Twoja strona jest „szybka" według standardu, jaki dziś stosują wyszukiwarki i podróżni:
 
-**Largest Contentful Paint (LCP)** — ile zajmuje, by największy widoczny element (zwykle obraz hero) został wyrenderowany. Cel: poniżej 2,5 sekundy.
+### Largest Contentful Paint (LCP)
 
-**Interaction to Next Paint (INP)** — jak responsywnie strona reaguje na dotyki i kliknięcia. Cel: poniżej 200 milisekund.
+— ile zajmuje, by największy widoczny element (zwykle obraz hero) został wyrenderowany. Cel: poniżej 2,5 sekundy.
 
-**Cumulative Layout Shift (CLS)** — jak bardzo strona skacze podczas ładowania (reklamy, banery, opóźnione obrazy). Cel: poniżej 0,1.
+### Interaction to Next Paint (INP)
+
+— jak responsywnie strona reaguje na dotyki i kliknięcia. Cel: poniżej 200 milisekund.
+
+### Cumulative Layout Shift (CLS)
+
+— jak bardzo strona skacze podczas ładowania (reklamy, banery, opóźnione obrazy). Cel: poniżej 0,1.
 
 To nie tylko czynniki rankingowe SEO (choć są). To różnica między gościem, który dochodzi do Twojego silnika rezerwacji, a gościem, który zamyka kartę, zanim w ogóle zobaczy Twoje stawki.
 
 ## Gdzie hotelowe strony po cichu zawodzą
 
-**Przerośnięte obrazy hero.** JPEG 4 MB lobby wygląda przepięknie na monitorze Maca i katastrofalnie na telefonie 4G. Nowoczesne hotelowe strony serwują obraz hero poniżej 250 KB w formacie WebP lub AVIF, z responsywnymi źródłami dla różnych rozmiarów ekranu. Większość hotelowych stron wciąż serwuje ten sam JPEG 4 MB na każde urządzenie.
+### Przerośnięte obrazy hero
 
-**Skrypty blokujące renderowanie.** Silniki rezerwacji, widgety czatu, piksele śledzące, narzędzia A/B testów — każdy załadowany synchronicznie opóźnia LCP o setki milisekund. Rozwiązanie jest proste (ładowanie odroczone lub asynchroniczne), ale wymaga dyscypliny, której brakuje większości szablonowych hotelowych stron.
+JPEG 4 MB lobby wygląda przepięknie na monitorze Maca i katastrofalnie na telefonie 4G. Nowoczesne hotelowe strony serwują obraz hero poniżej 250 KB w formacie WebP lub AVIF, z responsywnymi źródłami dla różnych rozmiarów ekranu. Większość hotelowych stron wciąż serwuje ten sam JPEG 4 MB na każde urządzenie.
 
-**Banery ciasteczek blokujące treść.** Dialog zgody, który spycha obraz hero poza ekran do czasu akceptacji, podnosi zarówno LCP, jak i CLS. Nowoczesna implementacja renderuje baner jako nakładkę bez przesuwania strony poniżej.
+### Skrypty blokujące renderowanie
 
-**Iframe silnika rezerwacji.** Silnik rezerwacji ładowany jako iframe to osobna strona wewnątrz Twojej strony, z własnymi skryptami, fontami i śledzeniem. Zwykle jest to najwolniejszy element hotelowej strony. Nowoczesne platformy rezerwacji bezpośrednich renderują się inline jako część tego samego DOM, dzielą fonty i całkowicie usuwają karę za iframe.
+Silniki rezerwacji, widgety czatu, piksele śledzące, narzędzia A/B testów — każdy załadowany synchronicznie opóźnia LCP o setki milisekund. Rozwiązanie jest proste (ładowanie odroczone lub asynchroniczne), ale wymaga dyscypliny, której brakuje większości szablonowych hotelowych stron.
 
-**Hero video w autoplay.** Wyciszone MP4 o rozmiarze 8 MB zapętlone za tekstem to największy zabójca LCP na hotelowych stronach. Rozwiązaniem jest zwykle zamiana go na statyczny obraz plus interakcję „odtwórz wideo".
+### Banery ciasteczek blokujące treść
+
+Dialog zgody, który spycha obraz hero poza ekran do czasu akceptacji, podnosi zarówno LCP, jak i CLS. Nowoczesna implementacja renderuje baner jako nakładkę bez przesuwania strony poniżej.
+
+### Iframe silnika rezerwacji
+
+Silnik rezerwacji ładowany jako iframe to osobna strona wewnątrz Twojej strony, z własnymi skryptami, fontami i śledzeniem. Zwykle jest to najwolniejszy element hotelowej strony. Nowoczesne platformy rezerwacji bezpośrednich renderują się inline jako część tego samego DOM, dzielą fonty i całkowicie usuwają karę za iframe.
+
+### Hero video w autoplay
+
+Wyciszone MP4 o rozmiarze 8 MB zapętlone za tekstem to największy zabójca LCP na hotelowych stronach. Rozwiązaniem jest zwykle zamiana go na statyczny obraz plus interakcję „odtwórz wideo".
 
 ## Jak wygląda rentowna szybkość w 2026 roku
 
@@ -57,15 +73,25 @@ Dlatego Core Web Vitals to już nie problem SEO. To problem marży rezerwacji be
 
 ## Co hotelarze powinni zrobić w tym kwartale
 
-**Najpierw zmierz.** Przepuść swoją stronę przez PageSpeed Insights i spójrz na sekcję „Field Data" — to, czego doświadczają rzeczywiści użytkownicy, a nie syntetyczny test. Jeśli LCP przekracza 3 sekundy, strona traci rezerwacje.
+### Najpierw zmierz
 
-**Skontroluj hero.** Jeśli hero strony głównej to JPEG większy niż 250 KB lub video w autoplay, to największa pojedyncza poprawka.
+Przepuść swoją stronę przez PageSpeed Insights i spójrz na sekcję „Field Data" — to, czego doświadczają rzeczywiści użytkownicy, a nie syntetyczny test. Jeśli LCP przekracza 3 sekundy, strona traci rezerwacje.
 
-**Spisz swoje skrypty.** Każdy skrypt, który nie jest silnikiem rezerwacji, analityką lub absolutnie niezbędny, powinien zostać odroczony lub usunięty.
+### Skontroluj hero
 
-**Sprawdź integrację silnika rezerwacji.** Jeśli ładuje się jako iframe, płacisz znaczny podatek wydajnościowy. Nowoczesne platformy rezerwacji renderują się inline.
+Jeśli hero strony głównej to JPEG większy niż 250 KB lub video w autoplay, to największa pojedyncza poprawka.
 
-**Ustal budżet.** Zdecyduj, jaki cel LCP mobilnego musi osiągnąć strona, i traktuj każde jego przekroczenie jako błąd produkcyjny, nie „byłoby miło".
+### Spisz swoje skrypty
+
+Każdy skrypt, który nie jest silnikiem rezerwacji, analityką lub absolutnie niezbędny, powinien zostać odroczony lub usunięty.
+
+### Sprawdź integrację silnika rezerwacji
+
+Jeśli ładuje się jako iframe, płacisz znaczny podatek wydajnościowy. Nowoczesne platformy rezerwacji renderują się inline.
+
+### Ustal budżet
+
+Zdecyduj, jaki cel LCP mobilnego musi osiągnąć strona, i traktuj każde jego przekroczenie jako błąd produkcyjny, nie „byłoby miło".
 
 ## Gdzie pasuje Bookassist
 

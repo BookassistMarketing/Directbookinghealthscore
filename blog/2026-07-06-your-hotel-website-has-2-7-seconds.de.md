@@ -17,25 +17,41 @@ Das ist relevant, weil Hotel-Websites ungewöhnlich ladeintensiv sind. Eine typi
 
 Googles Core Web Vitals sind drei Zahlen, die zusammen entscheiden, ob Ihre Seite nach dem Maßstab, den Suchmaschinen und Reisende heute anlegen, „schnell" ist:
 
-**Largest Contentful Paint (LCP)** — wie lange es dauert, bis das größte sichtbare Element (meist ein Hero-Bild) gerendert ist. Ziel: unter 2,5 Sekunden.
+### Largest Contentful Paint (LCP)
 
-**Interaction to Next Paint (INP)** — wie reaktiv sich die Seite auf Taps und Klicks anfühlt. Ziel: unter 200 Millisekunden.
+— wie lange es dauert, bis das größte sichtbare Element (meist ein Hero-Bild) gerendert ist. Ziel: unter 2,5 Sekunden.
 
-**Cumulative Layout Shift (CLS)** — wie sehr die Seite während des Ladens herumspringt (Anzeigen, Banner, spät erscheinende Bilder). Ziel: unter 0,1.
+### Interaction to Next Paint (INP)
+
+— wie reaktiv sich die Seite auf Taps und Klicks anfühlt. Ziel: unter 200 Millisekunden.
+
+### Cumulative Layout Shift (CLS)
+
+— wie sehr die Seite während des Ladens herumspringt (Anzeigen, Banner, spät erscheinende Bilder). Ziel: unter 0,1.
 
 Das sind nicht nur SEO-Rankingfaktoren (obwohl sie das auch sind). Es ist der Unterschied zwischen einem Gast, der Ihre Buchungsmaschine erreicht, und einem Gast, der den Tab schließt, bevor er Ihre Raten überhaupt sieht.
 
 ## Wo Hotel-Websites stillschweigend versagen
 
-**Überdimensionierte Hero-Bilder.** Ein 4-MB-JPEG der Lobby sieht auf einem Mac-Monitor wunderschön und auf einem 4G-Handy ruinös aus. Moderne Hotel-Websites liefern ein Hero-Bild unter 250 KB in WebP- oder AVIF-Format, mit responsiven Quellen für unterschiedliche Bildschirmgrößen. Die meisten Hotel-Websites liefern noch immer dasselbe 4-MB-JPEG an jedes Gerät.
+### Überdimensionierte Hero-Bilder
 
-**Render-blockierende Skripte.** Buchungsmaschinen, Chat-Widgets, Tracking-Pixel, A/B-Testing-Tools — jedes synchron geladene verzögert das LCP um Hunderte Millisekunden. Die Lösung ist einfach (deferred oder async laden), erfordert aber Disziplin, die den meisten templatebasierten Hotel-Websites fehlt.
+Ein 4-MB-JPEG der Lobby sieht auf einem Mac-Monitor wunderschön und auf einem 4G-Handy ruinös aus. Moderne Hotel-Websites liefern ein Hero-Bild unter 250 KB in WebP- oder AVIF-Format, mit responsiven Quellen für unterschiedliche Bildschirmgrößen. Die meisten Hotel-Websites liefern noch immer dasselbe 4-MB-JPEG an jedes Gerät.
 
-**Cookie-Banner, die Inhalte blockieren.** Ein Consent-Dialog, der das Hero-Bild bis zur Annahme aus dem Bild drängt, trägt sowohl zum LCP-Fehler als auch zu hohem CLS bei. Eine moderne Implementierung rendert den Banner als Overlay, ohne die darunterliegende Seite zu verschieben.
+### Render-blockierende Skripte
 
-**Buchungsmaschinen-Iframes.** Eine als Iframe geladene Buchungsmaschine ist eine eigene Seite innerhalb Ihrer Seite, mit eigenen Skripten, Fonts und Tracking. Sie ist meist das langsamste Element der Hotel-Website. Moderne direkte Buchungsplattformen rendern inline als Teil desselben DOM, teilen sich die Fonts und entfernen die Iframe-Strafe vollständig.
+Buchungsmaschinen, Chat-Widgets, Tracking-Pixel, A/B-Testing-Tools — jedes synchron geladene verzögert das LCP um Hunderte Millisekunden. Die Lösung ist einfach (deferred oder async laden), erfordert aber Disziplin, die den meisten templatebasierten Hotel-Websites fehlt.
 
-**Auto-Play-Video-Heroes.** Ein stummes 8-MB-MP4, das hinter Text loopt, ist der größte LCP-Killer auf Hotel-Websites. Die Lösung ist meist, es gegen ein statisches Bild plus eine „Video abspielen"-Interaktion zu tauschen.
+### Cookie-Banner, die Inhalte blockieren
+
+Ein Consent-Dialog, der das Hero-Bild bis zur Annahme aus dem Bild drängt, trägt sowohl zum LCP-Fehler als auch zu hohem CLS bei. Eine moderne Implementierung rendert den Banner als Overlay, ohne die darunterliegende Seite zu verschieben.
+
+### Buchungsmaschinen-Iframes
+
+Eine als Iframe geladene Buchungsmaschine ist eine eigene Seite innerhalb Ihrer Seite, mit eigenen Skripten, Fonts und Tracking. Sie ist meist das langsamste Element der Hotel-Website. Moderne direkte Buchungsplattformen rendern inline als Teil desselben DOM, teilen sich die Fonts und entfernen die Iframe-Strafe vollständig.
+
+### Auto-Play-Video-Heroes
+
+Ein stummes 8-MB-MP4, das hinter Text loopt, ist der größte LCP-Killer auf Hotel-Websites. Die Lösung ist meist, es gegen ein statisches Bild plus eine „Video abspielen"-Interaktion zu tauschen.
 
 ## Wie profitable Geschwindigkeit 2026 aussieht
 
@@ -57,15 +73,25 @@ Genau deshalb sind Core Web Vitals kein SEO-Thema mehr. Sie sind ein Thema der D
 
 ## Was Hoteliers diesen Quartal tun sollten
 
-**Zuerst messen.** Lassen Sie Ihre Seite durch PageSpeed Insights laufen und sehen Sie in den Abschnitt „Field Data" — das ist, was echte Nutzer erleben, nicht ein synthetischer Test. Übersteigt LCP drei Sekunden, verliert die Seite Buchungen.
+### Zuerst messen
 
-**Hero prüfen.** Ist der Homepage-Hero ein JPEG über 250 KB oder ein Auto-Play-Video, ist das die wirkungsvollste Einzelkorrektur.
+Lassen Sie Ihre Seite durch PageSpeed Insights laufen und sehen Sie in den Abschnitt „Field Data" — das ist, was echte Nutzer erleben, nicht ein synthetischer Test. Übersteigt LCP drei Sekunden, verliert die Seite Buchungen.
 
-**Skripte inventarisieren.** Jedes Skript, das nicht Buchungsmaschine, Analytics oder strikt notwendig ist, sollte deferred oder entfernt werden.
+### Hero prüfen
 
-**Buchungsmaschinen-Integration prüfen.** Lädt sie als Iframe, zahlen Sie eine erhebliche Performance-Steuer. Moderne Buchungsplattformen rendern inline.
+Ist der Homepage-Hero ein JPEG über 250 KB oder ein Auto-Play-Video, ist das die wirkungsvollste Einzelkorrektur.
 
-**Budget setzen.** Legen Sie ein mobiles LCP-Ziel fest, das die Seite treffen muss, und behandeln Sie jedes Überschreiten als Produktions-Bug, nicht als „wäre nett".
+### Skripte inventarisieren
+
+Jedes Skript, das nicht Buchungsmaschine, Analytics oder strikt notwendig ist, sollte deferred oder entfernt werden.
+
+### Buchungsmaschinen-Integration prüfen
+
+Lädt sie als Iframe, zahlen Sie eine erhebliche Performance-Steuer. Moderne Buchungsplattformen rendern inline.
+
+### Budget setzen
+
+Legen Sie ein mobiles LCP-Ziel fest, das die Seite treffen muss, und behandeln Sie jedes Überschreiten als Produktions-Bug, nicht als „wäre nett".
 
 ## Wo Bookassist hineinpasst
 

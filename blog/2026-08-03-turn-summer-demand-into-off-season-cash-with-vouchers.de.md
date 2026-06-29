@@ -21,11 +21,17 @@ Es gibt einen zweiten stillen Vorteil. Ein nennenswerter Anteil der Gutscheine w
 
 ## Die drei Zielgruppen, die im Sommer kaufen
 
-**Der aktuelle Gast.** Jemand, der seinen Aufenthalt gerade jetzt genießt, ist bereit, einen Rückbesuch zu kaufen oder zu verschenken. Ein einfacher Hinweis beim Check-out oder eine geschmackvolle Karte im Zimmer verwandelt einen glücklichen Moment in eine künftige Buchung.
+### Der aktuelle Gast
 
-**Der Geschenkkäufer.** Gutscheine sind ein naheliegendes Geschenk für Geburtstage, Jahrestage, Hochzeiten und die bevorstehende Festsaison. Ein Gast, der seinen Sommeraufenthalt geliebt hat, ist ein idealer Fürsprecher, um Ihr Hotel als Geschenk für Freunde und Familie zu kaufen und Sie damit Menschen vorzustellen, die noch nie bei Ihnen übernachtet haben.
+Jemand, der seinen Aufenthalt gerade jetzt genießt, ist bereit, einen Rückbesuch zu kaufen oder zu verschenken. Ein einfacher Hinweis beim Check-out oder eine geschmackvolle Karte im Zimmer verwandelt einen glücklichen Moment in eine künftige Buchung.
 
-**Der inaktive Gast.** Eine Gutscheinkampagne im Spätsommer an frühere Gäste, gestaltet als Verwöhnmoment für die dunkleren Monate, reaktiviert Beziehungen, die sonst bis zum nächsten Jahr erkalten würden.
+### Der Geschenkkäufer
+
+Gutscheine sind ein naheliegendes Geschenk für Geburtstage, Jahrestage, Hochzeiten und die bevorstehende Festsaison. Ein Gast, der seinen Sommeraufenthalt geliebt hat, ist ein idealer Fürsprecher, um Ihr Hotel als Geschenk für Freunde und Familie zu kaufen und Sie damit Menschen vorzustellen, die noch nie bei Ihnen übernachtet haben.
+
+### Der inaktive Gast
+
+Eine Gutscheinkampagne im Spätsommer an frühere Gäste, gestaltet als Verwöhnmoment für die dunkleren Monate, reaktiviert Beziehungen, die sonst bis zum nächsten Jahr erkalten würden.
 
 ## So funktioniert es in der Praxis
 

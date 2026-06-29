@@ -21,11 +21,17 @@ Jest też druga, cicha korzyść. Znaczący odsetek bonów nigdy nie zostaje zre
 
 ## Trzy grupy odbiorców kupujących latem
 
-**Obecny gość.** Ktoś, kto cieszy się pobytem właśnie teraz, jest gotowy, by kupić powrotną wizytę lub ją podarować. Prosta zachęta przy wymeldowaniu lub gustowna karta w pokoju zamienia szczęśliwą chwilę w przyszłą rezerwację.
+### Obecny gość
 
-**Kupujący prezent.** Bony są naturalnym prezentem na urodziny, rocznice, śluby i nadchodzący sezon świąteczny. Gość, który pokochał swój letni pobyt, jest idealnym ambasadorem, by kupić Twój hotel jako prezent dla przyjaciół i rodziny, wprowadzając Cię do osób, które nigdy wcześniej nie nocowały.
+Ktoś, kto cieszy się pobytem właśnie teraz, jest gotowy, by kupić powrotną wizytę lub ją podarować. Prosta zachęta przy wymeldowaniu lub gustowna karta w pokoju zamienia szczęśliwą chwilę w przyszłą rezerwację.
 
-**Gość, który odpłynął.** Późnoletnia kampania bonowa do byłych gości, oparta na haśle podarunku na ciemniejsze miesiące, reaktywuje relacje, które w przeciwnym razie ostygłyby aż do przyszłego roku.
+### Kupujący prezent
+
+Bony są naturalnym prezentem na urodziny, rocznice, śluby i nadchodzący sezon świąteczny. Gość, który pokochał swój letni pobyt, jest idealnym ambasadorem, by kupić Twój hotel jako prezent dla przyjaciół i rodziny, wprowadzając Cię do osób, które nigdy wcześniej nie nocowały.
+
+### Gość, który odpłynął
+
+Późnoletnia kampania bonowa do byłych gości, oparta na haśle podarunku na ciemniejsze miesiące, reaktywuje relacje, które w przeciwnym razie ostygłyby aż do przyszłego roku.
 
 ## Jak to działa w praktyce
 

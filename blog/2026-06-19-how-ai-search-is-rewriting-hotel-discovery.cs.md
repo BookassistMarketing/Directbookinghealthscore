@@ -19,11 +19,17 @@ Klasické Google SEO odměňuje hustotu klíčových slov, zpětné odkazy a akt
 
 Tři signály mají největší váhu:
 
-**1. Hloubka strukturovaných dat.** AI asistenti vytahují entity (název vašeho hotelu, adresu, vybavení, cenové rozpětí), vztahy (které pokoje patří ke které nemovitosti, jaké atrakce jsou v okolí) a shody záměru (vyhovuje tato nemovitost služebnímu cestovateli, rodině, páru). Hotely s chabým schema značením se v generativních odpovědích nevynořují, protože si asistent nedokáže poskládat spolehlivé doporučení.
+### 1. Hloubka strukturovaných dat
 
-**2. Konverzační pokrytí obsahu.** AI modely hledají otázkové formulace — *„jak daleko je hotel od letiště?"*, *„je v ceně snídaně?"*, *„je k dispozici parkování?"* — a upřednostňují weby, které na ně odpovídají v běžné řeči. Schema FAQPage je dnes základní očekávání, ne bonus.
+AI asistenti vytahují entity (název vašeho hotelu, adresu, vybavení, cenové rozpětí), vztahy (které pokoje patří ke které nemovitosti, jaké atrakce jsou v okolí) a shody záměru (vyhovuje tato nemovitost služebnímu cestovateli, rodině, páru). Hotely s chabým schema značením se v generativních odpovědích nevynořují, protože si asistent nedokáže poskládat spolehlivé doporučení.
 
-**3. Propojování entit.** Stránka hotelu, která zmiňuje „blízko St. Stephen's Green" bez explicitního propojení této entity s grafem znalostí, nedává AI asistentovi nic k ověření. Hotely s `@id` propojeními, GeoCoordinates a sameAs referencemi na Google Business Profile a TripAdvisor jsou citovány výrazně častěji.
+### 2. Konverzační pokrytí obsahu
+
+AI modely hledají otázkové formulace — *„jak daleko je hotel od letiště?"*, *„je v ceně snídaně?"*, *„je k dispozici parkování?"* — a upřednostňují weby, které na ně odpovídají v běžné řeči. Schema FAQPage je dnes základní očekávání, ne bonus.
+
+### 3. Propojování entit
+
+Stránka hotelu, která zmiňuje „blízko St. Stephen's Green" bez explicitního propojení této entity s grafem znalostí, nedává AI asistentovi nic k ověření. Hotely s `@id` propojeními, GeoCoordinates a sameAs referencemi na Google Business Profile a TripAdvisor jsou citovány výrazně častěji.
 
 ## Skrytá výhoda OTA v generativním vyhledávání
 
@@ -35,15 +41,25 @@ To je nový únik provize. Hotely, které před pěti lety vyřešily paritu na 
 
 Řešením není přestavba — je to promyšlená posloupnost strukturálních doplnění k webu, který už máte.
 
-**Přidejte schema FAQPage s alespoň osmi položkami.** Pokryjte otázky, které si každý host pokládá před rezervací: lokalita, snídaně, parkování, čas check-inu, rodinná politika, bezbariérovost, storno, záloha. Každá položka by měla být reálnou otázkou a reálnou odpovědí v jasné próze, označená schematy `Question` a `Answer`.
+### Přidejte schema FAQPage s alespoň osmi položkami
 
-**Posilte své entity Hotel a LocalBusiness.** Ujistěte se, že název, adresa, telefon, GeoCoordinates a AggregateRating jsou vyplněny a konzistentní mezi vaším přímým webem, Google Business Profile a hlavními katalogy. AI asistenti tato data porovnávají — jakékoli nesrovnalosti podkopávají důvěru v doporučení.
+Pokryjte otázky, které si každý host pokládá před rezervací: lokalita, snídaně, parkování, čas check-inu, rodinná politika, bezbariérovost, storno, záloha. Každá položka by měla být reálnou otázkou a reálnou odpovědí v jasné próze, označená schematy `Question` a `Answer`.
 
-**Doplňte odkazy na blízké atrakce ve schema i v textu.** *„Pět minut od St. Stephen's Green"* v textu je dobré. Stejné tvrzení provázané se strukturovanou entitou `TouristAttraction` s referencemi `@id` je to, co AI asistenti skutečně parsují, aby místní doporučení ověřili.
+### Posilte své entity Hotel a LocalBusiness
 
-**Doplňte SpeakableSpecification na své tři nejdůležitější vstupní stránky.** Hlasoví asistenti — stále častěji zpracovávající cestovní dotazy — stránky bez tohoto značení přeskakují. Náklady na doplnění jsou nízké; náklady na ztrátu viditelnosti rychle rostou.
+Ujistěte se, že název, adresa, telefon, GeoCoordinates a AggregateRating jsou vyplněny a konzistentní mezi vaším přímým webem, Google Business Profile a hlavními katalogy. AI asistenti tato data porovnávají — jakékoli nesrovnalosti podkopávají důvěru v doporučení.
 
-**Vytvořte obsahové bloky zacílené na persony.** *„Pro služební cestovatele"*, *„Pro rodiny"*, *„Pro páry"* — každý se dvěma nebo třemi odstavci obsahu specifického pro daný záměr. AI asistenti porovnávají doporučení se záměrem cestujícího a nemovitosti bez signálů záměru jsou vyřazeny dříve, než vůbec dojde k jejich zvážení.
+### Doplňte odkazy na blízké atrakce ve schema i v textu
+
+*„Pět minut od St. Stephen's Green"* v textu je dobré. Stejné tvrzení provázané se strukturovanou entitou `TouristAttraction` s referencemi `@id` je to, co AI asistenti skutečně parsují, aby místní doporučení ověřili.
+
+### Doplňte SpeakableSpecification na své tři nejdůležitější vstupní stránky
+
+Hlasoví asistenti — stále častěji zpracovávající cestovní dotazy — stránky bez tohoto značení přeskakují. Náklady na doplnění jsou nízké; náklady na ztrátu viditelnosti rychle rostou.
+
+### Vytvořte obsahové bloky zacílené na persony
+
+*„Pro služební cestovatele"*, *„Pro rodiny"*, *„Pro páry"* — každý se dvěma nebo třemi odstavci obsahu specifického pro daný záměr. AI asistenti porovnávají doporučení se záměrem cestujícího a nemovitosti bez signálů záměru jsou vyřazeny dříve, než vůbec dojde k jejich zvážení.
 
 ## Okno 90 dnů
 

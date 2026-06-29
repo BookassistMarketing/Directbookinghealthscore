@@ -17,31 +17,51 @@ Háček je v tom, že tento posun se zkonvertuje, jen pokud to plocha přímé r
 
 Cestující, který přichází z OTA, si nese tři implicitní očekávání:
 
-**1. Stejnou nebo lepší cenu.** Cenová parita je vstupenka. Pokud váš přímý web nabízí stejný pokoj za vyšší cenu než OTA, na kterou se právě podíval, rezervace se vrací k OTA — i s celou provizí. Hotely, které v roce 2026 stále zápasí s paritou, potichu dotují akcionáře OTA.
+### 1. Stejnou nebo lepší cenu
 
-**2. Lepší podmínky.** Bezplatné storno, flexibilní změna termínů, nižší zálohy, garance typu pokoje — tak si přímý kanál zaslouží svou prémii. Cestující už ví, co nabízí OTA. Přímý kanál musí být viditelně lepší alespoň v jedné dimenzi.
+Cenová parita je vstupenka. Pokud váš přímý web nabízí stejný pokoj za vyšší cenu než OTA, na kterou se právě podíval, rezervace se vrací k OTA — i s celou provizí. Hotely, které v roce 2026 stále zápasí s paritou, potichu dotují akcionáře OTA.
 
-**3. Rychlejší zážitek z rezervace.** OTA strávily deset let inženýrstvím svého checkoutu k nelítostné efektivitě. Pokud váš přímý rezervační engine stále vyžaduje více než tři kroky, žádá uprostřed flow reset hesla nebo skrývá daně až do poslední obrazovky, cestující se vrací na kanál, který fungoval.
+### 2. Lepší podmínky
+
+Bezplatné storno, flexibilní změna termínů, nižší zálohy, garance typu pokoje — tak si přímý kanál zaslouží svou prémii. Cestující už ví, co nabízí OTA. Přímý kanál musí být viditelně lepší alespoň v jedné dimenzi.
+
+### 3. Rychlejší zážitek z rezervace
+
+OTA strávily deset let inženýrstvím svého checkoutu k nelítostné efektivitě. Pokud váš přímý rezervační engine stále vyžaduje více než tři kroky, žádá uprostřed flow reset hesla nebo skrývá daně až do poslední obrazovky, cestující se vrací na kanál, který fungoval.
 
 ## Tři technologické mezery, které ztrácejí posun
 
-**Pomalé načítání na mobilu.** Více než 60 % hotelových vyhledávání se dnes odehrává na mobilu a data Google ukazují, že průměrný mobilní web, který se načítá déle než tři sekundy, ztrácí 53 % návštěv. Váš rezervační engine a hlavní vstupní stránky se musí načíst do 2,5 sekundy na smartphonu střední třídy v 4G — měřeno na mediánu, ne v nejlepším případě.
+### Pomalé načítání na mobilu
 
-**Opuštění rezervace bez záchrany.** Host, který dojde k vašemu rezervačnímu engine a nedokončí ji, je nejhodnotnější návštěvník, jakého váš web za měsíc uvidí. Jeho záměr byl jasný. Většina hotelů z této návštěvy nezachycuje nic — žádný e-mail, žádnou sekvenci opuštěného košíku, žádný cílený retargeting. OTA zachycují každý z těchto signálů za vás a pak vám toho cestujícího prodávají zpět s provizí.
+Více než 60 % hotelových vyhledávání se dnes odehrává na mobilu a data Google ukazují, že průměrný mobilní web, který se načítá déle než tři sekundy, ztrácí 53 % návštěv. Váš rezervační engine a hlavní vstupní stránky se musí načíst do 2,5 sekundy na smartphonu střední třídy v 4G — měřeno na mediánu, ne v nejlepším případě.
 
-**Žádná diferenciace pokojů na rezervační stránce.** Když OTA listují váš objekt, ukazují každý typ pokoje s fotkami, vybavením a cenou. Když váš přímý rezervační engine prezentuje stejný výběr jako plochý seznam názvů a cen, cestující nevidí, proč by měl zaplatit o 30 € víc za Junior Suite místo Standardu. Diferenciace je to, co ospravedlňuje cenovou výhodu přímého kanálu vůči paritě.
+### Opuštění rezervace bez záchrany
+
+Host, který dojde k vašemu rezervačnímu engine a nedokončí ji, je nejhodnotnější návštěvník, jakého váš web za měsíc uvidí. Jeho záměr byl jasný. Většina hotelů z této návštěvy nezachycuje nic — žádný e-mail, žádnou sekvenci opuštěného košíku, žádný cílený retargeting. OTA zachycují každý z těchto signálů za vás a pak vám toho cestujícího prodávají zpět s provizí.
+
+### Žádná diferenciace pokojů na rezervační stránce
+
+Když OTA listují váš objekt, ukazují každý typ pokoje s fotkami, vybavením a cenou. Když váš přímý rezervační engine prezentuje stejný výběr jako plochý seznam názvů a cen, cestující nevidí, proč by měl zaplatit o 30 € víc za Junior Suite místo Standardu. Diferenciace je to, co ospravedlňuje cenovou výhodu přímého kanálu vůči paritě.
 
 ## Co letos prověřit na vaší ploše přímé rezervace
 
 Projděte si vlastní rezervační flow, jako by to dělal host — na mobilním telefonu, ideálně na pomalém připojení. Změřte každý krok.
 
-**Od vyhledávání po potvrzení do 90 sekund.** Cokoli déle a ztrácíte cestující vytrénované OTA na každém dalším třecím bodě.
+### Od vyhledávání po potvrzení do 90 sekund
 
-**Každá sazba by měla jasně vysvětlit, co zahrnuje.** „Member rate" nebo „Best available" bez kontextu mate hosty, kteří srovnávají s cenami OTA, jimž už rozumějí.
+Cokoli déle a ztrácíte cestující vytrénované OTA na každém dalším třecím bodě.
 
-**Rezervační engine a web by měly působit jako jeden produkt.** Pokud kliknutí na „Rezervovat" spustí rezervační engine třetí strany s jinými fonty, jinými barvami a jiným flow košíku, signál důvěry se v okamžiku konverze láme. Moderní platformy přímé rezervace se objevují uvnitř vaší domény a vizuální identity.
+### Každá sazba by měla jasně vysvětlit, co zahrnuje
 
-**Potvrzení po rezervaci by mělo dorazit do 30 sekund.** Zpožděná nebo ve výchozí šabloně ponechaná potvrzení sejí pochybnosti o úspěšnosti rezervace — a pochybnosti posílají hosty zpět na OTA, kde alespoň vědí, že rezervace existuje.
+„Member rate" nebo „Best available" bez kontextu mate hosty, kteří srovnávají s cenami OTA, jimž už rozumějí.
+
+### Rezervační engine a web by měly působit jako jeden produkt
+
+Pokud kliknutí na „Rezervovat" spustí rezervační engine třetí strany s jinými fonty, jinými barvami a jiným flow košíku, signál důvěry se v okamžiku konverze láme. Moderní platformy přímé rezervace se objevují uvnitř vaší domény a vizuální identity.
+
+### Potvrzení po rezervaci by mělo dorazit do 30 sekund
+
+Zpožděná nebo ve výchozí šabloně ponechaná potvrzení sejí pochybnosti o úspěšnosti rezervace — a pochybnosti posílají hosty zpět na OTA, kde alespoň vědí, že rezervace existuje.
 
 ## Zachycení posunu se rok od roku skládá
 

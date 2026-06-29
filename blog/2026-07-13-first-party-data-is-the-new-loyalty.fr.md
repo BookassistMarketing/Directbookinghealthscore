@@ -21,23 +21,37 @@ L'économie est incomparable. Les données sectorielles montrent que les campagn
 
 ## Les trois niveaux de donnée first-party hôtelière
 
-**Donnée d'identité.** Email, téléphone, adresse — ce que le client vous donne à la réservation. C'est le plancher. La plupart des hôtels la collectent parce qu'ils le doivent. Peu l'utilisent stratégiquement une fois le client parti.
+### Donnée d'identité
 
-**Donnée comportementale.** Historique de réservation, préférence de chambre, durée de séjour, jour de semaine, canal d'origine, dépense par séjour. C'est ce qui transforme l'identité en segmentation. Un client qui a réservé deux fois un dimanche pour un vendredi soir est un candidat de retargeting clair pour le dimanche précédant son prochain voyage probable.
+Email, téléphone, adresse — ce que le client vous donne à la réservation. C'est le plancher. La plupart des hôtels la collectent parce qu'ils le doivent. Peu l'utilisent stratégiquement une fois le client parti.
 
-**Donnée de préférence.** Préférences déclarées — type d'oreiller, heure du petit-déjeuner, besoins d'accessibilité, occasions spéciales. Collectées à la réservation, au check-in ou via un sondage post-séjour. C'est ce qui rend une relation hôtelière personnelle plutôt que transactionnelle. Cela a aussi un impact remarquable sur la rétention : les clients dont les préférences sont mémorisées sont 3× plus susceptibles de réserver directement à nouveau.
+### Donnée comportementale
+
+Historique de réservation, préférence de chambre, durée de séjour, jour de semaine, canal d'origine, dépense par séjour. C'est ce qui transforme l'identité en segmentation. Un client qui a réservé deux fois un dimanche pour un vendredi soir est un candidat de retargeting clair pour le dimanche précédant son prochain voyage probable.
+
+### Donnée de préférence
+
+Préférences déclarées — type d'oreiller, heure du petit-déjeuner, besoins d'accessibilité, occasions spéciales. Collectées à la réservation, au check-in ou via un sondage post-séjour. C'est ce qui rend une relation hôtelière personnelle plutôt que transactionnelle. Cela a aussi un impact remarquable sur la rétention : les clients dont les préférences sont mémorisées sont 3× plus susceptibles de réserver directement à nouveau.
 
 Un hôtel qui mène une stratégie first-party cohérente utilise les trois niveaux ensemble — identité pour atteindre, comportement pour rythmer, préférence pour personnaliser.
 
 ## Ce qui manque à la plupart des hôtels
 
-**Un dossier client unifié.** Moteur de réservation, PMS, POS du restaurant, système de fidélité et plateforme email contiennent souvent des profils client partiels dans des formats différents. Un client qui a réservé en direct, dîné au restaurant et appelé pour un soin spa existe comme trois enregistrements séparés dans trois systèmes différents — et votre équipe marketing ne voit que la réservation. L'unification est la fondation de la valeur first-party, et c'est l'écart le plus courant.
+### Un dossier client unifié
 
-**Un consentement qui autorise réellement l'usage.** Beaucoup d'hôtels collectent des emails sans consentement marketing clair — ce qui signifie légalement qu'ils ne peuvent pas envoyer de messages promotionnels. Le RGPD et les réglementations similaires exigent un opt-in explicite pour le marketing. La correction se fait au flux de réservation : une case de consentement claire et bien placée, avec une valeur déclarée.
+Moteur de réservation, PMS, POS du restaurant, système de fidélité et plateforme email contiennent souvent des profils client partiels dans des formats différents. Un client qui a réservé en direct, dîné au restaurant et appelé pour un soin spa existe comme trois enregistrements séparés dans trois systèmes différents — et votre équipe marketing ne voit que la réservation. L'unification est la fondation de la valeur first-party, et c'est l'écart le plus courant.
 
-**Des déclencheurs comportementaux que personne n'a configurés.** L'email à plus fort taux de conversion dans le secteur hôtelier est la réactivation « nous avons remarqué que vous n'avez pas réservé depuis 14 mois ». Le second est l'upsell pré-séjour envoyé 7 jours avant l'arrivée. La plupart des hôtels n'ont ni l'un ni l'autre configuré.
+### Un consentement qui autorise réellement l'usage
 
-**Pas de boucle de mesure.** Les programmes first-party qui ne montrent pas de ROI échouent presque toujours sur la même étape : l'attribution. La réservation venue de l'email du dimanche soir est invisible au rapport de campagne sauf si la plateforme rattache le clic email à la réservation. Sans cela, le marketing ne peut pas défendre le budget, et le programme s'atrophie.
+Beaucoup d'hôtels collectent des emails sans consentement marketing clair — ce qui signifie légalement qu'ils ne peuvent pas envoyer de messages promotionnels. Le RGPD et les réglementations similaires exigent un opt-in explicite pour le marketing. La correction se fait au flux de réservation : une case de consentement claire et bien placée, avec une valeur déclarée.
+
+### Des déclencheurs comportementaux que personne n'a configurés
+
+L'email à plus fort taux de conversion dans le secteur hôtelier est la réactivation « nous avons remarqué que vous n'avez pas réservé depuis 14 mois ». Le second est l'upsell pré-séjour envoyé 7 jours avant l'arrivée. La plupart des hôtels n'ont ni l'un ni l'autre configuré.
+
+### Pas de boucle de mesure
+
+Les programmes first-party qui ne montrent pas de ROI échouent presque toujours sur la même étape : l'attribution. La réservation venue de l'email du dimanche soir est invisible au rapport de campagne sauf si la plateforme rattache le clic email à la réservation. Sans cela, le marketing ne peut pas défendre le budget, et le programme s'atrophie.
 
 ## Ce qu'un programme first-party rapporte en 12 mois
 
@@ -52,13 +66,21 @@ Ce ne sont pas des chiffres aspirationnels. Ils sont typiques des établissement
 
 ## Par où commencer
 
-**Auditez votre dossier client.** Combien de systèmes hébergent des profils client ? Votre équipe marketing peut-elle voir l'image complète d'un client en un seul endroit ? Sinon, c'est le premier écart.
+### Auditez votre dossier client
 
-**Auditez votre consentement.** Sortez le texte de consentement de votre flux de réservation. Permet-il clairement le marketing ? Indique-t-il ce que le client va recevoir ? Un client le lisant aujourd'hui choisirait-il activement de s'inscrire ?
+Combien de systèmes hébergent des profils client ? Votre équipe marketing peut-elle voir l'image complète d'un client en un seul endroit ? Sinon, c'est le premier écart.
 
-**Auditez votre liste de déclencheurs.** Avez-vous un sondage post-séjour ? Un upsell pré-arrivée ? Une réactivation à 12 mois ? Un message d'anniversaire ? Chaque déclencheur manquant est du revenu direct que vous laissez dans le pool OTA.
+### Auditez votre consentement
 
-**Branchez l'attribution.** Quelle que soit la plateforme email ou CRM utilisée, elle doit pouvoir rattacher les clics email aux réservations. Si elle ne le peut pas, vous menez un programme que vous ne pouvez pas mesurer — et le marketing non mesuré finit par être coupé.
+Sortez le texte de consentement de votre flux de réservation. Permet-il clairement le marketing ? Indique-t-il ce que le client va recevoir ? Un client le lisant aujourd'hui choisirait-il activement de s'inscrire ?
+
+### Auditez votre liste de déclencheurs
+
+Avez-vous un sondage post-séjour ? Un upsell pré-arrivée ? Une réactivation à 12 mois ? Un message d'anniversaire ? Chaque déclencheur manquant est du revenu direct que vous laissez dans le pool OTA.
+
+### Branchez l'attribution
+
+Quelle que soit la plateforme email ou CRM utilisée, elle doit pouvoir rattacher les clics email aux réservations. Si elle ne le peut pas, vous menez un programme que vous ne pouvez pas mesurer — et le marketing non mesuré finit par être coupé.
 
 ## Où Bookassist s'inscrit
 

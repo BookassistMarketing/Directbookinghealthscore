@@ -17,31 +17,51 @@ The catch is that this shift only converts if the direct booking surface can sup
 
 A traveller arriving from an OTA carries three implicit expectations:
 
-**1. Equal or better price.** Rate parity is the price of entry. If your direct site lists the same room at a higher price than the OTA they just looked at, the booking goes back to the OTA — full commission and all. Hotels still struggling with rate parity in 2026 are quietly subsidising OTA shareholders.
+### 1. Equal or better price
 
-**2. Better terms.** Free cancellation, flexible date changes, lower deposits, room-type guarantees — these are how direct earns its premium. The traveller already knows what the OTA is offering. Direct needs to be visibly better on at least one dimension.
+Rate parity is the price of entry. If your direct site lists the same room at a higher price than the OTA they just looked at, the booking goes back to the OTA — full commission and all. Hotels still struggling with rate parity in 2026 are quietly subsidising OTA shareholders.
 
-**3. A faster booking experience.** OTAs have spent a decade engineering their checkout to be ruthlessly efficient. If your direct booking engine still requires more than three steps, asks for a password reset mid-flow, or hides taxes until the final screen, the traveller defaults back to the channel that worked.
+### 2. Better terms
+
+Free cancellation, flexible date changes, lower deposits, room-type guarantees — these are how direct earns its premium. The traveller already knows what the OTA is offering. Direct needs to be visibly better on at least one dimension.
+
+### 3. A faster booking experience
+
+OTAs have spent a decade engineering their checkout to be ruthlessly efficient. If your direct booking engine still requires more than three steps, asks for a password reset mid-flow, or hides taxes until the final screen, the traveller defaults back to the channel that worked.
 
 ## Three Technology Gaps That Lose the Shift
 
-**Slow loading on mobile.** More than 60% of hotel searches now happen on mobile, and Google's data shows the average mobile site that takes longer than three seconds to load loses 53% of visits. Your booking engine and primary landing pages need to load in under 2.5 seconds on a mid-range smartphone over a 4G connection — measured at the median, not the best case.
+### Slow loading on mobile
 
-**Booking abandonment without recovery.** A guest who reaches your booking engine and doesn't complete is the most valuable visitor your site sees all month. They had clear intent. Most hotels capture nothing from that visit — no email, no abandoned-cart sequence, no targeted retargeting ad. OTAs capture every one of those signals on your behalf, then resell that traveller back to you under their commission.
+More than 60% of hotel searches now happen on mobile, and Google's data shows the average mobile site that takes longer than three seconds to load loses 53% of visits. Your booking engine and primary landing pages need to load in under 2.5 seconds on a mid-range smartphone over a 4G connection — measured at the median, not the best case.
 
-**No room differentiation on the booking page.** When OTAs list your property they show every room type clearly with photos, amenities, and a price. When your direct booking engine displays the same selection as a flat list of names and prices, the traveller cannot see why they should pay €30 more for the Junior Suite over the Standard. Differentiation is what justifies direct's price advantage on rate parity.
+### Booking abandonment without recovery
+
+A guest who reaches your booking engine and doesn't complete is the most valuable visitor your site sees all month. They had clear intent. Most hotels capture nothing from that visit — no email, no abandoned-cart sequence, no targeted retargeting ad. OTAs capture every one of those signals on your behalf, then resell that traveller back to you under their commission.
+
+### No room differentiation on the booking page
+
+When OTAs list your property they show every room type clearly with photos, amenities, and a price. When your direct booking engine displays the same selection as a flat list of names and prices, the traveller cannot see why they should pay €30 more for the Junior Suite over the Standard. Differentiation is what justifies direct's price advantage on rate parity.
 
 ## What to Audit on Your Direct Booking Surface This Quarter
 
 Walk through your own booking flow as a guest would — on a mobile phone, ideally over a slow network. Time each step.
 
-**Search through to confirmation should be under 90 seconds.** Anything longer and you are losing OTA-trained travellers at every additional friction point.
+### Search through to confirmation should be under 90 seconds
 
-**Every rate should explain its inclusions clearly.** "Member rate" or "Best available" without context confuses guests who are comparing against OTA pricing they already understand.
+Anything longer and you are losing OTA-trained travellers at every additional friction point.
 
-**The booking engine and the website should feel like one product.** If clicking "Book Now" launches a third-party booking engine with different fonts, colours, and a different cart flow, the trust signal breaks at the moment of conversion. Modern direct booking platforms surface inside your domain and visual identity.
+### Every rate should explain its inclusions clearly
 
-**Post-booking confirmation should arrive within 30 seconds.** Delayed or template-default confirmations create doubt about whether the booking succeeded — and doubt sends guests back to the OTA where they at least know the booking exists.
+"Member rate" or "Best available" without context confuses guests who are comparing against OTA pricing they already understand.
+
+### The booking engine and the website should feel like one product
+
+If clicking "Book Now" launches a third-party booking engine with different fonts, colours, and a different cart flow, the trust signal breaks at the moment of conversion. Modern direct booking platforms surface inside your domain and visual identity.
+
+### Post-booking confirmation should arrive within 30 seconds
+
+Delayed or template-default confirmations create doubt about whether the booking succeeded — and doubt sends guests back to the OTA where they at least know the booking exists.
 
 ## Capturing the Shift Compounds Year on Year
 

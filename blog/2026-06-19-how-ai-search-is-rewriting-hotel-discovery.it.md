@@ -19,11 +19,17 @@ La classica SEO di Google premia densità di parole chiave, backlink e freschezz
 
 Tre segnali contano più di tutti:
 
-**1. Profondità dei dati strutturati.** Gli assistenti AI estraggono entità (nome del tuo hotel, indirizzo, servizi, fascia di prezzo), relazioni (quali camere appartengono a quale struttura, quali attrazioni si trovano nelle vicinanze) e corrispondenze di intento (questa struttura è adatta a un viaggiatore d'affari, una famiglia, una coppia). Gli hotel con markup schema scarno non emergono nelle risposte generative perché l'assistente non può costruire una raccomandazione affidabile.
+### 1. Profondità dei dati strutturati
 
-**2. Copertura conversazionale dei contenuti.** I modelli AI cercano formulazioni in stile domanda — *«quanto dista la struttura dall'aeroporto?»*, *«la colazione è inclusa?»*, *«c'è il parcheggio?»* — e privilegiano i siti che rispondono in linguaggio chiaro. Il schema FAQPage è ora un requisito di base, non un bonus.
+Gli assistenti AI estraggono entità (nome del tuo hotel, indirizzo, servizi, fascia di prezzo), relazioni (quali camere appartengono a quale struttura, quali attrazioni si trovano nelle vicinanze) e corrispondenze di intento (questa struttura è adatta a un viaggiatore d'affari, una famiglia, una coppia). Gli hotel con markup schema scarno non emergono nelle risposte generative perché l'assistente non può costruire una raccomandazione affidabile.
 
-**3. Collegamento delle entità.** Una pagina hotel che cita «vicino a St. Stephen's Green» senza collegare esplicitamente quell'entità a un grafo della conoscenza non offre all'assistente AI nulla da verificare. Gli hotel dotati di collegamenti `@id`, GeoCoordinates e riferimenti sameAs a Google Business Profile e TripAdvisor hanno una probabilità molto più alta di essere citati.
+### 2. Copertura conversazionale dei contenuti
+
+I modelli AI cercano formulazioni in stile domanda — *«quanto dista la struttura dall'aeroporto?»*, *«la colazione è inclusa?»*, *«c'è il parcheggio?»* — e privilegiano i siti che rispondono in linguaggio chiaro. Il schema FAQPage è ora un requisito di base, non un bonus.
+
+### 3. Collegamento delle entità
+
+Una pagina hotel che cita «vicino a St. Stephen's Green» senza collegare esplicitamente quell'entità a un grafo della conoscenza non offre all'assistente AI nulla da verificare. Gli hotel dotati di collegamenti `@id`, GeoCoordinates e riferimenti sameAs a Google Business Profile e TripAdvisor hanno una probabilità molto più alta di essere citati.
 
 ## Il vantaggio nascosto delle OTA nella ricerca generativa
 
@@ -35,15 +41,25 @@ Booking.com, Expedia e Hotels.com investono pesantemente in dati strutturati, gr
 
 La soluzione non è una ricostruzione — è una sequenza deliberata di aggiunte strutturali al sito che hai già.
 
-**Aggiungi lo schema FAQPage con almeno otto voci.** Copri le domande che ogni ospite si pone prima di prenotare: posizione, colazione, parcheggio, orario di check-in, politica famiglie, accessibilità, cancellazione, deposito. Ogni voce deve essere una domanda reale e una risposta reale in prosa chiara, marcata con gli schemi `Question` e `Answer`.
+### Aggiungi lo schema FAQPage con almeno otto voci
 
-**Rafforza le tue entità Hotel e LocalBusiness.** Assicurati che nome, indirizzo, telefono, GeoCoordinates e AggregateRating siano valorizzati e coerenti tra il tuo sito diretto, il tuo Google Business Profile e le directory principali. Gli assistenti AI confrontano questi dati — eventuali incongruenze erodono la fiducia nella raccomandazione.
+Copri le domande che ogni ospite si pone prima di prenotare: posizione, colazione, parcheggio, orario di check-in, politica famiglie, accessibilità, cancellazione, deposito. Ogni voce deve essere una domanda reale e una risposta reale in prosa chiara, marcata con gli schemi `Question` e `Answer`.
 
-**Aggiungi riferimenti alle attrazioni vicine nello schema e nei testi.** *«A cinque minuti da St. Stephen's Green»* scritto nel testo va bene. La stessa affermazione collegata a un'entità `TouristAttraction` strutturata con riferimenti `@id` è ciò che gli assistenti AI analizzano davvero per verificare una raccomandazione locale.
+### Rafforza le tue entità Hotel e LocalBusiness
 
-**Aggiungi SpeakableSpecification alle tue tre pagine di destinazione principali.** Gli assistenti vocali — che gestiscono sempre più query di viaggio — saltano le pagine che ne sono prive. Il costo di aggiunta è basso; il costo di visibilità della sua assenza cresce velocemente.
+Assicurati che nome, indirizzo, telefono, GeoCoordinates e AggregateRating siano valorizzati e coerenti tra il tuo sito diretto, il tuo Google Business Profile e le directory principali. Gli assistenti AI confrontano questi dati — eventuali incongruenze erodono la fiducia nella raccomandazione.
 
-**Crea blocchi di contenuto mirati per persona.** *«Per viaggiatori d'affari»*, *«Per famiglie»*, *«Per coppie»* — ciascuno con due o tre paragrafi di contenuto specifico per l'intento. Gli assistenti AI abbinano le raccomandazioni all'intento del viaggiatore, e le strutture senza segnali di intento vengono filtrate prima ancora di essere prese in considerazione.
+### Aggiungi riferimenti alle attrazioni vicine nello schema e nei testi
+
+*«A cinque minuti da St. Stephen's Green»* scritto nel testo va bene. La stessa affermazione collegata a un'entità `TouristAttraction` strutturata con riferimenti `@id` è ciò che gli assistenti AI analizzano davvero per verificare una raccomandazione locale.
+
+### Aggiungi SpeakableSpecification alle tue tre pagine di destinazione principali
+
+Gli assistenti vocali — che gestiscono sempre più query di viaggio — saltano le pagine che ne sono prive. Il costo di aggiunta è basso; il costo di visibilità della sua assenza cresce velocemente.
+
+### Crea blocchi di contenuto mirati per persona
+
+*«Per viaggiatori d'affari»*, *«Per famiglie»*, *«Per coppie»* — ciascuno con due o tre paragrafi di contenuto specifico per l'intento. Gli assistenti AI abbinano le raccomandazioni all'intento del viaggiatore, e le strutture senza segnali di intento vengono filtrate prima ancora di essere prese in considerazione.
 
 ## La finestra dei 90 giorni
 

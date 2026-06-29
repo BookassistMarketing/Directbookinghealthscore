@@ -21,11 +21,17 @@ Los hoteles que hacen crecer los ingresos directos tratan la avalancha del veran
 
 ## Tres movimientos que hacer antes de que acabe la avalancha
 
-**Captura un email verificado en el check in, siempre.** Una reserva OTA te da una dirección enmascarada que desaparece en cuanto el huésped se va. Un breve paso en el check in que confirme un email de contacto real, planteado alrededor de la llave digital, el acceso al wifi o la confirmación de reserva, convierte a un huésped OTA anónimo en alguien al que puedes llegar directamente durante años.
+### Captura un email verificado en el check in, siempre
 
-**Registra una preferencia por huésped.** No necesitas un perfil completo. Un campo útil, un tipo de habitación, una ocasión especial, una nota dietética, un motivo de llegada, basta para personalizar el próximo mensaje. Un huésped que celebró un aniversario contigo en agosto es una reserva directa casi segura el próximo agosto si lo recuerdas y le escribes.
+Una reserva OTA te da una dirección enmascarada que desaparece en cuanto el huésped se va. Un breve paso en el check in que confirme un email de contacto real, planteado alrededor de la llave digital, el acceso al wifi o la confirmación de reserva, convierte a un huésped OTA anónimo en alguien al que puedes llegar directamente durante años.
 
-**Etiqueta el canal por el que llegaron.** Saber qué huéspedes de verano vinieron vía OTA te dice exactamente a quién conviene ganar para el directo. Estos son los huéspedes que merecen una oferta de otoño a medida, porque convertirlos una vez elimina una comisión que de otro modo pagarías en cada estancia futura.
+### Registra una preferencia por huésped
+
+No necesitas un perfil completo. Un campo útil, un tipo de habitación, una ocasión especial, una nota dietética, un motivo de llegada, basta para personalizar el próximo mensaje. Un huésped que celebró un aniversario contigo en agosto es una reserva directa casi segura el próximo agosto si lo recuerdas y le escribes.
+
+### Etiqueta el canal por el que llegaron
+
+Saber qué huéspedes de verano vinieron vía OTA te dice exactamente a quién conviene ganar para el directo. Estos son los huéspedes que merecen una oferta de otoño a medida, porque convertirlos una vez elimina una comisión que de otro modo pagarías en cada estancia futura.
 
 ## De la estancia de verano a la reserva de invierno
 

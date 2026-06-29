@@ -21,11 +21,17 @@ There is a second quiet advantage. A meaningful share of vouchers are never rede
 
 ## The Three Audiences Buying in Summer
 
-**The current guest.** Someone who is enjoying their stay right now is primed to buy a return visit or to gift one. A simple prompt at checkout, or a tasteful card in the room, turns a happy moment into a future booking.
+### The current guest
 
-**The gift buyer.** Vouchers are a natural present for birthdays, anniversaries, weddings and the festive season ahead. A guest who loved their summer stay is an ideal advocate to buy your hotel as a gift for friends and family, introducing you to people who have never stayed before.
+Someone who is enjoying their stay right now is primed to buy a return visit or to gift one. A simple prompt at checkout, or a tasteful card in the room, turns a happy moment into a future booking.
 
-**The lapsed guest.** A late summer voucher campaign to past guests, framed around a treat for the darker months, reactivates relationships that would otherwise go cold until next year.
+### The gift buyer
+
+Vouchers are a natural present for birthdays, anniversaries, weddings and the festive season ahead. A guest who loved their summer stay is an ideal advocate to buy your hotel as a gift for friends and family, introducing you to people who have never stayed before.
+
+### The lapsed guest
+
+A late summer voucher campaign to past guests, framed around a treat for the darker months, reactivates relationships that would otherwise go cold until next year.
 
 ## Making It Work in Practice
 

@@ -19,11 +19,17 @@ La mayoría de los hoteles cae en la dependencia de las OTA gradualmente. Una nu
 
 Tres brechas tecnológicas aceleran esto:
 
-**1. Un motor de reservas débil o ausente.** Si tu motor de reservas directas es lento, está mal diseñado o no muestra tarifas competitivas, los huéspedes lo abandonarán y reservarán en la OTA. Los estudios demuestran consistentemente que los motores de reservas con más de tres pasos pierden más del 40% de los usuarios.
+### 1. Un motor de reservas débil o ausente
 
-**2. Sin monitoreo de paridad de tarifas.** Las OTA ocasionalmente ofrecen precios por debajo de tu tarifa directa a través de programas de descuento o precios opacos. Cuando los huéspedes encuentran una tarifa más barata en Booking.com que en tu propio sitio web, has perdido permanentemente esa relación de reserva directa.
+Si tu motor de reservas directas es lento, está mal diseñado o no muestra tarifas competitivas, los huéspedes lo abandonarán y reservarán en la OTA. Los estudios demuestran consistentemente que los motores de reservas con más de tres pasos pierden más del 40% de los usuarios.
 
-**3. Sin CRM ni sistema de retención de huéspedes.** Un huésped que reserva a través de una OTA es cliente de la OTA, no tuyo. No recibes ningún correo electrónico, ningún dato de preferencias, nada con lo que construir una relación. Sin un CRM que capture datos de reservas directas, no puedes ejecutar campañas de fidelización, ventas adicionales previas a la llegada ni ofertas de visitas de retorno.
+### 2. Sin monitoreo de paridad de tarifas
+
+Las OTA ocasionalmente ofrecen precios por debajo de tu tarifa directa a través de programas de descuento o precios opacos. Cuando los huéspedes encuentran una tarifa más barata en Booking.com que en tu propio sitio web, has perdido permanentemente esa relación de reserva directa.
+
+### 3. Sin CRM ni sistema de retención de huéspedes
+
+Un huésped que reserva a través de una OTA es cliente de la OTA, no tuyo. No recibes ningún correo electrónico, ningún dato de preferencias, nada con lo que construir una relación. Sin un CRM que capture datos de reservas directas, no puedes ejecutar campañas de fidelización, ventas adicionales previas a la llegada ni ofertas de visitas de retorno.
 
 ## El Coste Real en 12 Meses
 
@@ -33,13 +39,21 @@ Considera un hotel de 40 habitaciones con una ocupación promedio del 70% a €1
 
 El punto de partida más efectivo no es la publicidad pagada ni las guerras de precios — es arreglar la infraestructura tecnológica que hace que la reserva directa sea menos atractiva de lo que debería ser.
 
-**Audita tu motor de reservas.** Cronometra el proceso de checkout de principio a fin. Si toma más de dos minutos o requiere más de cuatro clics, estás perdiendo reservas.
+### Audita tu motor de reservas
 
-**Revisa tu Perfil de Google Business.** Asegúrate de que tu enlace de reserva directa aparezca de forma prominente y que tus tarifas igualen o superen a las OTA mostradas en los resultados de Google Hotel Ads.
+Cronometra el proceso de checkout de principio a fin. Si toma más de dos minutos o requiere más de cuatro clics, estás perdiendo reservas.
 
-**Implementa una secuencia de emails post-estancia.** Incluso un flujo simple de tres emails — agradecimiento, solicitud de feedback, oferta de retorno — puede recuperar el 8–12% de los huéspedes que de otro modo reservarían su próxima estancia vía OTA.
+### Revisa tu Perfil de Google Business
 
-**Usa metabuscadores para competir con tu propia tarifa.** Plataformas como Google Hotel Ads y Trivago te permiten mostrar tu tarifa directa junto a las tarifas de las OTA. Los hoteles que invierten incluso €500 al mes en metabuscadores típicamente ven un retorno de 3:1 en gasto publicitario a través de reservas directas.
+Asegúrate de que tu enlace de reserva directa aparezca de forma prominente y que tus tarifas igualen o superen a las OTA mostradas en los resultados de Google Hotel Ads.
+
+### Implementa una secuencia de emails post-estancia
+
+Incluso un flujo simple de tres emails — agradecimiento, solicitud de feedback, oferta de retorno — puede recuperar el 8–12% de los huéspedes que de otro modo reservarían su próxima estancia vía OTA.
+
+### Usa metabuscadores para competir con tu propia tarifa
+
+Plataformas como Google Hotel Ads y Trivago te permiten mostrar tu tarifa directa junto a las tarifas de las OTA. Los hoteles que invierten incluso €500 al mes en metabuscadores típicamente ven un retorno de 3:1 en gasto publicitario a través de reservas directas.
 
 ## El Efecto Compuesto de Cerrar Estas Brechas
 

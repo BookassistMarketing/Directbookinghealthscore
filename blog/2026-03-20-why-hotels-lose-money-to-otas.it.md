@@ -19,11 +19,17 @@ La maggior parte degli hotel cade nella dipendenza dalle OTA gradualmente. Una n
 
 Tre lacune tecnologiche accelerano questo processo:
 
-**1. Un booking engine debole o assente.** Se il tuo booking engine per prenotazioni dirette è lento, mal progettato o non mostra tariffe competitive, gli ospiti lo abbandoneranno e prenoteranno sull'OTA. Gli studi dimostrano costantemente che i booking engine con più di tre passaggi perdono oltre il 40% degli utenti.
+### 1. Un booking engine debole o assente
 
-**2. Nessun monitoraggio della rate parity.** Le OTA occasionalmente sottoquotano la tua tariffa diretta attraverso programmi di sconto o prezzi opachi. Quando gli ospiti trovano una tariffa più bassa su Booking.com rispetto al tuo sito web, hai perso definitivamente quella relazione di prenotazione diretta.
+Se il tuo booking engine per prenotazioni dirette è lento, mal progettato o non mostra tariffe competitive, gli ospiti lo abbandoneranno e prenoteranno sull'OTA. Gli studi dimostrano costantemente che i booking engine con più di tre passaggi perdono oltre il 40% degli utenti.
 
-**3. Nessun CRM o sistema di fidelizzazione degli ospiti.** Un ospite che prenota tramite un'OTA è cliente dell'OTA, non tuo. Non ricevi alcun indirizzo email, nessun dato sulle preferenze, nulla su cui costruire una relazione. Senza un CRM che cattura i dati dei prenotanti diretti, non puoi gestire campagne fedeltà, upselling pre-arrivo o offerte per visite di ritorno.
+### 2. Nessun monitoraggio della rate parity
+
+Le OTA occasionalmente sottoquotano la tua tariffa diretta attraverso programmi di sconto o prezzi opachi. Quando gli ospiti trovano una tariffa più bassa su Booking.com rispetto al tuo sito web, hai perso definitivamente quella relazione di prenotazione diretta.
+
+### 3. Nessun CRM o sistema di fidelizzazione degli ospiti
+
+Un ospite che prenota tramite un'OTA è cliente dell'OTA, non tuo. Non ricevi alcun indirizzo email, nessun dato sulle preferenze, nulla su cui costruire una relazione. Senza un CRM che cattura i dati dei prenotanti diretti, non puoi gestire campagne fedeltà, upselling pre-arrivo o offerte per visite di ritorno.
 
 ## Il Costo Reale su 12 Mesi
 
@@ -33,13 +39,21 @@ Considera un hotel di 40 camere con un'occupazione media del 70% a €140 di tar
 
 Il punto di partenza più efficace non è la pubblicità a pagamento o le guerre di prezzo — è sistemare l'infrastruttura tecnologica che rende la prenotazione diretta meno attraente di quanto dovrebbe essere.
 
-**Fai un audit del tuo booking engine.** Cronometra il processo di checkout dall'inizio alla fine. Se richiede più di due minuti o più di quattro click, stai perdendo prenotazioni.
+### Fai un audit del tuo booking engine
 
-**Controlla il tuo Profilo Google Business.** Assicurati che il tuo link per prenotazioni dirette appaia in evidenza e che le tue tariffe siano uguali o migliori delle OTA mostrate nei risultati di Google Hotel Ads.
+Cronometra il processo di checkout dall'inizio alla fine. Se richiede più di due minuti o più di quattro click, stai perdendo prenotazioni.
 
-**Implementa una sequenza email post-soggiorno.** Anche un semplice flusso di tre email — ringraziamento, richiesta feedback, offerta di ritorno — può recuperare l'8–12% degli ospiti che altrimenti prenoterebbero il prossimo soggiorno tramite OTA.
+### Controlla il tuo Profilo Google Business
 
-**Usa il metasearch per competere sulla tua tariffa.** Piattaforme come Google Hotel Ads e Trivago ti permettono di mostrare la tua tariffa diretta accanto a quelle delle OTA. Gli hotel che investono anche solo €500 al mese in metasearch tipicamente vedono un ritorno di 3:1 sulla spesa pubblicitaria attraverso prenotazioni dirette.
+Assicurati che il tuo link per prenotazioni dirette appaia in evidenza e che le tue tariffe siano uguali o migliori delle OTA mostrate nei risultati di Google Hotel Ads.
+
+### Implementa una sequenza email post-soggiorno
+
+Anche un semplice flusso di tre email — ringraziamento, richiesta feedback, offerta di ritorno — può recuperare l'8–12% degli ospiti che altrimenti prenoterebbero il prossimo soggiorno tramite OTA.
+
+### Usa il metasearch per competere sulla tua tariffa
+
+Piattaforme come Google Hotel Ads e Trivago ti permettono di mostrare la tua tariffa diretta accanto a quelle delle OTA. Gli hotel che investono anche solo €500 al mese in metasearch tipicamente vedono un ritorno di 3:1 sulla spesa pubblicitaria attraverso prenotazioni dirette.
 
 ## L'Effetto Composto del Colmare Queste Lacune
 

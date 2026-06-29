@@ -21,11 +21,17 @@ C'è un secondo vantaggio silenzioso. Una quota significativa di voucher non vie
 
 ## I tre pubblici che comprano in estate
 
-**L'ospite attuale.** Chi sta godendo del proprio soggiorno proprio adesso è pronto a comprare una visita di ritorno o a regalarla. Un semplice invito al checkout, o un biglietto curato in camera, trasforma un momento felice in una futura prenotazione.
+### L'ospite attuale
 
-**Chi compra per regalare.** I voucher sono un regalo naturale per compleanni, anniversari, matrimoni e per le festività in arrivo. Un ospite che ha amato il proprio soggiorno estivo è un sostenitore ideale per comprare il tuo hotel come regalo per amici e famiglia, presentandoti a persone che non hanno mai soggiornato prima.
+Chi sta godendo del proprio soggiorno proprio adesso è pronto a comprare una visita di ritorno o a regalarla. Un semplice invito al checkout, o un biglietto curato in camera, trasforma un momento felice in una futura prenotazione.
 
-**L'ospite inattivo.** Una campagna voucher di fine estate verso ospiti passati, costruita attorno a un piccolo piacere per i mesi più bui, riattiva relazioni che altrimenti si raffredderebbero fino all'anno prossimo.
+### Chi compra per regalare
+
+I voucher sono un regalo naturale per compleanni, anniversari, matrimoni e per le festività in arrivo. Un ospite che ha amato il proprio soggiorno estivo è un sostenitore ideale per comprare il tuo hotel come regalo per amici e famiglia, presentandoti a persone che non hanno mai soggiornato prima.
+
+### L'ospite inattivo
+
+Una campagna voucher di fine estate verso ospiti passati, costruita attorno a un piccolo piacere per i mesi più bui, riattiva relazioni che altrimenti si raffredderebbero fino all'anno prossimo.
 
 ## Farlo funzionare nella pratica
 

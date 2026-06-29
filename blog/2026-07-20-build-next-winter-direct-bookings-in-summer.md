@@ -21,11 +21,17 @@ The hotels that grow direct revenue treat the summer rush as a data capture wind
 
 ## Three Moves to Make Before the Rush Ends
 
-**Capture a verified email at check in, every time.** An OTA booking gives you a masked address that disappears the moment the guest leaves. A short check in step that confirms a real contact email, framed around the digital key, the wifi login or the booking confirmation, converts an anonymous OTA guest into someone you can reach directly for years.
+### Capture a verified email at check in, every time
 
-**Record one preference per guest.** You do not need a full profile. One useful field, a room type, a special occasion, a dietary note, an arrival reason, is enough to personalise the next message. A guest who celebrated an anniversary with you in August is a near certain direct booking next August if you remember and reach out.
+An OTA booking gives you a masked address that disappears the moment the guest leaves. A short check in step that confirms a real contact email, framed around the digital key, the wifi login or the booking confirmation, converts an anonymous OTA guest into someone you can reach directly for years.
 
-**Tag the channel they arrived through.** Knowing which summer guests came via OTA tells you exactly who to win over to direct. These are the guests worth a tailored autumn offer, because converting them once removes a commission you would otherwise pay on every future stay.
+### Record one preference per guest
+
+You do not need a full profile. One useful field, a room type, a special occasion, a dietary note, an arrival reason, is enough to personalise the next message. A guest who celebrated an anniversary with you in August is a near certain direct booking next August if you remember and reach out.
+
+### Tag the channel they arrived through
+
+Knowing which summer guests came via OTA tells you exactly who to win over to direct. These are the guests worth a tailored autumn offer, because converting them once removes a commission you would otherwise pay on every future stay.
 
 ## From Summer Stay to Winter Booking
 

@@ -21,23 +21,37 @@ Ekonomia jest nieporównywalna. Dane branżowe pokazują, że kampanie retention
 
 ## Trzy poziomy hotelowych danych first-party
 
-**Dane tożsamości.** Email, telefon, adres — to, co gość daje przy rezerwacji. To podłoga. Większość hoteli zbiera to, bo musi. Niewielu używa tego strategicznie, gdy gość już wyszedł.
+### Dane tożsamości
 
-**Dane behawioralne.** Historia rezerwacji, preferencja pokoju, długość pobytu, wzór dnia tygodnia, kanał pochodzenia, wydatek na pobyt. To zamienia tożsamość w segmentację. Gość, który dwukrotnie zarezerwował w niedzielę na piątkowy wieczór, jest oczywistym kandydatem do retargetingu w niedzielę poprzedzającą jego prawdopodobny kolejny wyjazd.
+Email, telefon, adres — to, co gość daje przy rezerwacji. To podłoga. Większość hoteli zbiera to, bo musi. Niewielu używa tego strategicznie, gdy gość już wyszedł.
 
-**Dane preferencji.** Zadeklarowane preferencje — rodzaj poduszki, godzina śniadania, potrzeby związane z dostępnością, specjalne okazje. Zbierane przy rezerwacji, przy meldowaniu lub przez ankietę pobytową. To sprawia, że relacja z hotelem wydaje się osobista, a nie transakcyjna. Ma też wybitny wpływ na retencję: goście, których preferencje są zapamiętywane, są 3× bardziej skłonni ponownie zarezerwować bezpośrednio.
+### Dane behawioralne
+
+Historia rezerwacji, preferencja pokoju, długość pobytu, wzór dnia tygodnia, kanał pochodzenia, wydatek na pobyt. To zamienia tożsamość w segmentację. Gość, który dwukrotnie zarezerwował w niedzielę na piątkowy wieczór, jest oczywistym kandydatem do retargetingu w niedzielę poprzedzającą jego prawdopodobny kolejny wyjazd.
+
+### Dane preferencji
+
+Zadeklarowane preferencje — rodzaj poduszki, godzina śniadania, potrzeby związane z dostępnością, specjalne okazje. Zbierane przy rezerwacji, przy meldowaniu lub przez ankietę pobytową. To sprawia, że relacja z hotelem wydaje się osobista, a nie transakcyjna. Ma też wybitny wpływ na retencję: goście, których preferencje są zapamiętywane, są 3× bardziej skłonni ponownie zarezerwować bezpośrednio.
 
 Hotel prowadzący spójną strategię first-party używa wszystkich trzech poziomów razem — tożsamości, by dotrzeć, zachowania, by zsynchronizować czas, preferencji, by personalizować.
 
 ## Czego brakuje większości hoteli
 
-**Ujednoliconego rekordu gościa.** Silnik rezerwacji, PMS, POS restauracji, system lojalnościowy i platforma email zwykle przechowują częściowe profile gości w różnych formatach. Gość, który zarezerwował bezpośrednio, jadł w restauracji i dzwonił po zabieg w SPA, istnieje jako trzy osobne rekordy w trzech różnych systemach — a Twój zespół marketingowy widzi tylko rezerwację. Ujednolicenie to fundament wartości first-party i najczęstsza pojedyncza luka.
+### Ujednoliconego rekordu gościa
 
-**Zgody, która naprawdę pozwala na użycie.** Wiele hoteli zbiera adresy email bez jasnej zgody marketingowej — co oznacza, że prawnie nie mogą wysyłać komunikatów promocyjnych. RODO i podobne regulacje wymagają wyraźnego opt-inu na marketing. Naprawa jest w przepływie rezerwacji: czytelne, dobrze umieszczone pole zgody z deklarowaną wartością.
+Silnik rezerwacji, PMS, POS restauracji, system lojalnościowy i platforma email zwykle przechowują częściowe profile gości w różnych formatach. Gość, który zarezerwował bezpośrednio, jadł w restauracji i dzwonił po zabieg w SPA, istnieje jako trzy osobne rekordy w trzech różnych systemach — a Twój zespół marketingowy widzi tylko rezerwację. Ujednolicenie to fundament wartości first-party i najczęstsza pojedyncza luka.
 
-**Triggerów behawioralnych, których nikt nie wdrożył.** Najlepiej konwertującym mailem w branży hotelowej jest reaktywacja „zauważyliśmy, że nie rezerwowałeś od 14 miesięcy". Drugim jest pre-stay upsell wysyłany 7 dni przed przyjazdem. Większość hoteli nie skonfigurowała żadnego z nich.
+### Zgody, która naprawdę pozwala na użycie
 
-**Pętli pomiarowej.** Programy first-party, które nie pokazują ROI, prawie zawsze upadają na tym samym kroku: atrybucji. Rezerwacja z niedzielnego wieczornego maila jest niewidoczna dla raportu kampanii, chyba że platforma zszyje kliknięcie maila z rezerwacją. Bez tego marketing nie potrafi obronić budżetu, a program atrofizuje.
+Wiele hoteli zbiera adresy email bez jasnej zgody marketingowej — co oznacza, że prawnie nie mogą wysyłać komunikatów promocyjnych. RODO i podobne regulacje wymagają wyraźnego opt-inu na marketing. Naprawa jest w przepływie rezerwacji: czytelne, dobrze umieszczone pole zgody z deklarowaną wartością.
+
+### Triggerów behawioralnych, których nikt nie wdrożył
+
+Najlepiej konwertującym mailem w branży hotelowej jest reaktywacja „zauważyliśmy, że nie rezerwowałeś od 14 miesięcy". Drugim jest pre-stay upsell wysyłany 7 dni przed przyjazdem. Większość hoteli nie skonfigurowała żadnego z nich.
+
+### Pętli pomiarowej
+
+Programy first-party, które nie pokazują ROI, prawie zawsze upadają na tym samym kroku: atrybucji. Rezerwacja z niedzielnego wieczornego maila jest niewidoczna dla raportu kampanii, chyba że platforma zszyje kliknięcie maila z rezerwacją. Bez tego marketing nie potrafi obronić budżetu, a program atrofizuje.
 
 ## Co program first-party przynosi w 12 miesięcy
 
@@ -52,13 +66,21 @@ To nie są aspiracyjne liczby. To typowe dla obiektów, które kończą pracę t
 
 ## Od czego zacząć
 
-**Skontroluj rekord gościa.** Ile systemów trzyma profile gości? Czy Twój zespół marketingowy widzi pełny obraz pojedynczego gościa w jednym miejscu? Jeśli nie, to pierwsza luka.
+### Skontroluj rekord gościa
 
-**Skontroluj swoją zgodę.** Wyciągnij tekst zgody z przepływu rezerwacji. Czy jasno zezwala na marketing? Czy mówi, co gość otrzyma? Czy gość czytający to dzisiaj aktywnie by się zapisał?
+Ile systemów trzyma profile gości? Czy Twój zespół marketingowy widzi pełny obraz pojedynczego gościa w jednym miejscu? Jeśli nie, to pierwsza luka.
 
-**Skontroluj listę triggerów.** Czy masz ankietę pobytową? Pre-stay upsell? 12-miesięczną reaktywację? Wiadomość rocznicową? Każdy brakujący trigger to bezpośredni przychód zostawiany w puli OTA.
+### Skontroluj swoją zgodę
 
-**Podłącz atrybucję.** Jakakolwiek platforma email czy CRM, której używasz, powinna umieć zszywać kliknięcia maili z rezerwacjami. Jeśli nie potrafi, prowadzisz program, którego nie potrafisz zmierzyć — a niemierzona marketingowo działalność z czasem zostaje przycięta.
+Wyciągnij tekst zgody z przepływu rezerwacji. Czy jasno zezwala na marketing? Czy mówi, co gość otrzyma? Czy gość czytający to dzisiaj aktywnie by się zapisał?
+
+### Skontroluj listę triggerów
+
+Czy masz ankietę pobytową? Pre-stay upsell? 12-miesięczną reaktywację? Wiadomość rocznicową? Każdy brakujący trigger to bezpośredni przychód zostawiany w puli OTA.
+
+### Podłącz atrybucję
+
+Jakakolwiek platforma email czy CRM, której używasz, powinna umieć zszywać kliknięcia maili z rezerwacjami. Jeśli nie potrafi, prowadzisz program, którego nie potrafisz zmierzyć — a niemierzona marketingowo działalność z czasem zostaje przycięta.
 
 ## Gdzie pasuje Bookassist
 

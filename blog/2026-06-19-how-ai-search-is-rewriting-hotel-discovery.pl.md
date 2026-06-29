@@ -19,11 +19,17 @@ Klasyczne SEO Google nagradza gęstość słów kluczowych, linki przychodzące 
 
 Trzy sygnały liczą się najbardziej:
 
-**1. Głębia danych strukturalnych.** Asystenci AI wyciągają jednostki (nazwa Twojego hotelu, adres, udogodnienia, przedział cenowy), relacje (które pokoje należą do której nieruchomości, jakie atrakcje są w pobliżu) i dopasowania intencji (czy ten obiekt pasuje podróżnemu biznesowemu, rodzinie, parze). Hotele z ubogim oznaczeniem schema nie pojawiają się w odpowiedziach generatywnych, bo asystent nie potrafi zbudować pewnej rekomendacji.
+### 1. Głębia danych strukturalnych
 
-**2. Konwersacyjne pokrycie treści.** Modele AI szukają sformułowań w formie pytań — *„jak daleko obiekt znajduje się od lotniska?"*, *„czy śniadanie jest wliczone?"*, *„czy jest parking?"* — i priorytetyzują strony, które odpowiadają na nie zwykłym językiem. Schema FAQPage to dziś podstawowe oczekiwanie, a nie dodatek.
+Asystenci AI wyciągają jednostki (nazwa Twojego hotelu, adres, udogodnienia, przedział cenowy), relacje (które pokoje należą do której nieruchomości, jakie atrakcje są w pobliżu) i dopasowania intencji (czy ten obiekt pasuje podróżnemu biznesowemu, rodzinie, parze). Hotele z ubogim oznaczeniem schema nie pojawiają się w odpowiedziach generatywnych, bo asystent nie potrafi zbudować pewnej rekomendacji.
 
-**3. Łączenie jednostek.** Strona hotelu, która wspomina „blisko St. Stephen's Green" bez wyraźnego powiązania tej jednostki z grafem wiedzy, nie daje asystentowi AI niczego do weryfikacji. Hotele z linkami `@id`, GeoCoordinates i odwołaniami sameAs do Google Business Profile i TripAdvisor są znacznie częściej cytowane.
+### 2. Konwersacyjne pokrycie treści
+
+Modele AI szukają sformułowań w formie pytań — *„jak daleko obiekt znajduje się od lotniska?"*, *„czy śniadanie jest wliczone?"*, *„czy jest parking?"* — i priorytetyzują strony, które odpowiadają na nie zwykłym językiem. Schema FAQPage to dziś podstawowe oczekiwanie, a nie dodatek.
+
+### 3. Łączenie jednostek
+
+Strona hotelu, która wspomina „blisko St. Stephen's Green" bez wyraźnego powiązania tej jednostki z grafem wiedzy, nie daje asystentowi AI niczego do weryfikacji. Hotele z linkami `@id`, GeoCoordinates i odwołaniami sameAs do Google Business Profile i TripAdvisor są znacznie częściej cytowane.
 
 ## Ukryta przewaga OTA w wyszukiwaniu generatywnym
 
@@ -35,15 +41,25 @@ To nowy wyciek prowizji. Hotele, które pięć lat temu rozwiązały parytet Met
 
 Rozwiązaniem nie jest przebudowa — to przemyślana sekwencja strukturalnych dodatków do strony, którą już masz.
 
-**Dodaj schema FAQPage z co najmniej ośmioma wpisami.** Pokryj pytania, które każdy gość zadaje sobie przed rezerwacją: lokalizacja, śniadanie, parking, godzina zameldowania, polityka rodzinna, dostępność, anulacja, depozyt. Każdy wpis powinien być prawdziwym pytaniem i prawdziwą odpowiedzią w jasnej prozie, oznaczonym schematami `Question` i `Answer`.
+### Dodaj schema FAQPage z co najmniej ośmioma wpisami
 
-**Wzmocnij swoje jednostki Hotel i LocalBusiness.** Upewnij się, że nazwa, adres, telefon, GeoCoordinates i AggregateRating są wypełnione i spójne pomiędzy Twoją stroną bezpośrednią, Google Business Profile i głównymi katalogami. Asystenci AI porównują te dane — wszelkie rozbieżności podkopują zaufanie do rekomendacji.
+Pokryj pytania, które każdy gość zadaje sobie przed rezerwacją: lokalizacja, śniadanie, parking, godzina zameldowania, polityka rodzinna, dostępność, anulacja, depozyt. Każdy wpis powinien być prawdziwym pytaniem i prawdziwą odpowiedzią w jasnej prozie, oznaczonym schematami `Question` i `Answer`.
 
-**Dodaj odwołania do pobliskich atrakcji w schema i treści.** *„Pięć minut od St. Stephen's Green"* w tekście to dobry początek. To samo zdanie powiązane ze strukturalną jednostką `TouristAttraction` z odwołaniami `@id` to to, co asystenci AI naprawdę analizują, aby zweryfikować lokalną rekomendację.
+### Wzmocnij swoje jednostki Hotel i LocalBusiness
 
-**Dodaj SpeakableSpecification do trzech najważniejszych stron docelowych.** Asystenci głosowi — coraz częściej obsługujący zapytania podróżnicze — pomijają strony bez tego oznaczenia. Koszt dodania jest niewielki; koszt utraty widoczności rośnie szybko.
+Upewnij się, że nazwa, adres, telefon, GeoCoordinates i AggregateRating są wypełnione i spójne pomiędzy Twoją stroną bezpośrednią, Google Business Profile i głównymi katalogami. Asystenci AI porównują te dane — wszelkie rozbieżności podkopują zaufanie do rekomendacji.
 
-**Stwórz bloki treści ukierunkowane na persony.** *„Dla podróżnych biznesowych"*, *„Dla rodzin"*, *„Dla par"* — każdy z dwoma lub trzema akapitami treści dopasowanej do intencji. Asystenci AI łączą rekomendacje z intencją podróżnego, a obiekty bez sygnałów intencji są odsiewane, zanim w ogóle zostaną rozważone.
+### Dodaj odwołania do pobliskich atrakcji w schema i treści
+
+*„Pięć minut od St. Stephen's Green"* w tekście to dobry początek. To samo zdanie powiązane ze strukturalną jednostką `TouristAttraction` z odwołaniami `@id` to to, co asystenci AI naprawdę analizują, aby zweryfikować lokalną rekomendację.
+
+### Dodaj SpeakableSpecification do trzech najważniejszych stron docelowych
+
+Asystenci głosowi — coraz częściej obsługujący zapytania podróżnicze — pomijają strony bez tego oznaczenia. Koszt dodania jest niewielki; koszt utraty widoczności rośnie szybko.
+
+### Stwórz bloki treści ukierunkowane na persony
+
+*„Dla podróżnych biznesowych"*, *„Dla rodzin"*, *„Dla par"* — każdy z dwoma lub trzema akapitami treści dopasowanej do intencji. Asystenci AI łączą rekomendacje z intencją podróżnego, a obiekty bez sygnałów intencji są odsiewane, zanim w ogóle zostaną rozważone.
 
 ## Okno 90 dni
 

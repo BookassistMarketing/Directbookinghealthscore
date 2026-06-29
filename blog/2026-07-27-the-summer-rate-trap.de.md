@@ -15,11 +15,17 @@ Ein Hotel kann bei 95 Prozent Auslastung laufen und trotzdem einen großen Antei
 
 ## Die drei Lecks, die sich hinter hoher Nachfrage verbergen
 
-**Leck eins: OTA-Provision auf Nachfrage, die Sie ohnehin besaßen.** In der Hochsaison ist ein nennenswerter Anteil der OTA-Buchungen Gäste, die Sie ohnehin direkt gebucht hätten. Sie suchten Ihr Hotel namentlich, sahen zuerst das OTA-Listing und klickten es aus Gewohnheit an. Sie haben das Zimmer gefüllt, aber Sie haben 15 bis 25 Prozent Provision auf einen Gast gezahlt, der bereits Ihrer war. Hohe Nachfrage macht es schmerzlos, das zu ignorieren, weil das Zimmer ohnehin verkauft wurde.
+### Leck eins: OTA-Provision auf Nachfrage, die Sie ohnehin besaßen
 
-**Leck zwei: Ratenparität, die wegrutscht, während Sie nicht hinsehen.** In den geschäftigen Monaten gilt die Aufmerksamkeit dem Betrieb, nicht der Ratenüberwachung. Genau dann kann ein OTA-Rabattprogramm oder eine undurchsichtige Paketrate Ihren Direktpreis unterbieten. Ein Gast, der auf Booking.com eine günstigere Rate findet als auf Ihrer eigenen Website, hat gerade gelernt, Sie nie wieder direkt zu buchen. Eine einzige weggerutschte Rate im Juli kann Sie über Jahre Direktbuchungen kosten.
+In der Hochsaison ist ein nennenswerter Anteil der OTA-Buchungen Gäste, die Sie ohnehin direkt gebucht hätten. Sie suchten Ihr Hotel namentlich, sahen zuerst das OTA-Listing und klickten es aus Gewohnheit an. Sie haben das Zimmer gefüllt, aber Sie haben 15 bis 25 Prozent Provision auf einen Gast gezahlt, der bereits Ihrer war. Hohe Nachfrage macht es schmerzlos, das zu ignorieren, weil das Zimmer ohnehin verkauft wurde.
 
-**Leck drei: eine Buchungsmaschine, die unter Druck schlechter konvertiert.** Der Sommer-Traffic ist höher, aber wenn Ihre Buchungsmaschine langsam, sperrig oder auf Ihren eigenen Seiten unter OTA-Links vergraben ist, konvertieren die zusätzlichen Besucher zu einer geringeren Rate und laufen zur OTA über. Das Zimmer verkauft sich trotzdem. Es verkauft sich nur über den teuersten verfügbaren Kanal.
+### Leck zwei: Ratenparität, die wegrutscht, während Sie nicht hinsehen
+
+In den geschäftigen Monaten gilt die Aufmerksamkeit dem Betrieb, nicht der Ratenüberwachung. Genau dann kann ein OTA-Rabattprogramm oder eine undurchsichtige Paketrate Ihren Direktpreis unterbieten. Ein Gast, der auf Booking.com eine günstigere Rate findet als auf Ihrer eigenen Website, hat gerade gelernt, Sie nie wieder direkt zu buchen. Eine einzige weggerutschte Rate im Juli kann Sie über Jahre Direktbuchungen kosten.
+
+### Leck drei: eine Buchungsmaschine, die unter Druck schlechter konvertiert
+
+Der Sommer-Traffic ist höher, aber wenn Ihre Buchungsmaschine langsam, sperrig oder auf Ihren eigenen Seiten unter OTA-Links vergraben ist, konvertieren die zusätzlichen Besucher zu einer geringeren Rate und laufen zur OTA über. Das Zimmer verkauft sich trotzdem. Es verkauft sich nur über den teuersten verfügbaren Kanal.
 
 ## Was die Hochsaison real kostet
 

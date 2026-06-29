@@ -21,11 +21,17 @@ Il y a un second avantage discret. Une part significative des bons n'est jamais 
 
 ## Les trois publics qui achètent en été
 
-**Le client présent.** Quelqu'un qui profite de son séjour en ce moment même est prêt à acheter une visite de retour ou à en offrir une. Une simple incitation au moment du départ, ou une carte élégante dans la chambre, transforme un moment heureux en future réservation.
+### Le client présent
 
-**L'acheteur cadeau.** Les bons sont un présent naturel pour les anniversaires, les noces, les mariages et la saison des fêtes à venir. Un client qui a adoré son séjour estival est un ambassadeur idéal pour acheter votre hôtel en cadeau à ses amis et à sa famille, vous présentant à des personnes qui n'ont jamais séjourné chez vous.
+Quelqu'un qui profite de son séjour en ce moment même est prêt à acheter une visite de retour ou à en offrir une. Une simple incitation au moment du départ, ou une carte élégante dans la chambre, transforme un moment heureux en future réservation.
 
-**Le client perdu de vue.** Une campagne de bons cadeaux en fin d'été auprès des anciens clients, articulée autour d'une douceur pour les mois sombres, réactive des relations qui resteraient sinon en sommeil jusqu'à l'année prochaine.
+### L'acheteur cadeau
+
+Les bons sont un présent naturel pour les anniversaires, les noces, les mariages et la saison des fêtes à venir. Un client qui a adoré son séjour estival est un ambassadeur idéal pour acheter votre hôtel en cadeau à ses amis et à sa famille, vous présentant à des personnes qui n'ont jamais séjourné chez vous.
+
+### Le client perdu de vue
+
+Une campagne de bons cadeaux en fin d'été auprès des anciens clients, articulée autour d'une douceur pour les mois sombres, réactive des relations qui resteraient sinon en sommeil jusqu'à l'année prochaine.
 
 ## Le faire fonctionner en pratique
 

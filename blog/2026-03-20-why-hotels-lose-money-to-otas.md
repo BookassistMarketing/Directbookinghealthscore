@@ -19,11 +19,17 @@ Most hotels fall into OTA dependency gradually. A new property signs up to gain 
 
 Three technology gaps accelerate this:
 
-**1. A weak or absent booking engine.** If your direct booking engine is slow, poorly designed, or doesn't show competitive rates, guests will abandon it and book on the OTA instead. Studies consistently show that booking engines with more than three steps lose over 40% of users.
+### 1. A weak or absent booking engine
 
-**2. No rate parity monitoring.** OTAs occasionally undercut your direct rate through discount programmes or opaque pricing. When guests find a cheaper rate on Booking.com than on your own website, you have permanently lost that direct booking relationship.
+If your direct booking engine is slow, poorly designed, or doesn't show competitive rates, guests will abandon it and book on the OTA instead. Studies consistently show that booking engines with more than three steps lose over 40% of users.
 
-**3. No CRM or guest retention system.** A guest who books through an OTA is the OTA's customer, not yours. You receive no email address, no preference data, nothing to build a relationship on. Without a CRM capturing direct booker data, you cannot run loyalty campaigns, pre-arrival upsells, or return visit offers.
+### 2. No rate parity monitoring
+
+OTAs occasionally undercut your direct rate through discount programmes or opaque pricing. When guests find a cheaper rate on Booking.com than on your own website, you have permanently lost that direct booking relationship.
+
+### 3. No CRM or guest retention system
+
+A guest who books through an OTA is the OTA's customer, not yours. You receive no email address, no preference data, nothing to build a relationship on. Without a CRM capturing direct booker data, you cannot run loyalty campaigns, pre-arrival upsells, or return visit offers.
 
 ## The Real Cost Over 12 Months
 
@@ -33,13 +39,21 @@ Consider a 40-room hotel averaging 70% occupancy at €140 average daily rate. A
 
 The most effective starting point is not paid advertising or price wars — it is fixing the technology infrastructure that makes direct booking less attractive than it should be.
 
-**Audit your booking engine.** Time the checkout process from start to finish. If it takes more than two minutes or requires more than four clicks, you are losing bookings.
+### Audit your booking engine
 
-**Check your Google Business Profile.** Ensure your direct booking link appears prominently and that your rates match or beat the OTAs shown in Google Hotel Ads results.
+Time the checkout process from start to finish. If it takes more than two minutes or requires more than four clicks, you are losing bookings.
 
-**Implement a post-stay email sequence.** Even a simple three-email flow — thank you, feedback request, return offer — can recover 8–12% of guests who would otherwise book their next stay via OTA.
+### Check your Google Business Profile
 
-**Use metasearch to compete on your own rate.** Platforms like Google Hotel Ads and Trivago allow you to display your direct rate alongside OTA rates. Hotels investing even €500 per month in metasearch typically see a 3:1 return on ad spend through direct bookings.
+Ensure your direct booking link appears prominently and that your rates match or beat the OTAs shown in Google Hotel Ads results.
+
+### Implement a post-stay email sequence
+
+Even a simple three-email flow — thank you, feedback request, return offer — can recover 8–12% of guests who would otherwise book their next stay via OTA.
+
+### Use metasearch to compete on your own rate
+
+Platforms like Google Hotel Ads and Trivago allow you to display your direct rate alongside OTA rates. Hotels investing even €500 per month in metasearch typically see a 3:1 return on ad spend through direct bookings.
 
 ## The Compound Effect of Fixing These Gaps
 

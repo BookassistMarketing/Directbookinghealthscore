@@ -17,25 +17,41 @@ Cela compte parce que les sites hôteliers sont anormalement lourds. Une page d'
 
 Les Core Web Vitals de Google sont trois chiffres qui déterminent ensemble si votre site est « rapide » selon le standard appliqué aujourd'hui par les moteurs de recherche et les voyageurs :
 
-**Largest Contentful Paint (LCP)** — combien de temps avant que le plus grand élément visible (souvent une image hero) ne soit affiché. Cible : moins de 2,5 secondes.
+### Largest Contentful Paint (LCP)
 
-**Interaction to Next Paint (INP)** — à quel point la page semble réactive aux taps et clics. Cible : moins de 200 millisecondes.
+— combien de temps avant que le plus grand élément visible (souvent une image hero) ne soit affiché. Cible : moins de 2,5 secondes.
 
-**Cumulative Layout Shift (CLS)** — à quel point la page saute pendant son chargement (publicités, bandeaux, images arrivant en retard). Cible : moins de 0,1.
+### Interaction to Next Paint (INP)
+
+— à quel point la page semble réactive aux taps et clics. Cible : moins de 200 millisecondes.
+
+### Cumulative Layout Shift (CLS)
+
+— à quel point la page saute pendant son chargement (publicités, bandeaux, images arrivant en retard). Cible : moins de 0,1.
 
 Ce ne sont pas seulement des facteurs de classement SEO (même s'ils le sont). C'est la différence entre un client qui atteint votre moteur de réservation et un client qui ferme l'onglet avant même d'avoir vu vos tarifs.
 
 ## Où les sites hôteliers échouent discrètement
 
-**Images hero surdimensionnées.** Un JPEG de 4 Mo du lobby paraît splendide sur un écran Mac et ruineux sur un téléphone 4G. Les sites hôteliers modernes servent une image hero de moins de 250 Ko en format WebP ou AVIF, avec des sources responsives pour différentes tailles d'écran. La plupart des sites hôteliers servent encore le même JPEG de 4 Mo à chaque appareil.
+### Images hero surdimensionnées
 
-**Scripts bloquant le rendu.** Moteurs de réservation, widgets de chat, pixels de tracking, outils d'A/B testing — chacun chargé de manière synchrone retarde le LCP de centaines de millisecondes. La solution est simple (chargement différé ou async) mais demande une discipline qui manque à la plupart des sites hôteliers en template.
+Un JPEG de 4 Mo du lobby paraît splendide sur un écran Mac et ruineux sur un téléphone 4G. Les sites hôteliers modernes servent une image hero de moins de 250 Ko en format WebP ou AVIF, avec des sources responsives pour différentes tailles d'écran. La plupart des sites hôteliers servent encore le même JPEG de 4 Mo à chaque appareil.
 
-**Bandeaux de cookies qui bloquent le contenu.** Une boîte de consentement qui pousse l'image hero hors écran tant qu'elle n'est pas acceptée contribue à la fois à l'échec du LCP et à un CLS élevé. Une implémentation moderne affiche le bandeau en superposition sans décaler la page sous-jacente.
+### Scripts bloquant le rendu
 
-**Iframes de moteur de réservation.** Un moteur de réservation chargé en iframe est une page distincte à l'intérieur de votre page, avec ses propres scripts, polices et tracking. C'est généralement l'élément le plus lent du site. Les plateformes modernes de réservation directe s'affichent en ligne dans le même DOM, partagent les polices et suppriment entièrement la pénalité d'iframe.
+Moteurs de réservation, widgets de chat, pixels de tracking, outils d'A/B testing — chacun chargé de manière synchrone retarde le LCP de centaines de millisecondes. La solution est simple (chargement différé ou async) mais demande une discipline qui manque à la plupart des sites hôteliers en template.
 
-**Vidéos hero en lecture automatique.** Un MP4 de 8 Mo en sourdine bouclant derrière du texte est le plus gros tueur de LCP sur les sites hôteliers. La solution consiste généralement à le remplacer par une image fixe et une interaction « lancer la vidéo ».
+### Bandeaux de cookies qui bloquent le contenu
+
+Une boîte de consentement qui pousse l'image hero hors écran tant qu'elle n'est pas acceptée contribue à la fois à l'échec du LCP et à un CLS élevé. Une implémentation moderne affiche le bandeau en superposition sans décaler la page sous-jacente.
+
+### Iframes de moteur de réservation
+
+Un moteur de réservation chargé en iframe est une page distincte à l'intérieur de votre page, avec ses propres scripts, polices et tracking. C'est généralement l'élément le plus lent du site. Les plateformes modernes de réservation directe s'affichent en ligne dans le même DOM, partagent les polices et suppriment entièrement la pénalité d'iframe.
+
+### Vidéos hero en lecture automatique
+
+Un MP4 de 8 Mo en sourdine bouclant derrière du texte est le plus gros tueur de LCP sur les sites hôteliers. La solution consiste généralement à le remplacer par une image fixe et une interaction « lancer la vidéo ».
 
 ## À quoi ressemble la vitesse rentable en 2026
 
@@ -57,15 +73,25 @@ C'est pourquoi les Core Web Vitals ne sont plus un sujet SEO. C'est un sujet de 
 
 ## Ce que les hôteliers doivent faire ce trimestre
 
-**Mesurer d'abord.** Passez votre site dans PageSpeed Insights et regardez la section « Field Data » — c'est ce que vivent les vrais utilisateurs, pas un test synthétique. Si le LCP dépasse 3 secondes, le site perd des réservations.
+### Mesurer d'abord
 
-**Auditer votre hero.** Si le hero de la page d'accueil est un JPEG de plus de 250 Ko ou une vidéo en autoplay, c'est la plus grosse correction à faire en premier.
+Passez votre site dans PageSpeed Insights et regardez la section « Field Data » — c'est ce que vivent les vrais utilisateurs, pas un test synthétique. Si le LCP dépasse 3 secondes, le site perd des réservations.
 
-**Inventorier vos scripts.** Tout script qui n'est pas le moteur de réservation, l'analytics ou strictement nécessaire doit être différé ou supprimé.
+### Auditer votre hero
 
-**Vérifier votre intégration du moteur de réservation.** S'il se charge en iframe, vous payez une lourde taxe de performance. Les plateformes de réservation modernes s'affichent en ligne.
+Si le hero de la page d'accueil est un JPEG de plus de 250 Ko ou une vidéo en autoplay, c'est la plus grosse correction à faire en premier.
 
-**Fixer un budget.** Décidez de la cible LCP mobile que le site doit atteindre, et traitez tout dépassement comme un bug en production, pas un « ce serait bien ».
+### Inventorier vos scripts
+
+Tout script qui n'est pas le moteur de réservation, l'analytics ou strictement nécessaire doit être différé ou supprimé.
+
+### Vérifier votre intégration du moteur de réservation
+
+S'il se charge en iframe, vous payez une lourde taxe de performance. Les plateformes de réservation modernes s'affichent en ligne.
+
+### Fixer un budget
+
+Décidez de la cible LCP mobile que le site doit atteindre, et traitez tout dépassement comme un bug en production, pas un « ce serait bien ».
 
 ## Où Bookassist s'inscrit
 

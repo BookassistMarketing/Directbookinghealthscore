@@ -15,11 +15,17 @@ Un hotel può girare al 95% di occupazione e lasciare comunque sul tavolo una gr
 
 ## Le tre perdite che si nascondono dietro l'alta domanda
 
-**Perdita uno: commissione OTA su domanda che già possedevi.** In alta stagione, una porzione significativa delle prenotazioni OTA sono ospiti che ti avrebbero prenotato direttamente comunque. Hanno cercato il tuo hotel per nome, hanno visto prima la scheda OTA e ci hanno cliccato per abitudine. Hai riempito la camera, ma hai pagato dal 15% al 25% di commissione su un ospite che era già tuo. L'alta domanda rende indolore ignorare tutto questo, perché la camera si è venduta comunque.
+### Perdita uno: commissione OTA su domanda che già possedevi
 
-**Perdita due: rate parity che scivola quando non guardi.** Durante i mesi intensi, l'attenzione va alle operazioni, non al monitoraggio delle tariffe. È esattamente quando un programma di sconti OTA o una tariffa pacchetto opaca può scendere sotto il tuo prezzo diretto. Un ospite che trova una tariffa più economica su Booking.com che sul tuo sito ha appena imparato a non prenotarti mai più direttamente. Una sola tariffa sfuggita a luglio può costarti prenotazioni dirette per anni.
+In alta stagione, una porzione significativa delle prenotazioni OTA sono ospiti che ti avrebbero prenotato direttamente comunque. Hanno cercato il tuo hotel per nome, hanno visto prima la scheda OTA e ci hanno cliccato per abitudine. Hai riempito la camera, ma hai pagato dal 15% al 25% di commissione su un ospite che era già tuo. L'alta domanda rende indolore ignorare tutto questo, perché la camera si è venduta comunque.
 
-**Perdita tre: un motore di prenotazione che converte peggio sotto pressione.** Il traffico estivo è più alto, ma se il tuo motore di prenotazione è lento, macchinoso o sepolto sotto i link OTA sulle tue stesse pagine, i visitatori in più convertono a un tasso più basso e si riversano sulla OTA. La camera si vende comunque. Si vende solo tramite il canale più costoso disponibile.
+### Perdita due: rate parity che scivola quando non guardi
+
+Durante i mesi intensi, l'attenzione va alle operazioni, non al monitoraggio delle tariffe. È esattamente quando un programma di sconti OTA o una tariffa pacchetto opaca può scendere sotto il tuo prezzo diretto. Un ospite che trova una tariffa più economica su Booking.com che sul tuo sito ha appena imparato a non prenotarti mai più direttamente. Una sola tariffa sfuggita a luglio può costarti prenotazioni dirette per anni.
+
+### Perdita tre: un motore di prenotazione che converte peggio sotto pressione
+
+Il traffico estivo è più alto, ma se il tuo motore di prenotazione è lento, macchinoso o sepolto sotto i link OTA sulle tue stesse pagine, i visitatori in più convertono a un tasso più basso e si riversano sulla OTA. La camera si vende comunque. Si vende solo tramite il canale più costoso disponibile.
 
 ## Quanto costa l'alta stagione in termini reali
 

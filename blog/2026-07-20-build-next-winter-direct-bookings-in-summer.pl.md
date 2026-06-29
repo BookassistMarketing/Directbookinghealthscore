@@ -21,11 +21,17 @@ Hotele, które zwiększają przychód bezpośredni, traktują letni szczyt jako 
 
 ## Trzy ruchy do wykonania, zanim szczyt się skończy
 
-**Przechwyć zweryfikowany e-mail przy zameldowaniu, za każdym razem.** Rezerwacja OTA daje Ci zamaskowany adres, który znika w chwili, gdy gość wychodzi. Krótki krok przy zameldowaniu, potwierdzający prawdziwy adres kontaktowy, oparty na cyfrowym kluczu, logowaniu do wifi lub potwierdzeniu rezerwacji, zamienia anonimowego gościa OTA w kogoś, do kogo możesz dotrzeć bezpośrednio przez lata.
+### Przechwyć zweryfikowany e-mail przy zameldowaniu, za każdym razem
 
-**Zapisz jedną preferencję na gościa.** Nie potrzebujesz pełnego profilu. Jedno użyteczne pole, typ pokoju, szczególna okazja, notatka dietetyczna, powód przyjazdu, wystarczy, by spersonalizować kolejną wiadomość. Gość, który świętował u Ciebie rocznicę w sierpniu, jest niemal pewną rezerwacją bezpośrednią w kolejnym sierpniu, jeśli o tym pamiętasz i się odezwiesz.
+Rezerwacja OTA daje Ci zamaskowany adres, który znika w chwili, gdy gość wychodzi. Krótki krok przy zameldowaniu, potwierdzający prawdziwy adres kontaktowy, oparty na cyfrowym kluczu, logowaniu do wifi lub potwierdzeniu rezerwacji, zamienia anonimowego gościa OTA w kogoś, do kogo możesz dotrzeć bezpośrednio przez lata.
 
-**Oznacz kanał, którym przyszedł.** Wiedza o tym, którzy letni goście przyszli przez OTA, mówi Ci dokładnie, kogo warto przekonać do kanału bezpośredniego. To goście warci dopasowanej oferty jesiennej, ponieważ przekonanie ich raz usuwa prowizję, którą w przeciwnym razie płaciłbyś od każdego przyszłego pobytu.
+### Zapisz jedną preferencję na gościa
+
+Nie potrzebujesz pełnego profilu. Jedno użyteczne pole, typ pokoju, szczególna okazja, notatka dietetyczna, powód przyjazdu, wystarczy, by spersonalizować kolejną wiadomość. Gość, który świętował u Ciebie rocznicę w sierpniu, jest niemal pewną rezerwacją bezpośrednią w kolejnym sierpniu, jeśli o tym pamiętasz i się odezwiesz.
+
+### Oznacz kanał, którym przyszedł
+
+Wiedza o tym, którzy letni goście przyszli przez OTA, mówi Ci dokładnie, kogo warto przekonać do kanału bezpośredniego. To goście warci dopasowanej oferty jesiennej, ponieważ przekonanie ich raz usuwa prowizję, którą w przeciwnym razie płaciłbyś od każdego przyszłego pobytu.
 
 ## Od letniego pobytu do zimowej rezerwacji
 
