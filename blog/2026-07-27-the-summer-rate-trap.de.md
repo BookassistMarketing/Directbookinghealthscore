@@ -3,7 +3,7 @@ title: "Die Sommer-Ratenfalle: Warum hohe Auslastung verlorenen Direktumsatz ver
 date: "2026-07-27"
 excerpt: "Wenn das Hotel voll ist, nimmt man leicht an, dass die kommerzielle Aufstellung funktioniert. Gerade bei Spitzenauslastung sickert der meiste Direktumsatz still und leise weg."
 metaDescription: "Hohe Sommerauslastung verbirgt verlorenen Direktumsatz. Wie Ratenparität, Reibung in der Buchungsmaschine und Kanalmix die Hotelmarge in der Hochsaison still aushöhlen."
-image: "https://images.unsplash.com/photo-1553369728-15ec6971afaf?w=1200&q=80"
+image: "https://images.unsplash.com/photo-1582719508461-905c673771fd?w=1200&q=80"
 slug: "the-summer-rate-trap"
 ---
 
@@ -44,4 +44,4 @@ Eine Buchungsplattform, die sauber konvertiert, die Ratenparität verteidigt und
 Starten Sie das kostenlose Direct Booking Health Score Audit, solange Ihr Hotel noch voll ist. Es zeigt Ihnen in weniger als fünf Minuten genau, welches dieser Lecks bei Ihrem Haus gerade jetzt offen ist, sodass Sie sie schließen können, bevor der Sommerumsatz endgültig weg ist.
 
 ---
-*Foto von [Helena Lopes](https://unsplash.com/@helenalopesph) auf [Unsplash](https://unsplash.com)*
+*Foto von [Sasha Kaunas](https://unsplash.com/@akaunas) auf [Unsplash](https://unsplash.com)*

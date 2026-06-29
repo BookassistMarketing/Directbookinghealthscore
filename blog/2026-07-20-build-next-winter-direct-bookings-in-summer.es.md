@@ -3,7 +3,7 @@ title: "El pico del verano es cuando deberías estar construyendo las reservas d
 date: "2026-07-20"
 excerpt: "Las semanas más ajetreadas del año son también tu fuente más rica de futuros huéspedes directos. La mayoría de los hoteles dejan que esos datos salgan por la puerta en el check out."
 metaDescription: "Aprovecha la ocupación punta del verano para capturar datos de huéspedes y construir reservas directas para la temporada baja. Un manual práctico de CRM para hoteles."
-image: "https://images.unsplash.com/photo-1566073771259-6a8506099945?w=1200&q=80"
+image: "https://images.unsplash.com/photo-1570567100084-c7abafe232ee?w=1200&q=80"
 slug: "build-next-winter-direct-bookings-in-summer"
 ---
 
@@ -50,4 +50,4 @@ Una capa de inteligencia de huéspedes que captura, unifica y actúa sobre estos
 Lanza el gratuito audit Direct Booking Health Score sobre tu propiedad para ver lo bien que tu configuración actual captura y reutiliza los datos de los huéspedes. Lleva menos de cinco minutos y te muestra exactamente por dónde se te están escapando los huéspedes de este verano, mientras todavía estás a tiempo de retenerlos.
 
 ---
-*Foto de [Alisher Sharip](https://unsplash.com/@alishersharip) en [Unsplash](https://unsplash.com)*
+*Foto de [Roberto Nickson](https://unsplash.com/@rpnickson) en [Unsplash](https://unsplash.com)*

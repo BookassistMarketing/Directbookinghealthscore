@@ -3,7 +3,7 @@ title: "The Summer Rate Trap: Why High Occupancy Hides Lost Direct Revenue"
 date: "2026-07-27"
 excerpt: "When the hotel is full, it is easy to assume the commercial setup is working. Peak occupancy is exactly when the most direct revenue quietly leaks away."
 metaDescription: "High summer occupancy hides lost direct revenue. How rate parity, booking engine friction and channel mix quietly erode hotel margin at peak season."
-image: "https://images.unsplash.com/photo-1553369728-15ec6971afaf?w=1200&q=80"
+image: "https://images.unsplash.com/photo-1582719508461-905c673771fd?w=1200&q=80"
 slug: "the-summer-rate-trap"
 ---
 
@@ -44,4 +44,4 @@ A booking platform that converts cleanly, defends rate parity and surfaces a cle
 Run the free Direct Booking Health Score audit while your hotel is still full. It shows you, in under five minutes, exactly which of these leaks is open at your property right now, so you can close them before the summer revenue is gone for good.
 
 ---
-*Photo by [Helena Lopes](https://unsplash.com/@helenalopesph) on [Unsplash](https://unsplash.com)*
+*Photo by [Sasha Kaunas](https://unsplash.com/@akaunas) on [Unsplash](https://unsplash.com)*

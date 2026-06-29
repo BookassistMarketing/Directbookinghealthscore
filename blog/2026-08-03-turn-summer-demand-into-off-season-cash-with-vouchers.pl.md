@@ -3,7 +3,7 @@ title: "Zamień letni popyt w gotówkę poza sezonem dzięki bonom podarunkowym"
 date: "2026-08-03"
 excerpt: "Twój hotel jest teraz w szczycie atrakcyjności. To idealny moment, by sprzedawać pobyty, które goście zrealizują, gdy Twój kalendarz będzie pusty."
 metaDescription: "Sprzedawaj hotelowe bony podarunkowe w szczycie lata, aby wygładzić sezonowość i sprowadzić bezprowizyjną gotówkę bezpośrednią na nadchodzące ciche miesiące."
-image: "https://images.unsplash.com/photo-1504150558240-0b4fd8946624?w=1200&q=80"
+image: "https://images.unsplash.com/photo-1549465220-1a8b9238cd48?w=1200&q=80"
 slug: "turn-summer-demand-into-off-season-cash-with-vouchers"
 ---
 
@@ -50,4 +50,4 @@ Hotele sprzedające bony na łatwo, z ręcznym kodem i arkuszem kalkulacyjnym, z
 Uruchom darmowy audyt Direct Booking Health Score na swoim obiekcie, aby zobaczyć, czy przechwytujesz okazje na przychód bezpośredni, bony włącznie, które wręcza Ci Twój letni popyt. Zajmuje to mniej niż pięć minut i wskazuje wprost luki warte zamknięcia, zanim sezon się odwróci.
 
 ---
-*Zdjęcie [yousef alfuhigi](https://unsplash.com/@yousefalfuhigi) na [Unsplash](https://unsplash.com)*
+*Zdjęcie [Ekaterina Shevchenko](https://unsplash.com/@shekatherine) na [Unsplash](https://unsplash.com)*

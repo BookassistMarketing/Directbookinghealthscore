@@ -3,7 +3,7 @@ title: "Más allá del ocio: capturar reservas directas corporativas y de grupo"
 date: "2026-08-10"
 excerpt: "La demanda de ocio se desvanece con la llegada del otoño. Los hoteles que siguen llenos pivotan hacia el negocio corporativo, de grupo y de la industria del viaje, y se conectan a donde esos compradores realmente compran."
 metaDescription: "Cómo los hoteles independientes capturan reservas directas corporativas y de grupo a través de la conectividad GDS y la distribución a la industria del viaje cuando termina la temporada de ocio."
-image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=1200&q=80"
+image: "https://images.unsplash.com/photo-1497366811353-6870744d04b2?w=1200&q=80"
 slug: "capturing-corporate-and-group-direct-bookings"
 ---
 
@@ -41,4 +41,4 @@ Llegar a la industria del viaje de forma fiable significa una conectividad en co
 Lanza el gratuito audit Direct Booking Health Score sobre tu propiedad para ver lo bien posicionado que estás para capturar demanda más allá del pico de ocio. Lleva menos de cinco minutos y te muestra dónde tiene huecos tu distribución, para que puedas llenar el calendario de otoño antes incluso de que la multitud del verano se haya ido.
 
 ---
-*Foto de [Carlos Muza](https://unsplash.com/@kmuza) en [Unsplash](https://unsplash.com)*
+*Foto de [Nastuh Abootalebi](https://unsplash.com/@sunday_digital) en [Unsplash](https://unsplash.com)*

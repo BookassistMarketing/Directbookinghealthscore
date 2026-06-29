@@ -3,7 +3,7 @@ title: "La trappola delle tariffe estive: perché l'alta occupazione nasconde fa
 date: "2026-07-27"
 excerpt: "Quando l'hotel è pieno, è facile dare per scontato che l'assetto commerciale funzioni. È proprio nel picco di occupazione che il maggior fatturato diretto si disperde silenziosamente."
 metaDescription: "L'alta occupazione estiva nasconde fatturato diretto perduto. Come rate parity, attrito del motore di prenotazione e channel mix erodono silenziosamente il margine dell'hotel in alta stagione."
-image: "https://images.unsplash.com/photo-1553369728-15ec6971afaf?w=1200&q=80"
+image: "https://images.unsplash.com/photo-1582719508461-905c673771fd?w=1200&q=80"
 slug: "the-summer-rate-trap"
 ---
 
@@ -44,4 +44,4 @@ Una piattaforma di prenotazione che converte in modo pulito, difende la rate par
 Avvia il gratuito audit Direct Booking Health Score mentre il tuo hotel è ancora pieno. Ti mostra, in meno di cinque minuti, esattamente quale di queste perdite è aperta nella tua struttura in questo momento, così puoi chiuderla prima che il fatturato estivo se ne vada per sempre.
 
 ---
-*Foto di [Helena Lopes](https://unsplash.com/@helenalopesph) su [Unsplash](https://unsplash.com)*
+*Foto di [Sasha Kaunas](https://unsplash.com/@akaunas) su [Unsplash](https://unsplash.com)*

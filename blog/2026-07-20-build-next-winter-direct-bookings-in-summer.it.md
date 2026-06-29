@@ -3,7 +3,7 @@ title: "L'alta stagione estiva è il momento in cui dovresti costruire le prenot
 date: "2026-07-20"
 excerpt: "Le settimane più intense dell'anno sono anche la tua fonte più ricca di futuri ospiti diretti. La maggior parte degli hotel lascia che quei dati escano dalla porta al checkout."
 metaDescription: "Usa l'occupazione di picco estivo per catturare i dati degli ospiti e costruire prenotazioni dirette per la bassa stagione. Un playbook CRM pratico per hotel."
-image: "https://images.unsplash.com/photo-1566073771259-6a8506099945?w=1200&q=80"
+image: "https://images.unsplash.com/photo-1570567100084-c7abafe232ee?w=1200&q=80"
 slug: "build-next-winter-direct-bookings-in-summer"
 ---
 
@@ -50,4 +50,4 @@ Un livello di guest intelligence che cattura, unifica e agisce su questi dati è
 Avvia il gratuito audit Direct Booking Health Score sulla tua struttura per vedere quanto bene il tuo setup attuale cattura e riutilizza i dati degli ospiti. Richiede meno di cinque minuti e ti mostra esattamente dove gli ospiti di quest'estate stanno scivolando via, mentre c'è ancora tempo per trattenerli.
 
 ---
-*Foto di [Alisher Sharip](https://unsplash.com/@alishersharip) su [Unsplash](https://unsplash.com)*
+*Foto di [Roberto Nickson](https://unsplash.com/@rpnickson) su [Unsplash](https://unsplash.com)*

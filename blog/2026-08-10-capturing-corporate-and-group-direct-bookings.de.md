@@ -3,7 +3,7 @@ title: "Über die Freizeitnachfrage hinaus: Direktbuchungen von Firmen und Grupp
 date: "2026-08-10"
 excerpt: "Die Freizeitnachfrage lässt mit dem Herbst nach. Die Hotels, die voll bleiben, schwenken auf Firmen-, Gruppen- und Reisevertriebsgeschäft um und verbinden sich mit den Orten, an denen diese Bucher tatsächlich kaufen."
 metaDescription: "Wie unabhängige Hotels Direktbuchungen von Firmen und Gruppen über GDS-Anbindung und Travel-Trade-Distribution gewinnen, wenn die Freizeitsaison endet."
-image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=1200&q=80"
+image: "https://images.unsplash.com/photo-1497366811353-6870744d04b2?w=1200&q=80"
 slug: "capturing-corporate-and-group-direct-bookings"
 ---
 
@@ -41,4 +41,4 @@ Den Reisevertrieb verlässlich zu erreichen bedeutet eine ordentliche Anbindung 
 Starten Sie das kostenlose Direct Booking Health Score Audit für Ihr Haus, um zu sehen, wie gut Sie aufgestellt sind, um Nachfrage über die Freizeitspitze hinaus zu erfassen. Es dauert weniger als fünf Minuten und zeigt Ihnen, wo Ihre Distribution Lücken hat, sodass Sie den Herbstkalender füllen können, bevor die Sommergäste überhaupt abgereist sind.
 
 ---
-*Foto von [Carlos Muza](https://unsplash.com/@kmuza) auf [Unsplash](https://unsplash.com)*
+*Foto von [Nastuh Abootalebi](https://unsplash.com/@sunday_digital) auf [Unsplash](https://unsplash.com)*

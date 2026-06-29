@@ -3,7 +3,7 @@ title: "Le pic de l'été est le moment de construire les réservations directes
 date: "2026-07-20"
 excerpt: "Les semaines les plus chargées de l'année sont aussi votre source la plus riche de futurs clients directs. La plupart des hôtels laissent ces données franchir la porte au moment du départ."
 metaDescription: "Profitez du taux d'occupation estival pour capter les données clients et construire des réservations directes pour la basse saison. Un guide CRM concret pour les hôtels."
-image: "https://images.unsplash.com/photo-1566073771259-6a8506099945?w=1200&q=80"
+image: "https://images.unsplash.com/photo-1570567100084-c7abafe232ee?w=1200&q=80"
 slug: "build-next-winter-direct-bookings-in-summer"
 ---
 
@@ -50,4 +50,4 @@ Une couche d'intelligence client qui capte, unifie et active ces données est ce
 Lancez l'audit Direct Booking Health Score gratuit sur votre établissement pour voir à quel point votre configuration actuelle capte et réutilise les données clients. Cela prend moins de cinq minutes et vous montre exactement où les clients de cet été vous échappent, tant qu'il est encore temps de les retenir.
 
 ---
-*Photo de [Alisher Sharip](https://unsplash.com/@alishersharip) sur [Unsplash](https://unsplash.com)*
+*Photo de [Roberto Nickson](https://unsplash.com/@rpnickson) sur [Unsplash](https://unsplash.com)*

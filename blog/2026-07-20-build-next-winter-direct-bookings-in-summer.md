@@ -3,7 +3,7 @@ title: "Peak Summer Is When You Should Be Building Next Winter's Direct Bookings
 date: "2026-07-20"
 excerpt: "The busiest weeks of the year are also your richest source of future direct guests. Most hotels let that data walk out of the door at checkout."
 metaDescription: "Use peak summer occupancy to capture guest data and build direct bookings for the quiet season. A practical CRM playbook for hotels."
-image: "https://images.unsplash.com/photo-1566073771259-6a8506099945?w=1200&q=80"
+image: "https://images.unsplash.com/photo-1570567100084-c7abafe232ee?w=1200&q=80"
 slug: "build-next-winter-direct-bookings-in-summer"
 ---
 
@@ -50,4 +50,4 @@ A guest intelligence layer that captures, unifies and acts on this data is what 
 Run the free Direct Booking Health Score audit on your property to see how well your current setup captures and reuses guest data. It takes under five minutes and shows you exactly where this summer's guests are slipping away, while there is still time to keep them.
 
 ---
-*Photo by [Alisher Sharip](https://unsplash.com/@alishersharip) on [Unsplash](https://unsplash.com)*
+*Photo by [Roberto Nickson](https://unsplash.com/@rpnickson) on [Unsplash](https://unsplash.com)*

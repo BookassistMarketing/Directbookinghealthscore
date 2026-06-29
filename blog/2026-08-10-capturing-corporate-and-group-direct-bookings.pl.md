@@ -3,7 +3,7 @@ title: "Poza turystyką wypoczynkową: przechwytywanie korporacyjnych i grupowyc
 date: "2026-08-10"
 excerpt: "Popyt wypoczynkowy słabnie wraz z nadejściem jesieni. Hotele, które pozostają pełne, przestawiają się na biznes korporacyjny, grupowy i handel turystyczny oraz łączą się z miejscami, gdzie ci nabywcy faktycznie kupują."
 metaDescription: "Jak niezależne hotele przechwytują korporacyjne i grupowe rezerwacje bezpośrednie poprzez łączność GDS i dystrybucję w handlu turystycznym, gdy sezon wypoczynkowy się kończy."
-image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=1200&q=80"
+image: "https://images.unsplash.com/photo-1497366811353-6870744d04b2?w=1200&q=80"
 slug: "capturing-corporate-and-group-direct-bookings"
 ---
 
@@ -41,4 +41,4 @@ Niezawodne docieranie do handlu turystycznego oznacza właściwą łączność z
 Uruchom darmowy audyt Direct Booking Health Score na swoim obiekcie, aby zobaczyć, jak dobrze jesteś ustawiony, by przechwytywać popyt poza szczytem wypoczynkowym. Zajmuje to mniej niż pięć minut i pokazuje, gdzie Twoja dystrybucja ma luki, abyś mógł zapełnić jesienny kalendarz, zanim letni tłum w ogóle wyjdzie.
 
 ---
-*Zdjęcie [Carlos Muza](https://unsplash.com/@kmuza) na [Unsplash](https://unsplash.com)*
+*Zdjęcie [Nastuh Abootalebi](https://unsplash.com/@sunday_digital) na [Unsplash](https://unsplash.com)*

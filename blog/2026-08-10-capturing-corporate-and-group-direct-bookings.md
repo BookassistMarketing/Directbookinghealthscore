@@ -3,7 +3,7 @@ title: "Beyond Leisure: Capturing Corporate and Group Direct Bookings"
 date: "2026-08-10"
 excerpt: "Leisure demand fades as autumn arrives. The hotels that stay full pivot to corporate, group and travel trade business, and connect to where those bookers actually buy."
 metaDescription: "How independent hotels capture corporate and group direct bookings through GDS connectivity and travel trade distribution as leisure season ends."
-image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=1200&q=80"
+image: "https://images.unsplash.com/photo-1497366811353-6870744d04b2?w=1200&q=80"
 slug: "capturing-corporate-and-group-direct-bookings"
 ---
 
@@ -41,4 +41,4 @@ Reaching the travel trade reliably means proper connectivity into the systems th
 Run the free Direct Booking Health Score audit on your property to see how well positioned you are to capture demand beyond the leisure peak. It takes under five minutes and shows you where your distribution has gaps, so you can fill the autumn calendar before the summer crowd has even left.
 
 ---
-*Photo by [Carlos Muza](https://unsplash.com/@kmuza) on [Unsplash](https://unsplash.com)*
+*Photo by [Nastuh Abootalebi](https://unsplash.com/@sunday_digital) on [Unsplash](https://unsplash.com)*

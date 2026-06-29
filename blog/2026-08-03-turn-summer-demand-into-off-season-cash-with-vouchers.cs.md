@@ -3,7 +3,7 @@ title: "Proměňte letní poptávku v hotovost pro mimosezónu pomocí dárkový
 date: "2026-08-03"
 excerpt: "Váš hotel je právě teď nejžádanější. To je dokonalá chvíle prodat pobyty, které hosté uplatní, až bude váš kalendář prázdný."
 metaDescription: "Prodávejte hotelové dárkové vouchery během letní špičky, abyste vyrovnali sezónnost a přivedli přímou hotovost bez provize na klidné měsíce, které vás čekají."
-image: "https://images.unsplash.com/photo-1504150558240-0b4fd8946624?w=1200&q=80"
+image: "https://images.unsplash.com/photo-1549465220-1a8b9238cd48?w=1200&q=80"
 slug: "turn-summer-demand-into-off-season-cash-with-vouchers"
 ---
 
@@ -50,4 +50,4 @@ Hotely, které vouchery prodávají ležérně, s ručně zadávaným kódem a t
 Spusťte zdarma audit Direct Booking Health Score na svém objektu a zjistěte, zda zachycujete příležitosti k přímým tržbám, vouchery nevyjímaje, které vám vaše letní poptávka podává. Zabere to méně než pět minut a nasměruje vás rovnou na mezery, jež stojí za to uzavřít, než se sezóna obrátí.
 
 ---
-*Foto: [yousef alfuhigi](https://unsplash.com/@yousefalfuhigi) na [Unsplash](https://unsplash.com)*
+*Foto: [Ekaterina Shevchenko](https://unsplash.com/@shekatherine) na [Unsplash](https://unsplash.com)*

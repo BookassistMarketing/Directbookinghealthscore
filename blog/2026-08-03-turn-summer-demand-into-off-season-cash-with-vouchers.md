@@ -3,7 +3,7 @@ title: "Turn Summer Demand Into Off Season Cash With Gift Vouchers"
 date: "2026-08-03"
 excerpt: "Your hotel is at its most desirable right now. That is the perfect moment to sell stays that guests will redeem when your calendar is empty."
 metaDescription: "Sell hotel gift vouchers during peak summer to smooth seasonality and bring in commission free direct cash for the quiet months ahead."
-image: "https://images.unsplash.com/photo-1504150558240-0b4fd8946624?w=1200&q=80"
+image: "https://images.unsplash.com/photo-1549465220-1a8b9238cd48?w=1200&q=80"
 slug: "turn-summer-demand-into-off-season-cash-with-vouchers"
 ---
 
@@ -50,4 +50,4 @@ Hotels that sell vouchers casually, with a manual code and a spreadsheet, leave 
 Run the free Direct Booking Health Score audit on your property to see whether you are capturing the direct revenue opportunities, vouchers included, that your summer demand is handing you. It takes under five minutes and points you straight at the gaps worth closing before the season turns.
 
 ---
-*Photo by [yousef alfuhigi](https://unsplash.com/@yousefalfuhigi) on [Unsplash](https://unsplash.com)*
+*Photo by [Ekaterina Shevchenko](https://unsplash.com/@shekatherine) on [Unsplash](https://unsplash.com)*

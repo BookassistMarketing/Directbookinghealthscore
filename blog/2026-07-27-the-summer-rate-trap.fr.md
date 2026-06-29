@@ -3,7 +3,7 @@ title: "Le piège tarifaire de l'été : comment un fort taux d'occupation masqu
 date: "2026-07-27"
 excerpt: "Quand l'hôtel est plein, il est facile de supposer que le dispositif commercial fonctionne. La pleine occupation est précisément le moment où le plus de revenu direct fuit silencieusement."
 metaDescription: "Un fort taux d'occupation estival masque le revenu direct perdu. Comment la parité tarifaire, les frictions du moteur de réservation et le mix de canaux érodent silencieusement la marge hôtelière en haute saison."
-image: "https://images.unsplash.com/photo-1553369728-15ec6971afaf?w=1200&q=80"
+image: "https://images.unsplash.com/photo-1582719508461-905c673771fd?w=1200&q=80"
 slug: "the-summer-rate-trap"
 ---
 
@@ -44,4 +44,4 @@ Une plateforme de réservation qui convertit proprement, défend la parité tari
 Lancez l'audit Direct Booking Health Score gratuit tant que votre hôtel est encore plein. Il vous montre, en moins de cinq minutes, exactement laquelle de ces fuites est ouverte chez vous en ce moment, pour que vous puissiez les colmater avant que le revenu de l'été ne soit perdu pour de bon.
 
 ---
-*Photo de [Helena Lopes](https://unsplash.com/@helenalopesph) sur [Unsplash](https://unsplash.com)*
+*Photo de [Sasha Kaunas](https://unsplash.com/@akaunas) sur [Unsplash](https://unsplash.com)*

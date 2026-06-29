@@ -3,7 +3,7 @@ title: "Szczyt sezonu letniego to moment, w którym powinieneś budować rezerwa
 date: "2026-07-20"
 excerpt: "Najbardziej oblegane tygodnie roku są zarazem najbogatszym źródłem przyszłych gości bezpośrednich. Większość hoteli pozwala tym danym wyjść za drzwi przy wymeldowaniu."
 metaDescription: "Wykorzystaj szczytowe obłożenie latem, aby zebrać dane gości i zbudować rezerwacje bezpośrednie na sezon ciszy. Praktyczny poradnik CRM dla hoteli."
-image: "https://images.unsplash.com/photo-1566073771259-6a8506099945?w=1200&q=80"
+image: "https://images.unsplash.com/photo-1570567100084-c7abafe232ee?w=1200&q=80"
 slug: "build-next-winter-direct-bookings-in-summer"
 ---
 
@@ -50,4 +50,4 @@ Warstwa inteligencji o gościach, która przechwytuje, ujednolica i działa na t
 Uruchom darmowy audyt Direct Booking Health Score na swoim obiekcie, aby zobaczyć, jak dobrze Twoja obecna konfiguracja przechwytuje i ponownie wykorzystuje dane gości. Zajmuje to mniej niż pięć minut i pokazuje dokładnie, gdzie umykają Ci tegoroczni letni goście, póki wciąż jest czas, by ich zatrzymać.
 
 ---
-*Zdjęcie [Alisher Sharip](https://unsplash.com/@alishersharip) na [Unsplash](https://unsplash.com)*
+*Zdjęcie [Roberto Nickson](https://unsplash.com/@rpnickson) na [Unsplash](https://unsplash.com)*

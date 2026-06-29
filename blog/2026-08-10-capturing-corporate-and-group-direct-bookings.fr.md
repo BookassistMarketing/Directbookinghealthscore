@@ -3,7 +3,7 @@ title: "Au delà du loisir : capter les réservations directes corporate et grou
 date: "2026-08-10"
 excerpt: "La demande loisir s'estompe à l'arrivée de l'automne. Les hôtels qui restent pleins pivotent vers la clientèle corporate, groupes et travel trade, et se connectent là où ces réservataires achètent réellement."
 metaDescription: "Comment les hôtels indépendants captent les réservations directes corporate et groupes grâce à la connectivité GDS et à la distribution travel trade à la fin de la saison loisir."
-image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=1200&q=80"
+image: "https://images.unsplash.com/photo-1497366811353-6870744d04b2?w=1200&q=80"
 slug: "capturing-corporate-and-group-direct-bookings"
 ---
 
@@ -41,4 +41,4 @@ Atteindre le travel trade de façon fiable suppose une connectivité solide aux 
 Lancez l'audit Direct Booking Health Score gratuit sur votre établissement pour voir à quel point vous êtes bien positionné pour capter la demande au delà du pic loisir. Cela prend moins de cinq minutes et vous montre où votre distribution présente des lacunes, pour que vous puissiez remplir le calendrier d'automne avant même que la foule de l'été ne soit partie.
 
 ---
-*Photo de [Carlos Muza](https://unsplash.com/@kmuza) sur [Unsplash](https://unsplash.com)*
+*Photo de [Nastuh Abootalebi](https://unsplash.com/@sunday_digital) sur [Unsplash](https://unsplash.com)*

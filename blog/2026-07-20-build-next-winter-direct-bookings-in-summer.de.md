@@ -3,7 +3,7 @@ title: "Die Hochsaison ist der richtige Zeitpunkt, um die Direktbuchungen für d
 date: "2026-07-20"
 excerpt: "Die geschäftigsten Wochen des Jahres sind zugleich Ihre reichste Quelle für künftige Direktgäste. Die meisten Hotels lassen diese Daten beim Check-out einfach zur Tür hinausgehen."
 metaDescription: "Nutzen Sie die Sommerauslastung, um Gästedaten zu erfassen und Direktbuchungen für die ruhige Saison aufzubauen. Ein praktisches CRM-Playbook für Hotels."
-image: "https://images.unsplash.com/photo-1566073771259-6a8506099945?w=1200&q=80"
+image: "https://images.unsplash.com/photo-1570567100084-c7abafe232ee?w=1200&q=80"
 slug: "build-next-winter-direct-bookings-in-summer"
 ---
 
@@ -50,4 +50,4 @@ Eine Guest-Intelligence-Ebene, die diese Daten erfasst, vereinheitlicht und nutz
 Starten Sie das kostenlose Direct Booking Health Score Audit für Ihr Haus, um zu sehen, wie gut Ihre aktuelle Aufstellung Gästedaten erfasst und wiederverwendet. Es dauert weniger als fünf Minuten und zeigt Ihnen genau, wo Ihnen die Gäste dieses Sommers entgleiten, solange noch Zeit ist, sie zu halten.
 
 ---
-*Foto von [Alisher Sharip](https://unsplash.com/@alishersharip) auf [Unsplash](https://unsplash.com)*
+*Foto von [Roberto Nickson](https://unsplash.com/@rpnickson) auf [Unsplash](https://unsplash.com)*

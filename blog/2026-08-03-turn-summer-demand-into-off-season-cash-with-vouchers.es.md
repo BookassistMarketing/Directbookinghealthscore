@@ -3,7 +3,7 @@ title: "Convierte la demanda del verano en caja para la temporada baja con vales
 date: "2026-08-03"
 excerpt: "Tu hotel está en su momento más deseable ahora mismo. Ese es el momento perfecto para vender estancias que los huéspedes canjearán cuando tu calendario esté vacío."
 metaDescription: "Vende vales regalo de hotel durante el pico del verano para suavizar la estacionalidad y traer caja directa sin comisión para los meses tranquilos que vienen."
-image: "https://images.unsplash.com/photo-1504150558240-0b4fd8946624?w=1200&q=80"
+image: "https://images.unsplash.com/photo-1549465220-1a8b9238cd48?w=1200&q=80"
 slug: "turn-summer-demand-into-off-season-cash-with-vouchers"
 ---
 
@@ -50,4 +50,4 @@ Los hoteles que venden vales de forma casual, con un código manual y una hoja d
 Lanza el gratuito audit Direct Booking Health Score sobre tu propiedad para ver si estás capturando las oportunidades de ingreso directo, vales incluidos, que tu demanda de verano te está sirviendo. Lleva menos de cinco minutos y te apunta directo a los huecos que merece la pena cerrar antes de que cambie la temporada.
 
 ---
-*Foto de [yousef alfuhigi](https://unsplash.com/@yousefalfuhigi) en [Unsplash](https://unsplash.com)*
+*Foto de [Ekaterina Shevchenko](https://unsplash.com/@shekatherine) en [Unsplash](https://unsplash.com)*

@@ -3,7 +3,7 @@ title: "La trampa de las tarifas de verano: por qué la alta ocupación esconde 
 date: "2026-07-27"
 excerpt: "Cuando el hotel está lleno, es fácil suponer que el montaje comercial funciona. La ocupación punta es justo cuando más ingresos directos se fugan en silencio."
 metaDescription: "La alta ocupación de verano esconde ingresos directos perdidos. Cómo la paridad de tarifas, la fricción del motor de reservas y el mix de canales erosionan en silencio el margen hotelero en plena temporada."
-image: "https://images.unsplash.com/photo-1553369728-15ec6971afaf?w=1200&q=80"
+image: "https://images.unsplash.com/photo-1582719508461-905c673771fd?w=1200&q=80"
 slug: "the-summer-rate-trap"
 ---
 
@@ -44,4 +44,4 @@ Una plataforma de reservas que convierte de forma limpia, defiende la paridad de
 Lanza el gratuito audit Direct Booking Health Score mientras tu hotel todavía está lleno. Te muestra, en menos de cinco minutos, exactamente cuál de estas fugas está abierta en tu propiedad ahora mismo, para que puedas cerrarlas antes de que los ingresos del verano se hayan ido para siempre.
 
 ---
-*Foto de [Helena Lopes](https://unsplash.com/@helenalopesph) en [Unsplash](https://unsplash.com)*
+*Foto de [Sasha Kaunas](https://unsplash.com/@akaunas) en [Unsplash](https://unsplash.com)*

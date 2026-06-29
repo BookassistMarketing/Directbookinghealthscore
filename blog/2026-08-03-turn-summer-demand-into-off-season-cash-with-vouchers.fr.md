@@ -3,7 +3,7 @@ title: "Transformez la demande estivale en cash de basse saison grâce aux bons 
 date: "2026-08-03"
 excerpt: "Votre hôtel n'a jamais été aussi désirable qu'en ce moment. C'est le moment parfait pour vendre des séjours que les clients utiliseront quand votre calendrier sera vide."
 metaDescription: "Vendez des bons cadeaux hôteliers pendant le pic de l'été pour lisser la saisonnalité et faire entrer du cash direct sans commission pour les mois creux à venir."
-image: "https://images.unsplash.com/photo-1504150558240-0b4fd8946624?w=1200&q=80"
+image: "https://images.unsplash.com/photo-1549465220-1a8b9238cd48?w=1200&q=80"
 slug: "turn-summer-demand-into-off-season-cash-with-vouchers"
 ---
 
@@ -50,4 +50,4 @@ Les hôtels qui vendent des bons de façon désinvolte, avec un code manuel et u
 Lancez l'audit Direct Booking Health Score gratuit sur votre établissement pour voir si vous captez les opportunités de revenu direct, bons cadeaux compris, que votre demande estivale vous tend. Cela prend moins de cinq minutes et vous pointe droit sur les lacunes qui méritent d'être comblées avant que la saison ne tourne.
 
 ---
-*Photo de [yousef alfuhigi](https://unsplash.com/@yousefalfuhigi) sur [Unsplash](https://unsplash.com)*
+*Photo de [Ekaterina Shevchenko](https://unsplash.com/@shekatherine) sur [Unsplash](https://unsplash.com)*

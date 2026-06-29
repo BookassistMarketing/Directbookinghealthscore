@@ -3,7 +3,7 @@ title: "Trasforma la domanda estiva in cassa per la bassa stagione con i voucher
 date: "2026-08-03"
 excerpt: "La tua struttura è al massimo della sua desiderabilità proprio adesso. È il momento perfetto per vendere soggiorni che gli ospiti riscatteranno quando il tuo calendario sarà vuoto."
 metaDescription: "Vendi voucher regalo dell'hotel durante il picco estivo per smussare la stagionalità e portare cassa diretta senza commissioni per i mesi tranquilli a venire."
-image: "https://images.unsplash.com/photo-1504150558240-0b4fd8946624?w=1200&q=80"
+image: "https://images.unsplash.com/photo-1549465220-1a8b9238cd48?w=1200&q=80"
 slug: "turn-summer-demand-into-off-season-cash-with-vouchers"
 ---
 
@@ -50,4 +50,4 @@ Gli hotel che vendono voucher in modo casuale, con un codice manuale e un foglio
 Avvia il gratuito audit Direct Booking Health Score sulla tua struttura per vedere se stai catturando le opportunità di fatturato diretto, voucher inclusi, che la tua domanda estiva ti sta consegnando. Richiede meno di cinque minuti e ti punta dritto alle lacune che vale la pena chiudere prima che la stagione cambi.
 
 ---
-*Foto di [yousef alfuhigi](https://unsplash.com/@yousefalfuhigi) su [Unsplash](https://unsplash.com)*
+*Foto di [Ekaterina Shevchenko](https://unsplash.com/@shekatherine) su [Unsplash](https://unsplash.com)*

@@ -3,7 +3,7 @@ title: "Letnia pułapka stawek: dlaczego wysokie obłożenie ukrywa utracony prz
 date: "2026-07-27"
 excerpt: "Gdy hotel jest pełny, łatwo założyć, że konfiguracja komercyjna działa. Szczytowe obłożenie to dokładnie moment, w którym najwięcej przychodu bezpośredniego po cichu wycieka."
 metaDescription: "Wysokie letnie obłożenie ukrywa utracony przychód bezpośredni. Jak parytet stawek, tarcie w silniku rezerwacji i miks kanałów po cichu erodują marżę hotelu w szczycie sezonu."
-image: "https://images.unsplash.com/photo-1553369728-15ec6971afaf?w=1200&q=80"
+image: "https://images.unsplash.com/photo-1582719508461-905c673771fd?w=1200&q=80"
 slug: "the-summer-rate-trap"
 ---
 
@@ -44,4 +44,4 @@ Platforma rezerwacyjna, która czysto konwertuje, broni parytetu stawek i ekspon
 Uruchom darmowy audyt Direct Booking Health Score, póki Twój hotel jest wciąż pełny. Pokazuje Ci, w mniej niż pięć minut, dokładnie który z tych wycieków jest otwarty w Twoim obiekcie właśnie teraz, abyś mógł go zamknąć, zanim letni przychód zniknie na dobre.
 
 ---
-*Zdjęcie [Helena Lopes](https://unsplash.com/@helenalopesph) na [Unsplash](https://unsplash.com)*
+*Zdjęcie [Sasha Kaunas](https://unsplash.com/@akaunas) na [Unsplash](https://unsplash.com)*
