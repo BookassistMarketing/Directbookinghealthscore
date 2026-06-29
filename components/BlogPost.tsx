@@ -72,13 +72,17 @@ export const BlogPost: React.FC<BlogPostProps> = ({ slug, content, onBack, onSta
 
       {/* Content */}
       <div className="prose prose-lg max-w-none
-        prose-headings:font-black prose-headings:text-gray-900
-        prose-h2:text-2xl prose-h2:mt-10 prose-h2:mb-4
-        prose-h3:text-xl prose-h3:mt-8 prose-h3:mb-3
-        prose-p:text-gray-600 prose-p:leading-relaxed
-        prose-strong:text-gray-900 prose-strong:font-black
-        prose-li:text-gray-600
-        prose-a:text-brand-blue prose-a:no-underline hover:prose-a:underline">
+        prose-headings:font-bold prose-headings:tracking-tight prose-headings:scroll-mt-24
+        prose-h2:text-[1.7rem] prose-h2:leading-snug prose-h2:font-extrabold prose-h2:text-brand-blue prose-h2:mt-14 prose-h2:mb-5
+        prose-h3:text-xl prose-h3:font-bold prose-h3:text-gray-900 prose-h3:mt-9 prose-h3:mb-2
+        prose-p:text-gray-700 prose-p:leading-[1.8]
+        prose-li:text-gray-700 prose-li:leading-[1.75] prose-li:my-1
+        prose-strong:text-gray-900 prose-strong:font-semibold
+        prose-a:text-brand-blue prose-a:font-medium prose-a:underline prose-a:underline-offset-2 prose-a:decoration-brand-blue/30 hover:prose-a:decoration-brand-blue prose-a:transition-colors
+        prose-hr:my-12 prose-hr:border-gray-200
+        prose-table:text-[0.95em] prose-th:text-gray-900
+        prose-em:text-gray-500
+        [--tw-prose-bullets:#2A9D8F] [--tw-prose-counters:#2A9D8F]">
         <ReactMarkdown>{body}</ReactMarkdown>
       </div>
 
