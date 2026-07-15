@@ -4,6 +4,28 @@ Single rolling handoff for the project. Newest session at the top. Older session
 
 ---
 
+# 15 July 2026 — Published the two overdue scheduled posts (Jul 6 + Jul 13) via a rebuild trigger
+
+Short ops session. The Jul 6 and Jul 13 posts were committed and pushed, and their frontmatter dates had passed, but neither was showing on the live blog (`/blog` listed only up to 29 June). Diagnosed and fixed with a rebuild trigger; both are now live in all 7 languages.
+
+## Root cause
+
+Posts are date-gated by `isPublished()` in `lib/blog.ts` — a future-dated `.md` stays hidden until its `date` passes. The listing/home/sitemap pages set `revalidate = 3600`, expecting hourly ISR to surface a post within ~1h of its date. **That ISR revalidation does not fire on AWS Amplify** — Amplify kept serving the 29 June static build, where both posts were still future-dated and gated out. So they never appeared on their date on their own.
+
+## Fix
+
+Empty commit to `main` to force a fresh Amplify build (`d11a284`). The rebuild re-ran the date gate against today (15 Jul), so both posts appeared in the listing/sitemap. Verified live: `/blog` now lists all 6 published posts, newest first (13 Jul → 20 Mar).
+
+- Local `main` was already in sync with `origin/main` before this — nothing was unpushed.
+- Commit message on `d11a284` picked up a stray leading `@` (PowerShell heredoc syntax run through the Bash tool). Harmless on an empty deploy-trigger commit; left as-is.
+
+## Open / follow-ups
+
+- **The upcoming weekly posts (Jul 20 → Aug 10) will hit the same wall.** Each will need a rebuild push to `main` on/after its date to go live — they will not auto-publish. Options if this gets tedious: fix the ISR setup on Amplify, or add a scheduled routine that pushes an empty commit each Monday.
+- Translation QA on those 4 upcoming posts still pending (carried over from 29 June).
+
+---
+
 # 29 June 2026 — 4 new weekly blog posts, distinct hero images, SEO heading hierarchy across all posts, blog typography fixed and polished
 
 Content + frontend session. Confirmed the existing blog auto-publish pipeline is healthy, added the next batch of scheduled posts, then discovered and fixed two latent rendering bugs that meant the blog had never actually displayed with proper structure. Six commits to `main`, all deployed via Amplify. No interaction needed for the work; user approved the typography direction before the final polish shipped.
