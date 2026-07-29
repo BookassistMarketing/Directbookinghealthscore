@@ -4,6 +4,35 @@ Single rolling handoff for the project. Newest session at the top. Older session
 
 ---
 
+# 29 July 2026 — Published Jul 20 + Jul 27 via rebuild trigger, added 4 news-pegged posts (Aug 17 → Sep 7)
+
+Two-part session: the same ops fix as 15 July, then a new content batch.
+
+## Ops
+
+- Jul 20 and Jul 27 posts were live-blocked again (listing stopped at 13 Jul). Empty commit `9236e6f` to `main` triggered the Amplify rebuild; verified live ~150 s later, both posts present.
+- Push initially failed: the cached `BookassistMarketing` PAT was rejected and the credential dialog blocked the terminal. Resolved by re-running the push in the background so the GUI prompt could be completed.
+
+## New posts (all 7 languages, 28 files)
+
+Each pegged to verified July 2026 trade press, with sources named in-body:
+
+| Date | Slug | Peg | Product / internal link |
+|---|---|---|---|
+| 17 Aug | `google-is-selling-ad-space-inside-ai-answers` | Google Direct Offers inside AI answers (IHG first partner, invite only); Lighthouse AI Visibility Edge study, 82% of AI sources are OTA/metasearch + editorial | Digital Media / AI search discovery |
+| 24 Aug | `when-an-ai-agent-books-who-owns-the-guest` | Google UCP extended to lodging, OTA-led partner list; Expedia B2B +22% YoY Q1 2026 | Intelligence / first-party data |
+| 31 Aug | `the-eu-rule-that-lets-you-beat-ota-rates` | DMA ended Booking.com rate parity Dec 2024, most hotels unaware | Booking Platform / summer rate trap |
+| 7 Sep | `europes-small-hotels-are-falling-behind` | Booking.com 2026 European Accommodation Barometer chain vs independent gaps | Web Design / OTA losses |
+
+## Open / follow-ups
+
+- **Each new post still needs a rebuild push on/after its date** (Aug 3, Aug 10, Aug 17, Aug 24, Aug 31, Sep 7). Unchanged root cause, see 15 July entry.
+- **Photo credits are generic** ("Photo via Unsplash") on the 4 new posts because the photographers behind the image IDs could not be confirmed. Existing posts name them; worth backfilling.
+- Translation QA on the 8 pending posts (4 from 29 June, 4 from this session) still outstanding.
+- Blog queue runs dry after 7 Sep.
+
+---
+
 # 15 July 2026 — Published the two overdue scheduled posts (Jul 6 + Jul 13) via a rebuild trigger
 
 Short ops session. The Jul 6 and Jul 13 posts were committed and pushed, and their frontmatter dates had passed, but neither was showing on the live blog (`/blog` listed only up to 29 June). Diagnosed and fixed with a rebuild trigger; both are now live in all 7 languages.
