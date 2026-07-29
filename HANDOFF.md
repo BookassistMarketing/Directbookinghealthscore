@@ -13,9 +13,9 @@ Two-part session: the same ops fix as 15 July, then a new content batch.
 - Jul 20 and Jul 27 posts were live-blocked again (listing stopped at 13 Jul). Empty commit `9236e6f` to `main` triggered the Amplify rebuild; verified live ~150 s later, both posts present.
 - Push initially failed: the cached `BookassistMarketing` PAT was rejected and the credential dialog blocked the terminal. Resolved by re-running the push in the background so the GUI prompt could be completed.
 
-## New posts (all 7 languages, 28 files)
+## New posts (all 7 languages, 28 files) — commit `1d32702`
 
-Each pegged to verified July 2026 trade press, with sources named in-body:
+Each pegged to verified July 2026 trade press, with sources named in-body. Validated before commit: identical `##`/`###` hierarchy per language, matching bullet and table-row counts, slug/date/image identical to the English source, LF endings, no em or en dashes, one product link and one internal `/blog/` link each.
 
 | Date | Slug | Peg | Product / internal link |
 |---|---|---|---|
