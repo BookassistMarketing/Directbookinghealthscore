@@ -4,6 +4,24 @@ Single rolling handoff for the project. Newest session at the top. Older session
 
 ---
 
+# 10 August 2026 — Published Aug 3 + Aug 10 via rebuild trigger
+
+Ops only, no content or code changes. Same root cause as 15 July and 29 July: Amplify does not run the hourly ISR revalidation, so date-gated posts stay invisible until a fresh build re-runs `isPublished()`.
+
+- Live `/blog` was still listing only up to 27 Jul, so **both** the Aug 3 (vouchers) and Aug 10 (corporate/group) posts were gated out. Aug 3 had been overdue a full week: no session ran that Monday.
+- Pre-flight check before triggering: local `main` clean and in sync with `origin/main`, all 7 language files present for both posts, `date`/`slug` identical across languages. Working-copy CRLF is expected on Windows (`.gitattributes` stores LF, `blog.ts` is CRLF-tolerant).
+- Empty commit `0817a21` pushed to `main`. Live ~3 min later. Push went through without the credential dialog this time.
+- Verified live: `/blog` lists all 10 published posts newest first (10 Aug → 20 Mar); both new posts return 200 in EN plus spot-checked FR, DE, CS with correctly localised titles and article `<h1>`; sitemap emits 7 URLs per new post.
+
+## Open / follow-ups
+
+- **Remaining posts still need a rebuild push on/after their date**: Aug 17, Aug 24, Aug 31, Sep 7. Nothing about the root cause has changed. The standing options remain: fix ISR on Amplify, or add a scheduled routine that pushes an empty commit each Monday. Four manual triggers in a row now says the routine is worth doing.
+- **Duplicated site name in `<title>`** — every blog post renders `… | Direct Booking Health Score | Direct Booking Health Score`. Pre-existing (confirmed on the 27 Jul post too), affects all posts, not caused by this session. Minor SEO nit, unfixed.
+- Translation QA on the 4 remaining pending posts (29 July batch) still outstanding.
+- Blog queue still runs dry after 7 Sep.
+
+---
+
 # 29 July 2026 — Published Jul 20 + Jul 27 via rebuild trigger, added 4 news-pegged posts (Aug 17 → Sep 7)
 
 Two-part session: the same ops fix as 15 July, then a new content batch.
