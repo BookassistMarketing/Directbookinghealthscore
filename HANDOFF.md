@@ -4,6 +4,45 @@ Single rolling handoff for the project. Newest session at the top. Older session
 
 ---
 
+# 9 September 2026 — Published Aug 17 to Sep 7 via rebuild trigger, added 4 new posts (Sep 14 to Oct 5)
+
+Two-part session: the recurring ops publish, then a new content batch. Two content-relevant commits plus one docs commit on `main`, all deployed via Amplify.
+
+## Ops — published the four overdue scheduled posts
+
+The Aug 17, Aug 24, Aug 31 and Sep 7 posts were all still gated out of the live `/blog` listing, home and sitemap. Same root cause as every prior entry: ISR does not fire on Amplify, so the last production build (10 Aug) evaluated `isPublished()` before those four dates passed. Content was deployed and reachable by direct URL, just not listed.
+
+- Pre-flight: local `main` clean and in sync with `origin/main`; all four slugs had their full 7 language files; `date`/`slug`/`image` consistent across languages.
+- Empty commit `d19c8df` pushed to `main`. Push went through with no credential dialog.
+- **CDN edge-cache gotcha (new, worth remembering):** the bare `https://directbookinghealthscore.com/blog` URL kept serving the pre-rebuild HTML for several minutes after the build finished, so a plain `curl`/grep of `/blog` showed the four posts still MISSING and looked like a failed publish. Adding a cache-busting query string (`/blog?cb=<ts>`) forced a fresh render and confirmed all four present in both the listing and `sitemap.xml`. When verifying a publish, always cache-bust; do not trust the bare URL for the first ~10 min.
+
+## New posts (Sep 14 to Oct 5) — commit `d755628`, 28 files
+
+Four posts continuing the Monday cadence, rotating service angles, autumn/Q4 seasonal. Per the user, written **seasonal + illustrative** (no fabricated trade-press pegs this batch, because the assistant's knowledge cutoff predates the publish window — figures are framed as typical/illustrative rather than cited to invented 2026 surveys).
+
+| Date | Slug | Angle | Product / internal link |
+|---|---|---|---|
+| 14 Sep | `launch-christmas-gift-voucher-campaign` | Vouchers (festive voucher timing) | Vouchers / turn-summer-demand-into-off-season-cash-with-vouchers |
+| 21 Sep | `building-your-2027-direct-booking-budget` | Intelligence / CSM (budget season, CPA) | Intelligence / why-hotel-metasearch-campaigns-lose-money |
+| 28 Sep | `turn-winter-demand-into-direct-bookings` | Booking Platform (winter demand capture) | Booking Platform / build-next-winter-direct-bookings-in-summer |
+| 5 Oct | `make-your-hotel-visible-in-ai-search` | Digital Media / GEO (AI search visibility) | Digital Media / how-ai-search-is-rewriting-hotel-discovery |
+
+English masters written by hand; the 24 translations produced by 6 parallel translation agents (one per language), each mirroring the register, typography and terminology of the corresponding 7 Sep localised post. Full-batch validation before commit: identical `##`/`###` hierarchy and table structure per language, `slug`/`date`/`image` byte-identical across languages, exactly one product link and one internal `/blog/` link each, UK English, no hyphens or dashes (only lexically required French hyphens such as c'est-a-dire), metaDescription <= 160 chars (verified by character count, not bytes — accented ES/PL descriptions read >160 on a byte count but are 154 and 157 chars). LF stored in git via `.gitattributes` (`git ls-files --eol` shows `i/lf`); working-copy CRLF on Windows is expected and harmless.
+
+## Open / follow-ups
+
+- **Each new post needs a rebuild-trigger push on/after its date** (Sep 14, Sep 21, Sep 28, Oct 5). Nothing about the root cause has changed. Five manual triggers across the summer plus this one now strongly argue for the standing fix: either repair ISR on Amplify, or add a scheduled routine that pushes an empty commit each Monday. This is the single most repeated open item in this handoff.
+- **Blog queue now runs dry after 5 Oct.**
+- **Translation QA** — the 24 new translations are Claude-written, not native-reviewed (same caveat as every prior batch). Worth a read-through before each publishes.
+- `previews/` still uncommitted (carried over, unchanged this session).
+
+## Verified at close
+
+- Publish of the four overdue posts: all four present in the live `/blog` listing and `sitemap.xml` (cache-busted).
+- New batch deploy: the `d755628` Amplify build finished ~180 s after push; the 14 Sep post renders correctly via direct URL (markdown parses) and is correctly absent from the live listing until its date. The other three new posts follow the same gated pattern.
+
+---
+
 # 10 August 2026 — Published Aug 3 + Aug 10 via rebuild trigger
 
 Ops only, no content or code changes. Same root cause as 15 July and 29 July: Amplify does not run the hourly ISR revalidation, so date-gated posts stay invisible until a fresh build re-runs `isPublished()`.
