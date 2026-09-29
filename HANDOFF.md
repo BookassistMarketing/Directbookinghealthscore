@@ -4,6 +4,24 @@ Single rolling handoff for the project. Newest session at the top. Older session
 
 ---
 
+# 29 September 2026 — Published Sep 14, Sep 21, Sep 28 via rebuild trigger
+
+Ops only, no content or code changes. Same root cause as every prior entry (ISR does not fire on Amplify).
+
+- Pre-flight: local `main` clean and in sync with `origin/main`; all three slugs had 7 language files with consistent `date`/`slug`. Cache-busted `/blog` confirmed all three were missing (listing stopped at 7 Sep).
+- Empty commit `a666bdf` pushed to `main`, no credential dialog. Listing showed all three ~150 s after push.
+- **Sitemap lagged the listing (new gotcha):** for a few minutes after `/blog` updated, `sitemap.xml` still came back without the new posts, even with a cache-busting query and `X-Cache: Miss from cloudfront`. About a minute later it showed all 21 URLs (3 posts × 7 languages). So check the sitemap separately and give it a few extra minutes before calling a publish broken.
+- The apex domain now 302s to `www.directbookinghealthscore.com`; follow redirects (`curl -L`) when checking status codes.
+- Verified: EN/FR/DE/IT post URLs return 200; the 5 Oct post (`make-your-hotel-visible-in-ai-search`) is still correctly absent from the listing and sitemap.
+
+## Open / follow-ups
+
+- **5 Oct post needs a rebuild push on/after 5 Oct.** After that the blog queue is empty.
+- The standing fix (repair ISR or a Monday scheduled empty commit) is still not done. That makes seven manual triggers now.
+- Translation QA on the 9 Sep batch is still outstanding.
+
+---
+
 # 9 September 2026 — Published Aug 17 to Sep 7 via rebuild trigger, added 4 new posts (Sep 14 to Oct 5)
 
 Two-part session: the recurring ops publish, then a new content batch. Two content-relevant commits plus one docs commit on `main`, all deployed via Amplify.
