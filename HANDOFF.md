@@ -4,9 +4,9 @@ Single rolling handoff for the project. Newest session at the top. Older session
 
 ---
 
-# 29 September 2026 — Published Sep 14, Sep 21, Sep 28 via rebuild trigger
+# 29 September 2026 — Published Sep 14, Sep 21, Sep 28 via rebuild trigger, added 4 new posts (Oct 12 to Nov 2)
 
-Ops only, no content or code changes. Same root cause as every prior entry (ISR does not fire on Amplify).
+Two-part session: the recurring ops publish, then a new content batch. Same root cause for the publish as every prior entry (ISR does not fire on Amplify).
 
 - Pre-flight: local `main` clean and in sync with `origin/main`; all three slugs had 7 language files with consistent `date`/`slug`. Cache-busted `/blog` confirmed all three were missing (listing stopped at 7 Sep).
 - Empty commit `a666bdf` pushed to `main`, no credential dialog. Listing showed all three ~150 s after push.
@@ -14,11 +14,28 @@ Ops only, no content or code changes. Same root cause as every prior entry (ISR 
 - The apex domain now 302s to `www.directbookinghealthscore.com`; follow redirects (`curl -L`) when checking status codes.
 - Verified: EN/FR/DE/IT post URLs return 200; the 5 Oct post (`make-your-hotel-visible-in-ai-search`) is still correctly absent from the listing and sitemap.
 
+## New posts (Oct 12 to Nov 2) — commit `50f2e6a`, 28 files
+
+Same session, second part. Topics and keywords approved by the user before writing. Seasonal and illustrative, no invented statistics.
+
+| Date | Slug | Primary keyword | Product / internal link |
+|---|---|---|---|
+| 12 Oct | `win-2027-business-travel-in-corporate-rfp-season` | hotel corporate RFP | GDS / capturing-corporate-and-group-direct-bookings |
+| 19 Oct | `why-guests-drop-off-your-hotel-website-on-mobile` | hotel mobile booking conversion | Web Design / your-hotel-website-has-2-7-seconds |
+| 26 Oct | `hotel-pre-arrival-emails-that-grow-direct-revenue` | hotel pre arrival email | Intelligence / first-party-data-is-the-new-loyalty |
+| 2 Nov | `your-hotel-black-friday-strategy-starts-now` | hotel Black Friday strategy | Booking Engine / the-summer-rate-trap |
+
+- **New terminology rule (user, 29 Sep):** say **"Booking Engine"**, not "Booking Platform", in all languages. The link text is "Bookassist Booking Engine" and the URL stays `bookassist.org/booking-platform`. Say **"Guest Journey"**, not "Customer Journey", and keep it in English in the translations (this overrides translation-v3's "Parcours Client" / "Cesta zákazníka"). Older posts still say Booking Platform and were not changed.
+- Hero images are new, distinct Unsplash IDs, HTTP-checked and viewed before use. The credit is the generic "Photo via Unsplash".
+- The 24 translations were written by 6 parallel agents, each copying the style of its language's 5 Oct post, and then checked independently by script against the English: heading sequence, table rows, link URLs, identical `date`/`slug`/`image`, meta description 160 characters or less, LF endings, no hyphens or dashes in prose.
+- **Hyphen workarounds worth a native look:** DE uses "Mail" instead of "E-Mail" and open English compounds such as "Black Friday Strategie". CS and PL use "email"/"mail". FR reworded "week-end", "assurez-vous" and "check-in". "First party data" became "datos propios" (ES), "données propriétaires" (FR) and "data první strany" (CS). The FR (70) and PL (65, 71) titles run longer than the English ones.
+
 ## Open / follow-ups
 
-- **5 Oct post needs a rebuild push on/after 5 Oct.** After that the blog queue is empty.
+- **Rebuild push needed on/after each date:** 5 Oct, 12 Oct, 19 Oct, 26 Oct and 2 Nov. After 2 Nov the blog queue is empty.
 - The standing fix (repair ISR or a Monday scheduled empty commit) is still not done. That makes seven manual triggers now.
-- Translation QA on the 9 Sep batch is still outstanding.
+- Translation QA is outstanding on the 9 Sep batch and on this batch.
+- Possible follow-up: switch "Booking Platform" to "Booking Engine" in the older posts and the site UI, if the user wants it applied retroactively.
 
 ---
 
