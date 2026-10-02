@@ -3,6 +3,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { AiAudit } from './AiAudit';
 import { ForceLanguage } from '../contexts/ContentContext';
+import { saveTtgReport, type ReportProof } from '../services/aiService';
 
 // HubSpot form created by Fabien for the TTG stand (E-mail, Nome azienda, URL sito web + consent).
 // Same portal as LeadCapture. Fields added later in HubSpot show up here automatically.
@@ -50,23 +51,26 @@ const PILLARS = [
 
 const CONSENT_KEY = 'hhc_gemini_consent';
 
-// Reads the website the visitor typed. v2 embeds pass an HTMLFormElement, older
+// Reads a field the visitor typed. v2 embeds pass an HTMLFormElement, older
 // builds a jQuery wrapper; submissionValues arrives on onFormSubmitted in newer ones.
-function readWebsite(form: any, data?: any): string {
-  const fromData = data?.submissionValues?.website;
+function readField(name: string, form: any, data?: any): string {
+  const fromData = data?.submissionValues?.[name];
   if (typeof fromData === 'string' && fromData.trim()) return fromData.trim();
   const el: HTMLFormElement | undefined = form?.querySelector ? form : form?.[0];
-  const input = el?.querySelector<HTMLInputElement>('input[name="website"]');
+  const input = el?.querySelector<HTMLInputElement>(`input[name="${name}"]`);
   return input?.value.trim() ?? '';
 }
 
-function StandForm({ onLead }: { onLead: (website: string, formStartedAt: number) => void }) {
+type Lead = { url: string; email: string; formStartedAt: number };
+
+function StandForm({ onLead }: { onLead: (lead: Lead) => void }) {
   // Bumping formKey remounts the container and builds a fresh form for the next visitor.
   const [formKey, setFormKey] = useState(0);
   const [submitted, setSubmitted] = useState(false);
   const [ready, setReady] = useState(false);
   const created = useRef(false);
   const website = useRef('');
+  const email = useRef('');
   const readyAt = useRef(Date.now());
 
   useEffect(() => {
@@ -88,11 +92,12 @@ function StandForm({ onLead }: { onLead: (website: string, formStartedAt: number
         css: '', // drop HubSpot's default form styles; ttg.css styles the markup
 
         onFormReady: () => { readyAt.current = Date.now(); setReady(true); },
-        onFormSubmit: (form: any) => { website.current = readWebsite(form); },
+        onFormSubmit: (form: any) => { website.current = readField('website', form); email.current = readField('email', form); },
         onFormSubmitted: (form: any, data: any) => {
-          const site = readWebsite(form, data) || website.current;
+          const site = readField('website', form, data) || website.current;
+          const mail = readField('email', form, data) || email.current;
           // With a website, hand over to the AI audit; without one, Fabien runs it by hand.
-          if (site) onLead(site, readyAt.current);
+          if (site) onLead({ url: site, email: mail, formStartedAt: readyAt.current });
           else setSubmitted(true);
         },
       });
@@ -141,7 +146,28 @@ function StandForm({ onLead }: { onLead: (website: string, formStartedAt: number
   );
 }
 
-function StandAuditView({ url, formStartedAt, onReset }: { url: string; formStartedAt: number; onReset: () => void }) {
+type SendState = 'idle' | 'sending' | 'sent' | 'failed';
+
+const SEND_TEXT: Record<Exclude<SendState, 'idle'>, string> = {
+  sending: 'Invio del report via email in corso…',
+  sent: 'Report salvato: arriverà via email a breve, con una copia a Susanna.',
+  failed: 'Invio automatico non riuscito: scarica il PDF e invialo da qui.',
+};
+
+function StandAuditView({ lead, onReset }: { lead: Lead; onReset: () => void }) {
+  const [send, setSend] = useState<SendState>('idle');
+  const sentFor = useRef<string | null>(null);
+
+  // Saves the report on the HubSpot contact; the TTG workflow sends the email.
+  const handleReport = (report: string, proof: ReportProof | null) => {
+    if (!lead.email || !proof || sentFor.current === proof.reportSig) return;
+    sentFor.current = proof.reportSig;
+    setSend('sending');
+    saveTtgReport({ email: lead.email, report, ...proof })
+      .then(() => setSend('sent'))
+      .catch(err => { console.error('[TtgStandAudit] Saving the report failed:', err); setSend('failed'); });
+  };
+
   return (
     <div className="ttg">
       <section className="ttg__hero ttg__hero--audit">
@@ -151,8 +177,11 @@ function StandAuditView({ url, formStartedAt, onReset }: { url: string; formStar
           <img className="ttg__logo-r" src="/ttg-2026/bookassist-logo.png" alt="Bookassist" />
         </div>
         <div className="ttg__audit">
+          {send !== 'idle' && (
+            <p className={`ttg__send ttg__send--${send}`} role="status">{SEND_TEXT[send]}</p>
+          )}
           <ForceLanguage language="it">
-            <AiAudit prefillUrl={url} autoStart leadCaptured formStartedAt={formStartedAt} onReset={onReset} />
+            <AiAudit prefillUrl={lead.url} autoStart leadCaptured formStartedAt={lead.formStartedAt} onReset={onReset} onReport={handleReport} />
           </ForceLanguage>
           <div className="ttg__audit-foot">
             <button type="button" className="ttg__reset" onClick={onReset}>Nuovo contatto</button>
@@ -164,13 +193,14 @@ function StandAuditView({ url, formStartedAt, onReset }: { url: string; formStar
 }
 
 export const TtgStandAudit: React.FC = () => {
-  const [lead, setLead] = useState<{ url: string; formStartedAt: number } | null>(null);
+  const [lead, setLead] = useState<Lead | null>(null);
 
   // Local dev only: /ttg-2026?testLead=example.com jumps to the audit without a HubSpot submission.
   useEffect(() => {
     if (process.env.NODE_ENV === 'production') return;
-    const url = new URLSearchParams(window.location.search).get('testLead');
-    if (url) setLead({ url, formStartedAt: Date.now() - 5000 });
+    const params = new URLSearchParams(window.location.search);
+    const url = params.get('testLead');
+    if (url) setLead({ url, email: params.get('testEmail') ?? '', formStartedAt: Date.now() - 5000 });
   }, []);
 
   const reset = () => {
@@ -180,7 +210,7 @@ export const TtgStandAudit: React.FC = () => {
     window.scrollTo(0, 0);
   };
 
-  if (lead) return <StandAuditView url={lead.url} formStartedAt={lead.formStartedAt} onReset={reset} />;
+  if (lead) return <StandAuditView key={lead.formStartedAt} lead={lead} onReset={reset} />;
 
   return (
   <div className="ttg">
@@ -219,7 +249,7 @@ export const TtgStandAudit: React.FC = () => {
           <div className="ttg__body">
             <h2 className="ttg__ftitle">Ricevi il tuo audit gratuito</h2>
             <p className="ttg__fsub">Ti bastano 20 secondi. Lo ricevi via email.</p>
-            <StandForm onLead={(url, formStartedAt) => { setLead({ url, formStartedAt }); window.scrollTo(0, 0); }} />
+            <StandForm onLead={l => { setLead(l); window.scrollTo(0, 0); }} />
           </div>
         </div>
       </div>

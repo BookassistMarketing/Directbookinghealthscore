@@ -32,6 +32,7 @@ const FORBIDDEN_PATTERNS = [
   /process\.env\.STAFF_PASSWORD/,
   /process\.env\.STAFF_MARKETING_PASSWORD/,
   /process\.env\.STAFF_TOKEN_SECRET/,
+  /process\.env\.HUBSPOT_PRIVATE_APP_TOKEN/,
 ];
 
 // Directories to scan. Skip node_modules, .next, build output, scripts itself.

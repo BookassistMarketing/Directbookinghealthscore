@@ -1,5 +1,5 @@
 import 'server-only';
-import { createHmac, timingSafeEqual } from 'crypto';
+import { createHash, createHmac, timingSafeEqual } from 'crypto';
 import { NextRequest, NextResponse } from 'next/server';
 import { LOCALES } from './i18n';
 import type { Language } from '../types';
@@ -251,4 +251,30 @@ export function looksLikeAiReadinessReport(text: string): boolean {
   // At least 2 of the 3 markers must be present
   const hits = [hasSummaryHeading, hasOverallScore, hasMarkdownTable].filter(Boolean).length;
   return hits >= 2;
+}
+
+// ---------------------------------------------------------------------------
+// Report proof (TTG stand page)
+// ---------------------------------------------------------------------------
+// /api/ai-audit signs each report it returns, so /api/ttg-report only saves a
+// report our server produced for that URL, never arbitrary text from a caller.
+
+const REPORT_PROOF_MAX_AGE_SECONDS = 60 * 60;
+
+function reportProofPayload(url: string, report: string, issuedAt: number): string {
+  const digest = createHash('sha256').update(report).digest('hex');
+  return `report:${issuedAt}:${url}:${digest}`;
+}
+
+export function signReport(url: string, report: string): { reportSig: string; reportIssuedAt: number } {
+  const issuedAt = Math.floor(Date.now() / 1000);
+  return { reportSig: sign(reportProofPayload(url, report, issuedAt)), reportIssuedAt: issuedAt };
+}
+
+export function verifyReport(url: string, report: string, issuedAt: unknown, signature: unknown): boolean {
+  if (typeof issuedAt !== 'number' || !Number.isFinite(issuedAt)) return false;
+  if (typeof signature !== 'string' || !/^[0-9a-f]{64}$/.test(signature)) return false;
+  const age = Math.floor(Date.now() / 1000) - issuedAt;
+  if (age < 0 || age > REPORT_PROOF_MAX_AGE_SECONDS) return false;
+  return verifySignature(reportProofPayload(url, report, issuedAt), signature);
 }

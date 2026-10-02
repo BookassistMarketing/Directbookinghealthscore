@@ -53,11 +53,18 @@ export interface BotCheckSignals {
   formAgeMs: number;
 }
 
+// Signed by the server; lets /api/ttg-report check the report really came from /api/ai-audit.
+export interface ReportProof {
+  reportUrl: string; // the URL as the server validated and signed it
+  reportSig: string;
+  reportIssuedAt: number;
+}
+
 export async function generateAiReadinessReport(
   url: string,
   lang: Language,
   bot: BotCheckSignals,
-): Promise<string> {
+): Promise<{ report: string; proof: ReportProof | null }> {
   const res = await fetch('/api/ai-audit', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
@@ -70,6 +77,25 @@ export async function generateAiReadinessReport(
     }),
   });
   if (!res.ok) throw await parseError(res);
-  const data = (await res.json()) as { report: string };
-  return data.report;
+  const data = (await res.json()) as { report: string } & Partial<ReportProof>;
+  const proof = typeof data.reportUrl === 'string' && typeof data.reportSig === 'string' && typeof data.reportIssuedAt === 'number'
+    ? { reportUrl: data.reportUrl, reportSig: data.reportSig, reportIssuedAt: data.reportIssuedAt }
+    : null;
+  return { report: data.report, proof };
+}
+
+export interface TtgReportPayload extends ReportProof {
+  email: string;
+  report: string;
+}
+
+// TTG stand page: saves the finished report on the visitor's HubSpot contact,
+// which triggers the workflow that emails it to them (copy to Susanna).
+export async function saveTtgReport(payload: TtgReportPayload): Promise<void> {
+  const res = await fetch('/api/ttg-report', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(payload),
+  });
+  if (!res.ok) throw await parseError(res);
 }

@@ -12,7 +12,7 @@ import { LeadCapture } from './LeadCapture';
 import { StaffBadge } from './StaffBadge';
 import { useContent } from '../contexts/ContentContext';
 import { Language } from '../types';
-import { generateAiReadinessReport, type ApiError } from '../services/aiService';
+import { generateAiReadinessReport, type ApiError, type ReportProof } from '../services/aiService';
 import { checkStaffBypass, clearStaffToken, type StaffRole } from '../lib/staffBypass';
 import { DEMO_REPORTS } from '../lib/aiAuditDemoReport';
 
@@ -427,9 +427,11 @@ interface AiAuditProps {
   formStartedAt?: number;
   // Replaces the internal reset (e.g. back to the host page's form).
   onReset?: () => void;
+  // Called once per finished audit with the report and the server's proof.
+  onReport?: (report: string, proof: ReportProof | null) => void;
 }
 
-export const AiAudit: React.FC<AiAuditProps> = ({ prefillUrl, autoStart, leadCaptured, formStartedAt, onReset }) => {
+export const AiAudit: React.FC<AiAuditProps> = ({ prefillUrl, autoStart, leadCaptured, formStartedAt, onReset, onReport }) => {
   const { language } = useContent();
   const router = useRouter();
   const l = labelsMap[language];
@@ -782,11 +784,12 @@ export const AiAudit: React.FC<AiAuditProps> = ({ prefillUrl, autoStart, leadCap
     setView('loading');
     const formAgeMs = Date.now() - formRenderedAt.current;
     try {
-      const result = await generateAiReadinessReport(url, reportLang, {
+      const { report: result, proof } = await generateAiReadinessReport(url, reportLang, {
         honeypot,
         formAgeMs,
       });
       setReport(result);
+      onReport?.(result, proof);
       // Skip the blurred preview teaser for staff (any role) and land on
       // the full report. Re-check the bypass in case the mount-time fetch
       // hasn't resolved yet for fast submitters.

@@ -8,6 +8,7 @@ import {
   attachRateLimitCookie,
   sanitiseGeminiError,
   looksLikeAiReadinessReport,
+  signReport,
 } from '../../../lib/api-security';
 import { verifyStaffToken } from '../../../lib/staff-auth';
 
@@ -83,7 +84,7 @@ export async function POST(req: NextRequest) {
 
     // Skip the throttle cookie for staff so testing back-to-back doesn't
     // self-rate-limit them. Real visitors still get the cookie.
-    const successResponse = NextResponse.json({ report, requestId });
+    const successResponse = NextResponse.json({ report, requestId, reportUrl: urlCheck, ...signReport(urlCheck, report) });
     return isStaff ? successResponse : attachRateLimitCookie(successResponse);
   } catch (err) {
     const { code, status } = sanitiseGeminiError(err, `api/ai-audit [${requestId}]`);

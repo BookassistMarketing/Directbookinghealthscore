@@ -150,3 +150,7 @@
 .ttg__hero--audit { padding-bottom:40px; }
 .ttg__audit { max-width:1000px; margin:0 auto; background:#fff; border-radius:20px; box-shadow:0 10px 34px rgba(2,74,119,.08); }
 .ttg__audit-foot { display:flex; justify-content:center; padding:0 24px 32px; }
+.ttg__send { margin:0; padding:14px 24px; border-radius:20px 20px 0 0; font-size:15px; font-weight:700; text-align:center; }
+.ttg__send--sending { background:#E5F2F2; color:#3B5772; }
+.ttg__send--sent { background:#45AEB1; color:#000; }
+.ttg__send--failed { background:#fdecea; color:#a32620; }
