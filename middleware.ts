@@ -48,6 +48,12 @@ export function middleware(req: NextRequest) {
     return NextResponse.next();
   }
 
+  // /ttg-2026 is the hidden Italian-only TTG stand page; it has no localised
+  // version, so a locale redirect (e.g. to /it/ttg-2026) would 404.
+  if (pathname === '/ttg-2026') {
+    return NextResponse.next();
+  }
+
   // Signed-in staff stay on English everywhere. The cookie is set by the
   // /staff hub on sign-in and cleared on sign-out. Non-authoritative — actual
   // audit bypass still requires server-verified token; cookie just suppresses

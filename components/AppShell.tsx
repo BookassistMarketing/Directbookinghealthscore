@@ -201,6 +201,10 @@ export const AppShell: React.FC<{ children: React.ReactNode }> = ({ children }) 
     },
   ];
 
+  // Hidden TTG stand page runs as a kiosk on an iPad: no header, footer or
+  // cookie banner, so a visitor can't wander off the form.
+  if (pathname?.startsWith('/ttg-2026')) return <>{children}</>;
+
   return (
     <div className="relative isolate min-h-screen supports-[height:100dvh]:min-h-[100dvh] overflow-x-clip bg-[#F4F6F8] font-sans text-gray-900 flex flex-col print:bg-white print:h-auto print:min-h-0">
       {/* Site-wide dotted background — sits behind every page */}
