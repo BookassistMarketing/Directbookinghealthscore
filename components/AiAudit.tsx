@@ -417,7 +417,19 @@ const reportLangPickerLabel: Record<Language, string> = {
   cs: 'Vygenerovat report v',
 };
 
-export const AiAudit: React.FC = () => {
+interface AiAuditProps {
+  // Embedded mode (TTG stand page): the lead was already captured by a HubSpot
+  // form on the host page, so run straight away on this URL and skip the gate.
+  prefillUrl?: string;
+  autoStart?: boolean;
+  leadCaptured?: boolean;
+  // When the host form became visible; feeds the server's formAgeMs bot check.
+  formStartedAt?: number;
+  // Replaces the internal reset (e.g. back to the host page's form).
+  onReset?: () => void;
+}
+
+export const AiAudit: React.FC<AiAuditProps> = ({ prefillUrl, autoStart, leadCaptured, formStartedAt, onReset }) => {
   const { language } = useContent();
   const router = useRouter();
   const l = labelsMap[language];
@@ -427,7 +439,7 @@ export const AiAudit: React.FC = () => {
   const [consentDeclined, setConsentDeclined] = useState(false);
 
   const [view, setView] = useState<ViewState>('idle');
-  const [rawUrl, setRawUrl] = useState('');
+  const [rawUrl, setRawUrl] = useState(prefillUrl ?? '');
   const [reportLang, setReportLang] = useState<Language>(language);
   // Chrome around the rendered report (eyebrow, headings, PDF/reset buttons)
   // follows the report language, not the UI locale — so a staff member on the
@@ -444,7 +456,8 @@ export const AiAudit: React.FC = () => {
   // the form was rendered. Bots fill all fields including hidden ones, and
   // submit instantly. Both signals are checked server-side in /api/ai-audit.
   const [honeypot, setHoneypot] = useState('');
-  const formRenderedAt = useRef<number>(Date.now());
+  const formRenderedAt = useRef<number>(formStartedAt ?? Date.now());
+  const autoStarted = useRef(false);
   const [factIndex, setFactIndex] = useState(0);
   const [staffRole, setStaffRole] = useState<StaffRole | null>(null);
   const isStaffBypass = staffRole !== null;
@@ -724,7 +737,7 @@ export const AiAudit: React.FC = () => {
     if (typeof window === 'undefined') return;
     setConsentAccepted(sessionStorage.getItem(CONSENT_KEY) === 'accepted');
     setConsentChecked(true);
-    formRenderedAt.current = Date.now();
+    formRenderedAt.current = formStartedAt ?? Date.now();
     let cancelled = false;
     checkStaffBypass().then(role => {
       if (!cancelled) setStaffRole(role);
@@ -782,7 +795,7 @@ export const AiAudit: React.FC = () => {
         activeRole = await checkStaffBypass();
         if (activeRole) setStaffRole(activeRole);
       }
-      setView(activeRole ? 'done' : 'preview');
+      setView(activeRole || leadCaptured ? 'done' : 'preview');
     } catch (err) {
       console.error('[AiAudit] Audit failed:', err);
       setRequestError(l.errorBody);
@@ -800,6 +813,7 @@ export const AiAudit: React.FC = () => {
   };
 
   const reset = () => {
+    if (onReset) { onReset(); return; }
     setRawUrl('');
     setUrlError(null);
     setRequestError(null);
@@ -819,6 +833,17 @@ export const AiAudit: React.FC = () => {
     setReport(DEMO_REPORTS[reportLang] ?? DEMO_REPORTS.en);
     setView('done');
   };
+
+  // Embedded auto-start: fire once, as soon as Gemini consent is given.
+  useEffect(() => {
+    if (!autoStart || autoStarted.current || !consentAccepted || !prefillUrl) return;
+    const normalised = normaliseUrl(prefillUrl);
+    if (!normalised) { setUrlError(l.invalidUrl); return; }
+    autoStarted.current = true;
+    setAuditedUrl(normalised);
+    runAnalysis(normalised);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [autoStart, consentAccepted, prefillUrl]);
 
   if (consentDeclined) {
     return (

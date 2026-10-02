@@ -1,6 +1,8 @@
 'use client';
 
 import React, { useEffect, useRef, useState } from 'react';
+import { AiAudit } from './AiAudit';
+import { ForceLanguage } from '../contexts/ContentContext';
 
 // HubSpot form created by Fabien for the TTG stand (E-mail, Nome azienda, URL sito web + consent).
 // Same portal as LeadCapture. Fields added later in HubSpot show up here automatically.
@@ -46,12 +48,26 @@ const PILLARS = [
   },
 ];
 
-function StandForm() {
+const CONSENT_KEY = 'hhc_gemini_consent';
+
+// Reads the website the visitor typed. v2 embeds pass an HTMLFormElement, older
+// builds a jQuery wrapper; submissionValues arrives on onFormSubmitted in newer ones.
+function readWebsite(form: any, data?: any): string {
+  const fromData = data?.submissionValues?.website;
+  if (typeof fromData === 'string' && fromData.trim()) return fromData.trim();
+  const el: HTMLFormElement | undefined = form?.querySelector ? form : form?.[0];
+  const input = el?.querySelector<HTMLInputElement>('input[name="website"]');
+  return input?.value.trim() ?? '';
+}
+
+function StandForm({ onLead }: { onLead: (website: string, formStartedAt: number) => void }) {
   // Bumping formKey remounts the container and builds a fresh form for the next visitor.
   const [formKey, setFormKey] = useState(0);
   const [submitted, setSubmitted] = useState(false);
   const [ready, setReady] = useState(false);
   const created = useRef(false);
+  const website = useRef('');
+  const readyAt = useRef(Date.now());
 
   useEffect(() => {
     if (submitted) return;
@@ -71,8 +87,14 @@ function StandForm() {
         submitText: SUBMIT_TEXT,
         css: '', // drop HubSpot's default form styles; ttg.css styles the markup
 
-        onFormReady: () => setReady(true),
-        onFormSubmitted: () => setSubmitted(true),
+        onFormReady: () => { readyAt.current = Date.now(); setReady(true); },
+        onFormSubmit: (form: any) => { website.current = readWebsite(form); },
+        onFormSubmitted: (form: any, data: any) => {
+          const site = readWebsite(form, data) || website.current;
+          // With a website, hand over to the AI audit; without one, Fabien runs it by hand.
+          if (site) onLead(site, readyAt.current);
+          else setSubmitted(true);
+        },
       });
     };
 
@@ -92,6 +114,7 @@ function StandForm() {
     // Fallback if the script was already loading from another mount.
     const poll = setInterval(() => { if (!created.current) create(); else clearInterval(poll); }, 500);
     return () => clearInterval(poll);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [formKey, submitted]);
 
   if (submitted) {
@@ -118,7 +141,48 @@ function StandForm() {
   );
 }
 
-export const TtgStandAudit: React.FC = () => (
+function StandAuditView({ url, formStartedAt, onReset }: { url: string; formStartedAt: number; onReset: () => void }) {
+  return (
+    <div className="ttg">
+      <section className="ttg__hero ttg__hero--audit">
+        <div className="ttg__logos">
+          <img className="ttg__logo-l" src="/ttg-2026/logo-ttg-transparent.png" alt="TTG Travel Experience" />
+          <span className="ttg__logo-sep" aria-hidden="true" />
+          <img className="ttg__logo-r" src="/ttg-2026/bookassist-logo.png" alt="Bookassist" />
+        </div>
+        <div className="ttg__audit">
+          <ForceLanguage language="it">
+            <AiAudit prefillUrl={url} autoStart leadCaptured formStartedAt={formStartedAt} onReset={onReset} />
+          </ForceLanguage>
+          <div className="ttg__audit-foot">
+            <button type="button" className="ttg__reset" onClick={onReset}>Nuovo contatto</button>
+          </div>
+        </div>
+      </section>
+    </div>
+  );
+}
+
+export const TtgStandAudit: React.FC = () => {
+  const [lead, setLead] = useState<{ url: string; formStartedAt: number } | null>(null);
+
+  // Local dev only: /ttg-2026?testLead=example.com jumps to the audit without a HubSpot submission.
+  useEffect(() => {
+    if (process.env.NODE_ENV === 'production') return;
+    const url = new URLSearchParams(window.location.search).get('testLead');
+    if (url) setLead({ url, formStartedAt: Date.now() - 5000 });
+  }, []);
+
+  const reset = () => {
+    // Each visitor sees the Gemini disclosure for their own audit.
+    try { sessionStorage.removeItem(CONSENT_KEY); } catch {}
+    setLead(null);
+    window.scrollTo(0, 0);
+  };
+
+  if (lead) return <StandAuditView url={lead.url} formStartedAt={lead.formStartedAt} onReset={reset} />;
+
+  return (
   <div className="ttg">
     <section className="ttg__hero">
       <div className="ttg__logos">
@@ -155,7 +219,7 @@ export const TtgStandAudit: React.FC = () => (
           <div className="ttg__body">
             <h2 className="ttg__ftitle">Ricevi il tuo audit gratuito</h2>
             <p className="ttg__fsub">Ti bastano 20 secondi. Lo ricevi via email.</p>
-            <StandForm />
+            <StandForm onLead={(url, formStartedAt) => { setLead({ url, formStartedAt }); window.scrollTo(0, 0); }} />
           </div>
         </div>
       </div>
@@ -191,4 +255,5 @@ export const TtgStandAudit: React.FC = () => (
       </div>
     </section>
   </div>
-);
+  );
+};

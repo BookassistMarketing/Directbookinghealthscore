@@ -145,3 +145,8 @@
   .ttg__title { font-size:22px; }
   .ttg__figs b { font-size:34px; }
 }
+
+/* ---------- audit view (after the form) ---------- */
+.ttg__hero--audit { padding-bottom:40px; }
+.ttg__audit { max-width:1000px; margin:0 auto; background:#fff; border-radius:20px; box-shadow:0 10px 34px rgba(2,74,119,.08); }
+.ttg__audit-foot { display:flex; justify-content:center; padding:0 24px 32px; }
