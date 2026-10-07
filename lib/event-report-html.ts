@@ -9,7 +9,8 @@ import type { Root, Element } from 'hast';
 
 // Turns the Gemini markdown report into email-safe HTML (inline styles only,
 // Arial, Bookassist palette) for the HubSpot rich text property
-// `ttg_audit_report`, which the TTG workflow email prints with its token.
+// `ttg_audit_report` (label "Event audit report"), which each event's report
+// email prints with its token.
 // Raw HTML in the model output is dropped (remark-rehype default).
 
 // HubSpot caps a text property at 65,536 characters; keep a margin.

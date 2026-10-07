@@ -28,7 +28,7 @@ const ContentContext = createContext<ContentContextType>({
 export const useContent = () => useContext(ContentContext);
 
 // Pins the language for a subtree whose URL carries no locale prefix
-// (e.g. the Italian-only /ttg-2026 stand page embedding the AI audit).
+// (e.g. the /event/<slug> stand pages embedding the AI audit).
 export const ForceLanguage: React.FC<{ language: Language; children: React.ReactNode }> = ({ language, children }) => {
   const ctx = useContext(ContentContext);
   return <ContentContext.Provider value={{ ...ctx, language }}>{children}</ContentContext.Provider>;

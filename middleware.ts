@@ -48,9 +48,10 @@ export function middleware(req: NextRequest) {
     return NextResponse.next();
   }
 
-  // /ttg-2026 is the hidden Italian-only TTG stand page; it has no localised
-  // version, so a locale redirect (e.g. to /it/ttg-2026) would 404.
-  if (pathname === '/ttg-2026') {
+  // /event/<slug> are the hidden event stand pages (one language per skin,
+  // lib/events); they have no localised version, so a locale redirect (e.g. to
+  // /it/event/ttg-2026) would 404. /ttg-2026 is the old TTG URL (next.config redirect).
+  if (pathname.startsWith('/event/') || pathname === '/ttg-2026') {
     return NextResponse.next();
   }
 

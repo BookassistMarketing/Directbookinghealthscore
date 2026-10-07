@@ -4,6 +4,10 @@ const nextConfig: NextConfig = {
   images: {
     domains: ['images.unsplash.com'],
   },
+  async redirects() {
+    // Old TTG stand URL (Susanna's iPad home screen) → the white label event page.
+    return [{ source: '/ttg-2026', destination: '/event/ttg-2026', permanent: false }];
+  },
   async headers() {
     const securityHeaders = [
       // Force HTTPS for the next year (preload-eligible)

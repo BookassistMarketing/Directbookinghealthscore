@@ -254,9 +254,9 @@ export function looksLikeAiReadinessReport(text: string): boolean {
 }
 
 // ---------------------------------------------------------------------------
-// Report proof (TTG stand page)
+// Report proof (event stand pages)
 // ---------------------------------------------------------------------------
-// /api/ai-audit signs each report it returns, so /api/ttg-report only saves a
+// /api/ai-audit signs each report it returns, so /api/event-report only saves a
 // report our server produced for that URL, never arbitrary text from a caller.
 
 const REPORT_PROOF_MAX_AGE_SECONDS = 60 * 60;

@@ -53,7 +53,7 @@ export interface BotCheckSignals {
   formAgeMs: number;
 }
 
-// Signed by the server; lets /api/ttg-report check the report really came from /api/ai-audit.
+// Signed by the server; lets /api/event-report check the report really came from /api/ai-audit.
 export interface ReportProof {
   reportUrl: string; // the URL as the server validated and signed it
   reportSig: string;
@@ -84,15 +84,16 @@ export async function generateAiReadinessReport(
   return { report: data.report, proof };
 }
 
-export interface TtgReportPayload extends ReportProof {
+export interface EventReportPayload extends ReportProof {
+  event: string; // skin slug, lib/events
   email: string;
   report: string;
 }
 
-// TTG stand page: saves the finished report on the visitor's HubSpot contact,
-// which triggers the workflow that emails it to them (copy to Susanna).
-export async function saveTtgReport(payload: TtgReportPayload): Promise<void> {
-  const res = await fetch('/api/ttg-report', {
+// Event stand page: saves the finished report on the visitor's HubSpot contact,
+// which triggers that event's workflow (emails it to them).
+export async function saveEventReport(payload: EventReportPayload): Promise<void> {
+  const res = await fetch('/api/event-report', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(payload),

@@ -418,7 +418,7 @@ const reportLangPickerLabel: Record<Language, string> = {
 };
 
 interface AiAuditProps {
-  // Embedded mode (TTG stand page): the lead was already captured by a HubSpot
+  // Embedded mode (event stand pages): the lead was already captured by a HubSpot
   // form on the host page, so run straight away on this URL and skip the gate.
   prefillUrl?: string;
   autoStart?: boolean;
