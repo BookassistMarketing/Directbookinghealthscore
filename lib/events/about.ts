@@ -41,3 +41,37 @@ export const ABOUT_IT: AboutSection = {
   ],
   closing: 'Uniamo esperienza, dati e tecnologia per mettere **il canale diretto al centro** del tuo hotel.',
 };
+
+export const ABOUT_EN: AboutSection = {
+  eyebrow: 'About Bookassist',
+  heading: 'We help hotels get more direct bookings',
+  intro: 'Digital marketing, technology and data in one partnership. We work with you across the whole **Guest Journey**, from the first search to the booking on your website, to grow revenue and lower your CPA.',
+  pillars: [
+    {
+      img: { ...DM_GIF, alt: 'Bookassist Digital Marketing on smartphones: Search Ads, Metasearch, Display and AI Overview' },
+      tag: 'Attract',
+      title: 'Digital Marketing',
+      paragraphs: [
+        'Search Ads, Metasearch, Display, AI Overview and much more. Your **official website in front of the traveller**, wherever they search.',
+      ],
+      figures: [
+        { value: '25:1', label: 'Digital Media ROI' },
+        { value: '+48%', label: 'Revenue growth, Hotel Degli Artisti Rome' },
+      ],
+    },
+    {
+      img: { ...BE_INTEL_GIF, alt: 'The Bookassist Booking Engine with Rate Recommender on a smartphone and the Intelligence dashboard on a tablet' },
+      tag: 'Convert and measure',
+      title: 'Booking Engine and Intelligence',
+      paragraphs: [
+        '**Booking Engine:** Rate Recommender suggests the right rate and the traveller books direct on your website.',
+        '**Intelligence:** your data in real time to optimise campaigns and lower your CPA.',
+      ],
+      figures: [
+        { value: '>15%', label: 'Booking Engine conversion' },
+        { value: '87%', label: 'Rooms booked with Rate Recommender' },
+      ],
+    },
+  ],
+  closing: 'We bring together experience, data and technology to put **the direct channel at the heart** of your hotel.',
+};
