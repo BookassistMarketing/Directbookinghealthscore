@@ -17,7 +17,7 @@ const HUBSPOT_PORTAL_ID = '6862341';
 const CONSENT_KEY = 'hhc_gemini_consent';
 
 // Renders the skins' only markup, **bold**.
-function rich(text: string): React.ReactNode {
+export function rich(text: string): React.ReactNode {
   return text.split(/\*\*(.+?)\*\*/g).map((part, i) => (i % 2 === 1 ? <strong key={i}>{part}</strong> : part));
 }
 
@@ -32,7 +32,7 @@ function readField(name: string, form: any, data?: any): string {
 }
 
 // Urgency pill above the form. The label can tighten on given days (event time zone).
-function Urgency({ urgency, timeZone }: { urgency: NonNullable<EventSkin['urgency']>; timeZone: string }) {
+export function Urgency({ urgency, timeZone }: { urgency: NonNullable<EventSkin['urgency']>; timeZone: string }) {
   // Set after mount so the server render and the tablet's clock never disagree on hydration.
   const [label, setLabel] = useState(urgency.label);
   useEffect(() => {
@@ -49,6 +49,36 @@ function Urgency({ urgency, timeZone }: { urgency: NonNullable<EventSkin['urgenc
       <span className="ev__pulse" aria-hidden="true" />
       {label}
     </p>
+  );
+}
+
+// Live countdown to the end of the event. Ticks every second, hides itself once over.
+export function Countdown({ countdown }: { countdown: NonNullable<EventSkin['countdown']> }) {
+  // null until mounted: the server render can't know the tablet's clock.
+  const [left, setLeft] = useState<number | null>(null);
+  useEffect(() => {
+    const end = new Date(countdown.endsAt).getTime();
+    const tick = () => setLeft(Math.max(0, end - Date.now()));
+    tick();
+    const t = setInterval(tick, 1000);
+    return () => clearInterval(t);
+  }, [countdown.endsAt]);
+  if (left === 0) return null;
+
+  const s = left === null ? null : Math.floor(left / 1000);
+  const parts = s === null ? [null, null, null, null] : [Math.floor(s / 86400), Math.floor(s / 3600) % 24, Math.floor(s / 60) % 60, s % 60];
+  return (
+    <div className="ev__count" role="timer" aria-live="off">
+      <p className="ev__count-label">{countdown.label}</p>
+      <div className="ev__count-row">
+        {parts.map((n, i) => (
+          <div key={countdown.units[i]} className="ev__count-cell">
+            <b>{n === null ? '--' : String(n).padStart(2, '0')}</b>
+            <span>{countdown.units[i]}</span>
+          </div>
+        ))}
+      </div>
+    </div>
   );
 }
 
@@ -74,7 +104,7 @@ function wavePath(amp: number, phase: number): string {
   return `M${pts.join(' L')}`;
 }
 
-function Waves() {
+export function Waves() {
   return (
     <div className="ev__waves" aria-hidden="true">
       <svg viewBox={`0 0 ${WAVE.w} ${WAVE.h}`} preserveAspectRatio="xMidYMid slice">
@@ -88,7 +118,7 @@ function Waves() {
   );
 }
 
-function Logos({ skin }: { skin: EventSkin }) {
+export function Logos({ skin }: { skin: EventSkin }) {
   return (
     <div className="ev__logos">
       {skin.partnerLogo && (
@@ -255,7 +285,7 @@ function About({ about }: { about: NonNullable<EventSkin['about']> }) {
   );
 }
 
-function skinStyle(skin: EventSkin): React.CSSProperties {
+export function skinStyle(skin: EventSkin): React.CSSProperties {
   const style: Record<string, string> = {};
   if (skin.theme?.panel) style['--panel'] = skin.theme.panel;
   if (skin.theme?.highlight) style['--highlight'] = skin.theme.highlight;
@@ -327,6 +357,7 @@ export const EventStandAudit: React.FC<{ skin: EventSkin }> = ({ skin }) => {
                 )}
                 <div className="ev__body">
                   {skin.urgency && <Urgency urgency={skin.urgency} timeZone={skin.timeZone} />}
+                  {skin.countdown && <Countdown countdown={skin.countdown} />}
                   <h2 className="ev__ftitle">{skin.form.title}</h2>
                   <p className="ev__fsub">{rich(skin.form.sub)}</p>
                   <StandForm skin={skin} onLead={l => { setLead(l); window.scrollTo(0, 0); }} />

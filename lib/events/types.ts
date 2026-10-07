@@ -77,6 +77,23 @@ export interface EventSkin {
   // those days, e.g. "last day". Omit to hide it.
   urgency?: { label: string; byDate?: Record<string, string> };
 
+  // Live countdown under the urgency pill (form card and QR page). `endsAt` is
+  // an ISO time with its offset, e.g. '2026-10-16T17:30:00+02:00'. Hidden once
+  // it has passed. Omit to hide it.
+  countdown?: { label: string; endsAt: string; units: [string, string, string, string] }; // days, hours, minutes, seconds
+
+  // Idle screen at /event/<slug>/qr: a big QR code to the stand page, so the
+  // tablet can sit on the counter and visitors scan it with their own phone.
+  // Omit and the QR page 404s.
+  qr?: {
+    eyebrow: string;
+    headline: [string, string]; // 2nd line in the highlight colour
+    lead: string;
+    steps: string[];
+    scanLabel: string; // under the code
+    tapText: string; // button: open the form on this tablet instead
+  };
+
   // Shown when the form is sent without a website (no audit runs, staff follow up).
   thanks: { title: string; text: string };
 

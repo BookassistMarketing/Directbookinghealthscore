@@ -11,6 +11,10 @@ event's workflow emails it to them.
 - Report save: `POST /api/event-report` → `app/api/event-report/handler.ts`
 - Kiosk: `AppShell` hides header/footer/cookie banner under `/event/`; `middleware.ts` skips the locale redirect there
 - Not linked, not in the sitemap, noindex
+- Countdown (optional `countdown` in the skin): live timer under the urgency pill, to `endsAt`; hides itself once over
+- QR idle screen (optional `qr` in the skin): `/event/<slug>/qr`, a big QR code to the stand page (with `utm_source=<slug>&utm_medium=qr`)
+  so visitors scan it with their own phone while the tablet sits on the counter; it asks the browser to keep the screen on.
+  Code drawn on the server (`qrcode` package) in `app/event/[slug]/qr/page.tsx`, screen in `components/EventQrScreen.tsx`
 - Local test without a form submission: `/event/<slug>?testLead=example.com&testEmail=you@example.com` (dev only; there is no Gemini key locally, so the audit itself won't run)
 
 ## HubSpot contact properties (group "Event audits")
@@ -36,7 +40,7 @@ Each audit overwrites these on the contact (latest audit wins).
 2. **Skin.** Copy `lib/events/ttg-2026.ts` to `lib/events/<slug>.ts`. The slug is the URL and the
    value of `event_audit_event`, so pick it once (e.g. `itb-2027`). Set the copy, `language`,
    `timeZone`, `hubspotFormId`, urgency dates, person, optional `theme` colours. Omit what the
-   event doesn't need (`partnerLogo`, `background`, `person`, `urgency`, `about`, `hero.photo`).
+   event doesn't need (`partnerLogo`, `background`, `person`, `urgency`, `countdown`, `qr`, `about`, `hero.photo`).
    For a language other than Italian, add `ABOUT_<LANG>` in `about.ts` first (or omit `about`).
    No hyphens or dashes in copy; "Booking Engine", "Guest Journey", "Rate Recommender" (never translated).
 3. **Images** in `public/events/<slug>/` (partner logo, hero photo, optional background tile).

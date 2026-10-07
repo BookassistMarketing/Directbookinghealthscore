@@ -51,6 +51,25 @@ export const TTG_2026: EventSkin = {
     },
   },
 
+  countdown: {
+    label: 'L’audit allo stand termina tra',
+    endsAt: '2026-10-16T17:30:00+02:00', // TTG closes Fri 16 Oct, 17:30 Rome
+    units: ['giorni', 'ore', 'min', 'sec'],
+  },
+
+  qr: {
+    eyebrow: 'TTG 2026 · Pad. C5 · Stand 324',
+    headline: ['Inquadra il codice:', 'il tuo audit è gratuito.'],
+    lead: 'Scopri in 20 secondi come Google, ChatGPT e Gemini leggono il sito del tuo hotel. Vedi subito il tuo punteggio e lo ricevi anche via email.',
+    steps: [
+      'Apri la fotocamera del telefono e inquadra il codice',
+      'Inserisci la tua email e il sito del tuo hotel',
+      'Ricevi il punteggio e le correzioni prioritarie',
+    ],
+    scanLabel: 'Inquadra con la fotocamera',
+    tapText: 'Oppure compila qui sull’iPad',
+  },
+
   thanks: {
     title: 'Grazie! Siamo già al lavoro sul tuo audit.',
     text: 'Analizziamo il sito del tuo hotel e Susanna ti invierà il report via email a breve, con il tuo punteggio e le prime azioni per ottenere più prenotazioni dirette.',
