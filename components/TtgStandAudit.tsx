@@ -61,6 +61,69 @@ function readField(name: string, form: any, data?: any): string {
   return input?.value.trim() ?? '';
 }
 
+// Urgency pill above the form. The label tightens as the fair runs out (Rome dates).
+const URGENCY_DEFAULT = 'Solo al TTG · dal 14 al 16 ottobre';
+
+function urgencyLabel(now: Date): string {
+  const day = new Intl.DateTimeFormat('en-CA', { timeZone: 'Europe/Rome' }).format(now); // YYYY-MM-DD
+  if (day === '2026-10-16') return 'Ultimo giorno al TTG · fino alle 17:30';
+  if (day === '2026-10-14' || day === '2026-10-15') return 'Solo fino al 16 ottobre, qui allo stand';
+  return URGENCY_DEFAULT;
+}
+
+function Urgency() {
+  // Set after mount so the server render and the iPad's clock never disagree on hydration.
+  const [label, setLabel] = useState(URGENCY_DEFAULT);
+  useEffect(() => {
+    const tick = () => setLabel(urgencyLabel(new Date()));
+    tick();
+    const t = setInterval(tick, 60_000);
+    return () => clearInterval(t);
+  }, []);
+  return (
+    <p className="ttg__urgency">
+      <span className="ttg__pulse" aria-hidden="true" />
+      {label}
+    </p>
+  );
+}
+
+// The four brand waves (spec: HubSpot/visual-system/VISUAL-SOURCE-OF-TRUTH.md §3.7,
+// J_LINES/J_COLOURS from the homepage M13 module). Pure sines, each drifting slowly by one
+// wavelength per loop (34 to 64 s, spec range), so the loop is seamless.
+const WAVE = { w: 1440, h: 200, len: 720, amp: 55, stroke: 6 }; // amp 55 (mobile spec) so the band fits the gap under the slogan
+const WAVE_LINES = [
+  { colour: '#F8CF56', amp: 1.0, phase: 0, stroke: 1.0, drift: 44 },
+  { colour: '#FF8F1B', amp: 0.72, phase: 1.9, stroke: 0.84, drift: 56 },
+  { colour: '#F15B27', amp: 1.3, phase: 3.6, stroke: 0.75, drift: 64 },
+  { colour: '#45AEB1', amp: 0.52, phase: 5.2, stroke: 0.66, drift: 34 },
+];
+
+function wavePath(amp: number, phase: number): string {
+  const cy = WAVE.h / 2;
+  const pts: string[] = [];
+  // One extra wavelength on the right: it slides into view as the path drifts left.
+  for (let x = -10; x <= WAVE.w + WAVE.len + 10; x += 8) {
+    const y = cy + WAVE.amp * amp * Math.sin((x / WAVE.len) * 2 * Math.PI + phase);
+    pts.push(`${x},${y.toFixed(1)}`);
+  }
+  return `M${pts.join(' L')}`;
+}
+
+function Waves() {
+  return (
+    <div className="ttg__waves" aria-hidden="true">
+      <svg viewBox={`0 0 ${WAVE.w} ${WAVE.h}`} preserveAspectRatio="xMidYMid slice">
+        {WAVE_LINES.map(l => (
+          <path key={l.colour} d={wavePath(l.amp, l.phase)} fill="none" stroke={l.colour}
+            strokeWidth={WAVE.stroke * l.stroke} strokeLinecap="round" strokeLinejoin="round"
+            style={{ animationDuration: `${l.drift}s` }} />
+        ))}
+      </svg>
+    </div>
+  );
+}
+
 type Lead = { url: string; email: string; formStartedAt: number };
 
 function StandForm({ onLead }: { onLead: (lead: Lead) => void }) {
@@ -225,6 +288,7 @@ export const TtgStandAudit: React.FC = () => {
         <div className="ttg__photo">
           <img src="/ttg-2026/hero-photo.jpg" alt="Visitatori tra gli stand del TTG Travel Experience" />
         </div>
+        <Waves />
 
         <div className="ttg__left">
           <p className="ttg__slogan">Get More<br /><span>Direct.</span></p>
@@ -247,8 +311,9 @@ export const TtgStandAudit: React.FC = () => {
             <p>Il tuo audit te lo invia<b>Susanna Mazzoncini</b>Senior Sales Executive, Bookassist</p>
           </div>
           <div className="ttg__body">
-            <h2 className="ttg__ftitle">Ricevi il tuo audit gratuito</h2>
-            <p className="ttg__fsub">Ti bastano 20 secondi. Lo ricevi via email.</p>
+            <Urgency />
+            <h2 className="ttg__ftitle">Ricevi il tuo audit gratuito, adesso</h2>
+            <p className="ttg__fsub">Ti bastano 20 secondi: vedi subito il tuo punteggio qui allo stand, con Susanna, e lo ricevi anche via email.</p>
             <StandForm onLead={l => { setLead(l); window.scrollTo(0, 0); }} />
           </div>
         </div>

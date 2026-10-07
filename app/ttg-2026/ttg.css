@@ -2,7 +2,7 @@
    (HubSpot/website/ttg-2026/build_modules.py). Tablet first: Susanna's iPad 11 inch is
    1180x820 landscape, 820x1180 portrait. Everything is scoped under .ttg. */
 
-.ttg { --navy:#024A77; --slate:#3b5772; --teal:#45AEB1; --teal-deep:#2f8a8d; --yellow:#F4C94A; --lteal:#E5F2F2; --card:450px;
+.ttg { --navy:#024A77; --slate:#3b5772; --teal:#45AEB1; --teal-deep:#2f8a8d; --yellow:#F4C94A; --lteal:#E5F2F2; --red:#F15B27; --card:450px;
   --head:var(--ttg-head),'Montserrat',Arial,Helvetica,sans-serif;
   min-height:100vh; min-height:100dvh; box-sizing:border-box; color:var(--slate);
   background:#fff url('/ttg-2026/logo-pattern.png') repeat; background-size:260px 150px; }
@@ -26,6 +26,12 @@
 .ttg__photo::after { content:""; position:absolute; inset:0;
   background:linear-gradient(90deg, rgba(2,74,119,.65) 0%, rgba(2,74,119,.15) 45%, rgba(2,74,119,.15) 70%, #024A77 100%),
              linear-gradient(180deg, rgba(2,74,119,0) 45%, #024A77 100%); }
+/* brand waves, slow drift, centred in the navy panel, behind the copy and the form card (on navy: .33 to .50 opacity) */
+.ttg__waves { position:absolute; left:0; right:0; top:50%; height:200px; transform:translateY(-50%); z-index:0; opacity:.38; pointer-events:none; }
+.ttg__waves svg { display:block; width:100%; height:100%; }
+.ttg__waves path { animation:ttg-drift 44s linear infinite; }
+@keyframes ttg-drift { from { transform:translateX(0); } to { transform:translateX(-720px); } } /* = WAVE.len */
+@media (prefers-reduced-motion:reduce) { .ttg__waves path { animation:none; } }
 .ttg__left, .ttg__card { position:relative; z-index:1; min-width:0; }
 
 .ttg__slogan { margin:34px 0 0; font-family:var(--head); font-weight:800; font-size:60px; line-height:1; letter-spacing:-1px; color:#fff; }
@@ -48,6 +54,13 @@
 .ttg__person b { display:block; font-family:var(--head); font-weight:800; font-size:17px; }
 .ttg__body { padding:20px 24px 22px; }
 .ttg__ftitle { margin:0 0 4px; font-family:var(--head); font-weight:800; font-size:23px; line-height:1.15; color:var(--navy); }
+.ttg__urgency { display:inline-flex; align-items:center; gap:9px; margin:0 0 12px; padding:7px 14px 7px 12px; border-radius:30px;
+  background:var(--red); color:#fff; font-family:var(--head); font-size:13px; font-weight:800; letter-spacing:1.2px; text-transform:uppercase; line-height:1.2;
+  box-shadow:0 4px 14px rgba(241,91,39,.35); }
+.ttg__pulse { position:relative; flex:0 0 10px; width:10px; height:10px; border-radius:50%; background:#fff; }
+.ttg__pulse::after { content:""; position:absolute; inset:0; border-radius:50%; background:#fff; animation:ttg-pulse 1.6s ease-out infinite; }
+@keyframes ttg-pulse { from { transform:scale(1); opacity:.8; } to { transform:scale(2.8); opacity:0; } }
+@media (prefers-reduced-motion:reduce) { .ttg__pulse::after { animation:none; } }
 .ttg__fsub { margin:0 0 14px; font-size:14px; line-height:1.5; color:var(--slate); }
 .ttg__loading { margin:0; padding:24px 0; text-align:center; font-size:14px; color:#7a8a99; }
 
@@ -122,6 +135,7 @@
   .ttg__photo { right:0; height:270px; }
   .ttg__slogan { margin-top:18px; font-size:48px; }
   .ttg__eyebrow { margin-top:92px; }
+  .ttg__waves { top:420px; } /* stacked: middle of the copy, the card covers the lower half */
   .ttg__wrap { padding:34px 24px 30px; border-radius:16px; }
   .ttg__h2 { font-size:30px; }
   .ttg__head { margin-bottom:30px; }
