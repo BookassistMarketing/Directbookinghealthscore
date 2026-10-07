@@ -11,8 +11,8 @@ export const BASE_EN: EventSkin = {
   language: 'en',
   timeZone: 'Europe/Dublin',
   pageTitle: 'Free AI Visibility Audit · Bookassist',
-  // TODO: English stand form (email, company, website). This is the TTG form (Italian labels).
-  hubspotFormId: 'ad2ec816-545a-4d77-9f4b-7241421d0f8a',
+  // "EN - Event Stand - Audit" (clone of the TTG form, English). Reusable by any English event.
+  hubspotFormId: 'c913e80a-fc3a-437d-826c-98337adc6c54',
 
   hero: {
     photo: { src: '/events/shared/trade-show.jpg', alt: 'Visitors walking between trade show stands' },
