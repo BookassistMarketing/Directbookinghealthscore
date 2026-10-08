@@ -941,20 +941,20 @@ export const AiAudit: React.FC<AiAuditProps> = ({ prefillUrl, autoStart, leadCap
       )}
 
       {view === 'idle' && (
-        <div className="text-center">
+        <div className="text-left">
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-teal-50 text-brand-success text-xs font-bold uppercase tracking-widest mb-6">
             <Sparkles className="w-3.5 h-3.5" /> {l.eyebrow}
           </div>
           <h1 className="text-3xl sm:text-5xl font-bold text-gray-900 tracking-tight mb-4 leading-tight">
             {l.heading}
           </h1>
-          <p className="max-w-2xl mx-auto text-base sm:text-lg text-gray-600 mb-10 leading-relaxed">
+          <p className="max-w-2xl text-base sm:text-lg text-gray-600 mb-10 leading-relaxed">
             {l.sub}
           </p>
 
-          <form onSubmit={submit} className="max-w-xl mx-auto">
+          <form onSubmit={submit} className="max-w-xl">
             {isStaffBypass && (
-              <div className="mb-4 flex items-center justify-center gap-2 text-sm">
+              <div className="mb-4 flex items-center justify-start gap-2 text-sm">
                 <label htmlFor="ai-audit-report-lang" className="text-gray-500 font-medium">
                   {reportLangPickerLabel[language]}:
                 </label>

@@ -10,6 +10,8 @@ Single rolling handoff for the project. Newest session at the top. Older session
 - That fallback still failed for visitors ("Something went wrong analysing this site"): 7 of 8 live runs hit `UPSTREAM_TIMEOUT` at exactly the 20s Gemini budget.
 - `80315f3`: on the fallback path only, `thinkingLevel: LOW` and a 27s total budget (prefetch + Gemini, inside the 30s Amplify cap). Normal path unchanged.
 - Verified live after deploy: 8/8 elysia-park.com runs returned 200 in 6 to 8s; gavarni.com/fr still fine (11s).
+- User confirmed the audit now works for them on elysia-park.com.
+- Also: the AI Visibility Audit idle screen (`components/AiAudit.tsx`) is now left-aligned (eyebrow, heading, subtitle, form, staff language picker) instead of centred, at the user's request. Loading, preview and report views unchanged.
 - **Watch:** fallback scores came out lower with low thinking (58 to 68, vs 73 to 94 before with full thinking). The fallback is also less stable than the prefetch path. No Gemini key in `.env.local`, so this can only be tested live.
 
 ---
