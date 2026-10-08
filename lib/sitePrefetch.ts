@@ -19,15 +19,34 @@ const MAX_BYTES = 500_000;
 const MAX_BODY_TEXT_CHARS = 30_000;
 const MAX_REDIRECTS = 5;
 
+// `blocked` marks failures where the site most likely refused us rather than
+// being genuinely broken (bot firewalls such as SiteGround's 403 requests from
+// AWS IPs, or the site was too slow for our 5s budget). The caller can then
+// fall back to letting Gemini fetch the page from Google's own crawlers.
 export type PrefetchResult =
   | { status: 'ok'; content: string }
-  | { status: 'error'; code: 'URL_FETCH_TIMEOUT' | 'URL_FETCH_FAILED' | 'URL_NOT_HTML' };
+  | { status: 'error'; code: 'URL_FETCH_TIMEOUT' | 'URL_FETCH_FAILED' | 'URL_NOT_HTML'; blocked: boolean };
 
-const COMMON_HEADERS = {
+const BOT_HEADERS = {
   'User-Agent': 'Mozilla/5.0 (compatible; BookassistAuditBot/1.0; +https://directbookinghealthscore.com)',
   'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9',
   'Accept-Language': 'en-US,en;q=0.9,fr;q=0.8,es;q=0.7,it;q=0.7,de;q=0.7',
 };
+
+// Second attempt when the bot identity is refused: look like a regular browser.
+const BROWSER_HEADERS = {
+  'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/129.0.0.0 Safari/537.36',
+  'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,*/*;q=0.8',
+  'Accept-Language': 'en-US,en;q=0.9,fr;q=0.8,es;q=0.7,it;q=0.7,de;q=0.7',
+  'Sec-Fetch-Dest': 'document',
+  'Sec-Fetch-Mode': 'navigate',
+  'Sec-Fetch-Site': 'none',
+  'Sec-Fetch-User': '?1',
+  'Upgrade-Insecure-Requests': '1',
+};
+
+// Status codes that usually mean "a firewall said no", not "the page is gone".
+const BLOCKED_STATUSES = new Set([401, 403, 406, 429, 503]);
 
 export async function fetchHotelPageText(url: string): Promise<PrefetchResult> {
   const controller = new AbortController();
@@ -35,23 +54,27 @@ export async function fetchHotelPageText(url: string): Promise<PrefetchResult> {
 
   let response: Response;
   try {
-    response = await followRedirectsSafely(url, controller.signal);
+    response = await followRedirectsSafely(url, controller.signal, BOT_HEADERS);
+    if (BLOCKED_STATUSES.has(response.status)) {
+      try { await response.body?.cancel(); } catch { /* noop */ }
+      response = await followRedirectsSafely(url, controller.signal, BROWSER_HEADERS);
+    }
   } catch (err) {
     clearTimeout(timer);
     if (err instanceof Error && err.name === 'AbortError') {
-      return { status: 'error', code: 'URL_FETCH_TIMEOUT' };
+      return { status: 'error', code: 'URL_FETCH_TIMEOUT', blocked: true };
     }
-    return { status: 'error', code: 'URL_FETCH_FAILED' };
+    return { status: 'error', code: 'URL_FETCH_FAILED', blocked: false };
   }
   clearTimeout(timer);
 
   if (!response.ok) {
-    return { status: 'error', code: 'URL_FETCH_FAILED' };
+    return { status: 'error', code: 'URL_FETCH_FAILED', blocked: BLOCKED_STATUSES.has(response.status) };
   }
 
   const contentType = response.headers.get('content-type') ?? '';
   if (!/html|xml/i.test(contentType)) {
-    return { status: 'error', code: 'URL_NOT_HTML' };
+    return { status: 'error', code: 'URL_NOT_HTML', blocked: false };
   }
 
   // Stream-read with a hard byte cap so a 50MB page can't OOM the Lambda.
@@ -83,14 +106,18 @@ export async function fetchHotelPageText(url: string): Promise<PrefetchResult> {
 // Location header. Without this, an attacker could submit a URL on a public
 // domain that 302s to http://169.254.169.254/... and we'd happily fetch the
 // AWS instance metadata endpoint server-side (classic SSRF).
-async function followRedirectsSafely(initialUrl: string, signal: AbortSignal): Promise<Response> {
+async function followRedirectsSafely(
+  initialUrl: string,
+  signal: AbortSignal,
+  headers: Record<string, string>,
+): Promise<Response> {
   let currentUrl = initialUrl;
   for (let hop = 0; hop <= MAX_REDIRECTS; hop++) {
     const res = await fetch(currentUrl, {
       method: 'GET',
       redirect: 'manual',
       signal,
-      headers: COMMON_HEADERS,
+      headers,
     });
 
     // 3xx with a Location header: re-validate and loop.
