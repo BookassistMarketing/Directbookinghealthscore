@@ -1,5 +1,5 @@
 import 'server-only';
-import { GoogleGenAI } from "@google/genai";
+import { GoogleGenAI, ThinkingLevel } from "@google/genai";
 import { Answer, AnswerValue, Language } from '../types';
 import { QUESTIONS, CATEGORY_TRANSLATIONS } from '../constants';
 import { fetchHotelPageText } from '../lib/sitePrefetch';
@@ -107,6 +107,9 @@ const retryDelay = (attempt: number) => {
 // up-to-5s sitePrefetch and a ~5s response-flush buffer) so we can return a
 // clean UPSTREAM_TIMEOUT before AWS yanks the connection.
 const UPSTREAM_TIMEOUT_MS = 20000;
+// urlContext fallback (site blocked our prefetch): prefetch + Gemini share 27s,
+// leaving ~3s of the 30s Amplify cap to flush the response.
+const URL_CONTEXT_TOTAL_BUDGET_MS = 27000;
 function withTimeout<T>(promise: Promise<T>, ms: number, code: string): Promise<T> {
   return new Promise<T>((resolve, reject) => {
     const timer = setTimeout(() => reject(new Error(code)), ms);
@@ -495,8 +498,10 @@ export async function generateAiReadinessReport(
   //
   // If the site's firewall refused us (e.g. SiteGround 403s AWS IPs) or was
   // too slow, fall back to Gemini's urlContext tool: Google's crawlers are
-  // rarely blocked. Slower (15-20s), but still inside the 30s Amplify cap
-  // because the prefetch gives up within 5s.
+  // rarely blocked. That path routinely ran past the 20s budget (7 of 8 live
+  // runs on elysia-park.com timed out at 20.3s), so it gets low thinking and
+  // whatever is left of a 27s total, still inside the 30s Amplify cap.
+  const startedAt = Date.now();
   const prefetch = await fetchHotelPageText(url);
   if (prefetch.status === 'error' && !prefetch.blocked) {
     throw new Error(prefetch.code);
@@ -519,10 +524,14 @@ export async function generateAiReadinessReport(
           systemInstruction: AI_READINESS_SYSTEM_PROMPT(lang, useUrlContext ? 'url' : 'extracted'),
           temperature: 0,
           topP: 0.1,
-          ...(useUrlContext ? { tools: [{ urlContext: {} }] } : {}),
+          ...(useUrlContext
+            ? { tools: [{ urlContext: {} }], thinkingConfig: { thinkingLevel: ThinkingLevel.LOW } }
+            : {}),
         },
       }),
-      UPSTREAM_TIMEOUT_MS,
+      useUrlContext
+        ? Math.max(URL_CONTEXT_TOTAL_BUDGET_MS - (Date.now() - startedAt), UPSTREAM_TIMEOUT_MS)
+        : UPSTREAM_TIMEOUT_MS,
       'UPSTREAM_TIMEOUT',
     );
 
