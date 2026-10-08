@@ -4,6 +4,16 @@ Single rolling handoff for the project. Newest session at the top. Older session
 
 ---
 
+# 8 October 2026 — AI audit fallback for sites that block us (elysia-park.com)
+
+- `a9beb33`: when a site's firewall 403s our prefetch (SiteGround on elysia-park.com), retry with browser headers, then fall back to Gemini `urlContext`.
+- That fallback still failed for visitors ("Something went wrong analysing this site"): 7 of 8 live runs hit `UPSTREAM_TIMEOUT` at exactly the 20s Gemini budget.
+- `80315f3`: on the fallback path only, `thinkingLevel: LOW` and a 27s total budget (prefetch + Gemini, inside the 30s Amplify cap). Normal path unchanged.
+- Verified live after deploy: 8/8 elysia-park.com runs returned 200 in 6 to 8s; gavarni.com/fr still fine (11s).
+- **Watch:** fallback scores came out lower with low thinking (58 to 68, vs 73 to 94 before with full thinking). The fallback is also less stable than the prefetch path. No Gemini key in `.env.local`, so this can only be tested live.
+
+---
+
 # 29 September 2026 — Published Sep 14, Sep 21, Sep 28 via rebuild trigger, added 4 new posts (Oct 12 to Nov 2)
 
 Two-part session: the recurring ops publish, then a new content batch. Same root cause for the publish as every prior entry (ISR does not fire on Amplify).
