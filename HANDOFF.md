@@ -4,6 +4,13 @@ Single rolling handoff for the project. Newest session at the top. Older session
 
 ---
 
+# 28 October 2026: Published Oct 26 via rebuild trigger
+
+- `12a5af2`: empty commit to `main`, Amplify rebuild; the 26 Oct pre-arrival emails post is now in the live sitemap (verified with a cache-busting query).
+- Weekly Monday rebuild GitHub Action drafted at `.github/workflows/weekly-rebuild.yml` (untracked). Committing it was blocked by the Claude Code permission layer; needs Fabien's explicit OK. Until then the 2 Nov post needs a manual rebuild push.
+
+---
+
 # 8 October 2026 — AI audit fallback for sites that block us (elysia-park.com)
 
 - `a9beb33`: when a site's firewall 403s our prefetch (SiteGround on elysia-park.com), retry with browser headers, then fall back to Gemini `urlContext`.
