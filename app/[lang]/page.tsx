@@ -53,7 +53,7 @@ export async function generateMetadata({ params }: { params: Promise<{ lang: str
   const meta = localizedHomeMeta[lang as Language] ?? localizedHomeMeta.en;
   const canonical = canonicalFor(lang as Language, '/');
   return {
-    title: meta.title,
+    title: { absolute: meta.title }, // meta.title already contains the site name; skip the layout template
     description: meta.description,
     alternates: { canonical, languages: buildHreflang('/') },
     openGraph: {

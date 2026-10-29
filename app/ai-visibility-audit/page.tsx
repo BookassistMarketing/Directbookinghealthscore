@@ -4,7 +4,7 @@ import { JsonLd, aiAuditSchema } from '../../lib/schema';
 import { buildHreflang, canonicalFor } from '../../lib/i18n';
 
 export const metadata: Metadata = {
-  title: 'AI Visibility Audit for Hotels | Direct Booking Health Score',
+  title: 'AI Visibility Audit for Hotels', // layout template appends the site name
   description:
     'Free AI Readiness Report for hotel websites. Paste your URL and see exactly how visible your site is to ChatGPT, Perplexity and Gemini — with a scored breakdown and recommended fixes.',
   alternates: { canonical: canonicalFor('en', '/ai-visibility-audit'), languages: buildHreflang('/ai-visibility-audit') },

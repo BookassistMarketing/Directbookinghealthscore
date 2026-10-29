@@ -4,7 +4,7 @@ Single rolling handoff for the project. Newest session at the top. Older session
 
 ---
 
-- **2026-10-29 blog SEO fix:** post `<title>` no longer repeats the site name (`app/blog/[slug]/page.tsx` and `app/[lang]/blog/[slug]/page.tsx` now pass the bare title; the root layout template adds " | Direct Booking Health Score"), and the header logo in `components/AppShell.tsx` is a `div` instead of an `h1`, so each page has one H1 (post title / blog heading). Still open: hotel-audit, revenue-simulator, ai-visibility-audit and security titles also hard-code the suffix and render it twice.
+- **2026-10-29 blog SEO fix:** post `<title>` no longer repeats the site name (`app/blog/[slug]/page.tsx` and `app/[lang]/blog/[slug]/page.tsx` now pass the bare title; the root layout template adds " | Direct Booking Health Score"), and the header logo in `components/AppShell.tsx` is a `div` instead of an `h1`, so each page has one H1 (post title / blog heading). Done the same day for the rest of the site: EN hotel-audit, revenue-simulator, ai-visibility-audit, security titles dropped the suffix; localized versions of those pages and the localized home (`app/[lang]/...`) use `title: { absolute: meta.title }`. Built check: all 194 pages have the site name once in `<title>` and one `<h1>`, except `/staff` (noindex, no H1) and Next's default 404 page.
 
 ---
 

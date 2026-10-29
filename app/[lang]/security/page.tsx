@@ -19,7 +19,7 @@ export async function generateMetadata({ params }: { params: Promise<{ lang: str
   const meta = localizedMeta[lang as Language] ?? localizedMeta.en;
   const canonical = canonicalFor(lang as Language, '/security');
   return {
-    title: meta.title,
+    title: { absolute: meta.title }, // meta.title already ends with the site name; skip the layout template
     description: meta.description,
     alternates: { canonical, languages: buildHreflang('/security') },
     openGraph: { title: meta.title, description: meta.description, url: canonical, siteName: 'Direct Booking Health Score', type: 'website' },

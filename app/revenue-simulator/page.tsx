@@ -6,7 +6,7 @@ import { buildHreflang, canonicalFor } from '../../lib/i18n';
 // English (default-locale) entry. Localised versions live under
 // app/[lang]/revenue-simulator; hreflang alternates point at all locales.
 export const metadata: Metadata = {
-  title: 'Direct Booking Revenue Simulator | Direct Booking Health Score',
+  title: 'Direct Booking Revenue Simulator', // layout template appends the site name
   description:
     'Free interactive calculator. Enter the hotel’s annual online revenue and channel costs, then drag the slider to see the net revenue impact of moving more share to direct.',
   alternates: {

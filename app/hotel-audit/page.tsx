@@ -4,7 +4,7 @@ import { JsonLd, softwareApplicationSchema, serviceSchema } from '../../lib/sche
 import { buildHreflang, canonicalFor } from '../../lib/i18n';
 
 export const metadata: Metadata = {
-  title: 'Hotel Direct Booking Audit Tool | Direct Booking Health Score',
+  title: 'Hotel Direct Booking Audit Tool', // layout template appends the site name
   description:
     'Free AI-powered hotel technology audit. Answer 20 questions about your booking engine, metasearch, CRM, and analytics to get an instant scored report.',
   alternates: { canonical: canonicalFor('en', '/hotel-audit'), languages: buildHreflang('/hotel-audit') },

@@ -18,7 +18,7 @@ const securityPageSchema = {
 };
 
 export const metadata: Metadata = {
-  title: 'Security & Privacy | Direct Booking Health Score',
+  title: 'Security & Privacy', // layout template appends the site name
   description:
     'Security and privacy information for the Direct Booking Health Score hotel audit tool by Bookassist.',
   alternates: { canonical: canonicalFor('en', '/security'), languages: buildHreflang('/security') },
