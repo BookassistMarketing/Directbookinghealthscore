@@ -4,6 +4,22 @@ Single rolling handoff for the project. Newest session at the top. Older session
 
 ---
 
+# 28 October 2026: 4 new posts drafted (Nov 9 to Nov 30), UNCOMMITTED
+
+28 new files in `blog/` (EN + CS DE ES FR IT PL), not committed or pushed. Need Fabien's review, then commit + push.
+
+| Date | Slug | Product / internal link |
+|---|---|---|
+| 9 Nov | `sell-christmas-and-new-year-hotel-packages-direct` | Booking Engine / launch-christmas-gift-voucher-campaign |
+| 16 Nov | `recover-abandoned-bookings-on-your-hotel-booking-engine` | Digital Media / why-guests-drop-off-your-hotel-website-on-mobile |
+| 23 Nov | `win-early-2027-bookings-in-the-january-booking-window` | Intelligence / building-your-2027-direct-booking-budget |
+| 30 Nov | `check-your-hotel-booking-engine-before-peak-season` | Web Design / your-hotel-website-has-2-7-seconds |
+
+- Only two figures, both sourced and linked: Baymard Institute average cart abandonment (16 Nov) and Google web.dev LCP 2.5 s threshold (30 Nov). Other numbers are calendar facts (Christmas Day Fri 25 Dec 2026, Easter Sunday 28 Mar 2027).
+- Translations are Claude-written, not native-reviewed. Each post still needs a rebuild push on/after its date.
+
+---
+
 # 28 October 2026: Published Oct 26 via rebuild trigger
 
 - `12a5af2`: empty commit to `main`, Amplify rebuild; the 26 Oct pre-arrival emails post is now in the live sitemap (verified with a cache-busting query).
