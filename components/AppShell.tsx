@@ -225,9 +225,9 @@ export const AppShell: React.FC<{ children: React.ReactNode }> = ({ children }) 
               <Activity className="text-white w-5 h-5 sm:w-6 sm:h-6" />
             </div>
             <div className="flex flex-col justify-center">
-              <h1 className="text-lg sm:text-xl font-bold text-brand-blue tracking-tight leading-none">
+              <div className="text-lg sm:text-xl font-bold text-brand-blue tracking-tight leading-none">
                 <EditableText id="app.header.title" defaultText="Hotel Health Clinic" as="span" />
-              </h1>
+              </div>
               <p className="hidden sm:block text-xs text-gray-500 uppercase tracking-widest font-semibold mt-1 print:block">
                 Powered by{' '}
                 <a

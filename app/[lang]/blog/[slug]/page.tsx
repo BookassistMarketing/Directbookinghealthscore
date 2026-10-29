@@ -23,7 +23,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const canonical = canonicalFor(lang as Language, `/blog/${slug}`);
 
   return {
-    title: `${title} | Direct Booking Health Score`,
+    title, // root layout template appends " | Direct Booking Health Score"
     description,
     alternates: { canonical, languages: buildHreflang(`/blog/${slug}`) },
     openGraph: {

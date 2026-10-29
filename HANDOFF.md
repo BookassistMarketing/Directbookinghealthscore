@@ -4,6 +4,10 @@ Single rolling handoff for the project. Newest session at the top. Older session
 
 ---
 
+- **2026-10-29 blog SEO fix:** post `<title>` no longer repeats the site name (`app/blog/[slug]/page.tsx` and `app/[lang]/blog/[slug]/page.tsx` now pass the bare title; the root layout template adds " | Direct Booking Health Score"), and the header logo in `components/AppShell.tsx` is a `div` instead of an `h1`, so each page has one H1 (post title / blog heading). Still open: hotel-audit, revenue-simulator, ai-visibility-audit and security titles also hard-code the suffix and render it twice.
+
+---
+
 # 28 October 2026: 4 new posts drafted (Nov 9 to Nov 30), UNCOMMITTED
 
 28 new files in `blog/` (EN + CS DE ES FR IT PL), not committed or pushed. Need Fabien's review, then commit + push.
