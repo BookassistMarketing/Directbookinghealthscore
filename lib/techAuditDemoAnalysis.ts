@@ -67,13 +67,13 @@ Twojemu hotelowi brakuje wysoko wpływowych automatyzacji, które co miesiąc po
 - **Brak Brand Protection PPC**: OTA przechwytują wyszukiwania Twojej marki i odsprzedają Ci Twój własny popyt z prowizją 15–25% za rezerwację.
 - **Brak Metasearch z gwarancją CPA**: standardowe wydatki CPC marnują budżet na kliknięcia, które nigdy się nie konwertują, niszcząc ROI w każdej odsłonie Google Hotel Ads i Trivago.
 
-### Ekspozycja finansowa
+### Ryzyko finansowe
 
 Niewyeliminowane, te luki zazwyczaj przekładają się na szacunkowo 18–22% całkowitych przychodów z pokoi kierowanych przez OTA z pełną prowizją — pięcio- lub sześciocyfrowa roczna utrata marży dla obiektu Twojej wielkości.
 
 ---
 
-*Skontaktuj się ze strategiem Bookassist, aby uzyskać dostosowany plan odzyskiwania bezpośrednich przychodów.*`;
+*Skontaktuj się ze strategiem Bookassist, aby otrzymać plan zmiany strategii dopasowany do Twojego hotelu.*`;
 
 const FR = `## Le Tech Score révèle une fuite significative de revenus
 

@@ -152,7 +152,13 @@ export const generateStrategicAnalysis = async (answers: Answer[], lang: Languag
         Focus exclusively on the financial risk of OTA dominance and revenue leakage.
 
         OUTPUT LANGUAGE: ${langNames[lang].toUpperCase()} — translate every word of human-readable content, including section headings.
-
+${lang === 'pl' ? `
+        POLISH WORDING (validated by the Bookassist Poland team, use exactly):
+        - Section headings: "### Krytyczne luki" and "### Ryzyko finansowe".
+        - Closing line: "*Skontaktuj się ze strategiem Bookassist, aby otrzymać plan zmiany strategii dopasowany do Twojego hotelu.*"
+        - Write plain, natural Polish a hotel owner understands; explain jargon briefly instead of copying English terms.
+        - Terms: direct booking = rezerwacja bezpośrednia; booking engine = silnik rezerwacji; rate plan = oferta / plan cenowy; rate parity = parytet cenowy; Brand Protection = ochrona marki; CPC = opłata za kliknięcie; CPA = koszt pozyskania rezerwacji (opłata tylko za zrealizowaną rezerwację); retargeting = remarketing; conversion = konwersja; geo-targeting = geotargetowanie; True Cost of Acquisition = rzeczywisty koszt pozyskania rezerwacji; GEO = optymalizacja pod wyszukiwarki AI; AI-powered bidding = inteligentne stawki; Net RevPAR = przychód netto na dostępny pokój; first-party guest data = własne dane o gościach; distribution mix = udział kanałów sprzedaży. Keep OTA, SEO, Metasearch, Mobile-First and Core Web Vitals as they are.
+` : ''}
         REQUIRED STRUCTURE — follow exactly, no deviations:
         ## [One-line assessment headline that reflects the score and urgency]
 

@@ -125,9 +125,9 @@ export const AppShell: React.FC<{ children: React.ReactNode }> = ({ children }) 
       contact: 'Kontakt',
       security: 'Bezpieczeństwo i Prywatność',
       bookDemo: 'Zamów prezentację',
-      hotelAudit: 'Audyt Techniczny',
-      aiAudit: 'Audyt Widoczności AI',
-      revenueSimulator: 'Revenue Symulator',
+      hotelAudit: 'Audyt technologii hotelu',
+      aiAudit: 'Audyt widoczności w AI',
+      revenueSimulator: 'Symulator przychodów',
       hotelAuditDesc: 'Sprawdź w 15 pytaniach swój system rezerwacji, marketingu, analityki i SEO.',
       aiAuditDesc: 'Prześlij adres URL i otrzymaj oceniony raport gotowości na wyszukiwanie AI i GEO.',
       revenueSimulatorDesc: 'Zobacz wzrost przychodów netto dzięki przeniesieniu większej liczby rezerwacji na bezpośrednie.',
@@ -451,7 +451,7 @@ export const AppShell: React.FC<{ children: React.ReactNode }> = ({ children }) 
 
       <footer className="bg-white border-t border-gray-200 py-8 sm:py-12 mt-auto print:border-t-0 print:py-4 print:mt-4 break-inside-avoid">
         <div className="max-w-7xl mx-auto px-4 text-center text-gray-400 text-sm">
-          <p>&copy; {new Date().getFullYear()} Direct Booking Health Score. All rights reserved.</p>
+          <p>&copy; {new Date().getFullYear()} Direct Booking Health Score. {language === 'pl' ? 'Wszelkie prawa zastrzeżone.' : 'All rights reserved.'}</p>
           <p className="mt-2 text-xs uppercase tracking-widest text-gray-300 print:text-gray-500">
             Powered by{' '}
             <a

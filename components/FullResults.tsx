@@ -162,24 +162,24 @@ const labelsMap: Record<Language, {
     subOptimised: 'Buen desempeño frente a los estándares de la industria.',
   },
   pl: {
-    eyebrow: 'Audyt Technologiczny Hotelu',
-    reportHeading: 'Twój Raport Audytu Technologicznego',
+    eyebrow: 'Audyt technologii hotelu',
+    reportHeading: 'Twój raport z audytu technologii',
     retake: 'Powtórz audyt',
     pdfDownload: 'Pobierz PDF',
     pdfExporting: 'Eksportowanie…',
     ctaTitle: 'Popraw swój Tech Score już dziś',
     ctaSub: 'Umów bezpłatną konsultację ze strategiem Bookassist',
     ctaButton: 'Zamów Demo',
-    analyzing: 'AI analizuje Twój stos technologiczny…',
+    analyzing: 'AI analizuje rozwiązania technologiczne Twojego hotelu…',
     analysisError: 'Generowanie analizy nie powiodło się. Spróbuj powtórzyć audyt.',
-    passingLabel: 'zaliczone',
+    passingLabel: 'spełnione',
     gapsLabel: 'krytyczne luki',
-    statusCritical: 'Stan Krytyczny',
+    statusCritical: 'Stan krytyczny',
     statusRisk: 'Ryzyko Cyfrowe',
     statusOptimised: 'Zoptymalizowany',
-    subCritical: 'Wysoce narażony na dominację OTA.',
+    subCritical: 'Hotel jest bardzo silnie uzależniony od OTA.',
     subRisk: 'Brak automatyzacji generującej zyski.',
-    subOptimised: 'Dobre wyniki w zestawieniu ze standardami branżowymi.',
+    subOptimised: 'Hotel wypada dobrze na tle branży.',
   },
   fr: {
     eyebrow: 'Audit Tech Hôtelier',
@@ -605,7 +605,7 @@ export const FullResults: React.FC<FullResultsProps> = ({
               </ResponsiveContainer>
               <div className="absolute inset-0 flex flex-col items-center justify-center">
                 <span className="text-4xl sm:text-5xl font-black" style={{ color }}>{percentage}%</span>
-                <span className="text-[10px] text-gray-400 font-black uppercase tracking-widest mt-1">Tech Score</span>
+                <span className="text-[10px] text-gray-400 font-black uppercase tracking-widest mt-1">{labelLang === 'pl' ? 'Wynik technologii' : 'Tech Score'}</span>
               </div>
             </div>
             <div className="flex-1 text-center md:text-left">
