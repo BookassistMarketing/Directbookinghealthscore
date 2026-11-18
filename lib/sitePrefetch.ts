@@ -15,7 +15,12 @@ import { validatePublicUrl } from './api-security';
 // so this is a rare case in practice.
 
 const FETCH_TIMEOUT_MS = 5000;
-const MAX_BYTES = 500_000;
+// Some CMS (Vizergy, heavy WordPress builders) inline 500KB-1.5MB of JS/CSS
+// in <head> before <body> even starts. A 500KB cap cut those pages before any
+// content, JSON-LD or alt text, so Gemini scored an empty shell (16-21/100).
+// 4MB covers them; scripts/styles are stripped right after, so the text we
+// send to Gemini stays small.
+const MAX_BYTES = 4_000_000;
 const MAX_BODY_TEXT_CHARS = 30_000;
 const MAX_REDIRECTS = 5;
 
@@ -143,7 +148,8 @@ async function followRedirectsSafely(
 
 function extractRelevant(html: string, sourceUrl: string): string {
   // JSON-LD has to be extracted BEFORE we strip script tags below.
-  const jsonLdBlocks = collectAll(html, /<script[^>]*type=["']application\/ld\+json["'][^>]*>([\s\S]*?)<\/script>/gi)
+  // Quotes are optional: minified sites (Vizergy) emit type=application/ld+json.
+  const jsonLdBlocks = collectAll(html, /<script[^>]*type=["']?application\/ld\+json["']?[^>]*>([\s\S]*?)<\/script>/gi)
     .map(m => m[1].trim())
     .filter(Boolean);
 
@@ -151,7 +157,10 @@ function extractRelevant(html: string, sourceUrl: string): string {
   const stripped = html
     .replace(/<script\b[^>]*>[\s\S]*?<\/script>/gi, '')
     .replace(/<style\b[^>]*>[\s\S]*?<\/style>/gi, '')
-    .replace(/<noscript\b[^>]*>[\s\S]*?<\/noscript>/gi, '');
+    .replace(/<noscript\b[^>]*>[\s\S]*?<\/noscript>/gi, '')
+    // If the byte cap cut the page inside a <script>/<style>, drop the
+    // unclosed tail so raw code never reaches the body text.
+    .replace(/<(script|style)\b[^>]*>[\s\S]*$/i, '');
 
   const title = (stripped.match(/<title[^>]*>([\s\S]*?)<\/title>/i)?.[1] ?? '').trim();
 
@@ -224,7 +233,9 @@ function stripTags(html: string): string {
 }
 
 function attr(attrs: string, name: string): string | undefined {
-  return attrs.match(new RegExp(`\\b${name}=["']([^"']*)["']`, 'i'))?.[1];
+  // Accepts quoted values and unquoted ones (minified HTML: name=description).
+  const m = attrs.match(new RegExp(`\\b${name}=(?:"([^"]*)"|'([^']*)'|([^\\s"'>/]+))`, 'i'));
+  return m ? (m[1] ?? m[2] ?? m[3]) : undefined;
 }
 
 function collectAll(text: string, re: RegExp): RegExpMatchArray[] {
